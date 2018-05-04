@@ -1,0 +1,259 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TOPXModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="checksum">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Checksum" Type="varchar" MaxLength="150" />
+    <Property Name="Filename" Type="varchar" MaxLength="50" />
+    <Property Name="FilenameClean" Type="varchar" MaxLength="50" />
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
+  </EntityType>
+  <EntityType Name="DossiersZonderBeschikking">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DossierZonderBeschikking" Type="nvarchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="EersteShift">
+    <Key>
+      <PropertyRef Name="Bestand" />
+    </Key>
+    <Property Name="Bestand" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Column 1" Type="varchar" MaxLength="50" />
+    <Property Name="Column 2" Type="varchar" MaxLength="50" />
+    <Property Name="Column 3" Type="varchar" MaxLength="50" />
+    <Property Name="Column 4" Type="varchar" MaxLength="50" />
+    <Property Name="Column 5" Type="varchar" MaxLength="50" />
+    <Property Name="Column 6" Type="varchar" MaxLength="50" />
+    <Property Name="Column 7" Type="varchar" MaxLength="50" />
+    <Property Name="Column 8" Type="varchar" MaxLength="50" />
+    <Property Name="Column 9" Type="varchar" MaxLength="50" />
+    <Property Name="Column 10" Type="varchar" MaxLength="50" />
+    <Property Name="Column 11" Type="varchar" MaxLength="50" />
+    <Property Name="Column 12" Type="varchar" MaxLength="50" />
+    <Property Name="Column 13" Type="varchar" MaxLength="50" />
+    <Property Name="Column 14" Type="varchar" MaxLength="50" />
+    <Property Name="Column 15" Type="varchar" MaxLength="50" />
+    <Property Name="Column 16" Type="varchar" MaxLength="50" />
+    <Property Name="Column 17" Type="varchar" MaxLength="50" />
+    <Property Name="Column 18" Type="varchar" MaxLength="50" />
+    <Property Name="Column 19" Type="varchar" MaxLength="50" />
+    <Property Name="Column 20" Type="varchar" MaxLength="50" />
+    <Property Name="Column 21" Type="varchar" MaxLength="50" />
+    <Property Name="Column 22" Type="varchar" MaxLength="50" />
+    <Property Name="Column 23" Type="varchar" MaxLength="50" />
+    <Property Name="Column 24" Type="varchar" MaxLength="50" />
+    <Property Name="Column 25" Type="varchar" MaxLength="50" />
+    <Property Name="Column 26" Type="varchar" MaxLength="50" />
+    <Property Name="Column 27" Type="varchar" MaxLength="50" />
+    <Property Name="Column 28" Type="varchar" MaxLength="50" />
+    <Property Name="Column 29" Type="varchar" MaxLength="50" />
+    <Property Name="Column 30" Type="varchar" MaxLength="50" />
+    <Property Name="Column 31" Type="varchar" MaxLength="50" />
+    <Property Name="Column 32" Type="varchar" MaxLength="50" />
+    <Property Name="Column 33" Type="varchar" MaxLength="50" />
+    <Property Name="Column 34" Type="varchar" MaxLength="50" />
+    <Property Name="Column 35" Type="varchar" MaxLength="50" />
+    <Property Name="Column 36" Type="varchar" MaxLength="50" />
+    <Property Name="Column 37" Type="varchar" MaxLength="50" />
+    <Property Name="Column 38" Type="varchar" MaxLength="50" />
+    <Property Name="Column 39" Type="varchar" MaxLength="50" />
+    <Property Name="Column 40" Type="varchar" MaxLength="50" />
+    <Property Name="Column 41" Type="varchar" MaxLength="50" />
+    <Property Name="Column 42" Type="varchar" MaxLength="50" />
+    <Property Name="Column 43" Type="varchar" MaxLength="50" />
+    <Property Name="Column 44" Type="varchar" MaxLength="50" />
+    <Property Name="Column 45" Type="varchar" MaxLength="50" />
+    <Property Name="Column 46" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="FileSizes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Bestandsnaam" Type="varchar" MaxLength="50" />
+    <Property Name="Omvang(Byte)(B)" Type="varchar" MaxLength="50" />
+    <Property Name="Type" Type="varchar" MaxLength="50" />
+    <Property Name="Gemaakt op" Type="varchar" MaxLength="50" />
+    <Property Name="Gewijzigd op" Type="varchar" MaxLength="50" />
+    <Property Name="Toegestaan op" Type="varchar" MaxLength="50" />
+    <Property Name="Bevat map" Type="varchar" MaxLength="50" />
+    <Property Name="CleanName" Type="varchar" MaxLength="20" />
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
+  </EntityType>
+  <EntityType Name="Gebruiksrechten">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="naam" Type="nvarchar" MaxLength="50" />
+    <Property Name="omschrijvingVoorwaarden" Type="nvarchar" MaxLength="50" />
+    <Property Name="begin" Type="datetime" />
+    <Property Name="eind" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Log">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DateTime" Type="datetime" />
+    <Property Name="Bestand" Type="nvarchar" MaxLength="20" />
+    <Property Name="Omschrijving" Type="nvarchar" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="MarkedAsDelivered">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Zaaknr" Type="nvarchar" MaxLength="20" />
+    <Property Name="DatumProcessed" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Openbaarheid">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="naam" Type="nvarchar" MaxLength="50" />
+    <Property Name="omschrijvingBeperkingen" Type="nvarchar" MaxLength="50" />
+    <Property Name="begin" Type="datetime" />
+    <Property Name="eind" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Source">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="2_dn_Bestand" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Bouwvergnr2" Type="varchar" MaxLength="150" />
+    <Property Name="Straat" Type="varchar" MaxLength="150" />
+    <Property Name="Postcode" Type="varchar" MaxLength="150" />
+    <Property Name="AdresFull" Type="varchar" MaxLength="150" />
+    <Property Name="Adres" Type="varchar" MaxLength="150" />
+    <Property Name="Huisnr" Type="varchar" MaxLength="150" />
+    <Property Name="Voorvoegsl" Type="varchar" MaxLength="150" />
+    <Property Name="StraatHuisnr" Type="varchar" MaxLength="150" />
+    <Property Name="Postcode2" Type="varchar" MaxLength="150" />
+    <Property Name="Bvnr" Type="varchar" MaxLength="150" />
+    <Property Name="Jaar" Type="varchar" MaxLength="150" />
+    <Property Name="2zn  Zaaknummer" Type="varchar" MaxLength="150" />
+    <Property Name="19 1 DN Tabnaam" Type="varchar" MaxLength="150" />
+    <Property Name="4 dn Omschrijving" Type="nvarchar(max)" />
+    <Property Name="91_zn_Datum_vergunning" Type="varchar" MaxLength="150" />
+    <Property Name="4_zn_Omschrijving" Type="varchar(max)" />
+    <Property Name="OmschrijvingCompleet" Type="nvarchar(max)" />
+    <Property Name="Plaatsnaam" Type="varchar" MaxLength="150" />
+    <Property Name="15c_Gemeente" Type="varchar" MaxLength="150" />
+    <Property Name="51zn_classificatiecode" Type="varchar" MaxLength="150" />
+    <Property Name="52zn_Omschrijving_classificatiecode " Type="varchar" MaxLength="150" />
+    <Property Name="53_zn_Bron " Type="varchar" MaxLength="150" />
+    <Property Name="Omschrijving " Type="nvarchar(max)" />
+    <Property Name="Gemeentecode" Type="varchar" MaxLength="150" />
+    <Property Name="54_zn_Bron_classificatiecode" Type="varchar" MaxLength="150" />
+    <Property Name="KvK nummer" Type="varchar" MaxLength="150" />
+    <Property Name="Omvang in MB" Type="varchar" MaxLength="150" />
+    <Property Name="Bestandsformaat" Type="varchar" MaxLength="150" />
+    <Property Name="Language" Type="varchar" MaxLength="150" />
+    <Property Name="Datum vergunning" Type="varchar" MaxLength="150" />
+    <Property Name=" Bouw-en woningtoezicht" Type="varchar" MaxLength="150" />
+    <Property Name="zn_bn_Hierarchisch" Type="varchar" MaxLength="150" />
+    <Property Name="Gemeente" Type="varchar" MaxLength="150" />
+    <Property Name="Organisatie" Type="varchar" MaxLength="150" />
+    <Property Name="Verlenen_bouwvergunningen" Type="varchar" MaxLength="150" />
+    <Property Name="Vrij te gebruiken" Type="varchar" MaxLength="150" />
+    <Property Name="Openbaar" Type="varchar" MaxLength="150" />
+    <Property Name=" Integer" Type="varchar" MaxLength="150" />
+    <Property Name="Enkelvoudig" Type="varchar" MaxLength="150" />
+    <Property Name="Aanmaakdatum bestand" Type="varchar" MaxLength="150" />
+    <Property Name=" Aggregatieniveau" Type="varchar" MaxLength="150" />
+    <Property Name=" Relatie ID" Type="varchar" MaxLength="150" />
+    <Property Name="Checksum" Type="varchar" MaxLength="150" />
+    <Property Name="Datum" Type="varchar" MaxLength="150" />
+    <Property Name=" BN Algoritme" Type="varchar" MaxLength="150" />
+    <Property Name="ZN_DN_Classificatie" Type="varchar" MaxLength="150" />
+    <Property Name="Column 47" Type="varchar" MaxLength="150" />
+    <Property Name="Datum_vergunning2" Type="varchar" MaxLength="150" />
+    <Property Name="Zaaknummer" Type="varchar" MaxLength="150" />
+    <Property Name="BN Bestand" Type="varchar" MaxLength="150" />
+    <Property Name="21 BN  Bestand" Type="varchar" MaxLength="150" />
+    <Property Name="FileSize_Bytes" Type="bigint" />
+  </EntityType>
+  <EntityType Name="Source_temp">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="2_dn_Bestand" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Bouwvergnr2" Type="varchar" MaxLength="150" />
+    <Property Name="Straat" Type="varchar" MaxLength="150" />
+    <Property Name="Postcode" Type="varchar" MaxLength="150" />
+    <Property Name="AdresFull" Type="varchar" MaxLength="150" />
+    <Property Name="Adres" Type="varchar" MaxLength="150" />
+    <Property Name="Huisnr" Type="varchar" MaxLength="150" />
+    <Property Name="Voorvoegsl" Type="varchar" MaxLength="150" />
+    <Property Name="StraatHuisnr" Type="varchar" MaxLength="150" />
+    <Property Name="Postcode2" Type="varchar" MaxLength="150" />
+    <Property Name="Bvnr" Type="varchar" MaxLength="150" />
+    <Property Name="Jaar" Type="varchar" MaxLength="150" />
+    <Property Name="2zn  Zaaknummer" Type="varchar" MaxLength="150" />
+    <Property Name="19 1 DN Tabnaam" Type="varchar" MaxLength="150" />
+    <Property Name="4 dn Omschrijving" Type="nvarchar(max)" />
+    <Property Name="91_zn_Datum_vergunning" Type="varchar" MaxLength="150" />
+    <Property Name="4_zn_Omschrijving" Type="varchar(max)" />
+    <Property Name="OmschrijvingCompleet" Type="nvarchar(max)" />
+    <Property Name="Plaatsnaam" Type="varchar" MaxLength="150" />
+    <Property Name="15c_Gemeente" Type="varchar" MaxLength="150" />
+    <Property Name="51zn_classificatiecode" Type="varchar" MaxLength="150" />
+    <Property Name="52zn_Omschrijving_classificatiecode " Type="varchar" MaxLength="150" />
+    <Property Name="53_zn_Bron " Type="varchar" MaxLength="150" />
+    <Property Name="Omschrijving " Type="nvarchar(max)" />
+    <Property Name="Gemeentecode" Type="varchar" MaxLength="150" />
+    <Property Name="54_zn_Bron_classificatiecode" Type="varchar" MaxLength="150" />
+    <Property Name="KvK nummer" Type="varchar" MaxLength="150" />
+    <Property Name="Omvang in MB" Type="varchar" MaxLength="150" />
+    <Property Name="Bestandsformaat" Type="varchar" MaxLength="150" />
+    <Property Name="Language" Type="varchar" MaxLength="150" />
+    <Property Name="Datum vergunning" Type="varchar" MaxLength="150" />
+    <Property Name=" Bouw-en woningtoezicht" Type="varchar" MaxLength="150" />
+    <Property Name="zn_bn_Hierarchisch" Type="varchar" MaxLength="150" />
+    <Property Name="Gemeente" Type="varchar" MaxLength="150" />
+    <Property Name="Organisatie" Type="varchar" MaxLength="150" />
+    <Property Name="Verlenen_bouwvergunningen" Type="varchar" MaxLength="150" />
+    <Property Name="Vrij te gebruiken" Type="varchar" MaxLength="150" />
+    <Property Name="Openbaar" Type="varchar" MaxLength="150" />
+    <Property Name=" Integer" Type="varchar" MaxLength="150" />
+    <Property Name="Enkelvoudig" Type="varchar" MaxLength="150" />
+    <Property Name="Aanmaakdatum bestand" Type="varchar" MaxLength="150" />
+    <Property Name=" Aggregatieniveau" Type="varchar" MaxLength="150" />
+    <Property Name=" Relatie ID" Type="varchar" MaxLength="150" />
+    <Property Name="Checksum" Type="varchar" MaxLength="150" />
+    <Property Name="Datum" Type="varchar" MaxLength="150" />
+    <Property Name=" BN Algoritme" Type="varchar" MaxLength="150" />
+    <Property Name="ZN_DN_Classificatie" Type="varchar" MaxLength="150" />
+    <Property Name="Column 47" Type="varchar" MaxLength="150" />
+    <Property Name="Datum_vergunning2" Type="varchar" MaxLength="150" />
+    <Property Name="Zaaknummer" Type="varchar" MaxLength="150" />
+    <Property Name="BN Bestand" Type="varchar" MaxLength="150" />
+    <Property Name="21 BN  Bestand" Type="varchar" MaxLength="150" />
+    <Property Name="FileSize_Bytes" Type="bigint" />
+  </EntityType>
+  <EntityType Name="TestSet">
+    <Key>
+      <PropertyRef Name="FileName" />
+    </Key>
+    <Property Name="FileName" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="TOPXModelStoreContainer">
+    <EntitySet Name="checksum" EntityType="Self.checksum" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DossiersZonderBeschikking" EntityType="Self.DossiersZonderBeschikking" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EersteShift" EntityType="Self.EersteShift" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FileSizes" EntityType="Self.FileSizes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Gebruiksrechten" EntityType="Self.Gebruiksrechten" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Log" EntityType="Self.Log" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MarkedAsDelivered" EntityType="Self.MarkedAsDelivered" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Openbaarheid" EntityType="Self.Openbaarheid" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Source" EntityType="Self.Source" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Source_temp" EntityType="Self.Source_temp" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TestSet" EntityType="Self.TestSet" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

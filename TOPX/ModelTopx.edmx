@@ -1,0 +1,807 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="TOPXModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="checksum">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Checksum" Type="varchar" MaxLength="150" />
+          <Property Name="Filename" Type="varchar" MaxLength="50" />
+          <Property Name="FilenameClean" Type="varchar" MaxLength="50" />
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="DossiersZonderBeschikking">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DossierZonderBeschikking" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="EersteShift">
+          <Key>
+            <PropertyRef Name="Bestand" />
+          </Key>
+          <Property Name="Bestand" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Column 1" Type="varchar" MaxLength="50" />
+          <Property Name="Column 2" Type="varchar" MaxLength="50" />
+          <Property Name="Column 3" Type="varchar" MaxLength="50" />
+          <Property Name="Column 4" Type="varchar" MaxLength="50" />
+          <Property Name="Column 5" Type="varchar" MaxLength="50" />
+          <Property Name="Column 6" Type="varchar" MaxLength="50" />
+          <Property Name="Column 7" Type="varchar" MaxLength="50" />
+          <Property Name="Column 8" Type="varchar" MaxLength="50" />
+          <Property Name="Column 9" Type="varchar" MaxLength="50" />
+          <Property Name="Column 10" Type="varchar" MaxLength="50" />
+          <Property Name="Column 11" Type="varchar" MaxLength="50" />
+          <Property Name="Column 12" Type="varchar" MaxLength="50" />
+          <Property Name="Column 13" Type="varchar" MaxLength="50" />
+          <Property Name="Column 14" Type="varchar" MaxLength="50" />
+          <Property Name="Column 15" Type="varchar" MaxLength="50" />
+          <Property Name="Column 16" Type="varchar" MaxLength="50" />
+          <Property Name="Column 17" Type="varchar" MaxLength="50" />
+          <Property Name="Column 18" Type="varchar" MaxLength="50" />
+          <Property Name="Column 19" Type="varchar" MaxLength="50" />
+          <Property Name="Column 20" Type="varchar" MaxLength="50" />
+          <Property Name="Column 21" Type="varchar" MaxLength="50" />
+          <Property Name="Column 22" Type="varchar" MaxLength="50" />
+          <Property Name="Column 23" Type="varchar" MaxLength="50" />
+          <Property Name="Column 24" Type="varchar" MaxLength="50" />
+          <Property Name="Column 25" Type="varchar" MaxLength="50" />
+          <Property Name="Column 26" Type="varchar" MaxLength="50" />
+          <Property Name="Column 27" Type="varchar" MaxLength="50" />
+          <Property Name="Column 28" Type="varchar" MaxLength="50" />
+          <Property Name="Column 29" Type="varchar" MaxLength="50" />
+          <Property Name="Column 30" Type="varchar" MaxLength="50" />
+          <Property Name="Column 31" Type="varchar" MaxLength="50" />
+          <Property Name="Column 32" Type="varchar" MaxLength="50" />
+          <Property Name="Column 33" Type="varchar" MaxLength="50" />
+          <Property Name="Column 34" Type="varchar" MaxLength="50" />
+          <Property Name="Column 35" Type="varchar" MaxLength="50" />
+          <Property Name="Column 36" Type="varchar" MaxLength="50" />
+          <Property Name="Column 37" Type="varchar" MaxLength="50" />
+          <Property Name="Column 38" Type="varchar" MaxLength="50" />
+          <Property Name="Column 39" Type="varchar" MaxLength="50" />
+          <Property Name="Column 40" Type="varchar" MaxLength="50" />
+          <Property Name="Column 41" Type="varchar" MaxLength="50" />
+          <Property Name="Column 42" Type="varchar" MaxLength="50" />
+          <Property Name="Column 43" Type="varchar" MaxLength="50" />
+          <Property Name="Column 44" Type="varchar" MaxLength="50" />
+          <Property Name="Column 45" Type="varchar" MaxLength="50" />
+          <Property Name="Column 46" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="FileSizes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Bestandsnaam" Type="varchar" MaxLength="50" />
+          <Property Name="Omvang(Byte)(B)" Type="varchar" MaxLength="50" />
+          <Property Name="Type" Type="varchar" MaxLength="50" />
+          <Property Name="Gemaakt op" Type="varchar" MaxLength="50" />
+          <Property Name="Gewijzigd op" Type="varchar" MaxLength="50" />
+          <Property Name="Toegestaan op" Type="varchar" MaxLength="50" />
+          <Property Name="Bevat map" Type="varchar" MaxLength="50" />
+          <Property Name="CleanName" Type="varchar" MaxLength="20" />
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="Gebruiksrechten">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="naam" Type="nvarchar" MaxLength="50" />
+          <Property Name="omschrijvingVoorwaarden" Type="nvarchar" MaxLength="50" />
+          <Property Name="begin" Type="datetime" />
+          <Property Name="eind" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Log">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DateTime" Type="datetime" />
+          <Property Name="Bestand" Type="nvarchar" MaxLength="20" />
+          <Property Name="Omschrijving" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="MarkedAsDelivered">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Zaaknr" Type="nvarchar" MaxLength="20" />
+          <Property Name="DatumProcessed" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Openbaarheid">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="naam" Type="nvarchar" MaxLength="50" />
+          <Property Name="omschrijvingBeperkingen" Type="nvarchar" MaxLength="50" />
+          <Property Name="begin" Type="datetime" />
+          <Property Name="eind" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Source">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="2_dn_Bestand" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Bouwvergnr2" Type="varchar" MaxLength="150" />
+          <Property Name="Straat" Type="varchar" MaxLength="150" />
+          <Property Name="Postcode" Type="varchar" MaxLength="150" />
+          <Property Name="AdresFull" Type="varchar" MaxLength="150" />
+          <Property Name="Adres" Type="varchar" MaxLength="150" />
+          <Property Name="Huisnr" Type="varchar" MaxLength="150" />
+          <Property Name="Voorvoegsl" Type="varchar" MaxLength="150" />
+          <Property Name="StraatHuisnr" Type="varchar" MaxLength="150" />
+          <Property Name="Postcode2" Type="varchar" MaxLength="150" />
+          <Property Name="Bvnr" Type="varchar" MaxLength="150" />
+          <Property Name="Jaar" Type="varchar" MaxLength="150" />
+          <Property Name="2zn  Zaaknummer" Type="varchar" MaxLength="150" />
+          <Property Name="19 1 DN Tabnaam" Type="varchar" MaxLength="150" />
+          <Property Name="4 dn Omschrijving" Type="nvarchar(max)" />
+          <Property Name="91_zn_Datum_vergunning" Type="varchar" MaxLength="150" />
+          <Property Name="4_zn_Omschrijving" Type="varchar(max)" />
+          <Property Name="OmschrijvingCompleet" Type="nvarchar(max)" />
+          <Property Name="Plaatsnaam" Type="varchar" MaxLength="150" />
+          <Property Name="15c_Gemeente" Type="varchar" MaxLength="150" />
+          <Property Name="51zn_classificatiecode" Type="varchar" MaxLength="150" />
+          <Property Name="52zn_Omschrijving_classificatiecode " Type="varchar" MaxLength="150" />
+          <Property Name="53_zn_Bron " Type="varchar" MaxLength="150" />
+          <Property Name="Omschrijving " Type="nvarchar(max)" />
+          <Property Name="Gemeentecode" Type="varchar" MaxLength="150" />
+          <Property Name="54_zn_Bron_classificatiecode" Type="varchar" MaxLength="150" />
+          <Property Name="KvK nummer" Type="varchar" MaxLength="150" />
+          <Property Name="Omvang in MB" Type="varchar" MaxLength="150" />
+          <Property Name="Bestandsformaat" Type="varchar" MaxLength="150" />
+          <Property Name="Language" Type="varchar" MaxLength="150" />
+          <Property Name="Datum vergunning" Type="varchar" MaxLength="150" />
+          <Property Name=" Bouw-en woningtoezicht" Type="varchar" MaxLength="150" />
+          <Property Name="zn_bn_Hierarchisch" Type="varchar" MaxLength="150" />
+          <Property Name="Gemeente" Type="varchar" MaxLength="150" />
+          <Property Name="Organisatie" Type="varchar" MaxLength="150" />
+          <Property Name="Verlenen_bouwvergunningen" Type="varchar" MaxLength="150" />
+          <Property Name="Vrij te gebruiken" Type="varchar" MaxLength="150" />
+          <Property Name="Openbaar" Type="varchar" MaxLength="150" />
+          <Property Name=" Integer" Type="varchar" MaxLength="150" />
+          <Property Name="Enkelvoudig" Type="varchar" MaxLength="150" />
+          <Property Name="Aanmaakdatum bestand" Type="varchar" MaxLength="150" />
+          <Property Name=" Aggregatieniveau" Type="varchar" MaxLength="150" />
+          <Property Name=" Relatie ID" Type="varchar" MaxLength="150" />
+          <Property Name="Checksum" Type="varchar" MaxLength="150" />
+          <Property Name="Datum" Type="varchar" MaxLength="150" />
+          <Property Name=" BN Algoritme" Type="varchar" MaxLength="150" />
+          <Property Name="ZN_DN_Classificatie" Type="varchar" MaxLength="150" />
+          <Property Name="Column 47" Type="varchar" MaxLength="150" />
+          <Property Name="Datum_vergunning2" Type="varchar" MaxLength="150" />
+          <Property Name="Zaaknummer" Type="varchar" MaxLength="150" />
+          <Property Name="BN Bestand" Type="varchar" MaxLength="150" />
+          <Property Name="21 BN  Bestand" Type="varchar" MaxLength="150" />
+          <Property Name="FileSize_Bytes" Type="bigint" />
+        </EntityType>
+        <EntityType Name="Source_temp">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="2_dn_Bestand" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Bouwvergnr2" Type="varchar" MaxLength="150" />
+          <Property Name="Straat" Type="varchar" MaxLength="150" />
+          <Property Name="Postcode" Type="varchar" MaxLength="150" />
+          <Property Name="AdresFull" Type="varchar" MaxLength="150" />
+          <Property Name="Adres" Type="varchar" MaxLength="150" />
+          <Property Name="Huisnr" Type="varchar" MaxLength="150" />
+          <Property Name="Voorvoegsl" Type="varchar" MaxLength="150" />
+          <Property Name="StraatHuisnr" Type="varchar" MaxLength="150" />
+          <Property Name="Postcode2" Type="varchar" MaxLength="150" />
+          <Property Name="Bvnr" Type="varchar" MaxLength="150" />
+          <Property Name="Jaar" Type="varchar" MaxLength="150" />
+          <Property Name="2zn  Zaaknummer" Type="varchar" MaxLength="150" />
+          <Property Name="19 1 DN Tabnaam" Type="varchar" MaxLength="150" />
+          <Property Name="4 dn Omschrijving" Type="nvarchar(max)" />
+          <Property Name="91_zn_Datum_vergunning" Type="varchar" MaxLength="150" />
+          <Property Name="4_zn_Omschrijving" Type="varchar(max)" />
+          <Property Name="OmschrijvingCompleet" Type="nvarchar(max)" />
+          <Property Name="Plaatsnaam" Type="varchar" MaxLength="150" />
+          <Property Name="15c_Gemeente" Type="varchar" MaxLength="150" />
+          <Property Name="51zn_classificatiecode" Type="varchar" MaxLength="150" />
+          <Property Name="52zn_Omschrijving_classificatiecode " Type="varchar" MaxLength="150" />
+          <Property Name="53_zn_Bron " Type="varchar" MaxLength="150" />
+          <Property Name="Omschrijving " Type="nvarchar(max)" />
+          <Property Name="Gemeentecode" Type="varchar" MaxLength="150" />
+          <Property Name="54_zn_Bron_classificatiecode" Type="varchar" MaxLength="150" />
+          <Property Name="KvK nummer" Type="varchar" MaxLength="150" />
+          <Property Name="Omvang in MB" Type="varchar" MaxLength="150" />
+          <Property Name="Bestandsformaat" Type="varchar" MaxLength="150" />
+          <Property Name="Language" Type="varchar" MaxLength="150" />
+          <Property Name="Datum vergunning" Type="varchar" MaxLength="150" />
+          <Property Name=" Bouw-en woningtoezicht" Type="varchar" MaxLength="150" />
+          <Property Name="zn_bn_Hierarchisch" Type="varchar" MaxLength="150" />
+          <Property Name="Gemeente" Type="varchar" MaxLength="150" />
+          <Property Name="Organisatie" Type="varchar" MaxLength="150" />
+          <Property Name="Verlenen_bouwvergunningen" Type="varchar" MaxLength="150" />
+          <Property Name="Vrij te gebruiken" Type="varchar" MaxLength="150" />
+          <Property Name="Openbaar" Type="varchar" MaxLength="150" />
+          <Property Name=" Integer" Type="varchar" MaxLength="150" />
+          <Property Name="Enkelvoudig" Type="varchar" MaxLength="150" />
+          <Property Name="Aanmaakdatum bestand" Type="varchar" MaxLength="150" />
+          <Property Name=" Aggregatieniveau" Type="varchar" MaxLength="150" />
+          <Property Name=" Relatie ID" Type="varchar" MaxLength="150" />
+          <Property Name="Checksum" Type="varchar" MaxLength="150" />
+          <Property Name="Datum" Type="varchar" MaxLength="150" />
+          <Property Name=" BN Algoritme" Type="varchar" MaxLength="150" />
+          <Property Name="ZN_DN_Classificatie" Type="varchar" MaxLength="150" />
+          <Property Name="Column 47" Type="varchar" MaxLength="150" />
+          <Property Name="Datum_vergunning2" Type="varchar" MaxLength="150" />
+          <Property Name="Zaaknummer" Type="varchar" MaxLength="150" />
+          <Property Name="BN Bestand" Type="varchar" MaxLength="150" />
+          <Property Name="21 BN  Bestand" Type="varchar" MaxLength="150" />
+          <Property Name="FileSize_Bytes" Type="bigint" />
+        </EntityType>
+        <EntityType Name="TestSet">
+          <Key>
+            <PropertyRef Name="FileName" />
+          </Key>
+          <Property Name="FileName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="TOPXModelStoreContainer">
+          <EntitySet Name="checksum" EntityType="Self.checksum" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DossiersZonderBeschikking" EntityType="Self.DossiersZonderBeschikking" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EersteShift" EntityType="Self.EersteShift" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FileSizes" EntityType="Self.FileSizes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Gebruiksrechten" EntityType="Self.Gebruiksrechten" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Log" EntityType="Self.Log" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MarkedAsDelivered" EntityType="Self.MarkedAsDelivered" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Openbaarheid" EntityType="Self.Openbaarheid" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Source" EntityType="Self.Source" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Source_temp" EntityType="Self.Source_temp" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TestSet" EntityType="Self.TestSet" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TOPXModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="TOPXEntities" annotation:LazyLoadingEnabled="true" >
+          <EntitySet Name="Source" EntityType="TOPXModel.Source" />
+          <EntitySet Name="FileSizes" EntityType="TOPXModel.FileSizes" />
+          <EntitySet Name="Openbaarheid" EntityType="TOPXModel.Openbaarheid" />
+          <EntitySet Name="Gebruiksrechten" EntityType="TOPXModel.Gebruiksrechten" />
+          <EntitySet Name="TestSet" EntityType="TOPXModel.TestSet" />
+          <EntitySet Name="checksum" EntityType="TOPXModel.checksum" />
+          <EntitySet Name="Log" EntityType="TOPXModel.Log" />
+          <EntitySet Name="MarkedAsDelivered" EntityType="TOPXModel.MarkedAsDelivered" />
+          <EntitySet Name="Source_temp" EntityType="TOPXModel.Source_temp" />
+          <EntitySet Name="EersteShift" EntityType="TOPXModel.EersteShift" />
+          <EntitySet Name="DossiersZonderBeschikking" EntityType="TOPXModel.DossiersZonderBeschikking" />
+        </EntityContainer>
+        <EntityType Name="Source">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="C2_dn_Bestand" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Bouwvergnr2" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Straat" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Postcode" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="AdresFull" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Adres" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Huisnr" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Voorvoegsl" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="StraatHuisnr" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Postcode2" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Bvnr" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Jaar" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="C2zn__Zaaknummer" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="C19_1_DN_Tabnaam" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="C4_dn_Omschrijving" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="C91_zn_Datum_vergunning" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="C4_zn_Omschrijving" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="OmschrijvingCompleet" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Plaatsnaam" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="C15c_Gemeente" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="C51zn_classificatiecode" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="C52zn_Omschrijving_classificatiecode_" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="C53_zn_Bron_" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Omschrijving_" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Gemeentecode" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="C54_zn_Bron_classificatiecode" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="KvK_nummer" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Omvang_in_MB" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Bestandsformaat" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Language" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Datum_vergunning" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="C_Bouw_en_woningtoezicht" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="zn_bn_Hierarchisch" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Gemeente" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Organisatie" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Verlenen_bouwvergunningen" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Vrij_te_gebruiken" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Openbaar" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="C_Integer" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Enkelvoudig" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Aanmaakdatum_bestand" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="C_Aggregatieniveau" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="C_Relatie_ID" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Checksum" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Datum" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="C_BN_Algoritme" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="ZN_DN_Classificatie" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Column_47" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Datum_vergunning2" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Zaaknummer" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="BN_Bestand" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="C21_BN__Bestand" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="FileSize_Bytes" Type="Int64" />
+        </EntityType>
+        <EntityType Name="FileSizes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Bestandsnaam" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Omvang_Byte__B_" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Gemaakt_op" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Gewijzigd_op" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Toegestaan_op" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Bevat_map" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CleanName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="Openbaarheid">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="naam" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="omschrijvingBeperkingen" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="begin" Type="DateTime" Precision="3" />
+          <Property Name="eind" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Gebruiksrechten">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="naam" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="omschrijvingVoorwaarden" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="begin" Type="DateTime" Precision="3" />
+          <Property Name="eind" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="TestSet">
+          <Key>
+            <PropertyRef Name="FileName" />
+          </Key>
+          <Property Name="FileName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="checksum">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Checksum1" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Filename" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FilenameClean" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="Log">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Bestand" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Omschrijving" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="DateTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="MarkedAsDelivered">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Zaaknr" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="DatumProcessed" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Source_temp">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="C2_dn_Bestand" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Bouwvergnr2" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Straat" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Postcode" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="AdresFull" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Adres" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Huisnr" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Voorvoegsl" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="StraatHuisnr" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Postcode2" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Bvnr" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Jaar" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="C2zn__Zaaknummer" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="C19_1_DN_Tabnaam" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="C4_dn_Omschrijving" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="C91_zn_Datum_vergunning" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="C4_zn_Omschrijving" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="OmschrijvingCompleet" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Plaatsnaam" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="C15c_Gemeente" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="C51zn_classificatiecode" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="C52zn_Omschrijving_classificatiecode_" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="C53_zn_Bron_" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Omschrijving_" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Gemeentecode" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="C54_zn_Bron_classificatiecode" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="KvK_nummer" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Omvang_in_MB" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Bestandsformaat" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Language" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Datum_vergunning" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="C_Bouw_en_woningtoezicht" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="zn_bn_Hierarchisch" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Gemeente" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Organisatie" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Verlenen_bouwvergunningen" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Vrij_te_gebruiken" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Openbaar" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="C_Integer" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Enkelvoudig" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Aanmaakdatum_bestand" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="C_Aggregatieniveau" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="C_Relatie_ID" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Checksum" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Datum" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="C_BN_Algoritme" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="ZN_DN_Classificatie" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Column_47" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Datum_vergunning2" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Zaaknummer" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="BN_Bestand" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="C21_BN__Bestand" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="FileSize_Bytes" Type="Int64" />
+        </EntityType>
+        <EntityType Name="EersteShift">
+          <Key>
+            <PropertyRef Name="Bestand" />
+          </Key>
+          <Property Name="Bestand" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Column_1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Column_2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Column_3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Column_4" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Column_5" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Column_6" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Column_7" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Column_8" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Column_9" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Column_10" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Column_11" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Column_12" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Column_13" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Column_14" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Column_15" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Column_16" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Column_17" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Column_18" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Column_19" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Column_20" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Column_21" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Column_22" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Column_23" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Column_24" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Column_25" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Column_26" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Column_27" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Column_28" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Column_29" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Column_30" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Column_31" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Column_32" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Column_33" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Column_34" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Column_35" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Column_36" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Column_37" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Column_38" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Column_39" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Column_40" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Column_41" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Column_42" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Column_43" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Column_44" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Column_45" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Column_46" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="DossiersZonderBeschikking">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DossierZonderBeschikking" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TOPXModelStoreContainer" CdmEntityContainer="TOPXEntities" >
+          <EntitySetMapping Name="Source">
+            <EntityTypeMapping TypeName="TOPXModel.Source">
+              <MappingFragment StoreEntitySet="Source">
+                <ScalarProperty Name="FileSize_Bytes" ColumnName="FileSize_Bytes" />
+                <ScalarProperty Name="C21_BN__Bestand" ColumnName="21 BN  Bestand" />
+                <ScalarProperty Name="BN_Bestand" ColumnName="BN Bestand" />
+                <ScalarProperty Name="Zaaknummer" ColumnName="Zaaknummer" />
+                <ScalarProperty Name="Datum_vergunning2" ColumnName="Datum_vergunning2" />
+                <ScalarProperty Name="Column_47" ColumnName="Column 47" />
+                <ScalarProperty Name="ZN_DN_Classificatie" ColumnName="ZN_DN_Classificatie" />
+                <ScalarProperty Name="C_BN_Algoritme" ColumnName=" BN Algoritme" />
+                <ScalarProperty Name="Datum" ColumnName="Datum" />
+                <ScalarProperty Name="Checksum" ColumnName="Checksum" />
+                <ScalarProperty Name="C_Relatie_ID" ColumnName=" Relatie ID" />
+                <ScalarProperty Name="C_Aggregatieniveau" ColumnName=" Aggregatieniveau" />
+                <ScalarProperty Name="Aanmaakdatum_bestand" ColumnName="Aanmaakdatum bestand" />
+                <ScalarProperty Name="Enkelvoudig" ColumnName="Enkelvoudig" />
+                <ScalarProperty Name="C_Integer" ColumnName=" Integer" />
+                <ScalarProperty Name="Openbaar" ColumnName="Openbaar" />
+                <ScalarProperty Name="Vrij_te_gebruiken" ColumnName="Vrij te gebruiken" />
+                <ScalarProperty Name="Verlenen_bouwvergunningen" ColumnName="Verlenen_bouwvergunningen" />
+                <ScalarProperty Name="Organisatie" ColumnName="Organisatie" />
+                <ScalarProperty Name="Gemeente" ColumnName="Gemeente" />
+                <ScalarProperty Name="zn_bn_Hierarchisch" ColumnName="zn_bn_Hierarchisch" />
+                <ScalarProperty Name="C_Bouw_en_woningtoezicht" ColumnName=" Bouw-en woningtoezicht" />
+                <ScalarProperty Name="Datum_vergunning" ColumnName="Datum vergunning" />
+                <ScalarProperty Name="Language" ColumnName="Language" />
+                <ScalarProperty Name="Bestandsformaat" ColumnName="Bestandsformaat" />
+                <ScalarProperty Name="Omvang_in_MB" ColumnName="Omvang in MB" />
+                <ScalarProperty Name="KvK_nummer" ColumnName="KvK nummer" />
+                <ScalarProperty Name="C54_zn_Bron_classificatiecode" ColumnName="54_zn_Bron_classificatiecode" />
+                <ScalarProperty Name="Gemeentecode" ColumnName="Gemeentecode" />
+                <ScalarProperty Name="Omschrijving_" ColumnName="Omschrijving " />
+                <ScalarProperty Name="C53_zn_Bron_" ColumnName="53_zn_Bron " />
+                <ScalarProperty Name="C52zn_Omschrijving_classificatiecode_" ColumnName="52zn_Omschrijving_classificatiecode " />
+                <ScalarProperty Name="C51zn_classificatiecode" ColumnName="51zn_classificatiecode" />
+                <ScalarProperty Name="C15c_Gemeente" ColumnName="15c_Gemeente" />
+                <ScalarProperty Name="Plaatsnaam" ColumnName="Plaatsnaam" />
+                <ScalarProperty Name="OmschrijvingCompleet" ColumnName="OmschrijvingCompleet" />
+                <ScalarProperty Name="C4_zn_Omschrijving" ColumnName="4_zn_Omschrijving" />
+                <ScalarProperty Name="C91_zn_Datum_vergunning" ColumnName="91_zn_Datum_vergunning" />
+                <ScalarProperty Name="C4_dn_Omschrijving" ColumnName="4 dn Omschrijving" />
+                <ScalarProperty Name="C19_1_DN_Tabnaam" ColumnName="19 1 DN Tabnaam" />
+                <ScalarProperty Name="C2zn__Zaaknummer" ColumnName="2zn  Zaaknummer" />
+                <ScalarProperty Name="Jaar" ColumnName="Jaar" />
+                <ScalarProperty Name="Bvnr" ColumnName="Bvnr" />
+                <ScalarProperty Name="Postcode2" ColumnName="Postcode2" />
+                <ScalarProperty Name="StraatHuisnr" ColumnName="StraatHuisnr" />
+                <ScalarProperty Name="Voorvoegsl" ColumnName="Voorvoegsl" />
+                <ScalarProperty Name="Huisnr" ColumnName="Huisnr" />
+                <ScalarProperty Name="Adres" ColumnName="Adres" />
+                <ScalarProperty Name="AdresFull" ColumnName="AdresFull" />
+                <ScalarProperty Name="Postcode" ColumnName="Postcode" />
+                <ScalarProperty Name="Straat" ColumnName="Straat" />
+                <ScalarProperty Name="Bouwvergnr2" ColumnName="Bouwvergnr2" />
+                <ScalarProperty Name="C2_dn_Bestand" ColumnName="2_dn_Bestand" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FileSizes">
+            <EntityTypeMapping TypeName="TOPXModel.FileSizes">
+              <MappingFragment StoreEntitySet="FileSizes">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CleanName" ColumnName="CleanName" />
+                <ScalarProperty Name="Bevat_map" ColumnName="Bevat map" />
+                <ScalarProperty Name="Toegestaan_op" ColumnName="Toegestaan op" />
+                <ScalarProperty Name="Gewijzigd_op" ColumnName="Gewijzigd op" />
+                <ScalarProperty Name="Gemaakt_op" ColumnName="Gemaakt op" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Omvang_Byte__B_" ColumnName="Omvang(Byte)(B)" />
+                <ScalarProperty Name="Bestandsnaam" ColumnName="Bestandsnaam" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Openbaarheid">
+            <EntityTypeMapping TypeName="TOPXModel.Openbaarheid">
+              <MappingFragment StoreEntitySet="Openbaarheid">
+                <ScalarProperty Name="eind" ColumnName="eind" />
+                <ScalarProperty Name="begin" ColumnName="begin" />
+                <ScalarProperty Name="omschrijvingBeperkingen" ColumnName="omschrijvingBeperkingen" />
+                <ScalarProperty Name="naam" ColumnName="naam" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Gebruiksrechten">
+            <EntityTypeMapping TypeName="TOPXModel.Gebruiksrechten">
+              <MappingFragment StoreEntitySet="Gebruiksrechten">
+                <ScalarProperty Name="eind" ColumnName="eind" />
+                <ScalarProperty Name="begin" ColumnName="begin" />
+                <ScalarProperty Name="omschrijvingVoorwaarden" ColumnName="omschrijvingVoorwaarden" />
+                <ScalarProperty Name="naam" ColumnName="naam" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TestSet">
+            <EntityTypeMapping TypeName="TOPXModel.TestSet">
+              <MappingFragment StoreEntitySet="TestSet">
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="checksum">
+            <EntityTypeMapping TypeName="TOPXModel.checksum">
+              <MappingFragment StoreEntitySet="checksum">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FilenameClean" ColumnName="FilenameClean" />
+                <ScalarProperty Name="Filename" ColumnName="Filename" />
+                <ScalarProperty Name="Checksum1" ColumnName="Checksum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Log">
+            <EntityTypeMapping TypeName="TOPXModel.Log">
+              <MappingFragment StoreEntitySet="Log">
+                <ScalarProperty Name="DateTime" ColumnName="DateTime" />
+                <ScalarProperty Name="Omschrijving" ColumnName="Omschrijving" />
+                <ScalarProperty Name="Bestand" ColumnName="Bestand" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MarkedAsDelivered">
+            <EntityTypeMapping TypeName="TOPXModel.MarkedAsDelivered">
+              <MappingFragment StoreEntitySet="MarkedAsDelivered">
+                <ScalarProperty Name="DatumProcessed" ColumnName="DatumProcessed" />
+                <ScalarProperty Name="Zaaknr" ColumnName="Zaaknr" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Source_temp">
+            <EntityTypeMapping TypeName="TOPXModel.Source_temp">
+              <MappingFragment StoreEntitySet="Source_temp">
+                <ScalarProperty Name="FileSize_Bytes" ColumnName="FileSize_Bytes" />
+                <ScalarProperty Name="C21_BN__Bestand" ColumnName="21 BN  Bestand" />
+                <ScalarProperty Name="BN_Bestand" ColumnName="BN Bestand" />
+                <ScalarProperty Name="Zaaknummer" ColumnName="Zaaknummer" />
+                <ScalarProperty Name="Datum_vergunning2" ColumnName="Datum_vergunning2" />
+                <ScalarProperty Name="Column_47" ColumnName="Column 47" />
+                <ScalarProperty Name="ZN_DN_Classificatie" ColumnName="ZN_DN_Classificatie" />
+                <ScalarProperty Name="C_BN_Algoritme" ColumnName=" BN Algoritme" />
+                <ScalarProperty Name="Datum" ColumnName="Datum" />
+                <ScalarProperty Name="Checksum" ColumnName="Checksum" />
+                <ScalarProperty Name="C_Relatie_ID" ColumnName=" Relatie ID" />
+                <ScalarProperty Name="C_Aggregatieniveau" ColumnName=" Aggregatieniveau" />
+                <ScalarProperty Name="Aanmaakdatum_bestand" ColumnName="Aanmaakdatum bestand" />
+                <ScalarProperty Name="Enkelvoudig" ColumnName="Enkelvoudig" />
+                <ScalarProperty Name="C_Integer" ColumnName=" Integer" />
+                <ScalarProperty Name="Openbaar" ColumnName="Openbaar" />
+                <ScalarProperty Name="Vrij_te_gebruiken" ColumnName="Vrij te gebruiken" />
+                <ScalarProperty Name="Verlenen_bouwvergunningen" ColumnName="Verlenen_bouwvergunningen" />
+                <ScalarProperty Name="Organisatie" ColumnName="Organisatie" />
+                <ScalarProperty Name="Gemeente" ColumnName="Gemeente" />
+                <ScalarProperty Name="zn_bn_Hierarchisch" ColumnName="zn_bn_Hierarchisch" />
+                <ScalarProperty Name="C_Bouw_en_woningtoezicht" ColumnName=" Bouw-en woningtoezicht" />
+                <ScalarProperty Name="Datum_vergunning" ColumnName="Datum vergunning" />
+                <ScalarProperty Name="Language" ColumnName="Language" />
+                <ScalarProperty Name="Bestandsformaat" ColumnName="Bestandsformaat" />
+                <ScalarProperty Name="Omvang_in_MB" ColumnName="Omvang in MB" />
+                <ScalarProperty Name="KvK_nummer" ColumnName="KvK nummer" />
+                <ScalarProperty Name="C54_zn_Bron_classificatiecode" ColumnName="54_zn_Bron_classificatiecode" />
+                <ScalarProperty Name="Gemeentecode" ColumnName="Gemeentecode" />
+                <ScalarProperty Name="Omschrijving_" ColumnName="Omschrijving " />
+                <ScalarProperty Name="C53_zn_Bron_" ColumnName="53_zn_Bron " />
+                <ScalarProperty Name="C52zn_Omschrijving_classificatiecode_" ColumnName="52zn_Omschrijving_classificatiecode " />
+                <ScalarProperty Name="C51zn_classificatiecode" ColumnName="51zn_classificatiecode" />
+                <ScalarProperty Name="C15c_Gemeente" ColumnName="15c_Gemeente" />
+                <ScalarProperty Name="Plaatsnaam" ColumnName="Plaatsnaam" />
+                <ScalarProperty Name="OmschrijvingCompleet" ColumnName="OmschrijvingCompleet" />
+                <ScalarProperty Name="C4_zn_Omschrijving" ColumnName="4_zn_Omschrijving" />
+                <ScalarProperty Name="C91_zn_Datum_vergunning" ColumnName="91_zn_Datum_vergunning" />
+                <ScalarProperty Name="C4_dn_Omschrijving" ColumnName="4 dn Omschrijving" />
+                <ScalarProperty Name="C19_1_DN_Tabnaam" ColumnName="19 1 DN Tabnaam" />
+                <ScalarProperty Name="C2zn__Zaaknummer" ColumnName="2zn  Zaaknummer" />
+                <ScalarProperty Name="Jaar" ColumnName="Jaar" />
+                <ScalarProperty Name="Bvnr" ColumnName="Bvnr" />
+                <ScalarProperty Name="Postcode2" ColumnName="Postcode2" />
+                <ScalarProperty Name="StraatHuisnr" ColumnName="StraatHuisnr" />
+                <ScalarProperty Name="Voorvoegsl" ColumnName="Voorvoegsl" />
+                <ScalarProperty Name="Huisnr" ColumnName="Huisnr" />
+                <ScalarProperty Name="Adres" ColumnName="Adres" />
+                <ScalarProperty Name="AdresFull" ColumnName="AdresFull" />
+                <ScalarProperty Name="Postcode" ColumnName="Postcode" />
+                <ScalarProperty Name="Straat" ColumnName="Straat" />
+                <ScalarProperty Name="Bouwvergnr2" ColumnName="Bouwvergnr2" />
+                <ScalarProperty Name="C2_dn_Bestand" ColumnName="2_dn_Bestand" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EersteShift">
+            <EntityTypeMapping TypeName="TOPXModel.EersteShift">
+              <MappingFragment StoreEntitySet="EersteShift">
+                <ScalarProperty Name="Column_46" ColumnName="Column 46" />
+                <ScalarProperty Name="Column_45" ColumnName="Column 45" />
+                <ScalarProperty Name="Column_44" ColumnName="Column 44" />
+                <ScalarProperty Name="Column_43" ColumnName="Column 43" />
+                <ScalarProperty Name="Column_42" ColumnName="Column 42" />
+                <ScalarProperty Name="Column_41" ColumnName="Column 41" />
+                <ScalarProperty Name="Column_40" ColumnName="Column 40" />
+                <ScalarProperty Name="Column_39" ColumnName="Column 39" />
+                <ScalarProperty Name="Column_38" ColumnName="Column 38" />
+                <ScalarProperty Name="Column_37" ColumnName="Column 37" />
+                <ScalarProperty Name="Column_36" ColumnName="Column 36" />
+                <ScalarProperty Name="Column_35" ColumnName="Column 35" />
+                <ScalarProperty Name="Column_34" ColumnName="Column 34" />
+                <ScalarProperty Name="Column_33" ColumnName="Column 33" />
+                <ScalarProperty Name="Column_32" ColumnName="Column 32" />
+                <ScalarProperty Name="Column_31" ColumnName="Column 31" />
+                <ScalarProperty Name="Column_30" ColumnName="Column 30" />
+                <ScalarProperty Name="Column_29" ColumnName="Column 29" />
+                <ScalarProperty Name="Column_28" ColumnName="Column 28" />
+                <ScalarProperty Name="Column_27" ColumnName="Column 27" />
+                <ScalarProperty Name="Column_26" ColumnName="Column 26" />
+                <ScalarProperty Name="Column_25" ColumnName="Column 25" />
+                <ScalarProperty Name="Column_24" ColumnName="Column 24" />
+                <ScalarProperty Name="Column_23" ColumnName="Column 23" />
+                <ScalarProperty Name="Column_22" ColumnName="Column 22" />
+                <ScalarProperty Name="Column_21" ColumnName="Column 21" />
+                <ScalarProperty Name="Column_20" ColumnName="Column 20" />
+                <ScalarProperty Name="Column_19" ColumnName="Column 19" />
+                <ScalarProperty Name="Column_18" ColumnName="Column 18" />
+                <ScalarProperty Name="Column_17" ColumnName="Column 17" />
+                <ScalarProperty Name="Column_16" ColumnName="Column 16" />
+                <ScalarProperty Name="Column_15" ColumnName="Column 15" />
+                <ScalarProperty Name="Column_14" ColumnName="Column 14" />
+                <ScalarProperty Name="Column_13" ColumnName="Column 13" />
+                <ScalarProperty Name="Column_12" ColumnName="Column 12" />
+                <ScalarProperty Name="Column_11" ColumnName="Column 11" />
+                <ScalarProperty Name="Column_10" ColumnName="Column 10" />
+                <ScalarProperty Name="Column_9" ColumnName="Column 9" />
+                <ScalarProperty Name="Column_8" ColumnName="Column 8" />
+                <ScalarProperty Name="Column_7" ColumnName="Column 7" />
+                <ScalarProperty Name="Column_6" ColumnName="Column 6" />
+                <ScalarProperty Name="Column_5" ColumnName="Column 5" />
+                <ScalarProperty Name="Column_4" ColumnName="Column 4" />
+                <ScalarProperty Name="Column_3" ColumnName="Column 3" />
+                <ScalarProperty Name="Column_2" ColumnName="Column 2" />
+                <ScalarProperty Name="Column_1" ColumnName="Column 1" />
+                <ScalarProperty Name="Bestand" ColumnName="Bestand" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DossiersZonderBeschikking">
+            <EntityTypeMapping TypeName="TOPXModel.DossiersZonderBeschikking">
+              <MappingFragment StoreEntitySet="DossiersZonderBeschikking">
+                <ScalarProperty Name="DossierZonderBeschikking" ColumnName="DossierZonderBeschikking" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

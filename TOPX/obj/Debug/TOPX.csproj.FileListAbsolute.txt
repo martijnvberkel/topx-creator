@@ -1,0 +1,12 @@
+D:\Visual Studio Projects\TOPX\TOPX\TOPX\bin\Debug\TOPX.dll.config
+D:\Visual Studio Projects\TOPX\TOPX\TOPX\bin\Debug\TOPX.dll
+D:\Visual Studio Projects\TOPX\TOPX\TOPX\bin\Debug\TOPX.pdb
+D:\Visual Studio Projects\TOPX\TOPX\TOPX\bin\Debug\EntityFramework.dll
+D:\Visual Studio Projects\TOPX\TOPX\TOPX\bin\Debug\EntityFramework.SqlServer.dll
+D:\Visual Studio Projects\TOPX\TOPX\TOPX\bin\Debug\EntityFramework.xml
+D:\Visual Studio Projects\TOPX\TOPX\TOPX\bin\Debug\EntityFramework.SqlServer.xml
+D:\Visual Studio Projects\TOPX\TOPX\TOPX\obj\Debug\TOPX.csprojResolveAssemblyReference.cache
+D:\Visual Studio Projects\TOPX\TOPX\TOPX\obj\Debug\TOPX.dll
+D:\Visual Studio Projects\TOPX\TOPX\TOPX\obj\Debug\TOPX.pdb
+D:\Visual Studio Projects\TOPX\TOPX\TOPX\obj\Debug\TOPX.csproj.CoreCompileInputs.cache
+D:\Visual Studio Projects\TOPX\TOPX\TOPX\obj\Debug\TOPX.csproj.CopyComplete

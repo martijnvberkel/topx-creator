@@ -1,0 +1,259 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TOPXModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="TOPXEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Source" EntityType="TOPXModel.Source" />
+    <EntitySet Name="FileSizes" EntityType="TOPXModel.FileSizes" />
+    <EntitySet Name="Openbaarheid" EntityType="TOPXModel.Openbaarheid" />
+    <EntitySet Name="Gebruiksrechten" EntityType="TOPXModel.Gebruiksrechten" />
+    <EntitySet Name="TestSet" EntityType="TOPXModel.TestSet" />
+    <EntitySet Name="checksum" EntityType="TOPXModel.checksum" />
+    <EntitySet Name="Log" EntityType="TOPXModel.Log" />
+    <EntitySet Name="MarkedAsDelivered" EntityType="TOPXModel.MarkedAsDelivered" />
+    <EntitySet Name="Source_temp" EntityType="TOPXModel.Source_temp" />
+    <EntitySet Name="EersteShift" EntityType="TOPXModel.EersteShift" />
+    <EntitySet Name="DossiersZonderBeschikking" EntityType="TOPXModel.DossiersZonderBeschikking" />
+  </EntityContainer>
+  <EntityType Name="Source">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="C2_dn_Bestand" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Bouwvergnr2" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Straat" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Postcode" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="AdresFull" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Adres" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Huisnr" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Voorvoegsl" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="StraatHuisnr" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Postcode2" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Bvnr" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Jaar" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="C2zn__Zaaknummer" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="C19_1_DN_Tabnaam" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="C4_dn_Omschrijving" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="C91_zn_Datum_vergunning" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="C4_zn_Omschrijving" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="OmschrijvingCompleet" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Plaatsnaam" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="C15c_Gemeente" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="C51zn_classificatiecode" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="C52zn_Omschrijving_classificatiecode_" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="C53_zn_Bron_" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Omschrijving_" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Gemeentecode" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="C54_zn_Bron_classificatiecode" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="KvK_nummer" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Omvang_in_MB" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Bestandsformaat" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Language" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Datum_vergunning" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="C_Bouw_en_woningtoezicht" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="zn_bn_Hierarchisch" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Gemeente" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Organisatie" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Verlenen_bouwvergunningen" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Vrij_te_gebruiken" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Openbaar" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="C_Integer" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Enkelvoudig" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Aanmaakdatum_bestand" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="C_Aggregatieniveau" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="C_Relatie_ID" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Checksum" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Datum" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="C_BN_Algoritme" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="ZN_DN_Classificatie" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Column_47" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Datum_vergunning2" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Zaaknummer" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="BN_Bestand" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="C21_BN__Bestand" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="FileSize_Bytes" Type="Int64" />
+  </EntityType>
+  <EntityType Name="FileSizes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Bestandsnaam" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Omvang_Byte__B_" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Gemaakt_op" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Gewijzigd_op" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Toegestaan_op" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Bevat_map" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CleanName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+  </EntityType>
+  <EntityType Name="Openbaarheid">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="naam" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="omschrijvingBeperkingen" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="begin" Type="DateTime" Precision="3" />
+    <Property Name="eind" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="Gebruiksrechten">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="naam" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="omschrijvingVoorwaarden" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="begin" Type="DateTime" Precision="3" />
+    <Property Name="eind" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="TestSet">
+    <Key>
+      <PropertyRef Name="FileName" />
+    </Key>
+    <Property Name="FileName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="checksum">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Checksum1" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Filename" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="FilenameClean" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+  </EntityType>
+  <EntityType Name="Log">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Bestand" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Omschrijving" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="DateTime" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="MarkedAsDelivered">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Zaaknr" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="DatumProcessed" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="Source_temp">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="C2_dn_Bestand" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Bouwvergnr2" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Straat" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Postcode" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="AdresFull" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Adres" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Huisnr" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Voorvoegsl" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="StraatHuisnr" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Postcode2" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Bvnr" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Jaar" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="C2zn__Zaaknummer" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="C19_1_DN_Tabnaam" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="C4_dn_Omschrijving" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="C91_zn_Datum_vergunning" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="C4_zn_Omschrijving" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="OmschrijvingCompleet" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Plaatsnaam" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="C15c_Gemeente" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="C51zn_classificatiecode" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="C52zn_Omschrijving_classificatiecode_" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="C53_zn_Bron_" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Omschrijving_" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Gemeentecode" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="C54_zn_Bron_classificatiecode" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="KvK_nummer" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Omvang_in_MB" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Bestandsformaat" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Language" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Datum_vergunning" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="C_Bouw_en_woningtoezicht" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="zn_bn_Hierarchisch" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Gemeente" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Organisatie" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Verlenen_bouwvergunningen" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Vrij_te_gebruiken" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Openbaar" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="C_Integer" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Enkelvoudig" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Aanmaakdatum_bestand" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="C_Aggregatieniveau" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="C_Relatie_ID" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Checksum" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Datum" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="C_BN_Algoritme" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="ZN_DN_Classificatie" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Column_47" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Datum_vergunning2" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Zaaknummer" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="BN_Bestand" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="C21_BN__Bestand" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="FileSize_Bytes" Type="Int64" />
+  </EntityType>
+  <EntityType Name="EersteShift">
+    <Key>
+      <PropertyRef Name="Bestand" />
+    </Key>
+    <Property Name="Bestand" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Column_1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Column_2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Column_3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Column_4" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Column_5" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Column_6" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Column_7" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Column_8" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Column_9" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Column_10" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Column_11" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Column_12" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Column_13" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Column_14" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Column_15" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Column_16" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Column_17" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Column_18" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Column_19" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Column_20" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Column_21" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Column_22" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Column_23" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Column_24" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Column_25" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Column_26" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Column_27" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Column_28" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Column_29" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Column_30" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Column_31" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Column_32" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Column_33" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Column_34" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Column_35" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Column_36" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Column_37" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Column_38" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Column_39" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Column_40" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Column_41" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Column_42" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Column_43" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Column_44" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Column_45" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Column_46" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="DossiersZonderBeschikking">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DossierZonderBeschikking" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+  </EntityType>
+</Schema>

@@ -1,0 +1,1391 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--*****************************************Documentatie*****************************************-->
+<!-- 28_01_2016 ONDERWERP: aanpassing schema. WAT: Toevoeging vormtype op aggregatieType***-->
+<!-- 02_02_2016 ONDERWERP: aanpassing schema. WAT: Toevoeging attribuut group. Elk element gekoppeld aan attribuutgroup***-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.nationaalarchief.nl/ToPX/v2.3" targetNamespace="http://www.nationaalarchief.nl/ToPX/v2.3" elementFormDefault="qualified" attributeFormDefault="unqualified" version="v2.3">
+	<xs:element name="ToPX" type="topxType"/>
+	<xs:complexType name="topxType">
+		<xs:choice>
+			<xs:element name="aggregatie" type="aggregatieType">
+				<xs:annotation>
+					<xs:documentation>Gegevens over een archief, serie, dossier of record.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="bestand" type="bestandType">
+				<xs:annotation>
+					<xs:documentation>Gegevens over een bestand, waarbij vorm- en formaat-informatie verplicht meegeleverd dienen te worden.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:choice>
+		<xs:attributeGroup ref="optioneelAttribuut"/>
+	</xs:complexType>
+	<xs:group name="basisEigenschappenGroup">
+		<xs:sequence>
+			<xs:element name="naam" type="nonEmptyStringTypeAttribuut" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Toepassingsprofiel nr. 4 - Beknopte formeel-inhoudelijke beschrijving (titel) van het record.</xs:documentation>
+					<xs:documentation>Optioneel</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="classificatie" type="classificatieType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Toepassingsprofiel nr. 5 - Samenvoeging van archiefbestanddelen tot één nieuw geheel met een eigen identiteit.</xs:documentation>
+					<xs:documentation>Optioneel</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="omschrijving" type="string" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Toepassingsprofiel nr. 6 - Vrije tekst met nadere beschrijving van record.</xs:documentation>
+					<xs:documentation>Optioneel</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="plaats" type="string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Toepassingsprofiel nr. 7 - Fysieke of virtuele locatie van record.</xs:documentation>
+					<xs:documentation>Optioneel</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="dekking" type="dekkingType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Toepassingsprofiel nr. 9 - Nadere aanduiding van tijd en ruimte waarin het record kan worden gepositioneerd.</xs:documentation>
+					<xs:documentation>Optioneel</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="externIdentificatiekenmerk" type="externIdentificatiekenmerkType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Toepassingsprofiel nr. 10 - Kenmerken, toegekend aan een record, buiten de huidige beheersomgeving.</xs:documentation>
+					<xs:documentation>Optioneel</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="taal" type="taalTypeAttribuut" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Toepassingsprofiel nr. 11 - Taal van een record.</xs:documentation>
+					<xs:documentation>Optioneel</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="eventGeschiedenis" type="eventGeschiedenisType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Toepassingsprofiel nr. 12 - Vastlegging van het ontstaan en wijzigingen van een record.</xs:documentation>
+					<xs:documentation>Optioneel.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="eventPlan" type="eventPlanType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Toepassingsprofiel nr. 13 - Geeft activiteiten of gebeurtenissen weer die in de toekomst van belang zijn voor het record (wat moet er mee gebeuren, wanneer moet archief worden overgebracht).</xs:documentation>
+					<xs:documentation>Optioneel</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="relatie" type="relatieType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Toepassingsprofiel nr. 15 - Element waarmee een relatie gelegd kan worden met andere records (op verschillende aggregatieniveaus) en met andere entiteiten.</xs:documentation>
+					<xs:documentation>Optioneel</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="context" type="contextType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Toepassingsprofiel nr. 15C - De verwijzing naar de organisatorische context van het record.</xs:documentation>
+					<xs:documentation>Optioneel</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="gebruiksrechten" type="gebruiksrechtenType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Toepassingsprofiel nr. 16 - Voorwaarden voor het gebruik anders dan raadpleging van het record (auteursrechten e.d.).</xs:documentation>
+					<xs:documentation>Optioneel</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="vertrouwelijkheid" type="vertrouwelijkheidType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Toepassingsprofiel nr. 17 - Indicatie van niveau van vertrouwelijkheid van de informatie (record).</xs:documentation>
+					<xs:documentation>Optioneel</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="openbaarheid" type="openbaarheidType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Toepassingsprofiel nr. 18 - Mogelijke beperkingen aan de raadpleging.</xs:documentation>
+					<xs:documentation>Optioneel</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:group>
+	<xs:complexType name="aggregatieType">
+		<xs:sequence>
+			<xs:element name="identificatiekenmerk" type="nonEmptyStringTypeAttribuut">
+				<xs:annotation>
+					<xs:documentation>Toepassingsprofiel nr. 2 - Uniek kenmerk van een record.</xs:documentation>
+					<xs:documentation>Verplicht.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="aggregatieniveau">
+				<xs:annotation>
+					<xs:documentation>Toepassingsprofiel nr. 3 - Het niveau waarop een record kan worden beschreven.</xs:documentation>
+					<xs:documentation>Verplicht.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="aggregatieAggregatieniveauType">
+							<xs:attributeGroup ref="optioneelAttribuut"/>
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:group ref="basisEigenschappenGroup"/>
+			<xs:element name="vorm" type="vormType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Toepassingsprofiel nr. 19 - Redactie, verschijningsvorm en structuur van een record.</xs:documentation>
+					<xs:documentation>Optioneel.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="integriteit" type="string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Toepassingsprofiel nr. 20 - Volledigheid van een record - juist, volledig, tijdig, geautoriseerd. N.B. Hier wordt de inhoudelijke integriteit bedoeld.</xs:documentation>
+					<xs:documentation>Optioneel</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="generiekeMetadata" type="generiekeMetadataType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Algemene metadata waar ToPX niet in voorziet. Dit element dus alleen gebruiken indien voorgaande elementen niet voldoen.</xs:documentation>
+					<xs:documentation>Optioneel</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attributeGroup ref="optioneelAttribuut"/>
+	</xs:complexType>
+	<xs:complexType name="bestandType">
+		<xs:sequence>
+			<xs:element name="identificatiekenmerk" type="nonEmptyStringTypeAttribuut">
+				<xs:annotation>
+					<xs:documentation>Toepassingsprofiel nr. 2 - Uniek kenmerk van een record.</xs:documentation>
+					<xs:documentation>Verplicht.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="aggregatieniveau">
+				<xs:annotation>
+					<xs:documentation>Toepassingsprofiel nr. 3 - Het niveau waarop een record kan worden beschreven.</xs:documentation>
+					<xs:documentation>Verplicht.</xs:documentation>
+					<xs:documentation>Is in het geval van een bestand altijd 'Bestand'.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="bestandAggregatieniveauType">
+							<xs:attributeGroup ref="optioneelAttribuut"/>
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:group ref="basisEigenschappenGroup"/>
+			<xs:element name="vorm" type="vormType">
+				<xs:annotation>
+					<xs:documentation>Toepassingsprofiel nr. 19 - Redactie, verschijningsvorm en structuur van een record.</xs:documentation>
+					<xs:documentation>Verplicht.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="integriteit" type="string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Toepassingsprofiel nr. 20 - Volledigheid van een record - juist, volledig, tijdig, geautoriseerd. N.B. Hier wordt de inhoudelijke integriteit bedoeld.</xs:documentation>
+					<xs:documentation>Optioneel</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="formaat" type="formaatType" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Toepassingsprofiel nr. 21 - Fysieke/technische aspecten van een record. Verplicht in digitale omgeving.</xs:documentation>
+					<xs:documentation>Verplicht op aggregatieniveau "Bestand"</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="generiekeMetadata" type="generiekeMetadataType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Algemene metadata waarin ToPX 2.3 niet in voorziet. Dit element dus alleen gebruiken indien voorgaande elementen niet voldoen.</xs:documentation>
+					<xs:documentation>Optioneel</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attributeGroup ref="optioneelAttribuut"/>
+	</xs:complexType>
+	<xs:complexType name="nonEmptyStringTypeAttribuut">
+		<xs:simpleContent>
+			<xs:extension base="nonEmptyStringType">
+				<xs:attributeGroup ref="optioneelAttribuut"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:simpleType name="nonEmptyStringType">
+		<xs:annotation>
+			<xs:documentation>Een tekst waarde, die ingevuld dient te zijn (minimale lengte is 1).</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="aggregatieAggregatieniveauType">
+		<xs:annotation>
+			<xs:documentation>Enumeratie van 4 strings die de verschillende aggregatieniveau's beschrijven: archief, serie, dossier, record.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Record"/>
+			<xs:enumeration value="Dossier"/>
+			<xs:enumeration value="Serie"/>
+			<xs:enumeration value="Archief"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="bestandAggregatieniveauType">
+		<xs:annotation>
+			<xs:documentation>Enumeratie met 1 waarde die geldig is voor een bestand: Bestand.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Bestand"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="classificatieType">
+		<xs:sequence>
+			<xs:element name="code" type="nonEmptyStringTypeAttribuut">
+				<xs:annotation>
+					<xs:documentation>Toepassingsprofiel nr. 5.1 - Kenmerk waaronder de record wordt ingedeeld of geklasseerd.</xs:documentation>
+					<xs:documentation>Verplicht als het element classificatie wordt opgenomen.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="omschrijving" type="nonEmptyStringTypeAttribuut">
+				<xs:annotation>
+					<xs:documentation>Toepassingsprofiel nr. 5.2 - Nadere omschrijving van classificatie.</xs:documentation>
+					<xs:documentation>Verplicht, als het element classificatie wordt opgenomen.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="bron" type="nonEmptyStringTypeAttribuut">
+				<xs:annotation>
+					<xs:documentation>Toepassingsprofiel nr. 5.3 - Verwijzing naar het geldende classificatieschema/ordeningsplan.</xs:documentation>
+					<xs:documentation>Verplicht, als het element classificatie wordt opgenomen.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="datumOfPeriode" type="datumOfPeriodeType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Toepassingsprofiel nr. 5.4 - Datum of periode wanneer geldig/gebruikt.</xs:documentation>
+					<xs:documentation>Verplicht, als het element classificatie wordt opgenomen.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attributeGroup ref="optioneelAttribuut"/>
+	</xs:complexType>
+	<xs:complexType name="dekkingType">
+		<xs:sequence>
+			<xs:element name="inTijd" type="periodeType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Toepassingsprofiel nr. 9.1 - Geeft positionering in de tijd aan, waarin iets van kracht is/was dan wel bestond.</xs:documentation>
+					<xs:documentation>Optioneel</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="geografischGebied" type="string" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Toepassingsprofiel nr. 9.2 - Geeft ruimtelijke afbakening of locatie van record of werking ervan aan.</xs:documentation>
+					<xs:documentation>Optioneel</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attributeGroup ref="optioneelAttribuut"/>
+	</xs:complexType>
+	<xs:complexType name="periodeType">
+		<xs:sequence>
+			<xs:element name="begin" type="datumOfJaarType" minOccurs="0"/>
+			<xs:element name="eind" type="datumOfJaarType" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attributeGroup ref="optioneelAttribuut"/>
+	</xs:complexType>
+	<xs:complexType name="datumOfJaarType">
+		<xs:choice>
+			<xs:element name="jaar">
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="xs:gYear">
+							<xs:attributeGroup ref="optioneelAttribuut"/>
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="datum">
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="xs:date">
+							<xs:attributeGroup ref="optioneelAttribuut"/>
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="datumEnTijd">
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="xs:dateTime">
+							<xs:attributeGroup ref="optioneelAttribuut"/>
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+		</xs:choice>
+		<xs:attributeGroup ref="optioneelAttribuut"/>
+	</xs:complexType>
+	<xs:simpleType name="dateTimeOrDateType">
+		<xs:union memberTypes="xs:dateTime xs:date"/>
+	</xs:simpleType>
+	<xs:complexType name="externIdentificatiekenmerkType">
+		<xs:annotation>
+			<xs:documentation>Toepassingsprofiel nr. 10 - Kenmerken, toegekend aan een record, buiten de huidige beheersomgeving.</xs:documentation>
+			<xs:documentation>Als het element externIdentificatiekenmerk wordt opgenomen dan is het element nummerBinnenSysteem verplicht.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="kenmerkSysteem" type="string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Toepassingsprofiel nr. 10.1 - Betreft de aanduiding van het systeem, de gegevensverzameling, de andere opslag, de andere organisatie etc. waarin het record een rol heeft gespeeld onder een andere identificatie. Het gaat dus om systemen in de meest brede zin van het woord (niet alleen ICT-systemen) die zich buiten de beheeromgeving bevinden waarin het record beheerd wordt.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="nummerBinnenSysteem" type="nonEmptyStringTypeAttribuut">
+				<xs:annotation>
+					<xs:documentation>Toepassingsprofiel nr. 10.2 - Betreft de identificatie van het record in het andere systeem. Bijvoorbeeld briefkenmerk van derden, met name bij samenwerking in ketens.</xs:documentation>
+					<xs:documentation>Verplicht</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attributeGroup ref="optioneelAttribuut"/>
+	</xs:complexType>
+	<xs:complexType name="eventGeschiedenisType">
+		<xs:sequence>
+			<xs:element name="datumOfPeriode" type="datumOfPeriodeType">
+				<xs:annotation>
+					<xs:documentation>Toepassingsprofiel nr. 12.1 - Datum of periode waarop/-in iets
+                        heeft plaatsgevonden.</xs:documentation>
+					<xs:documentation>Verplicht</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="type" type="nonEmptyStringTypeAttribuut">
+				<xs:annotation>
+					<xs:documentation>Toepassingsprofiel nr. 12.2 - Soort activiteit of
+                        gebeurtenis.</xs:documentation>
+					<xs:documentation>Verplicht</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="beschrijving" type="string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Toepassingsprofiel nr. 12.3 - Nadere omschrijving van de
+                        gebeurtenis.</xs:documentation>
+					<xs:documentation>Optioneel</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="verantwoordelijkeFunctionaris" type="nonEmptyStringTypeAttribuut">
+				<xs:annotation>
+					<xs:documentation>Toepassingsprofiel nr. 12.4 - Degene die verantwoordelijk is
+                        voor de gebeurtenis of activiteit.</xs:documentation>
+					<xs:documentation>Verplicht</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attributeGroup ref="optioneelAttribuut"/>
+	</xs:complexType>
+	<xs:complexType name="datumOfPeriodeType">
+		<xs:choice>
+			<xs:element name="datum">
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="xs:date">
+							<xs:attributeGroup ref="optioneelAttribuut"/>
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="jaar">
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="xs:gYear">
+							<xs:attributeGroup ref="optioneelAttribuut"/>
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="datumEnTijd">
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="xs:dateTime">
+							<xs:attributeGroup ref="optioneelAttribuut"/>
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="periode" type="periodeType"/>
+		</xs:choice>
+		<xs:attributeGroup ref="optioneelAttribuut"/>
+	</xs:complexType>
+	<xs:complexType name="eventPlanType">
+		<xs:sequence>
+			<xs:element name="datumOfPeriode" type="datumOfPeriodeType">
+				<xs:annotation>
+					<xs:documentation>Toepassingsprofiel nr. 13.1 - Datum of periode waarop/-in iets zal plaatsvinden.</xs:documentation>
+					<xs:documentation>Verplicht als het element evenPlan is opgenomen.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="type">
+				<xs:annotation>
+					<xs:documentation>Toepassingsprofiel nr. 13.2 - Soort activiteit of gebeurtenis.</xs:documentation>
+					<xs:documentation>Verplicht als het element evenPlan is opgenomen</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="eventPlanTypeWaardenLijstType">
+							<xs:attributeGroup ref="optioneelAttribuut"/>
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="beschrijving" type="string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Toepassingsprofiel nr. 13.3 - Nadere omschrijving van de gebeurtenis of activiteit.</xs:documentation>
+					<xs:documentation>Optioneel</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="aanleiding" type="string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Toepassingsprofiel nr. 13.4 - Indicatie van mechanisme waarop gebeurtenis of actie in gang wordt gezet.</xs:documentation>
+					<xs:documentation>Optioneel</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attributeGroup ref="optioneelAttribuut"/>
+	</xs:complexType>
+	<xs:complexType name="relatieType">
+		<xs:sequence>
+			<xs:element name="relatieID" type="nonEmptyStringTypeAttribuut">
+				<xs:annotation>
+					<xs:documentation>Toepassingsprofiel nr. 15.1 - Een link naar de entiteit waarin de relatie beschreven is.</xs:documentation>
+					<xs:documentation>Verplicht</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="typeRelatie" type="nonEmptyStringTypeAttribuut">
+				<xs:annotation>
+					<xs:documentation>Toepassingsprofiel nr. 15.2 - Nadere aanduiding van aard van de relatie.</xs:documentation>
+					<xs:documentation>Verplicht</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="datumOfPeriode" type="datumOfPeriodeType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Toepassingsprofiel nr. 15.3 - Datum of periode waarin de relatie bestaat.</xs:documentation>
+					<xs:documentation>Optioneel</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attributeGroup ref="optioneelAttribuut"/>
+	</xs:complexType>
+	<xs:complexType name="contextType">
+		<xs:sequence>
+			<xs:element name="actor" type="actorType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Toepassingsprofiel nr. 15C-1 - Een organisatie of persoon verantwoordelijk voor of betrokken bij het opmaken, opnemen van archiefbescheiden en/of processen van informatie- en archiefbeheer.</xs:documentation>
+					<xs:documentation>Optioneel</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="activiteit" type="activiteitType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Toepassingsprofiel nr. 15C-2 - Het geheel van taken, functies, activiteiten en transacties die op basis van een mandaat worden uitgevoerd door een actor.</xs:documentation>
+					<xs:documentation>Optioneel</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attributeGroup ref="optioneelAttribuut"/>
+	</xs:complexType>
+	<xs:complexType name="actorType">
+		<xs:annotation>
+			<xs:documentation>Toepassingsprofiel nr. 15C-1 - Een organisatie of persoon verantwoordelijk voor of betrokken bij opmaken, opnemen van archiefbescheiden en/of processen van informatie- en archiefbeheer</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="identificatiekenmerk" type="nonEmptyStringTypeAttribuut">
+				<xs:annotation>
+					<xs:documentation>Toepassingsprofiel nr. 15C-1-2 - Uniek kenmerk van een actor</xs:documentation>
+					<xs:documentation>Verplicht</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="aggregatieniveau" type="string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Toepassingsprofiel nr. 15C-1-3 - Onderscheidt de niveaus waarop een actor kan worden beschreven</xs:documentation>
+					<xs:documentation>Optioneel</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="geautoriseerdeNaam" type="nonEmptyStringTypeAttribuut">
+				<xs:annotation>
+					<xs:documentation>Toepassingsprofiel nr. 15C-1-4.2 - De benaming(en), waaronder een actor bekend is</xs:documentation>
+					<xs:documentation>Verplicht</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="plaats" type="string" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Toepassingsprofiel nr. 15C-1-7 - Fysieke of virtuele locatie van actor. Voor een ministerie de URL of ‘Den Haag’</xs:documentation>
+					<xs:documentation>Optioneel</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="jurisdictie" type="string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Toepassingsprofiel nr. 15C-1-8 - Bevoegdheden van (formele) actor. Nadere omschrijving van werkingsgebied of bevoegdheden</xs:documentation>
+					<xs:documentation>Optioneel</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attributeGroup ref="optioneelAttribuut"/>
+	</xs:complexType>
+	<xs:complexType name="activiteitType">
+		<xs:annotation>
+			<xs:documentation>Toepassingsprofiel nr. 15C-2 - Het geheel van taken, functies, activiteiten en transacties die op basis van een mandaat worden uitgevoerd.</xs:documentation>
+			<xs:documentation>Optioneel.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="identificatiekenmerk" type="string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Toepassingsprofiel nr. 15C-2-2 - Uniek kenmerk van een activiteit.</xs:documentation>
+					<xs:documentation>Optioneel</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="aggregatieniveau" type="string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Toepassingsprofiel nr. 15C-2-3 - Onderscheidt de niveaus waarop een activiteit kan worden beschreven</xs:documentation>
+					<xs:documentation>Optioneel</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="naam" type="nonEmptyStringTypeAttribuut">
+				<xs:annotation>
+					<xs:documentation>Toepassingsprofiel nr. 15C-2-4 - Kernachtige omschrijving van de activiteit.</xs:documentation>
+					<xs:documentation>Verplicht als het element activiteit wordt opgenomen.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attributeGroup ref="optioneelAttribuut"/>
+	</xs:complexType>
+	<xs:complexType name="gebruiksrechtenType">
+		<xs:annotation>
+			<xs:documentation>Toepassingsprofiel nr. 16 - Voorwaarden voor het gebruik anders dan raadpleging van het record (auteursrechten e.d.).</xs:documentation>
+			<xs:documentation>Optioneel</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="omschrijvingVoorwaarden" type="nonEmptyStringTypeAttribuut" default="Geen gebruiksrechten">
+				<xs:annotation>
+					<xs:documentation>Toepassingsprofiel nr. 16.1 - Voorwaarden voor het gebruik anders dan raadpleging van het record.</xs:documentation>
+					<xs:documentation>Verplicht, als het element gebruikersrechten wordt opgenomen.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="datumOfPeriode" type="datumOfPeriodeType">
+				<xs:annotation>
+					<xs:documentation>Toepassingsprofiel nr. 16.2 - Datum of periode waarin voorwaarden van toepassing zijn.</xs:documentation>
+					<xs:documentation>Verplicht, als het element gebruikersrechten wordt opgenomen.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attributeGroup ref="optioneelAttribuut"/>
+	</xs:complexType>
+	<xs:complexType name="vertrouwelijkheidType">
+		<xs:annotation>
+			<xs:documentation>Toepassingsprofiel nr. 17 - Indicatie van niveau van vertrouwelijkheid van de informatie (record).</xs:documentation>
+			<xs:documentation>Optioneel</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classificatieNiveau">
+				<xs:annotation>
+					<xs:documentation>Toepassingsprofiel nr. 17.1 - Aanduiding van niveau van vertrouwelijkheid.</xs:documentation>
+					<xs:documentation>Verplicht, als het element vertrouwelijkheid wordt opgenomen.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="classificatieNiveauType">
+							<xs:attributeGroup ref="optioneelAttribuut"/>
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="datumOfPeriode" type="datumOfPeriodeType">
+				<xs:annotation>
+					<xs:documentation>Toepassingsprofiel nr. 17.2 - Datum of periode waarin dit niveau van vertrouwelijkheid van toepassing is.</xs:documentation>
+					<xs:documentation>Verplicht, als het element vertrouwelijkheid wordt opgenomen.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attributeGroup ref="optioneelAttribuut"/>
+	</xs:complexType>
+	<xs:simpleType name="classificatieNiveauType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Niet vertrouwelijk"/>
+			<xs:enumeration value="Organisatievertrouwelijk"/>
+			<xs:enumeration value="Vertrouwelijk"/>
+			<xs:enumeration value="Geheim"/>
+			<xs:enumeration value="Zeer geheim"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="openbaarheidType">
+		<xs:annotation>
+			<xs:documentation>Toepassingsprofiel nr. 18 - Mogelijke beperkingen aan de raadpleging.</xs:documentation>
+			<xs:documentation>Optioneel</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="omschrijvingBeperkingen" type="nonEmptyStringTypeAttribuut" default="Openbaar" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Toepassingsprofiel nr. 18.1 - Omschrijving van beperkingen voor raadpleging.</xs:documentation>
+					<xs:documentation>Verplicht, als het element openbaarheid wordt opgenomen</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="datumOfPeriode" type="datumOfPeriodeType">
+				<xs:annotation>
+					<xs:documentation>Toepassingsprofiel nr. 18.2 - Datum of periode waarin openbaarheidsbeperking van toepassing is.</xs:documentation>
+					<xs:documentation>Verplicht, als het element openbaarheid wordt opgenomen</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attributeGroup ref="optioneelAttribuut"/>
+	</xs:complexType>
+	<xs:complexType name="vormType">
+		<xs:annotation>
+			<xs:documentation>Toepassingsprofiel nr. 19 - Redactie, verschijningsvorm en structuur van een record.</xs:documentation>
+			<xs:documentation>Veplicht.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="redactieGenre" type="string">
+				<xs:annotation>
+					<xs:documentation>Toepassingsprofiel nr. 19.1 - Type archiefbescheiden (records) met een specifiek stijl, inhoud of vorm.</xs:documentation>
+					<xs:documentation>Verplicht</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="verschijningsvorm" type="string" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Toepassingsprofiel nr. 19.2 - Verschijningsvorm van een record.</xs:documentation>
+					<xs:documentation>Optioneel</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="structuur" type="string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Toepassingsprofiel nr. 19.3 - Omschrijving van structuur van record (op verschillende aggregatieniveaus)</xs:documentation>
+					<xs:documentation>Optioneel</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attributeGroup ref="optioneelAttribuut"/>
+	</xs:complexType>
+	<xs:complexType name="formaatType">
+		<xs:annotation>
+			<xs:documentation>Toepassingsprofiel nr. 21 - Fysieke/technische aspecten van een record.</xs:documentation>
+			<xs:documentation>Verplicht, voor aggregratieniveau 'Bestand'</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="identificatiekenmerk" type="nonEmptyStringTypeAttribuut">
+				<xs:annotation>
+					<xs:documentation>Toepassingsprofiel nr. 21.1 - Uniek kenmerk van digitaal bestand.</xs:documentation>
+					<xs:documentation>Verplicht</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="bestandsnaam" type="bestandsnaamType">
+				<xs:annotation>
+					<xs:documentation>Toepassingsprofiel nr. 21.2 - Korte omschrijving van een digitaal bestand of benaming</xs:documentation>
+					<xs:documentation>Verplicht</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="type" type="string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Toepassingsprofiel nr. 21.3 - Wijze van groepering van bestanden omwille van samenhang of verpakking. Typering van digitaal bestand.</xs:documentation>
+					<xs:documentation>Optioneel</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="omvang" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Toepassingsprofiel nr. 21.4 - Ruimtebeslag op medium uitgedrukt in bytes.</xs:documentation>
+					<xs:documentation>Optioneel</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="xs:nonNegativeInteger">
+							<xs:attributeGroup ref="optioneelAttribuut"/>
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="bestandsformaat" type="string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Toepassingsprofiel nr. 21.5 - Code volgens welke gegevens op een gegevensdrager zijn opgeslagen.</xs:documentation>
+					<xs:documentation>Optioneel</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="creatieapplicatie" type="creatieApplicatieType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Toepassingsprofiel nr. 21.6 - Omschrijving van de applicatie waarmee het bestand oorspronkelijk gemaakt is</xs:documentation>
+					<xs:documentation>Optioneel</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="fysiekeIntegriteit" type="fysiekeIntegriteitType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Toepassingsprofiel nr. 21.7 - Uitdrukking van mate van volledigheid en onbeschadigd zijn van digitaal bestand Conditioneel).</xs:documentation>
+					<xs:documentation>Verplicht</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="datumAanmaak" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Toepassingsprofiel nr. 21.8 - Datum, waarop het huidige digitale bestand is aangemaakt.</xs:documentation>
+					<xs:documentation>Optioneel</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="dateTimeOrDateType">
+							<xs:attributeGroup ref="optioneelAttribuut"/>
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="eventPlan" type="formaatEventPlanType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Toepassingsprofiel nr. 21.9 - Activiteit of gebeurtenis die aangeeft wat in de toekomst moet/zal gebeuren.</xs:documentation>
+					<xs:documentation>Optioneel</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="relatie" type="string" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Toepassingsprofiel nr. 21.10 - Definieert de samenhang met andere digitale bestanden, of (intellectuele) entiteiten zoals 'Record'.</xs:documentation>
+					<xs:documentation>Optioneel</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attributeGroup ref="optioneelAttribuut"/>
+	</xs:complexType>
+	<xs:complexType name="bestandsnaamType">
+		<xs:sequence>
+			<xs:element name="naam" type="nonEmptyStringTypeAttribuut">
+				<xs:annotation>
+					<xs:documentation>Toepassingsprofiel nr. 21.2.1 - Korte omschrijving van een digitaal bestand of benaming zonder aanduiding van het bestandsformaat</xs:documentation>
+					<xs:documentation>Verplicht</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="extensie" type="string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Toepassingsprofiel nr. 21.2.2 - Aanduiding van bestandsformaat</xs:documentation>
+					<xs:documentation>optioneel</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attributeGroup ref="optioneelAttribuut"/>
+	</xs:complexType>
+	<xs:complexType name="creatieApplicatieType">
+		<xs:annotation>
+			<xs:documentation>Toepassingsprofiel nr. 21.6 - Omschrijving van de applicatie waarmee het bestand oorspronkelijk gemaakt is.</xs:documentation>
+			<xs:documentation>Optioneel</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="naam" type="string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Toepassingsprofiel nr. 21.6.1 - Benaming van de applicatie waarmee het oorspronkelijke bestand is gemaakt.</xs:documentation>
+					<xs:documentation>Optioneel.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="versie" type="string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Toepassingsprofiel nr. 21.6.2 - Nadere aanduiding van de versie van de creatieapplicatie.</xs:documentation>
+					<xs:documentation>Optioneel.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="datumAanmaak" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Toepassingsprofiel nr. 21.6.3 - Datum, waarop het oorspronkelijke digitale bestand met de creatie applicatie is gemaakt.</xs:documentation>
+					<xs:documentation>Optioneel</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="dateTimeOrDateType">
+							<xs:attributeGroup ref="optioneelAttribuut"/>
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attributeGroup ref="optioneelAttribuut"/>
+	</xs:complexType>
+	<xs:complexType name="fysiekeIntegriteitType">
+		<xs:annotation>
+			<xs:documentation>Toepassingsprofiel nr. 21.7 - Uitdrukking van mate van volledigheid en onbeschadigd zijn van digitaal bestand (Conditioneel).</xs:documentation>
+			<xs:documentation>Verplicht</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="algoritme" type="nonEmptyStringTypeAttribuut">
+				<xs:annotation>
+					<xs:documentation>Toepassingsprofiel nr. 21.7.1 - Aanduiding van algoritme gebruikt om de checksum te maken.</xs:documentation>
+					<xs:documentation>Verplicht</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="waarde" type="nonEmptyStringTypeAttribuut">
+				<xs:annotation>
+					<xs:documentation>Toepassingsprofiel nr. 21.7.2 - De waarde van de checksum.</xs:documentation>
+					<xs:documentation>Verplicht.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="datumEnTijd">
+				<xs:annotation>
+					<xs:documentation>Toepassingsprofiel nr. 21.7.3 - Datum, waarop de checksum is gemaakt</xs:documentation>
+					<xs:documentation>Verplicht.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="xs:dateTime">
+							<xs:attributeGroup ref="optioneelAttribuut"/>
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attributeGroup ref="optioneelAttribuut"/>
+	</xs:complexType>
+	<xs:complexType name="formaatEventPlanType">
+		<xs:annotation>
+			<xs:documentation>Toepassingsprofiel nr. 21.9 - Activiteit of gebeurtenis die aangeeft wat in de toekomst moet/zal gebeuren.</xs:documentation>
+			<xs:documentation>Optioneel</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="datumOfPeriode" type="datumOfPeriodeType">
+				<xs:annotation>
+					<xs:documentation>Toepassingsprofiel nr. 21.9.1 - Datum of periode waarop/-in iets zal plaatsvinden.</xs:documentation>
+					<xs:documentation>Verplicht</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="type" type="nonEmptyStringTypeAttribuut">
+				<xs:annotation>
+					<xs:documentation>Toepassingsprofiel nr. 21.9.2 - Soort activiteit of gebeurtenis.</xs:documentation>
+					<xs:documentation>Verplicht</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="beschrijving" type="string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Toepassingsprofiel nr. 21.9.3 - Nadere omschrijving van de gebeurtenis.</xs:documentation>
+					<xs:documentation>Optioneel</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="aanleiding" type="string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Toepassingsprofiel nr. 21.9.4 - Indicatie van mechanisme waarop gebeurtenis in gang wordt gezet.</xs:documentation>
+					<xs:documentation>Optioneel</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attributeGroup ref="optioneelAttribuut"/>
+	</xs:complexType>
+	<xs:complexType name="generiekeMetadataType">
+		<xs:sequence>
+			<xs:any processContents="skip" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attributeGroup ref="optioneelAttribuut"/>
+	</xs:complexType>
+	<xs:complexType name="string">
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attributeGroup ref="optioneelAttribuut"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="taalTypeAttribuut">
+		<xs:simpleContent>
+			<xs:extension base="taalType">
+				<xs:attributeGroup ref="optioneelAttribuut"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:simpleType name="taalType">
+		<xs:annotation>
+			<xs:documentation>ISO 639-2B codes from
+                "http://www.loc.gov/standards/iso639-2/php/code_list.php"</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value=""/>
+			<xs:enumeration value="aar"/>
+			<xs:enumeration value="abk"/>
+			<xs:enumeration value="ace"/>
+			<xs:enumeration value="ach"/>
+			<xs:enumeration value="ada"/>
+			<xs:enumeration value="ady"/>
+			<xs:enumeration value="afa"/>
+			<xs:enumeration value="afh"/>
+			<xs:enumeration value="afr"/>
+			<xs:enumeration value="ain"/>
+			<xs:enumeration value="aka"/>
+			<xs:enumeration value="akk"/>
+			<xs:enumeration value="alb"/>
+			<xs:enumeration value="ale"/>
+			<xs:enumeration value="alg"/>
+			<xs:enumeration value="alt"/>
+			<xs:enumeration value="amh"/>
+			<xs:enumeration value="ang"/>
+			<xs:enumeration value="anp"/>
+			<xs:enumeration value="apa"/>
+			<xs:enumeration value="ara"/>
+			<xs:enumeration value="arc"/>
+			<xs:enumeration value="arg"/>
+			<xs:enumeration value="arm"/>
+			<xs:enumeration value="arn"/>
+			<xs:enumeration value="arp"/>
+			<xs:enumeration value="art"/>
+			<xs:enumeration value="arw"/>
+			<xs:enumeration value="asm"/>
+			<xs:enumeration value="ast"/>
+			<xs:enumeration value="ath"/>
+			<xs:enumeration value="aus"/>
+			<xs:enumeration value="ava"/>
+			<xs:enumeration value="ave"/>
+			<xs:enumeration value="awa"/>
+			<xs:enumeration value="aym"/>
+			<xs:enumeration value="aze"/>
+			<xs:enumeration value="bad"/>
+			<xs:enumeration value="bai"/>
+			<xs:enumeration value="bak"/>
+			<xs:enumeration value="bal"/>
+			<xs:enumeration value="bam"/>
+			<xs:enumeration value="ban"/>
+			<xs:enumeration value="baq"/>
+			<xs:enumeration value="bas"/>
+			<xs:enumeration value="bat"/>
+			<xs:enumeration value="bej"/>
+			<xs:enumeration value="bel"/>
+			<xs:enumeration value="bem"/>
+			<xs:enumeration value="ben"/>
+			<xs:enumeration value="ber"/>
+			<xs:enumeration value="bho"/>
+			<xs:enumeration value="bih"/>
+			<xs:enumeration value="bik"/>
+			<xs:enumeration value="bin"/>
+			<xs:enumeration value="bis"/>
+			<xs:enumeration value="bla"/>
+			<xs:enumeration value="bnt"/>
+			<xs:enumeration value="bos"/>
+			<xs:enumeration value="bra"/>
+			<xs:enumeration value="bre"/>
+			<xs:enumeration value="btk"/>
+			<xs:enumeration value="bua"/>
+			<xs:enumeration value="bug"/>
+			<xs:enumeration value="bul"/>
+			<xs:enumeration value="bur"/>
+			<xs:enumeration value="byn"/>
+			<xs:enumeration value="cad"/>
+			<xs:enumeration value="cai"/>
+			<xs:enumeration value="car"/>
+			<xs:enumeration value="cat"/>
+			<xs:enumeration value="cau"/>
+			<xs:enumeration value="ceb"/>
+			<xs:enumeration value="cel"/>
+			<xs:enumeration value="cha"/>
+			<xs:enumeration value="chb"/>
+			<xs:enumeration value="che"/>
+			<xs:enumeration value="chg"/>
+			<xs:enumeration value="chi"/>
+			<xs:enumeration value="chk"/>
+			<xs:enumeration value="chm"/>
+			<xs:enumeration value="chn"/>
+			<xs:enumeration value="cho"/>
+			<xs:enumeration value="chp"/>
+			<xs:enumeration value="chr"/>
+			<xs:enumeration value="chu"/>
+			<xs:enumeration value="chv"/>
+			<xs:enumeration value="chy"/>
+			<xs:enumeration value="cmc"/>
+			<xs:enumeration value="cop"/>
+			<xs:enumeration value="cor"/>
+			<xs:enumeration value="cos"/>
+			<xs:enumeration value="cpe"/>
+			<xs:enumeration value="cpf"/>
+			<xs:enumeration value="cpp"/>
+			<xs:enumeration value="cre"/>
+			<xs:enumeration value="crh"/>
+			<xs:enumeration value="crp"/>
+			<xs:enumeration value="csb"/>
+			<xs:enumeration value="cus"/>
+			<xs:enumeration value="wel"/>
+			<xs:enumeration value="cze"/>
+			<xs:enumeration value="dak"/>
+			<xs:enumeration value="dan"/>
+			<xs:enumeration value="dar"/>
+			<xs:enumeration value="day"/>
+			<xs:enumeration value="del"/>
+			<xs:enumeration value="den"/>
+			<xs:enumeration value="ger"/>
+			<xs:enumeration value="dgr"/>
+			<xs:enumeration value="din"/>
+			<xs:enumeration value="div"/>
+			<xs:enumeration value="doi"/>
+			<xs:enumeration value="dra"/>
+			<xs:enumeration value="dsb"/>
+			<xs:enumeration value="dua"/>
+			<xs:enumeration value="dum"/>
+			<xs:enumeration value="dut"/>
+			<xs:enumeration value="dyu"/>
+			<xs:enumeration value="dzo"/>
+			<xs:enumeration value="efi"/>
+			<xs:enumeration value="egy"/>
+			<xs:enumeration value="eka"/>
+			<xs:enumeration value="elx"/>
+			<xs:enumeration value="eng"/>
+			<xs:enumeration value="enm"/>
+			<xs:enumeration value="epo"/>
+			<xs:enumeration value="est"/>
+			<xs:enumeration value="ewe"/>
+			<xs:enumeration value="ewo"/>
+			<xs:enumeration value="fan"/>
+			<xs:enumeration value="fao"/>
+			<xs:enumeration value="fat"/>
+			<xs:enumeration value="fij"/>
+			<xs:enumeration value="fil"/>
+			<xs:enumeration value="fin"/>
+			<xs:enumeration value="fiu"/>
+			<xs:enumeration value="fon"/>
+			<xs:enumeration value="fre"/>
+			<xs:enumeration value="frm"/>
+			<xs:enumeration value="fro"/>
+			<xs:enumeration value="frr"/>
+			<xs:enumeration value="frs"/>
+			<xs:enumeration value="fry"/>
+			<xs:enumeration value="ful"/>
+			<xs:enumeration value="fur"/>
+			<xs:enumeration value="gaa"/>
+			<xs:enumeration value="gay"/>
+			<xs:enumeration value="gba"/>
+			<xs:enumeration value="gem"/>
+			<xs:enumeration value="geo"/>
+			<xs:enumeration value="ger"/>
+			<xs:enumeration value="gez"/>
+			<xs:enumeration value="gil"/>
+			<xs:enumeration value="gla"/>
+			<xs:enumeration value="gle"/>
+			<xs:enumeration value="glg"/>
+			<xs:enumeration value="glv"/>
+			<xs:enumeration value="gmh"/>
+			<xs:enumeration value="goh"/>
+			<xs:enumeration value="gon"/>
+			<xs:enumeration value="gor"/>
+			<xs:enumeration value="got"/>
+			<xs:enumeration value="grb"/>
+			<xs:enumeration value="grc"/>
+			<xs:enumeration value="gre"/>
+			<xs:enumeration value="grn"/>
+			<xs:enumeration value="gsw"/>
+			<xs:enumeration value="guj"/>
+			<xs:enumeration value="gwi"/>
+			<xs:enumeration value="hai"/>
+			<xs:enumeration value="hat"/>
+			<xs:enumeration value="hau"/>
+			<xs:enumeration value="haw"/>
+			<xs:enumeration value="heb"/>
+			<xs:enumeration value="her"/>
+			<xs:enumeration value="hil"/>
+			<xs:enumeration value="him"/>
+			<xs:enumeration value="hin"/>
+			<xs:enumeration value="hit"/>
+			<xs:enumeration value="hmn"/>
+			<xs:enumeration value="hmo"/>
+			<xs:enumeration value="hrv"/>
+			<xs:enumeration value="hsb"/>
+			<xs:enumeration value="hun"/>
+			<xs:enumeration value="hup"/>
+			<xs:enumeration value="iba"/>
+			<xs:enumeration value="ibo"/>
+			<xs:enumeration value="ice"/>
+			<xs:enumeration value="ido"/>
+			<xs:enumeration value="iii"/>
+			<xs:enumeration value="ijo"/>
+			<xs:enumeration value="iku"/>
+			<xs:enumeration value="ile"/>
+			<xs:enumeration value="ilo"/>
+			<xs:enumeration value="ina"/>
+			<xs:enumeration value="inc"/>
+			<xs:enumeration value="ind"/>
+			<xs:enumeration value="ine"/>
+			<xs:enumeration value="inh"/>
+			<xs:enumeration value="ipk"/>
+			<xs:enumeration value="ira"/>
+			<xs:enumeration value="iro"/>
+			<xs:enumeration value="ita"/>
+			<xs:enumeration value="jav"/>
+			<xs:enumeration value="jbo"/>
+			<xs:enumeration value="jpn"/>
+			<xs:enumeration value="jpr"/>
+			<xs:enumeration value="jrb"/>
+			<xs:enumeration value="kaa"/>
+			<xs:enumeration value="kab"/>
+			<xs:enumeration value="kac"/>
+			<xs:enumeration value="kal"/>
+			<xs:enumeration value="kam"/>
+			<xs:enumeration value="kan"/>
+			<xs:enumeration value="kar"/>
+			<xs:enumeration value="kas"/>
+			<xs:enumeration value="kau"/>
+			<xs:enumeration value="kaw"/>
+			<xs:enumeration value="kaz"/>
+			<xs:enumeration value="kbd"/>
+			<xs:enumeration value="kha"/>
+			<xs:enumeration value="khi"/>
+			<xs:enumeration value="khm"/>
+			<xs:enumeration value="kho"/>
+			<xs:enumeration value="kik"/>
+			<xs:enumeration value="kin"/>
+			<xs:enumeration value="kir"/>
+			<xs:enumeration value="kmb"/>
+			<xs:enumeration value="kok"/>
+			<xs:enumeration value="kom"/>
+			<xs:enumeration value="kon"/>
+			<xs:enumeration value="kor"/>
+			<xs:enumeration value="kos"/>
+			<xs:enumeration value="kpe"/>
+			<xs:enumeration value="krc"/>
+			<xs:enumeration value="krl"/>
+			<xs:enumeration value="kro"/>
+			<xs:enumeration value="kru"/>
+			<xs:enumeration value="kua"/>
+			<xs:enumeration value="kum"/>
+			<xs:enumeration value="kur"/>
+			<xs:enumeration value="kut"/>
+			<xs:enumeration value="lad"/>
+			<xs:enumeration value="lah"/>
+			<xs:enumeration value="lam"/>
+			<xs:enumeration value="lao"/>
+			<xs:enumeration value="lat"/>
+			<xs:enumeration value="lav"/>
+			<xs:enumeration value="lez"/>
+			<xs:enumeration value="lim"/>
+			<xs:enumeration value="lin"/>
+			<xs:enumeration value="lit"/>
+			<xs:enumeration value="lol"/>
+			<xs:enumeration value="loz"/>
+			<xs:enumeration value="ltz"/>
+			<xs:enumeration value="lua"/>
+			<xs:enumeration value="lub"/>
+			<xs:enumeration value="lug"/>
+			<xs:enumeration value="lui"/>
+			<xs:enumeration value="lun"/>
+			<xs:enumeration value="luo"/>
+			<xs:enumeration value="lus"/>
+			<xs:enumeration value="mac"/>
+			<xs:enumeration value="mad"/>
+			<xs:enumeration value="mag"/>
+			<xs:enumeration value="mah"/>
+			<xs:enumeration value="mai"/>
+			<xs:enumeration value="mak"/>
+			<xs:enumeration value="mal"/>
+			<xs:enumeration value="man"/>
+			<xs:enumeration value="mao"/>
+			<xs:enumeration value="map"/>
+			<xs:enumeration value="mar"/>
+			<xs:enumeration value="mas"/>
+			<xs:enumeration value="may"/>
+			<xs:enumeration value="mdf"/>
+			<xs:enumeration value="mdr"/>
+			<xs:enumeration value="men"/>
+			<xs:enumeration value="mga"/>
+			<xs:enumeration value="mic"/>
+			<xs:enumeration value="min"/>
+			<xs:enumeration value="mis"/>
+			<xs:enumeration value="mkh"/>
+			<xs:enumeration value="mlg"/>
+			<xs:enumeration value="mlt"/>
+			<xs:enumeration value="mnc"/>
+			<xs:enumeration value="mni"/>
+			<xs:enumeration value="mno"/>
+			<xs:enumeration value="moh"/>
+			<xs:enumeration value="mon"/>
+			<xs:enumeration value="mos"/>
+			<xs:enumeration value="mul"/>
+			<xs:enumeration value="mun"/>
+			<xs:enumeration value="mus"/>
+			<xs:enumeration value="mwl"/>
+			<xs:enumeration value="mwr"/>
+			<xs:enumeration value="myn"/>
+			<xs:enumeration value="myv"/>
+			<xs:enumeration value="nah"/>
+			<xs:enumeration value="nai"/>
+			<xs:enumeration value="nap"/>
+			<xs:enumeration value="nau"/>
+			<xs:enumeration value="nav"/>
+			<xs:enumeration value="nbl"/>
+			<xs:enumeration value="nde"/>
+			<xs:enumeration value="ndo"/>
+			<xs:enumeration value="nds"/>
+			<xs:enumeration value="nep"/>
+			<xs:enumeration value="new"/>
+			<xs:enumeration value="nia"/>
+			<xs:enumeration value="nic"/>
+			<xs:enumeration value="niu"/>
+			<xs:enumeration value="nno"/>
+			<xs:enumeration value="nob"/>
+			<xs:enumeration value="nog"/>
+			<xs:enumeration value="non"/>
+			<xs:enumeration value="nor"/>
+			<xs:enumeration value="nqo"/>
+			<xs:enumeration value="nso"/>
+			<xs:enumeration value="nub"/>
+			<xs:enumeration value="nwc"/>
+			<xs:enumeration value="nya"/>
+			<xs:enumeration value="nym"/>
+			<xs:enumeration value="nyn"/>
+			<xs:enumeration value="nyo"/>
+			<xs:enumeration value="nzi"/>
+			<xs:enumeration value="oci"/>
+			<xs:enumeration value="oji"/>
+			<xs:enumeration value="ori"/>
+			<xs:enumeration value="orm"/>
+			<xs:enumeration value="osa"/>
+			<xs:enumeration value="oss"/>
+			<xs:enumeration value="ota"/>
+			<xs:enumeration value="oto"/>
+			<xs:enumeration value="paa"/>
+			<xs:enumeration value="pag"/>
+			<xs:enumeration value="pal"/>
+			<xs:enumeration value="pam"/>
+			<xs:enumeration value="pan"/>
+			<xs:enumeration value="pap"/>
+			<xs:enumeration value="pau"/>
+			<xs:enumeration value="peo"/>
+			<xs:enumeration value="per"/>
+			<xs:enumeration value="phi"/>
+			<xs:enumeration value="phn"/>
+			<xs:enumeration value="pli"/>
+			<xs:enumeration value="pol"/>
+			<xs:enumeration value="pon"/>
+			<xs:enumeration value="por"/>
+			<xs:enumeration value="pra"/>
+			<xs:enumeration value="pro"/>
+			<xs:enumeration value="pus"/>
+			<xs:enumeration value="que"/>
+			<xs:enumeration value="raj"/>
+			<xs:enumeration value="rap"/>
+			<xs:enumeration value="rar"/>
+			<xs:enumeration value="roa"/>
+			<xs:enumeration value="roh"/>
+			<xs:enumeration value="rom"/>
+			<xs:enumeration value="rum"/>
+			<xs:enumeration value="run"/>
+			<xs:enumeration value="rup"/>
+			<xs:enumeration value="rus"/>
+			<xs:enumeration value="sad"/>
+			<xs:enumeration value="sag"/>
+			<xs:enumeration value="sah"/>
+			<xs:enumeration value="sai"/>
+			<xs:enumeration value="sal"/>
+			<xs:enumeration value="sam"/>
+			<xs:enumeration value="san"/>
+			<xs:enumeration value="sas"/>
+			<xs:enumeration value="sat"/>
+			<xs:enumeration value="scn"/>
+			<xs:enumeration value="sco"/>
+			<xs:enumeration value="sel"/>
+			<xs:enumeration value="sem"/>
+			<xs:enumeration value="sga"/>
+			<xs:enumeration value="sgn"/>
+			<xs:enumeration value="shn"/>
+			<xs:enumeration value="sid"/>
+			<xs:enumeration value="sin"/>
+			<xs:enumeration value="sio"/>
+			<xs:enumeration value="sit"/>
+			<xs:enumeration value="sla"/>
+			<xs:enumeration value="slo"/>
+			<xs:enumeration value="slv"/>
+			<xs:enumeration value="sma"/>
+			<xs:enumeration value="sme"/>
+			<xs:enumeration value="smi"/>
+			<xs:enumeration value="smj"/>
+			<xs:enumeration value="smn"/>
+			<xs:enumeration value="smo"/>
+			<xs:enumeration value="sms"/>
+			<xs:enumeration value="sna"/>
+			<xs:enumeration value="snd"/>
+			<xs:enumeration value="snk"/>
+			<xs:enumeration value="sog"/>
+			<xs:enumeration value="som"/>
+			<xs:enumeration value="son"/>
+			<xs:enumeration value="sot"/>
+			<xs:enumeration value="spa"/>
+			<xs:enumeration value="srd"/>
+			<xs:enumeration value="srn"/>
+			<xs:enumeration value="srp"/>
+			<xs:enumeration value="srr"/>
+			<xs:enumeration value="ssa"/>
+			<xs:enumeration value="ssw"/>
+			<xs:enumeration value="suk"/>
+			<xs:enumeration value="sun"/>
+			<xs:enumeration value="sus"/>
+			<xs:enumeration value="sux"/>
+			<xs:enumeration value="swa"/>
+			<xs:enumeration value="swe"/>
+			<xs:enumeration value="syc"/>
+			<xs:enumeration value="syr"/>
+			<xs:enumeration value="tah"/>
+			<xs:enumeration value="tai"/>
+			<xs:enumeration value="tam"/>
+			<xs:enumeration value="tat"/>
+			<xs:enumeration value="tel"/>
+			<xs:enumeration value="tem"/>
+			<xs:enumeration value="ter"/>
+			<xs:enumeration value="tet"/>
+			<xs:enumeration value="tgk"/>
+			<xs:enumeration value="tgl"/>
+			<xs:enumeration value="tha"/>
+			<xs:enumeration value="tib"/>
+			<xs:enumeration value="tig"/>
+			<xs:enumeration value="tir"/>
+			<xs:enumeration value="tiv"/>
+			<xs:enumeration value="tkl"/>
+			<xs:enumeration value="tlh"/>
+			<xs:enumeration value="tli"/>
+			<xs:enumeration value="tmh"/>
+			<xs:enumeration value="tog"/>
+			<xs:enumeration value="ton"/>
+			<xs:enumeration value="tpi"/>
+			<xs:enumeration value="tsi"/>
+			<xs:enumeration value="tsn"/>
+			<xs:enumeration value="tso"/>
+			<xs:enumeration value="tuk"/>
+			<xs:enumeration value="tum"/>
+			<xs:enumeration value="tup"/>
+			<xs:enumeration value="tur"/>
+			<xs:enumeration value="tut"/>
+			<xs:enumeration value="tvl"/>
+			<xs:enumeration value="twi"/>
+			<xs:enumeration value="tyv"/>
+			<xs:enumeration value="udm"/>
+			<xs:enumeration value="uga"/>
+			<xs:enumeration value="uig"/>
+			<xs:enumeration value="ukr"/>
+			<xs:enumeration value="umb"/>
+			<xs:enumeration value="und"/>
+			<xs:enumeration value="urd"/>
+			<xs:enumeration value="uzb"/>
+			<xs:enumeration value="vai"/>
+			<xs:enumeration value="ven"/>
+			<xs:enumeration value="vie"/>
+			<xs:enumeration value="vol"/>
+			<xs:enumeration value="vot"/>
+			<xs:enumeration value="wak"/>
+			<xs:enumeration value="wal"/>
+			<xs:enumeration value="war"/>
+			<xs:enumeration value="was"/>
+			<xs:enumeration value="wel"/>
+			<xs:enumeration value="wen"/>
+			<xs:enumeration value="wln"/>
+			<xs:enumeration value="wol"/>
+			<xs:enumeration value="xal"/>
+			<xs:enumeration value="xho"/>
+			<xs:enumeration value="yao"/>
+			<xs:enumeration value="yap"/>
+			<xs:enumeration value="yid"/>
+			<xs:enumeration value="yor"/>
+			<xs:enumeration value="ypk"/>
+			<xs:enumeration value="zap"/>
+			<xs:enumeration value="zbl"/>
+			<xs:enumeration value="zen"/>
+			<xs:enumeration value="zgh"/>
+			<xs:enumeration value="zha"/>
+			<xs:enumeration value="znd"/>
+			<xs:enumeration value="zul"/>
+			<xs:enumeration value="zun"/>
+			<xs:enumeration value="zxx"/>
+			<xs:enumeration value="zza"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eventPlanTypeWaardenLijstType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Conversie"/>
+			<xs:enumeration value="Migratie"/>
+			<xs:enumeration value="Overbrengen"/>
+			<xs:enumeration value="Publicatie"/>
+			<xs:enumeration value="Vervallen beperkingen openbaarheid"/>
+			<xs:enumeration value="Overdracht"/>
+			<xs:enumeration value="Vernietigen"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:attributeGroup name="optioneelAttribuut">
+		<xs:attribute name="lokaal" use="optional"/>
+		<xs:attribute name="type" use="optional"/>
+		<xs:attribute name="bronElement" use="optional"/>
+	</xs:attributeGroup>
+</xs:schema>

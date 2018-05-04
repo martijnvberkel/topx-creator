@@ -1,0 +1,1355 @@
+<?xml version="1.0" encoding="utf-8"?>
+<recordInformationPackage xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.nationaalarchief.nl/RIP/v0.3">
+  <packageHeader>
+    <identificatie>NL-0834-10002</identificatie>
+    <datum>2017-06-18</datum>
+    <omschrijving>Bouwvergunningen Gemeente Raamsdonk 1940-1996</omschrijving>
+    <bron>Digitale bouwvergunningen</bron>
+    <doel>Bouwvergunningen om op te nemen in e-Depot</doel>
+  </packageHeader>
+  <record>
+    <recordHeader>
+      <identificatie>NL-0834-10002</identificatie>
+    </recordHeader>
+    <metadata schemaURI="topx">
+      <ToPX xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.nationaalarchief.nl/ToPX/v2.3">
+        <aggregatie>
+          <identificatiekenmerk>NL-0834-10002</identificatiekenmerk>
+          <aggregatieniveau>Archief</aggregatieniveau>
+          <naam>Bouwvergunningen Gemeente Raamsdonk 1940-1996</naam>
+        </aggregatie>
+      </ToPX>
+    </metadata>
+  </record>
+  <record>
+    <recordHeader>
+      <identificatie>NL-0779-19480041</identificatie>
+    </recordHeader>
+    <metadata schemaURI="topx">
+      <ToPX xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.nationaalarchief.nl/ToPX/v2.3">
+        <aggregatie>
+          <identificatiekenmerk>NL-0779-19480041</identificatiekenmerk>
+          <aggregatieniveau>Dossier</aggregatieniveau>
+          <naam>Bouwvergunning Verbouwen bestaande woning Korte Broekstraat D 110  Raamsdonk 5-3-1948</naam>
+          <classificatie>
+            <code>-1.733.21</code>
+            <omschrijving>Bouw van woningen en gebouwen</omschrijving>
+            <bron>basisarchiefcode</bron>
+            <datumOfPeriode>
+              <jaar>2010</jaar>
+            </datumOfPeriode>
+          </classificatie>
+          <dekking>
+            <inTijd>
+              <begin>
+                <datum>1948-03-05</datum>
+              </begin>
+              <eind>
+                <datum>1948-03-05</datum>
+              </eind>
+            </inTijd>
+            <geografischGebied>Broekstraat D 110 Raamsdonk</geografischGebied>
+          </dekking>
+          <taal>dut</taal>
+          <eventGeschiedenis>
+            <datumOfPeriode>
+              <datum>1948-03-05</datum>
+            </datumOfPeriode>
+            <type>Afsluiting</type>
+            <verantwoordelijkeFunctionaris>Afdeling Ondersteuning</verantwoordelijkeFunctionaris>
+          </eventGeschiedenis>
+          <relatie>
+            <relatieID>NL-0834-10002</relatieID>
+            <typeRelatie>Hiërarchisch</typeRelatie>
+            <datumOfPeriode>
+              <datum>2015-12-21</datum>
+            </datumOfPeriode>
+          </relatie>
+          <context>
+            <actor>
+              <identificatiekenmerk>K50771752</identificatiekenmerk>
+              <aggregatieniveau>Organisatie</aggregatieniveau>
+              <geautoriseerdeNaam>Gemeente Raamsdonk</geautoriseerdeNaam>
+            </actor>
+            <activiteit>
+              <naam>Verlenen van bouwvergunningen</naam>
+            </activiteit>
+          </context>
+          <gebruiksrechten>
+            <omschrijvingVoorwaarden>Vrij te gebruiken</omschrijvingVoorwaarden>
+            <datumOfPeriode>
+              <datum>1948-03-05</datum>
+            </datumOfPeriode>
+          </gebruiksrechten>
+          <vertrouwelijkheid>
+            <classificatieNiveau>Niet vertrouwelijk</classificatieNiveau>
+            <datumOfPeriode>
+              <datum>1948-03-05</datum>
+            </datumOfPeriode>
+          </vertrouwelijkheid>
+          <openbaarheid>
+            <omschrijvingBeperkingen>Openbaar</omschrijvingBeperkingen>
+            <datumOfPeriode>
+              <datum>1948-03-05</datum>
+            </datumOfPeriode>
+          </openbaarheid>
+          <integriteit>Integer</integriteit>
+        </aggregatie>
+      </ToPX>
+    </metadata>
+  </record>
+  <record>
+    <recordHeader>
+      <identificatie>NL-0779-19480041_GDB-0075-01</identificatie>
+    </recordHeader>
+    <metadata schemaURI="topx">
+      <ToPX xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.nationaalarchief.nl/ToPX/v2.3">
+        <aggregatie>
+          <identificatiekenmerk>NL-0779-19480041_GDB-0075-01</identificatiekenmerk>
+          <aggregatieniveau>Record</aggregatieniveau>
+          <naam>Bouwvergunning Beschikking Verbouwen bestaande woning Korte Broekstraat D 110  Raamsdonk 5-3-1948</naam>
+          <taal>dut</taal>
+          <eventGeschiedenis>
+            <datumOfPeriode>
+              <datum>1948-03-05</datum>
+            </datumOfPeriode>
+            <type>Verzending</type>
+            <verantwoordelijkeFunctionaris>Afdeling Ondersteuning</verantwoordelijkeFunctionaris>
+          </eventGeschiedenis>
+          <relatie>
+            <relatieID>NL-0779-19480041</relatieID>
+            <typeRelatie>Hiërarchisch</typeRelatie>
+            <datumOfPeriode>
+              <datum>2015-12-21</datum>
+            </datumOfPeriode>
+          </relatie>
+          <gebruiksrechten>
+            <omschrijvingVoorwaarden>Vrij te gebruiken</omschrijvingVoorwaarden>
+            <datumOfPeriode>
+              <datum>1948-03-05</datum>
+            </datumOfPeriode>
+          </gebruiksrechten>
+          <vertrouwelijkheid>
+            <classificatieNiveau>Niet vertrouwelijk</classificatieNiveau>
+            <datumOfPeriode>
+              <datum>1948-03-05</datum>
+            </datumOfPeriode>
+          </vertrouwelijkheid>
+          <openbaarheid>
+            <omschrijvingBeperkingen>Openbaar</omschrijvingBeperkingen>
+            <datumOfPeriode>
+              <datum>2015-12-21</datum>
+            </datumOfPeriode>
+          </openbaarheid>
+        </aggregatie>
+      </ToPX>
+    </metadata>
+  </record>
+  <record>
+    <recordHeader>
+      <identificatie>GDB-0075-01</identificatie>
+    </recordHeader>
+    <metadata schemaURI="topx">
+      <ToPX xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.nationaalarchief.nl/ToPX/v2.3">
+        <bestand>
+          <identificatiekenmerk>GDB-0075-01</identificatiekenmerk>
+          <aggregatieniveau>Bestand</aggregatieniveau>
+          <naam>Bouwvergunning Verbouwen bestaande woning Korte Broekstraat D 110  Raamsdonk 5-3-1948</naam>
+          <relatie>
+            <relatieID>NL-0779-19480041_GDB-0075-01</relatieID>
+            <typeRelatie>Hiërarchisch</typeRelatie>
+            <datumOfPeriode>
+              <datum>2015-12-21</datum>
+            </datumOfPeriode>
+          </relatie>
+          <vorm>
+            <redactieGenre>Beschikking</redactieGenre>
+          </vorm>
+          <formaat>
+            <identificatiekenmerk>GDB-0075-01</identificatiekenmerk>
+            <bestandsnaam>
+              <naam>GDB-0075-01</naam>
+              <extensie>pdf</extensie>
+            </bestandsnaam>
+            <omvang>8292587</omvang>
+            <bestandsformaat>fmt/18</bestandsformaat>
+            <fysiekeIntegriteit>
+              <algoritme>sha256</algoritme>
+              <waarde>8ba3707127c0fbde34bd60491e524d7084859ee4f5ca192d3aea69ab49fad836</waarde>
+              <datumEnTijd>2015-12-21T12:46:00</datumEnTijd>
+            </fysiekeIntegriteit>
+            <datumAanmaak>2015-12-21</datumAanmaak>
+          </formaat>
+        </bestand>
+      </ToPX>
+    </metadata>
+  </record>
+  <record>
+    <recordHeader>
+      <identificatie>NL-0779-19480041_GDB-0075-02</identificatie>
+    </recordHeader>
+    <metadata schemaURI="topx">
+      <ToPX xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.nationaalarchief.nl/ToPX/v2.3">
+        <aggregatie>
+          <identificatiekenmerk>NL-0779-19480041_GDB-0075-02</identificatiekenmerk>
+          <aggregatieniveau>Record</aggregatieniveau>
+          <naam>Bouwvergunning Tekening ( technisch ) Verbouwen bestaande woning Korte Broekstraat D 110  Raamsdonk 5-3-1948</naam>
+          <taal>dut</taal>
+          <eventGeschiedenis>
+            <datumOfPeriode>
+              <datum>1948-03-05</datum>
+            </datumOfPeriode>
+            <type>Verzending</type>
+            <verantwoordelijkeFunctionaris>Afdeling Ondersteuning</verantwoordelijkeFunctionaris>
+          </eventGeschiedenis>
+          <relatie>
+            <relatieID>NL-0779-19480041</relatieID>
+            <typeRelatie>Hiërarchisch</typeRelatie>
+            <datumOfPeriode>
+              <datum>2015-12-21</datum>
+            </datumOfPeriode>
+          </relatie>
+          <gebruiksrechten>
+            <omschrijvingVoorwaarden>Vrij te gebruiken</omschrijvingVoorwaarden>
+            <datumOfPeriode>
+              <datum>1948-03-05</datum>
+            </datumOfPeriode>
+          </gebruiksrechten>
+          <vertrouwelijkheid>
+            <classificatieNiveau>Niet vertrouwelijk</classificatieNiveau>
+            <datumOfPeriode>
+              <datum>1948-03-05</datum>
+            </datumOfPeriode>
+          </vertrouwelijkheid>
+          <openbaarheid>
+            <omschrijvingBeperkingen>Openbaar</omschrijvingBeperkingen>
+            <datumOfPeriode>
+              <datum>2015-12-21</datum>
+            </datumOfPeriode>
+          </openbaarheid>
+        </aggregatie>
+      </ToPX>
+    </metadata>
+  </record>
+  <record>
+    <recordHeader>
+      <identificatie>GDB-0075-02</identificatie>
+    </recordHeader>
+    <metadata schemaURI="topx">
+      <ToPX xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.nationaalarchief.nl/ToPX/v2.3">
+        <bestand>
+          <identificatiekenmerk>GDB-0075-02</identificatiekenmerk>
+          <aggregatieniveau>Bestand</aggregatieniveau>
+          <naam>Bouwvergunning Verbouwen bestaande woning Korte Broekstraat D 110  Raamsdonk 5-3-1948</naam>
+          <relatie>
+            <relatieID>NL-0779-19480041_GDB-0075-02</relatieID>
+            <typeRelatie>Hiërarchisch</typeRelatie>
+            <datumOfPeriode>
+              <datum>2015-12-21</datum>
+            </datumOfPeriode>
+          </relatie>
+          <vorm>
+            <redactieGenre>Tekening ( technisch )</redactieGenre>
+          </vorm>
+          <formaat>
+            <identificatiekenmerk>GDB-0075-02</identificatiekenmerk>
+            <bestandsnaam>
+              <naam>GDB-0075-02</naam>
+              <extensie>pdf</extensie>
+            </bestandsnaam>
+            <omvang>19334096</omvang>
+            <bestandsformaat>fmt/18</bestandsformaat>
+            <fysiekeIntegriteit>
+              <algoritme>sha256</algoritme>
+              <waarde>0d71d37324e883cf26550ffb929c61c578b3853a734ffe6e5ab08afee10ce13b</waarde>
+              <datumEnTijd>2015-12-21T12:46:00</datumEnTijd>
+            </fysiekeIntegriteit>
+            <datumAanmaak>2015-12-21</datumAanmaak>
+          </formaat>
+        </bestand>
+      </ToPX>
+    </metadata>
+  </record>
+  <record>
+    <recordHeader>
+      <identificatie>NL-0779-19550710</identificatie>
+    </recordHeader>
+    <metadata schemaURI="topx">
+      <ToPX xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.nationaalarchief.nl/ToPX/v2.3">
+        <aggregatie>
+          <identificatiekenmerk>NL-0779-19550710</identificatiekenmerk>
+          <aggregatieniveau>Dossier</aggregatieniveau>
+          <naam>Bouwvergunning Verbouwen winkelpand en verbeteren woonhuis  Hoofdstraat 14 4941DC Raamsdonksveer 29-7-1955</naam>
+          <classificatie>
+            <code>-1.733.21</code>
+            <omschrijving>Bouw van woningen en gebouwen</omschrijving>
+            <bron>basisarchiefcode</bron>
+            <datumOfPeriode>
+              <jaar>2010</jaar>
+            </datumOfPeriode>
+          </classificatie>
+          <dekking>
+            <inTijd>
+              <begin>
+                <datum>1955-07-29</datum>
+              </begin>
+              <eind>
+                <datum>1955-07-29</datum>
+              </eind>
+            </inTijd>
+            <geografischGebied>Hoofdstraat 14 4941DC Raamsdonksveer</geografischGebied>
+          </dekking>
+          <taal>dut</taal>
+          <eventGeschiedenis>
+            <datumOfPeriode>
+              <datum>1955-07-29</datum>
+            </datumOfPeriode>
+            <type>Afsluiting</type>
+            <verantwoordelijkeFunctionaris>Afdeling Ondersteuning</verantwoordelijkeFunctionaris>
+          </eventGeschiedenis>
+          <relatie>
+            <relatieID>NL-0834-10002</relatieID>
+            <typeRelatie>Hiërarchisch</typeRelatie>
+            <datumOfPeriode>
+              <datum>2015-12-21</datum>
+            </datumOfPeriode>
+          </relatie>
+          <context>
+            <actor>
+              <identificatiekenmerk>K50771752</identificatiekenmerk>
+              <aggregatieniveau>Organisatie</aggregatieniveau>
+              <geautoriseerdeNaam>Gemeente Raamsdonk</geautoriseerdeNaam>
+            </actor>
+            <activiteit>
+              <naam>Verlenen van bouwvergunningen</naam>
+            </activiteit>
+          </context>
+          <gebruiksrechten>
+            <omschrijvingVoorwaarden>Vrij te gebruiken</omschrijvingVoorwaarden>
+            <datumOfPeriode>
+              <datum>1955-07-29</datum>
+            </datumOfPeriode>
+          </gebruiksrechten>
+          <vertrouwelijkheid>
+            <classificatieNiveau>Niet vertrouwelijk</classificatieNiveau>
+            <datumOfPeriode>
+              <datum>1955-07-29</datum>
+            </datumOfPeriode>
+          </vertrouwelijkheid>
+          <openbaarheid>
+            <omschrijvingBeperkingen>Openbaar</omschrijvingBeperkingen>
+            <datumOfPeriode>
+              <datum>1955-07-29</datum>
+            </datumOfPeriode>
+          </openbaarheid>
+          <integriteit>Integer</integriteit>
+        </aggregatie>
+      </ToPX>
+    </metadata>
+  </record>
+  <record>
+    <recordHeader>
+      <identificatie>NL-0779-19550710_GDB-0436-01</identificatie>
+    </recordHeader>
+    <metadata schemaURI="topx">
+      <ToPX xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.nationaalarchief.nl/ToPX/v2.3">
+        <aggregatie>
+          <identificatiekenmerk>NL-0779-19550710_GDB-0436-01</identificatiekenmerk>
+          <aggregatieniveau>Record</aggregatieniveau>
+          <naam>Bouwvergunning Beschikking Verbouwen winkelpand en verbeteren woonhuis  Hoofdstraat 14 4941DC Raamsdonksveer 29-7-1955</naam>
+          <taal>dut</taal>
+          <eventGeschiedenis>
+            <datumOfPeriode>
+              <datum>1955-07-29</datum>
+            </datumOfPeriode>
+            <type>Verzending</type>
+            <verantwoordelijkeFunctionaris>Afdeling Ondersteuning</verantwoordelijkeFunctionaris>
+          </eventGeschiedenis>
+          <relatie>
+            <relatieID>NL-0779-19550710</relatieID>
+            <typeRelatie>Hiërarchisch</typeRelatie>
+            <datumOfPeriode>
+              <datum>2015-12-21</datum>
+            </datumOfPeriode>
+          </relatie>
+          <gebruiksrechten>
+            <omschrijvingVoorwaarden>Vrij te gebruiken</omschrijvingVoorwaarden>
+            <datumOfPeriode>
+              <datum>1955-07-29</datum>
+            </datumOfPeriode>
+          </gebruiksrechten>
+          <vertrouwelijkheid>
+            <classificatieNiveau>Niet vertrouwelijk</classificatieNiveau>
+            <datumOfPeriode>
+              <datum>1955-07-29</datum>
+            </datumOfPeriode>
+          </vertrouwelijkheid>
+          <openbaarheid>
+            <omschrijvingBeperkingen>Openbaar</omschrijvingBeperkingen>
+            <datumOfPeriode>
+              <datum>2015-12-21</datum>
+            </datumOfPeriode>
+          </openbaarheid>
+        </aggregatie>
+      </ToPX>
+    </metadata>
+  </record>
+  <record>
+    <recordHeader>
+      <identificatie>GDB-0436-01</identificatie>
+    </recordHeader>
+    <metadata schemaURI="topx">
+      <ToPX xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.nationaalarchief.nl/ToPX/v2.3">
+        <bestand>
+          <identificatiekenmerk>GDB-0436-01</identificatiekenmerk>
+          <aggregatieniveau>Bestand</aggregatieniveau>
+          <naam>Bouwvergunning Verbouwen winkelpand en verbeteren woonhuis  Hoofdstraat 14 4941DC Raamsdonksveer 29-7-1955</naam>
+          <relatie>
+            <relatieID>NL-0779-19550710_GDB-0436-01</relatieID>
+            <typeRelatie>Hiërarchisch</typeRelatie>
+            <datumOfPeriode>
+              <datum>2015-12-21</datum>
+            </datumOfPeriode>
+          </relatie>
+          <vorm>
+            <redactieGenre>Beschikking</redactieGenre>
+          </vorm>
+          <formaat>
+            <identificatiekenmerk>GDB-0436-01</identificatiekenmerk>
+            <bestandsnaam>
+              <naam>GDB-0436-01</naam>
+              <extensie>pdf</extensie>
+            </bestandsnaam>
+            <omvang>9842193</omvang>
+            <bestandsformaat>fmt/18</bestandsformaat>
+            <fysiekeIntegriteit>
+              <algoritme>sha256</algoritme>
+              <waarde>bc9452f8b6faf6e6d07ad7820d4f4afb0399f7ef7a08114178fd8eed7ef8b547</waarde>
+              <datumEnTijd>2015-12-21T13:21:00</datumEnTijd>
+            </fysiekeIntegriteit>
+            <datumAanmaak>2015-12-21</datumAanmaak>
+          </formaat>
+        </bestand>
+      </ToPX>
+    </metadata>
+  </record>
+  <record>
+    <recordHeader>
+      <identificatie>NL-0779-19550710_GDB-0436-02</identificatie>
+    </recordHeader>
+    <metadata schemaURI="topx">
+      <ToPX xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.nationaalarchief.nl/ToPX/v2.3">
+        <aggregatie>
+          <identificatiekenmerk>NL-0779-19550710_GDB-0436-02</identificatiekenmerk>
+          <aggregatieniveau>Record</aggregatieniveau>
+          <naam>Bouwvergunning Tekening ( technisch ) Verbouwen winkelpand en verbeteren woonhuis  Hoofdstraat 14 4941DC Raamsdonksveer 29-7-1955</naam>
+          <taal>dut</taal>
+          <eventGeschiedenis>
+            <datumOfPeriode>
+              <datum>1955-07-29</datum>
+            </datumOfPeriode>
+            <type>Verzending</type>
+            <verantwoordelijkeFunctionaris>Afdeling Ondersteuning</verantwoordelijkeFunctionaris>
+          </eventGeschiedenis>
+          <relatie>
+            <relatieID>NL-0779-19550710</relatieID>
+            <typeRelatie>Hiërarchisch</typeRelatie>
+            <datumOfPeriode>
+              <datum>2015-12-21</datum>
+            </datumOfPeriode>
+          </relatie>
+          <gebruiksrechten>
+            <omschrijvingVoorwaarden>Vrij te gebruiken</omschrijvingVoorwaarden>
+            <datumOfPeriode>
+              <datum>1955-07-29</datum>
+            </datumOfPeriode>
+          </gebruiksrechten>
+          <vertrouwelijkheid>
+            <classificatieNiveau>Niet vertrouwelijk</classificatieNiveau>
+            <datumOfPeriode>
+              <datum>1955-07-29</datum>
+            </datumOfPeriode>
+          </vertrouwelijkheid>
+          <openbaarheid>
+            <omschrijvingBeperkingen>Openbaar</omschrijvingBeperkingen>
+            <datumOfPeriode>
+              <datum>2015-12-21</datum>
+            </datumOfPeriode>
+          </openbaarheid>
+        </aggregatie>
+      </ToPX>
+    </metadata>
+  </record>
+  <record>
+    <recordHeader>
+      <identificatie>GDB-0436-02</identificatie>
+    </recordHeader>
+    <metadata schemaURI="topx">
+      <ToPX xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.nationaalarchief.nl/ToPX/v2.3">
+        <bestand>
+          <identificatiekenmerk>GDB-0436-02</identificatiekenmerk>
+          <aggregatieniveau>Bestand</aggregatieniveau>
+          <naam>Bouwvergunning Verbouwen winkelpand en verbeteren woonhuis  Hoofdstraat 14 4941DC Raamsdonksveer 29-7-1955</naam>
+          <relatie>
+            <relatieID>NL-0779-19550710_GDB-0436-02</relatieID>
+            <typeRelatie>Hiërarchisch</typeRelatie>
+            <datumOfPeriode>
+              <datum>2015-12-21</datum>
+            </datumOfPeriode>
+          </relatie>
+          <vorm>
+            <redactieGenre>Tekening ( technisch )</redactieGenre>
+          </vorm>
+          <formaat>
+            <identificatiekenmerk>GDB-0436-02</identificatiekenmerk>
+            <bestandsnaam>
+              <naam>GDB-0436-02</naam>
+              <extensie>pdf</extensie>
+            </bestandsnaam>
+            <omvang>139210510</omvang>
+            <bestandsformaat>fmt/18</bestandsformaat>
+            <fysiekeIntegriteit>
+              <algoritme>sha256</algoritme>
+              <waarde>6561a6921622027e2468903742b27794f5a97f970a1603df27e7ba7ec5ad1d9a</waarde>
+              <datumEnTijd>2015-12-21T13:21:00</datumEnTijd>
+            </fysiekeIntegriteit>
+            <datumAanmaak>2015-12-21</datumAanmaak>
+          </formaat>
+        </bestand>
+      </ToPX>
+    </metadata>
+  </record>
+  <record>
+    <recordHeader>
+      <identificatie>NL-0779-19600364</identificatie>
+    </recordHeader>
+    <metadata schemaURI="topx">
+      <ToPX xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.nationaalarchief.nl/ToPX/v2.3">
+        <aggregatie>
+          <identificatiekenmerk>NL-0779-19600364</identificatiekenmerk>
+          <aggregatieniveau>Dossier</aggregatieniveau>
+          <naam>Bouwvergunning Bouw woonhuis Burgemeester Prinssenlaan   Raamsdonksveer 14-10-1960</naam>
+          <classificatie>
+            <code>-1.733.21</code>
+            <omschrijving>Bouw van woningen en gebouwen</omschrijving>
+            <bron>basisarchiefcode</bron>
+            <datumOfPeriode>
+              <jaar>2010</jaar>
+            </datumOfPeriode>
+          </classificatie>
+          <dekking>
+            <inTijd>
+              <begin>
+                <datum>1960-10-14</datum>
+              </begin>
+              <eind>
+                <datum>1960-10-14</datum>
+              </eind>
+            </inTijd>
+            <geografischGebied>Prinssenlaan  Raamsdonksveer</geografischGebied>
+          </dekking>
+          <taal>dut</taal>
+          <eventGeschiedenis>
+            <datumOfPeriode>
+              <datum>1960-10-14</datum>
+            </datumOfPeriode>
+            <type>Afsluiting</type>
+            <verantwoordelijkeFunctionaris>Afdeling Ondersteuning</verantwoordelijkeFunctionaris>
+          </eventGeschiedenis>
+          <relatie>
+            <relatieID>NL-0834-10002</relatieID>
+            <typeRelatie>Hiërarchisch</typeRelatie>
+            <datumOfPeriode>
+              <datum>2015-12-21</datum>
+            </datumOfPeriode>
+          </relatie>
+          <context>
+            <actor>
+              <identificatiekenmerk>K50771752</identificatiekenmerk>
+              <aggregatieniveau>Organisatie</aggregatieniveau>
+              <geautoriseerdeNaam>Gemeente Raamsdonk</geautoriseerdeNaam>
+            </actor>
+            <activiteit>
+              <naam>Verlenen van bouwvergunningen</naam>
+            </activiteit>
+          </context>
+          <gebruiksrechten>
+            <omschrijvingVoorwaarden>Vrij te gebruiken</omschrijvingVoorwaarden>
+            <datumOfPeriode>
+              <datum>1960-10-14</datum>
+            </datumOfPeriode>
+          </gebruiksrechten>
+          <vertrouwelijkheid>
+            <classificatieNiveau>Niet vertrouwelijk</classificatieNiveau>
+            <datumOfPeriode>
+              <datum>1960-10-14</datum>
+            </datumOfPeriode>
+          </vertrouwelijkheid>
+          <openbaarheid>
+            <omschrijvingBeperkingen>Openbaar</omschrijvingBeperkingen>
+            <datumOfPeriode>
+              <datum>1960-10-14</datum>
+            </datumOfPeriode>
+          </openbaarheid>
+          <integriteit>Integer</integriteit>
+        </aggregatie>
+      </ToPX>
+    </metadata>
+  </record>
+  <record>
+    <recordHeader>
+      <identificatie>NL-0779-19600364_GDB-0875-01</identificatie>
+    </recordHeader>
+    <metadata schemaURI="topx">
+      <ToPX xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.nationaalarchief.nl/ToPX/v2.3">
+        <aggregatie>
+          <identificatiekenmerk>NL-0779-19600364_GDB-0875-01</identificatiekenmerk>
+          <aggregatieniveau>Record</aggregatieniveau>
+          <naam>Bouwvergunning Beschikking Bouw woonhuis Burgemeester Prinssenlaan   Raamsdonksveer 14-10-1960</naam>
+          <taal>dut</taal>
+          <eventGeschiedenis>
+            <datumOfPeriode>
+              <datum>1960-10-14</datum>
+            </datumOfPeriode>
+            <type>Verzending</type>
+            <verantwoordelijkeFunctionaris>Afdeling Ondersteuning</verantwoordelijkeFunctionaris>
+          </eventGeschiedenis>
+          <relatie>
+            <relatieID>NL-0779-19600364</relatieID>
+            <typeRelatie>Hiërarchisch</typeRelatie>
+            <datumOfPeriode>
+              <datum>2015-12-21</datum>
+            </datumOfPeriode>
+          </relatie>
+          <gebruiksrechten>
+            <omschrijvingVoorwaarden>Vrij te gebruiken</omschrijvingVoorwaarden>
+            <datumOfPeriode>
+              <datum>1960-10-14</datum>
+            </datumOfPeriode>
+          </gebruiksrechten>
+          <vertrouwelijkheid>
+            <classificatieNiveau>Niet vertrouwelijk</classificatieNiveau>
+            <datumOfPeriode>
+              <datum>1960-10-14</datum>
+            </datumOfPeriode>
+          </vertrouwelijkheid>
+          <openbaarheid>
+            <omschrijvingBeperkingen>Openbaar</omschrijvingBeperkingen>
+            <datumOfPeriode>
+              <datum>2015-12-21</datum>
+            </datumOfPeriode>
+          </openbaarheid>
+        </aggregatie>
+      </ToPX>
+    </metadata>
+  </record>
+  <record>
+    <recordHeader>
+      <identificatie>GDB-0875-01</identificatie>
+    </recordHeader>
+    <metadata schemaURI="topx">
+      <ToPX xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.nationaalarchief.nl/ToPX/v2.3">
+        <bestand>
+          <identificatiekenmerk>GDB-0875-01</identificatiekenmerk>
+          <aggregatieniveau>Bestand</aggregatieniveau>
+          <naam>Bouwvergunning Bouw woonhuis Burgemeester Prinssenlaan   Raamsdonksveer 14-10-1960</naam>
+          <relatie>
+            <relatieID>NL-0779-19600364_GDB-0875-01</relatieID>
+            <typeRelatie>Hiërarchisch</typeRelatie>
+            <datumOfPeriode>
+              <datum>2015-12-21</datum>
+            </datumOfPeriode>
+          </relatie>
+          <vorm>
+            <redactieGenre>Beschikking</redactieGenre>
+          </vorm>
+          <formaat>
+            <identificatiekenmerk>GDB-0875-01</identificatiekenmerk>
+            <bestandsnaam>
+              <naam>GDB-0875-01</naam>
+              <extensie>pdf</extensie>
+            </bestandsnaam>
+            <omvang>4288451</omvang>
+            <bestandsformaat>fmt/18</bestandsformaat>
+            <fysiekeIntegriteit>
+              <algoritme>sha256</algoritme>
+              <waarde>d70ef6cf587d839755e8dcb56b4b9babe2f49f1f99d055abca5dd301525f155e</waarde>
+              <datumEnTijd>2015-12-21T14:08:00</datumEnTijd>
+            </fysiekeIntegriteit>
+            <datumAanmaak>2015-12-21</datumAanmaak>
+          </formaat>
+        </bestand>
+      </ToPX>
+    </metadata>
+  </record>
+  <record>
+    <recordHeader>
+      <identificatie>NL-0779-19600364_GDB-0875-02</identificatie>
+    </recordHeader>
+    <metadata schemaURI="topx">
+      <ToPX xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.nationaalarchief.nl/ToPX/v2.3">
+        <aggregatie>
+          <identificatiekenmerk>NL-0779-19600364_GDB-0875-02</identificatiekenmerk>
+          <aggregatieniveau>Record</aggregatieniveau>
+          <naam>Bouwvergunning Tekening ( technisch ) Bouw woonhuis Burgemeester Prinssenlaan   Raamsdonksveer 14-10-1960</naam>
+          <taal>dut</taal>
+          <eventGeschiedenis>
+            <datumOfPeriode>
+              <datum>1960-10-14</datum>
+            </datumOfPeriode>
+            <type>Verzending</type>
+            <verantwoordelijkeFunctionaris>Afdeling Ondersteuning</verantwoordelijkeFunctionaris>
+          </eventGeschiedenis>
+          <relatie>
+            <relatieID>NL-0779-19600364</relatieID>
+            <typeRelatie>Hiërarchisch</typeRelatie>
+            <datumOfPeriode>
+              <datum>2015-12-21</datum>
+            </datumOfPeriode>
+          </relatie>
+          <gebruiksrechten>
+            <omschrijvingVoorwaarden>Vrij te gebruiken</omschrijvingVoorwaarden>
+            <datumOfPeriode>
+              <datum>1960-10-14</datum>
+            </datumOfPeriode>
+          </gebruiksrechten>
+          <vertrouwelijkheid>
+            <classificatieNiveau>Niet vertrouwelijk</classificatieNiveau>
+            <datumOfPeriode>
+              <datum>1960-10-14</datum>
+            </datumOfPeriode>
+          </vertrouwelijkheid>
+          <openbaarheid>
+            <omschrijvingBeperkingen>Openbaar</omschrijvingBeperkingen>
+            <datumOfPeriode>
+              <datum>2015-12-21</datum>
+            </datumOfPeriode>
+          </openbaarheid>
+        </aggregatie>
+      </ToPX>
+    </metadata>
+  </record>
+  <record>
+    <recordHeader>
+      <identificatie>GDB-0875-02</identificatie>
+    </recordHeader>
+    <metadata schemaURI="topx">
+      <ToPX xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.nationaalarchief.nl/ToPX/v2.3">
+        <bestand>
+          <identificatiekenmerk>GDB-0875-02</identificatiekenmerk>
+          <aggregatieniveau>Bestand</aggregatieniveau>
+          <naam>Bouwvergunning Bouw woonhuis Burgemeester Prinssenlaan   Raamsdonksveer 14-10-1960</naam>
+          <relatie>
+            <relatieID>NL-0779-19600364_GDB-0875-02</relatieID>
+            <typeRelatie>Hiërarchisch</typeRelatie>
+            <datumOfPeriode>
+              <datum>2015-12-21</datum>
+            </datumOfPeriode>
+          </relatie>
+          <vorm>
+            <redactieGenre>Tekening ( technisch )</redactieGenre>
+          </vorm>
+          <formaat>
+            <identificatiekenmerk>GDB-0875-02</identificatiekenmerk>
+            <bestandsnaam>
+              <naam>GDB-0875-02</naam>
+              <extensie>pdf</extensie>
+            </bestandsnaam>
+            <omvang>31476754</omvang>
+            <bestandsformaat>fmt/18</bestandsformaat>
+            <fysiekeIntegriteit>
+              <algoritme>sha256</algoritme>
+              <waarde>ec0c6aa81d6cbbdf06f8a81346cebfb566905b5ccd38a193422cc564f48d08d7</waarde>
+              <datumEnTijd>2015-12-21T14:08:00</datumEnTijd>
+            </fysiekeIntegriteit>
+            <datumAanmaak>2015-12-21</datumAanmaak>
+          </formaat>
+        </bestand>
+      </ToPX>
+    </metadata>
+  </record>
+  <record>
+    <recordHeader>
+      <identificatie>NL-0779-19610083</identificatie>
+    </recordHeader>
+    <metadata schemaURI="topx">
+      <ToPX xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.nationaalarchief.nl/ToPX/v2.3">
+        <aggregatie>
+          <identificatiekenmerk>NL-0779-19610083</identificatiekenmerk>
+          <aggregatieniveau>Dossier</aggregatieniveau>
+          <naam>Bouwvergunning Bouw woonhuis Burgemeester Prinssenlaan   Raamsdonksveer 12-4-1961</naam>
+          <classificatie>
+            <code>-1.733.21</code>
+            <omschrijving>Bouw van woningen en gebouwen</omschrijving>
+            <bron>basisarchiefcode</bron>
+            <datumOfPeriode>
+              <jaar>2010</jaar>
+            </datumOfPeriode>
+          </classificatie>
+          <dekking>
+            <inTijd>
+              <begin>
+                <datum>1961-04-12</datum>
+              </begin>
+              <eind>
+                <datum>1961-04-12</datum>
+              </eind>
+            </inTijd>
+            <geografischGebied>Prinssenlaan  Raamsdonksveer</geografischGebied>
+          </dekking>
+          <taal>dut</taal>
+          <eventGeschiedenis>
+            <datumOfPeriode>
+              <datum>1961-04-12</datum>
+            </datumOfPeriode>
+            <type>Afsluiting</type>
+            <verantwoordelijkeFunctionaris>Afdeling Ondersteuning</verantwoordelijkeFunctionaris>
+          </eventGeschiedenis>
+          <relatie>
+            <relatieID>NL-0834-10002</relatieID>
+            <typeRelatie>Hiërarchisch</typeRelatie>
+            <datumOfPeriode>
+              <datum>2015-12-21</datum>
+            </datumOfPeriode>
+          </relatie>
+          <context>
+            <actor>
+              <identificatiekenmerk>K50771752</identificatiekenmerk>
+              <aggregatieniveau>Organisatie</aggregatieniveau>
+              <geautoriseerdeNaam>Gemeente Raamsdonk</geautoriseerdeNaam>
+            </actor>
+            <activiteit>
+              <naam>Verlenen van bouwvergunningen</naam>
+            </activiteit>
+          </context>
+          <gebruiksrechten>
+            <omschrijvingVoorwaarden>Vrij te gebruiken</omschrijvingVoorwaarden>
+            <datumOfPeriode>
+              <datum>1961-04-12</datum>
+            </datumOfPeriode>
+          </gebruiksrechten>
+          <vertrouwelijkheid>
+            <classificatieNiveau>Niet vertrouwelijk</classificatieNiveau>
+            <datumOfPeriode>
+              <datum>1961-04-12</datum>
+            </datumOfPeriode>
+          </vertrouwelijkheid>
+          <openbaarheid>
+            <omschrijvingBeperkingen>Openbaar</omschrijvingBeperkingen>
+            <datumOfPeriode>
+              <datum>1961-04-12</datum>
+            </datumOfPeriode>
+          </openbaarheid>
+          <integriteit>Integer</integriteit>
+        </aggregatie>
+      </ToPX>
+    </metadata>
+  </record>
+  <record>
+    <recordHeader>
+      <identificatie>NL-0779-19610083_GDB-0923-01</identificatie>
+    </recordHeader>
+    <metadata schemaURI="topx">
+      <ToPX xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.nationaalarchief.nl/ToPX/v2.3">
+        <aggregatie>
+          <identificatiekenmerk>NL-0779-19610083_GDB-0923-01</identificatiekenmerk>
+          <aggregatieniveau>Record</aggregatieniveau>
+          <naam>Bouwvergunning Beschikking Bouw woonhuis Burgemeester Prinssenlaan   Raamsdonksveer 12-4-1961</naam>
+          <taal>dut</taal>
+          <eventGeschiedenis>
+            <datumOfPeriode>
+              <datum>1961-04-12</datum>
+            </datumOfPeriode>
+            <type>Verzending</type>
+            <verantwoordelijkeFunctionaris>Afdeling Ondersteuning</verantwoordelijkeFunctionaris>
+          </eventGeschiedenis>
+          <relatie>
+            <relatieID>NL-0779-19610083</relatieID>
+            <typeRelatie>Hiërarchisch</typeRelatie>
+            <datumOfPeriode>
+              <datum>2015-12-21</datum>
+            </datumOfPeriode>
+          </relatie>
+          <gebruiksrechten>
+            <omschrijvingVoorwaarden>Vrij te gebruiken</omschrijvingVoorwaarden>
+            <datumOfPeriode>
+              <datum>1961-04-12</datum>
+            </datumOfPeriode>
+          </gebruiksrechten>
+          <vertrouwelijkheid>
+            <classificatieNiveau>Niet vertrouwelijk</classificatieNiveau>
+            <datumOfPeriode>
+              <datum>1961-04-12</datum>
+            </datumOfPeriode>
+          </vertrouwelijkheid>
+          <openbaarheid>
+            <omschrijvingBeperkingen>Openbaar</omschrijvingBeperkingen>
+            <datumOfPeriode>
+              <datum>2015-12-21</datum>
+            </datumOfPeriode>
+          </openbaarheid>
+        </aggregatie>
+      </ToPX>
+    </metadata>
+  </record>
+  <record>
+    <recordHeader>
+      <identificatie>GDB-0923-01</identificatie>
+    </recordHeader>
+    <metadata schemaURI="topx">
+      <ToPX xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.nationaalarchief.nl/ToPX/v2.3">
+        <bestand>
+          <identificatiekenmerk>GDB-0923-01</identificatiekenmerk>
+          <aggregatieniveau>Bestand</aggregatieniveau>
+          <naam>Bouwvergunning Bouw woonhuis Burgemeester Prinssenlaan   Raamsdonksveer 12-4-1961</naam>
+          <relatie>
+            <relatieID>NL-0779-19610083_GDB-0923-01</relatieID>
+            <typeRelatie>Hiërarchisch</typeRelatie>
+            <datumOfPeriode>
+              <datum>2015-12-21</datum>
+            </datumOfPeriode>
+          </relatie>
+          <vorm>
+            <redactieGenre>Beschikking</redactieGenre>
+          </vorm>
+          <formaat>
+            <identificatiekenmerk>GDB-0923-01</identificatiekenmerk>
+            <bestandsnaam>
+              <naam>GDB-0923-01</naam>
+              <extensie>pdf</extensie>
+            </bestandsnaam>
+            <omvang>6776228</omvang>
+            <bestandsformaat>fmt/18</bestandsformaat>
+            <fysiekeIntegriteit>
+              <algoritme>sha256</algoritme>
+              <waarde>794bf5e4942f06e5146e9b5150ffd989b9ebf679e73bbaf56da4a5882e09a536</waarde>
+              <datumEnTijd>2015-12-21T14:13:00</datumEnTijd>
+            </fysiekeIntegriteit>
+            <datumAanmaak>2015-12-21</datumAanmaak>
+          </formaat>
+        </bestand>
+      </ToPX>
+    </metadata>
+  </record>
+  <record>
+    <recordHeader>
+      <identificatie>NL-0779-19610083_GDB-0923-02</identificatie>
+    </recordHeader>
+    <metadata schemaURI="topx">
+      <ToPX xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.nationaalarchief.nl/ToPX/v2.3">
+        <aggregatie>
+          <identificatiekenmerk>NL-0779-19610083_GDB-0923-02</identificatiekenmerk>
+          <aggregatieniveau>Record</aggregatieniveau>
+          <naam>Bouwvergunning Tekening ( technisch ) Bouw woonhuis Burgemeester Prinssenlaan   Raamsdonksveer 12-4-1961</naam>
+          <taal>dut</taal>
+          <eventGeschiedenis>
+            <datumOfPeriode>
+              <datum>1961-04-12</datum>
+            </datumOfPeriode>
+            <type>Verzending</type>
+            <verantwoordelijkeFunctionaris>Afdeling Ondersteuning</verantwoordelijkeFunctionaris>
+          </eventGeschiedenis>
+          <relatie>
+            <relatieID>NL-0779-19610083</relatieID>
+            <typeRelatie>Hiërarchisch</typeRelatie>
+            <datumOfPeriode>
+              <datum>2015-12-21</datum>
+            </datumOfPeriode>
+          </relatie>
+          <gebruiksrechten>
+            <omschrijvingVoorwaarden>Vrij te gebruiken</omschrijvingVoorwaarden>
+            <datumOfPeriode>
+              <datum>1961-04-12</datum>
+            </datumOfPeriode>
+          </gebruiksrechten>
+          <vertrouwelijkheid>
+            <classificatieNiveau>Niet vertrouwelijk</classificatieNiveau>
+            <datumOfPeriode>
+              <datum>1961-04-12</datum>
+            </datumOfPeriode>
+          </vertrouwelijkheid>
+          <openbaarheid>
+            <omschrijvingBeperkingen>Openbaar</omschrijvingBeperkingen>
+            <datumOfPeriode>
+              <datum>2015-12-21</datum>
+            </datumOfPeriode>
+          </openbaarheid>
+        </aggregatie>
+      </ToPX>
+    </metadata>
+  </record>
+  <record>
+    <recordHeader>
+      <identificatie>GDB-0923-02</identificatie>
+    </recordHeader>
+    <metadata schemaURI="topx">
+      <ToPX xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.nationaalarchief.nl/ToPX/v2.3">
+        <bestand>
+          <identificatiekenmerk>GDB-0923-02</identificatiekenmerk>
+          <aggregatieniveau>Bestand</aggregatieniveau>
+          <naam>Bouwvergunning Bouw woonhuis Burgemeester Prinssenlaan   Raamsdonksveer 12-4-1961</naam>
+          <relatie>
+            <relatieID>NL-0779-19610083_GDB-0923-02</relatieID>
+            <typeRelatie>Hiërarchisch</typeRelatie>
+            <datumOfPeriode>
+              <datum>2015-12-21</datum>
+            </datumOfPeriode>
+          </relatie>
+          <vorm>
+            <redactieGenre>Tekening ( technisch )</redactieGenre>
+          </vorm>
+          <formaat>
+            <identificatiekenmerk>GDB-0923-02</identificatiekenmerk>
+            <bestandsnaam>
+              <naam>GDB-0923-02</naam>
+              <extensie>pdf</extensie>
+            </bestandsnaam>
+            <omvang>45875736</omvang>
+            <bestandsformaat>fmt/18</bestandsformaat>
+            <fysiekeIntegriteit>
+              <algoritme>sha256</algoritme>
+              <waarde>b5339f5996444cf8ad9cc2545d4329faeb9dbc60e33b1bf7c981ef99a9c1f6c8</waarde>
+              <datumEnTijd>2015-12-21T14:13:00</datumEnTijd>
+            </fysiekeIntegriteit>
+            <datumAanmaak>2015-12-21</datumAanmaak>
+          </formaat>
+        </bestand>
+      </ToPX>
+    </metadata>
+  </record>
+  <record>
+    <recordHeader>
+      <identificatie>NL-0779-19610254</identificatie>
+    </recordHeader>
+    <metadata schemaURI="topx">
+      <ToPX xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.nationaalarchief.nl/ToPX/v2.3">
+        <aggregatie>
+          <identificatiekenmerk>NL-0779-19610254</identificatiekenmerk>
+          <aggregatieniveau>Dossier</aggregatieniveau>
+          <naam>Bouwvergunning Bouw tiental autoboxen Burgemeester Prinssenlaan   Raamsdonksveer 7-11-1961</naam>
+          <classificatie>
+            <code>-1.733.21</code>
+            <omschrijving>Bouw van woningen en gebouwen</omschrijving>
+            <bron>basisarchiefcode</bron>
+            <datumOfPeriode>
+              <jaar>2010</jaar>
+            </datumOfPeriode>
+          </classificatie>
+          <dekking>
+            <inTijd>
+              <begin>
+                <datum>1961-11-07</datum>
+              </begin>
+              <eind>
+                <datum>1961-11-07</datum>
+              </eind>
+            </inTijd>
+            <geografischGebied>Prinssenlaan  Raamsdonksveer</geografischGebied>
+          </dekking>
+          <taal>dut</taal>
+          <eventGeschiedenis>
+            <datumOfPeriode>
+              <datum>1961-11-07</datum>
+            </datumOfPeriode>
+            <type>Afsluiting</type>
+            <verantwoordelijkeFunctionaris>Afdeling Ondersteuning</verantwoordelijkeFunctionaris>
+          </eventGeschiedenis>
+          <relatie>
+            <relatieID>NL-0834-10002</relatieID>
+            <typeRelatie>Hiërarchisch</typeRelatie>
+            <datumOfPeriode>
+              <datum>2015-12-21</datum>
+            </datumOfPeriode>
+          </relatie>
+          <context>
+            <actor>
+              <identificatiekenmerk>K50771752</identificatiekenmerk>
+              <aggregatieniveau>Organisatie</aggregatieniveau>
+              <geautoriseerdeNaam>Gemeente Raamsdonk</geautoriseerdeNaam>
+            </actor>
+            <activiteit>
+              <naam>Verlenen van bouwvergunningen</naam>
+            </activiteit>
+          </context>
+          <gebruiksrechten>
+            <omschrijvingVoorwaarden>Vrij te gebruiken</omschrijvingVoorwaarden>
+            <datumOfPeriode>
+              <datum>1961-11-07</datum>
+            </datumOfPeriode>
+          </gebruiksrechten>
+          <vertrouwelijkheid>
+            <classificatieNiveau>Niet vertrouwelijk</classificatieNiveau>
+            <datumOfPeriode>
+              <datum>1961-11-07</datum>
+            </datumOfPeriode>
+          </vertrouwelijkheid>
+          <openbaarheid>
+            <omschrijvingBeperkingen>Openbaar</omschrijvingBeperkingen>
+            <datumOfPeriode>
+              <datum>1961-11-07</datum>
+            </datumOfPeriode>
+          </openbaarheid>
+          <integriteit>Integer</integriteit>
+        </aggregatie>
+      </ToPX>
+    </metadata>
+  </record>
+  <record>
+    <recordHeader>
+      <identificatie>NL-0779-19610254_GDB-0964-01</identificatie>
+    </recordHeader>
+    <metadata schemaURI="topx">
+      <ToPX xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.nationaalarchief.nl/ToPX/v2.3">
+        <aggregatie>
+          <identificatiekenmerk>NL-0779-19610254_GDB-0964-01</identificatiekenmerk>
+          <aggregatieniveau>Record</aggregatieniveau>
+          <naam>Bouwvergunning Beschikking Bouw tiental autoboxen Burgemeester Prinssenlaan   Raamsdonksveer 7-11-1961</naam>
+          <taal>dut</taal>
+          <eventGeschiedenis>
+            <datumOfPeriode>
+              <datum>1961-11-07</datum>
+            </datumOfPeriode>
+            <type>Verzending</type>
+            <verantwoordelijkeFunctionaris>Afdeling Ondersteuning</verantwoordelijkeFunctionaris>
+          </eventGeschiedenis>
+          <relatie>
+            <relatieID>NL-0779-19610254</relatieID>
+            <typeRelatie>Hiërarchisch</typeRelatie>
+            <datumOfPeriode>
+              <datum>2015-12-21</datum>
+            </datumOfPeriode>
+          </relatie>
+          <gebruiksrechten>
+            <omschrijvingVoorwaarden>Vrij te gebruiken</omschrijvingVoorwaarden>
+            <datumOfPeriode>
+              <datum>1961-11-07</datum>
+            </datumOfPeriode>
+          </gebruiksrechten>
+          <vertrouwelijkheid>
+            <classificatieNiveau>Niet vertrouwelijk</classificatieNiveau>
+            <datumOfPeriode>
+              <datum>1961-11-07</datum>
+            </datumOfPeriode>
+          </vertrouwelijkheid>
+          <openbaarheid>
+            <omschrijvingBeperkingen>Openbaar</omschrijvingBeperkingen>
+            <datumOfPeriode>
+              <datum>2015-12-21</datum>
+            </datumOfPeriode>
+          </openbaarheid>
+        </aggregatie>
+      </ToPX>
+    </metadata>
+  </record>
+  <record>
+    <recordHeader>
+      <identificatie>GDB-0964-01</identificatie>
+    </recordHeader>
+    <metadata schemaURI="topx">
+      <ToPX xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.nationaalarchief.nl/ToPX/v2.3">
+        <bestand>
+          <identificatiekenmerk>GDB-0964-01</identificatiekenmerk>
+          <aggregatieniveau>Bestand</aggregatieniveau>
+          <naam>Bouwvergunning Bouw tiental autoboxen Burgemeester Prinssenlaan   Raamsdonksveer 7-11-1961</naam>
+          <relatie>
+            <relatieID>NL-0779-19610254_GDB-0964-01</relatieID>
+            <typeRelatie>Hiërarchisch</typeRelatie>
+            <datumOfPeriode>
+              <datum>2015-12-21</datum>
+            </datumOfPeriode>
+          </relatie>
+          <vorm>
+            <redactieGenre>Beschikking</redactieGenre>
+          </vorm>
+          <formaat>
+            <identificatiekenmerk>GDB-0964-01</identificatiekenmerk>
+            <bestandsnaam>
+              <naam>GDB-0964-01</naam>
+              <extensie>pdf</extensie>
+            </bestandsnaam>
+            <omvang>7293241</omvang>
+            <bestandsformaat>fmt/18</bestandsformaat>
+            <fysiekeIntegriteit>
+              <algoritme>sha256</algoritme>
+              <waarde>caf92fc164dd5d7fbfb7380959dd0998930cf5cf33c09c855752c4a5baf130e5</waarde>
+              <datumEnTijd>2015-12-21T14:20:00</datumEnTijd>
+            </fysiekeIntegriteit>
+            <datumAanmaak>2015-12-21</datumAanmaak>
+          </formaat>
+        </bestand>
+      </ToPX>
+    </metadata>
+  </record>
+  <record>
+    <recordHeader>
+      <identificatie>NL-0779-19610254_GDB-0964-02</identificatie>
+    </recordHeader>
+    <metadata schemaURI="topx">
+      <ToPX xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.nationaalarchief.nl/ToPX/v2.3">
+        <aggregatie>
+          <identificatiekenmerk>NL-0779-19610254_GDB-0964-02</identificatiekenmerk>
+          <aggregatieniveau>Record</aggregatieniveau>
+          <naam>Bouwvergunning Tekening ( technisch ) Bouw tiental autoboxen Burgemeester Prinssenlaan   Raamsdonksveer 7-11-1961</naam>
+          <taal>dut</taal>
+          <eventGeschiedenis>
+            <datumOfPeriode>
+              <datum>1961-11-07</datum>
+            </datumOfPeriode>
+            <type>Verzending</type>
+            <verantwoordelijkeFunctionaris>Afdeling Ondersteuning</verantwoordelijkeFunctionaris>
+          </eventGeschiedenis>
+          <relatie>
+            <relatieID>NL-0779-19610254</relatieID>
+            <typeRelatie>Hiërarchisch</typeRelatie>
+            <datumOfPeriode>
+              <datum>2015-12-21</datum>
+            </datumOfPeriode>
+          </relatie>
+          <gebruiksrechten>
+            <omschrijvingVoorwaarden>Vrij te gebruiken</omschrijvingVoorwaarden>
+            <datumOfPeriode>
+              <datum>1961-11-07</datum>
+            </datumOfPeriode>
+          </gebruiksrechten>
+          <vertrouwelijkheid>
+            <classificatieNiveau>Niet vertrouwelijk</classificatieNiveau>
+            <datumOfPeriode>
+              <datum>1961-11-07</datum>
+            </datumOfPeriode>
+          </vertrouwelijkheid>
+          <openbaarheid>
+            <omschrijvingBeperkingen>Openbaar</omschrijvingBeperkingen>
+            <datumOfPeriode>
+              <datum>2015-12-21</datum>
+            </datumOfPeriode>
+          </openbaarheid>
+        </aggregatie>
+      </ToPX>
+    </metadata>
+  </record>
+  <record>
+    <recordHeader>
+      <identificatie>GDB-0964-02</identificatie>
+    </recordHeader>
+    <metadata schemaURI="topx">
+      <ToPX xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.nationaalarchief.nl/ToPX/v2.3">
+        <bestand>
+          <identificatiekenmerk>GDB-0964-02</identificatiekenmerk>
+          <aggregatieniveau>Bestand</aggregatieniveau>
+          <naam>Bouwvergunning Bouw tiental autoboxen Burgemeester Prinssenlaan   Raamsdonksveer 7-11-1961</naam>
+          <relatie>
+            <relatieID>NL-0779-19610254_GDB-0964-02</relatieID>
+            <typeRelatie>Hiërarchisch</typeRelatie>
+            <datumOfPeriode>
+              <datum>2015-12-21</datum>
+            </datumOfPeriode>
+          </relatie>
+          <vorm>
+            <redactieGenre>Tekening ( technisch )</redactieGenre>
+          </vorm>
+          <formaat>
+            <identificatiekenmerk>GDB-0964-02</identificatiekenmerk>
+            <bestandsnaam>
+              <naam>GDB-0964-02</naam>
+              <extensie>pdf</extensie>
+            </bestandsnaam>
+            <omvang>15743975</omvang>
+            <bestandsformaat>fmt/18</bestandsformaat>
+            <fysiekeIntegriteit>
+              <algoritme>sha256</algoritme>
+              <waarde>0b2b3684ab78655105a04484a0492e88fb7a2148bd217f5c45fda62bf3453958</waarde>
+              <datumEnTijd>2015-12-21T14:20:00</datumEnTijd>
+            </fysiekeIntegriteit>
+            <datumAanmaak>2015-12-21</datumAanmaak>
+          </formaat>
+        </bestand>
+      </ToPX>
+    </metadata>
+  </record>
+  <record>
+    <recordHeader>
+      <identificatie>NL-0779-19610254_GDB-0964-03</identificatie>
+    </recordHeader>
+    <metadata schemaURI="topx">
+      <ToPX xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.nationaalarchief.nl/ToPX/v2.3">
+        <aggregatie>
+          <identificatiekenmerk>NL-0779-19610254_GDB-0964-03</identificatiekenmerk>
+          <aggregatieniveau>Record</aggregatieniveau>
+          <naam>Bouwvergunning Overige documenten Bouw tiental autoboxen Burgemeester Prinssenlaan   Raamsdonksveer 7-11-1961</naam>
+          <taal>dut</taal>
+          <eventGeschiedenis>
+            <datumOfPeriode>
+              <datum>1961-11-07</datum>
+            </datumOfPeriode>
+            <type>Verzending</type>
+            <verantwoordelijkeFunctionaris>Afdeling Ondersteuning</verantwoordelijkeFunctionaris>
+          </eventGeschiedenis>
+          <relatie>
+            <relatieID>NL-0779-19610254</relatieID>
+            <typeRelatie>Hiërarchisch</typeRelatie>
+            <datumOfPeriode>
+              <datum>2015-12-21</datum>
+            </datumOfPeriode>
+          </relatie>
+          <gebruiksrechten>
+            <omschrijvingVoorwaarden>Vrij te gebruiken</omschrijvingVoorwaarden>
+            <datumOfPeriode>
+              <datum>1961-11-07</datum>
+            </datumOfPeriode>
+          </gebruiksrechten>
+          <vertrouwelijkheid>
+            <classificatieNiveau>Niet vertrouwelijk</classificatieNiveau>
+            <datumOfPeriode>
+              <datum>1961-11-07</datum>
+            </datumOfPeriode>
+          </vertrouwelijkheid>
+          <openbaarheid>
+            <omschrijvingBeperkingen>Openbaar</omschrijvingBeperkingen>
+            <datumOfPeriode>
+              <datum>2015-12-21</datum>
+            </datumOfPeriode>
+          </openbaarheid>
+        </aggregatie>
+      </ToPX>
+    </metadata>
+  </record>
+  <record>
+    <recordHeader>
+      <identificatie>GDB-0964-03</identificatie>
+    </recordHeader>
+    <metadata schemaURI="topx">
+      <ToPX xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.nationaalarchief.nl/ToPX/v2.3">
+        <bestand>
+          <identificatiekenmerk>GDB-0964-03</identificatiekenmerk>
+          <aggregatieniveau>Bestand</aggregatieniveau>
+          <naam>Bouwvergunning Bouw tiental autoboxen Burgemeester Prinssenlaan   Raamsdonksveer 7-11-1961</naam>
+          <relatie>
+            <relatieID>NL-0779-19610254_GDB-0964-03</relatieID>
+            <typeRelatie>Hiërarchisch</typeRelatie>
+            <datumOfPeriode>
+              <datum>2015-12-21</datum>
+            </datumOfPeriode>
+          </relatie>
+          <vorm>
+            <redactieGenre>Overige documenten</redactieGenre>
+          </vorm>
+          <formaat>
+            <identificatiekenmerk>GDB-0964-03</identificatiekenmerk>
+            <bestandsnaam>
+              <naam>GDB-0964-03</naam>
+              <extensie>pdf</extensie>
+            </bestandsnaam>
+            <omvang>1255955</omvang>
+            <bestandsformaat>fmt/18</bestandsformaat>
+            <fysiekeIntegriteit>
+              <algoritme>sha256</algoritme>
+              <waarde>37b4f227b9f3235c9e004091ae990524f4ffe0e431c9287776f299935442892e</waarde>
+              <datumEnTijd>2015-12-21T14:20:00</datumEnTijd>
+            </fysiekeIntegriteit>
+            <datumAanmaak>2015-12-21</datumAanmaak>
+          </formaat>
+        </bestand>
+      </ToPX>
+    </metadata>
+  </record>
+</recordInformationPackage>

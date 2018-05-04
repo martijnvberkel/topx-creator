@@ -1,0 +1,259 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="TOPXModelStoreContainer" CdmEntityContainer="TOPXEntities">
+    <EntitySetMapping Name="Source">
+      <EntityTypeMapping TypeName="TOPXModel.Source">
+        <MappingFragment StoreEntitySet="Source">
+          <ScalarProperty Name="FileSize_Bytes" ColumnName="FileSize_Bytes" />
+          <ScalarProperty Name="C21_BN__Bestand" ColumnName="21 BN  Bestand" />
+          <ScalarProperty Name="BN_Bestand" ColumnName="BN Bestand" />
+          <ScalarProperty Name="Zaaknummer" ColumnName="Zaaknummer" />
+          <ScalarProperty Name="Datum_vergunning2" ColumnName="Datum_vergunning2" />
+          <ScalarProperty Name="Column_47" ColumnName="Column 47" />
+          <ScalarProperty Name="ZN_DN_Classificatie" ColumnName="ZN_DN_Classificatie" />
+          <ScalarProperty Name="C_BN_Algoritme" ColumnName=" BN Algoritme" />
+          <ScalarProperty Name="Datum" ColumnName="Datum" />
+          <ScalarProperty Name="Checksum" ColumnName="Checksum" />
+          <ScalarProperty Name="C_Relatie_ID" ColumnName=" Relatie ID" />
+          <ScalarProperty Name="C_Aggregatieniveau" ColumnName=" Aggregatieniveau" />
+          <ScalarProperty Name="Aanmaakdatum_bestand" ColumnName="Aanmaakdatum bestand" />
+          <ScalarProperty Name="Enkelvoudig" ColumnName="Enkelvoudig" />
+          <ScalarProperty Name="C_Integer" ColumnName=" Integer" />
+          <ScalarProperty Name="Openbaar" ColumnName="Openbaar" />
+          <ScalarProperty Name="Vrij_te_gebruiken" ColumnName="Vrij te gebruiken" />
+          <ScalarProperty Name="Verlenen_bouwvergunningen" ColumnName="Verlenen_bouwvergunningen" />
+          <ScalarProperty Name="Organisatie" ColumnName="Organisatie" />
+          <ScalarProperty Name="Gemeente" ColumnName="Gemeente" />
+          <ScalarProperty Name="zn_bn_Hierarchisch" ColumnName="zn_bn_Hierarchisch" />
+          <ScalarProperty Name="C_Bouw_en_woningtoezicht" ColumnName=" Bouw-en woningtoezicht" />
+          <ScalarProperty Name="Datum_vergunning" ColumnName="Datum vergunning" />
+          <ScalarProperty Name="Language" ColumnName="Language" />
+          <ScalarProperty Name="Bestandsformaat" ColumnName="Bestandsformaat" />
+          <ScalarProperty Name="Omvang_in_MB" ColumnName="Omvang in MB" />
+          <ScalarProperty Name="KvK_nummer" ColumnName="KvK nummer" />
+          <ScalarProperty Name="C54_zn_Bron_classificatiecode" ColumnName="54_zn_Bron_classificatiecode" />
+          <ScalarProperty Name="Gemeentecode" ColumnName="Gemeentecode" />
+          <ScalarProperty Name="Omschrijving_" ColumnName="Omschrijving " />
+          <ScalarProperty Name="C53_zn_Bron_" ColumnName="53_zn_Bron " />
+          <ScalarProperty Name="C52zn_Omschrijving_classificatiecode_" ColumnName="52zn_Omschrijving_classificatiecode " />
+          <ScalarProperty Name="C51zn_classificatiecode" ColumnName="51zn_classificatiecode" />
+          <ScalarProperty Name="C15c_Gemeente" ColumnName="15c_Gemeente" />
+          <ScalarProperty Name="Plaatsnaam" ColumnName="Plaatsnaam" />
+          <ScalarProperty Name="OmschrijvingCompleet" ColumnName="OmschrijvingCompleet" />
+          <ScalarProperty Name="C4_zn_Omschrijving" ColumnName="4_zn_Omschrijving" />
+          <ScalarProperty Name="C91_zn_Datum_vergunning" ColumnName="91_zn_Datum_vergunning" />
+          <ScalarProperty Name="C4_dn_Omschrijving" ColumnName="4 dn Omschrijving" />
+          <ScalarProperty Name="C19_1_DN_Tabnaam" ColumnName="19 1 DN Tabnaam" />
+          <ScalarProperty Name="C2zn__Zaaknummer" ColumnName="2zn  Zaaknummer" />
+          <ScalarProperty Name="Jaar" ColumnName="Jaar" />
+          <ScalarProperty Name="Bvnr" ColumnName="Bvnr" />
+          <ScalarProperty Name="Postcode2" ColumnName="Postcode2" />
+          <ScalarProperty Name="StraatHuisnr" ColumnName="StraatHuisnr" />
+          <ScalarProperty Name="Voorvoegsl" ColumnName="Voorvoegsl" />
+          <ScalarProperty Name="Huisnr" ColumnName="Huisnr" />
+          <ScalarProperty Name="Adres" ColumnName="Adres" />
+          <ScalarProperty Name="AdresFull" ColumnName="AdresFull" />
+          <ScalarProperty Name="Postcode" ColumnName="Postcode" />
+          <ScalarProperty Name="Straat" ColumnName="Straat" />
+          <ScalarProperty Name="Bouwvergnr2" ColumnName="Bouwvergnr2" />
+          <ScalarProperty Name="C2_dn_Bestand" ColumnName="2_dn_Bestand" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FileSizes">
+      <EntityTypeMapping TypeName="TOPXModel.FileSizes">
+        <MappingFragment StoreEntitySet="FileSizes">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CleanName" ColumnName="CleanName" />
+          <ScalarProperty Name="Bevat_map" ColumnName="Bevat map" />
+          <ScalarProperty Name="Toegestaan_op" ColumnName="Toegestaan op" />
+          <ScalarProperty Name="Gewijzigd_op" ColumnName="Gewijzigd op" />
+          <ScalarProperty Name="Gemaakt_op" ColumnName="Gemaakt op" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Omvang_Byte__B_" ColumnName="Omvang(Byte)(B)" />
+          <ScalarProperty Name="Bestandsnaam" ColumnName="Bestandsnaam" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Openbaarheid">
+      <EntityTypeMapping TypeName="TOPXModel.Openbaarheid">
+        <MappingFragment StoreEntitySet="Openbaarheid">
+          <ScalarProperty Name="eind" ColumnName="eind" />
+          <ScalarProperty Name="begin" ColumnName="begin" />
+          <ScalarProperty Name="omschrijvingBeperkingen" ColumnName="omschrijvingBeperkingen" />
+          <ScalarProperty Name="naam" ColumnName="naam" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Gebruiksrechten">
+      <EntityTypeMapping TypeName="TOPXModel.Gebruiksrechten">
+        <MappingFragment StoreEntitySet="Gebruiksrechten">
+          <ScalarProperty Name="eind" ColumnName="eind" />
+          <ScalarProperty Name="begin" ColumnName="begin" />
+          <ScalarProperty Name="omschrijvingVoorwaarden" ColumnName="omschrijvingVoorwaarden" />
+          <ScalarProperty Name="naam" ColumnName="naam" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TestSet">
+      <EntityTypeMapping TypeName="TOPXModel.TestSet">
+        <MappingFragment StoreEntitySet="TestSet">
+          <ScalarProperty Name="FileName" ColumnName="FileName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="checksum">
+      <EntityTypeMapping TypeName="TOPXModel.checksum">
+        <MappingFragment StoreEntitySet="checksum">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FilenameClean" ColumnName="FilenameClean" />
+          <ScalarProperty Name="Filename" ColumnName="Filename" />
+          <ScalarProperty Name="Checksum1" ColumnName="Checksum" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Log">
+      <EntityTypeMapping TypeName="TOPXModel.Log">
+        <MappingFragment StoreEntitySet="Log">
+          <ScalarProperty Name="DateTime" ColumnName="DateTime" />
+          <ScalarProperty Name="Omschrijving" ColumnName="Omschrijving" />
+          <ScalarProperty Name="Bestand" ColumnName="Bestand" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MarkedAsDelivered">
+      <EntityTypeMapping TypeName="TOPXModel.MarkedAsDelivered">
+        <MappingFragment StoreEntitySet="MarkedAsDelivered">
+          <ScalarProperty Name="DatumProcessed" ColumnName="DatumProcessed" />
+          <ScalarProperty Name="Zaaknr" ColumnName="Zaaknr" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Source_temp">
+      <EntityTypeMapping TypeName="TOPXModel.Source_temp">
+        <MappingFragment StoreEntitySet="Source_temp">
+          <ScalarProperty Name="FileSize_Bytes" ColumnName="FileSize_Bytes" />
+          <ScalarProperty Name="C21_BN__Bestand" ColumnName="21 BN  Bestand" />
+          <ScalarProperty Name="BN_Bestand" ColumnName="BN Bestand" />
+          <ScalarProperty Name="Zaaknummer" ColumnName="Zaaknummer" />
+          <ScalarProperty Name="Datum_vergunning2" ColumnName="Datum_vergunning2" />
+          <ScalarProperty Name="Column_47" ColumnName="Column 47" />
+          <ScalarProperty Name="ZN_DN_Classificatie" ColumnName="ZN_DN_Classificatie" />
+          <ScalarProperty Name="C_BN_Algoritme" ColumnName=" BN Algoritme" />
+          <ScalarProperty Name="Datum" ColumnName="Datum" />
+          <ScalarProperty Name="Checksum" ColumnName="Checksum" />
+          <ScalarProperty Name="C_Relatie_ID" ColumnName=" Relatie ID" />
+          <ScalarProperty Name="C_Aggregatieniveau" ColumnName=" Aggregatieniveau" />
+          <ScalarProperty Name="Aanmaakdatum_bestand" ColumnName="Aanmaakdatum bestand" />
+          <ScalarProperty Name="Enkelvoudig" ColumnName="Enkelvoudig" />
+          <ScalarProperty Name="C_Integer" ColumnName=" Integer" />
+          <ScalarProperty Name="Openbaar" ColumnName="Openbaar" />
+          <ScalarProperty Name="Vrij_te_gebruiken" ColumnName="Vrij te gebruiken" />
+          <ScalarProperty Name="Verlenen_bouwvergunningen" ColumnName="Verlenen_bouwvergunningen" />
+          <ScalarProperty Name="Organisatie" ColumnName="Organisatie" />
+          <ScalarProperty Name="Gemeente" ColumnName="Gemeente" />
+          <ScalarProperty Name="zn_bn_Hierarchisch" ColumnName="zn_bn_Hierarchisch" />
+          <ScalarProperty Name="C_Bouw_en_woningtoezicht" ColumnName=" Bouw-en woningtoezicht" />
+          <ScalarProperty Name="Datum_vergunning" ColumnName="Datum vergunning" />
+          <ScalarProperty Name="Language" ColumnName="Language" />
+          <ScalarProperty Name="Bestandsformaat" ColumnName="Bestandsformaat" />
+          <ScalarProperty Name="Omvang_in_MB" ColumnName="Omvang in MB" />
+          <ScalarProperty Name="KvK_nummer" ColumnName="KvK nummer" />
+          <ScalarProperty Name="C54_zn_Bron_classificatiecode" ColumnName="54_zn_Bron_classificatiecode" />
+          <ScalarProperty Name="Gemeentecode" ColumnName="Gemeentecode" />
+          <ScalarProperty Name="Omschrijving_" ColumnName="Omschrijving " />
+          <ScalarProperty Name="C53_zn_Bron_" ColumnName="53_zn_Bron " />
+          <ScalarProperty Name="C52zn_Omschrijving_classificatiecode_" ColumnName="52zn_Omschrijving_classificatiecode " />
+          <ScalarProperty Name="C51zn_classificatiecode" ColumnName="51zn_classificatiecode" />
+          <ScalarProperty Name="C15c_Gemeente" ColumnName="15c_Gemeente" />
+          <ScalarProperty Name="Plaatsnaam" ColumnName="Plaatsnaam" />
+          <ScalarProperty Name="OmschrijvingCompleet" ColumnName="OmschrijvingCompleet" />
+          <ScalarProperty Name="C4_zn_Omschrijving" ColumnName="4_zn_Omschrijving" />
+          <ScalarProperty Name="C91_zn_Datum_vergunning" ColumnName="91_zn_Datum_vergunning" />
+          <ScalarProperty Name="C4_dn_Omschrijving" ColumnName="4 dn Omschrijving" />
+          <ScalarProperty Name="C19_1_DN_Tabnaam" ColumnName="19 1 DN Tabnaam" />
+          <ScalarProperty Name="C2zn__Zaaknummer" ColumnName="2zn  Zaaknummer" />
+          <ScalarProperty Name="Jaar" ColumnName="Jaar" />
+          <ScalarProperty Name="Bvnr" ColumnName="Bvnr" />
+          <ScalarProperty Name="Postcode2" ColumnName="Postcode2" />
+          <ScalarProperty Name="StraatHuisnr" ColumnName="StraatHuisnr" />
+          <ScalarProperty Name="Voorvoegsl" ColumnName="Voorvoegsl" />
+          <ScalarProperty Name="Huisnr" ColumnName="Huisnr" />
+          <ScalarProperty Name="Adres" ColumnName="Adres" />
+          <ScalarProperty Name="AdresFull" ColumnName="AdresFull" />
+          <ScalarProperty Name="Postcode" ColumnName="Postcode" />
+          <ScalarProperty Name="Straat" ColumnName="Straat" />
+          <ScalarProperty Name="Bouwvergnr2" ColumnName="Bouwvergnr2" />
+          <ScalarProperty Name="C2_dn_Bestand" ColumnName="2_dn_Bestand" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EersteShift">
+      <EntityTypeMapping TypeName="TOPXModel.EersteShift">
+        <MappingFragment StoreEntitySet="EersteShift">
+          <ScalarProperty Name="Column_46" ColumnName="Column 46" />
+          <ScalarProperty Name="Column_45" ColumnName="Column 45" />
+          <ScalarProperty Name="Column_44" ColumnName="Column 44" />
+          <ScalarProperty Name="Column_43" ColumnName="Column 43" />
+          <ScalarProperty Name="Column_42" ColumnName="Column 42" />
+          <ScalarProperty Name="Column_41" ColumnName="Column 41" />
+          <ScalarProperty Name="Column_40" ColumnName="Column 40" />
+          <ScalarProperty Name="Column_39" ColumnName="Column 39" />
+          <ScalarProperty Name="Column_38" ColumnName="Column 38" />
+          <ScalarProperty Name="Column_37" ColumnName="Column 37" />
+          <ScalarProperty Name="Column_36" ColumnName="Column 36" />
+          <ScalarProperty Name="Column_35" ColumnName="Column 35" />
+          <ScalarProperty Name="Column_34" ColumnName="Column 34" />
+          <ScalarProperty Name="Column_33" ColumnName="Column 33" />
+          <ScalarProperty Name="Column_32" ColumnName="Column 32" />
+          <ScalarProperty Name="Column_31" ColumnName="Column 31" />
+          <ScalarProperty Name="Column_30" ColumnName="Column 30" />
+          <ScalarProperty Name="Column_29" ColumnName="Column 29" />
+          <ScalarProperty Name="Column_28" ColumnName="Column 28" />
+          <ScalarProperty Name="Column_27" ColumnName="Column 27" />
+          <ScalarProperty Name="Column_26" ColumnName="Column 26" />
+          <ScalarProperty Name="Column_25" ColumnName="Column 25" />
+          <ScalarProperty Name="Column_24" ColumnName="Column 24" />
+          <ScalarProperty Name="Column_23" ColumnName="Column 23" />
+          <ScalarProperty Name="Column_22" ColumnName="Column 22" />
+          <ScalarProperty Name="Column_21" ColumnName="Column 21" />
+          <ScalarProperty Name="Column_20" ColumnName="Column 20" />
+          <ScalarProperty Name="Column_19" ColumnName="Column 19" />
+          <ScalarProperty Name="Column_18" ColumnName="Column 18" />
+          <ScalarProperty Name="Column_17" ColumnName="Column 17" />
+          <ScalarProperty Name="Column_16" ColumnName="Column 16" />
+          <ScalarProperty Name="Column_15" ColumnName="Column 15" />
+          <ScalarProperty Name="Column_14" ColumnName="Column 14" />
+          <ScalarProperty Name="Column_13" ColumnName="Column 13" />
+          <ScalarProperty Name="Column_12" ColumnName="Column 12" />
+          <ScalarProperty Name="Column_11" ColumnName="Column 11" />
+          <ScalarProperty Name="Column_10" ColumnName="Column 10" />
+          <ScalarProperty Name="Column_9" ColumnName="Column 9" />
+          <ScalarProperty Name="Column_8" ColumnName="Column 8" />
+          <ScalarProperty Name="Column_7" ColumnName="Column 7" />
+          <ScalarProperty Name="Column_6" ColumnName="Column 6" />
+          <ScalarProperty Name="Column_5" ColumnName="Column 5" />
+          <ScalarProperty Name="Column_4" ColumnName="Column 4" />
+          <ScalarProperty Name="Column_3" ColumnName="Column 3" />
+          <ScalarProperty Name="Column_2" ColumnName="Column 2" />
+          <ScalarProperty Name="Column_1" ColumnName="Column 1" />
+          <ScalarProperty Name="Bestand" ColumnName="Bestand" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DossiersZonderBeschikking">
+      <EntityTypeMapping TypeName="TOPXModel.DossiersZonderBeschikking">
+        <MappingFragment StoreEntitySet="DossiersZonderBeschikking">
+          <ScalarProperty Name="DossierZonderBeschikking" ColumnName="DossierZonderBeschikking" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
