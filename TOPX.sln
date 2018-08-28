@@ -22,6 +22,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topx.Importer", "Topx.Impor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TOPX.UI", "TOPX.UI\TOPX.UI.csproj", "{118C7B5B-3AE8-497D-961C-D0E62476A879}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topx.Data", "Topx.Data\Topx.Data.csproj", "{71FF9484-30CD-4406-A6E5-E8D9D62C0CA5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,12 +46,16 @@ Global
 		{118C7B5B-3AE8-497D-961C-D0E62476A879}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{118C7B5B-3AE8-497D-961C-D0E62476A879}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{118C7B5B-3AE8-497D-961C-D0E62476A879}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71FF9484-30CD-4406-A6E5-E8D9D62C0CA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71FF9484-30CD-4406-A6E5-E8D9D62C0CA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71FF9484-30CD-4406-A6E5-E8D9D62C0CA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71FF9484-30CD-4406-A6E5-E8D9D62C0CA5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		VisualSVNWorkingCopyRoot = .
 		SolutionGuid = {AD535C3E-945A-4562-BAA7-F55B7E855B40}
+		VisualSVNWorkingCopyRoot = .
 	EndGlobalSection
 EndGlobal

@@ -3,43 +3,67 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MaterialSkin;
+using MaterialSkin.Controls;
 
 namespace TOPX.UI
 {
-    public partial class TopXConverter : Form
+    public partial class TopXConverter : MaterialForm
     {
+        private List<string> _headersDossiers = new List<string>();
+        private List<string> _headersRecords = new List<string>();
         public TopXConverter()
         {
             InitializeComponent();
+            var materialSkinManager = MaterialSkinManager.Instance;
+            materialSkinManager.AddFormToManage(this);
+            materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
+            materialSkinManager.ColorScheme = new ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.LightBlue200, TextShade.WHITE);
         }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void textBox1_TextChanged_1(object sender, EventArgs e)
-        {
-
-        }
+       
 
         private void TopXConverter_Load(object sender, EventArgs e)
         {
-            textBox1.Text = "--- begin ---" + System.Environment.NewLine + "bBScgdKBnc34XYi0lbKJnhdHFJLKEd9wdNfb0Akx7tNNCjorPw0Gzn4tUlC9khDRIhGj3p9NFNY0MOv8nOQ==" + System.Environment.NewLine + " ---- end -----";
+            
+        }
+
+        private void ditIs1ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void materialFlatButton1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btSelectDossiers_Click(object sender, EventArgs e)
+        {
+            if (openFileDialogDossiers.ShowDialog() == DialogResult.OK)
+            {
+                filelocationDossiers.Text = Path.GetFileName(openFileDialogDossiers.FileName);
+                using (var sr = new StreamReader(openFileDialogDossiers.FileName))
+                {
+                    _headersDossiers = sr.ReadLine().Split(";"[0]).ToList();
+                }
+            }
+        }
+
+        private void btSelectRecords_Click(object sender, EventArgs e)
+        {
+            if (openFileDialogRecords.ShowDialog() == DialogResult.OK)
+            {
+                filelocationRecords.Text = Path.GetFileName(openFileDialogRecords.FileName);
+                using (var sr = new StreamReader(openFileDialogRecords.FileName))
+                {
+                    _headersRecords = sr.ReadLine().Split(";"[0]).ToList();
+                }
+            }
         }
     }
 }

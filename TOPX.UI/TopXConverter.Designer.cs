@@ -28,142 +28,307 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TopXConverter));
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
-            this.button1 = new System.Windows.Forms.Button();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.button2 = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.materialContextMenuStrip1 = new MaterialSkin.Controls.MaterialContextMenuStrip();
+            this.materialContextMenuStrip2 = new MaterialSkin.Controls.MaterialContextMenuStrip();
+            this.testToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.testToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.materialContextMenuStrip3 = new MaterialSkin.Controls.MaterialContextMenuStrip();
+            this.ditIs1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ditIs2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ditIs3ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.materialTabControl = new MaterialSkin.Controls.MaterialTabControl();
+            this.tabPageLoadFiles = new System.Windows.Forms.TabPage();
+            this.filelocationRecords = new MaterialSkin.Controls.MaterialSingleLineTextField();
+            this.btSelectRecords = new MaterialSkin.Controls.MaterialFlatButton();
+            this.filelocationDossiers = new MaterialSkin.Controls.MaterialSingleLineTextField();
+            this.btSelectDossiers = new MaterialSkin.Controls.MaterialFlatButton();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.materialTabSelector1 = new MaterialSkin.Controls.MaterialTabSelector();
+            this.openFileDialogDossiers = new System.Windows.Forms.OpenFileDialog();
+            this.openFileDialogRecords = new System.Windows.Forms.OpenFileDialog();
+            this.gridFieldMappingDossiers = new System.Windows.Forms.DataGridView();
+            this.gridFieldMappingRecords = new System.Windows.Forms.DataGridView();
+            this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
+            this.materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
+            this.materialContextMenuStrip2.SuspendLayout();
+            this.materialContextMenuStrip3.SuspendLayout();
+            this.materialTabControl.SuspendLayout();
+            this.tabPageLoadFiles.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridFieldMappingDossiers)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridFieldMappingRecords)).BeginInit();
             this.SuspendLayout();
             // 
-            // panel1
+            // materialContextMenuStrip1
             // 
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel1.Controls.Add(this.linkLabel1);
-            this.panel1.Controls.Add(this.button1);
-            this.panel1.Controls.Add(this.textBox2);
-            this.panel1.Controls.Add(this.pictureBox1);
-            this.panel1.Controls.Add(this.button2);
-            this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.textBox1);
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Location = new System.Drawing.Point(112, 12);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(540, 404);
-            this.panel1.TabIndex = 7;
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            this.materialContextMenuStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.materialContextMenuStrip1.Depth = 0;
+            this.materialContextMenuStrip1.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialContextMenuStrip1.Name = "materialContextMenuStrip1";
+            this.materialContextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
-            // linkLabel1
+            // materialContextMenuStrip2
             // 
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(268, 81);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(165, 13);
-            this.linkLabel1.TabIndex = 17;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "edepot@regionaalarchieftilburg.nl";
+            this.materialContextMenuStrip2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.materialContextMenuStrip2.Depth = 0;
+            this.materialContextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.testToolStripMenuItem,
+            this.testToolStripMenuItem1});
+            this.materialContextMenuStrip2.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialContextMenuStrip2.Name = "materialContextMenuStrip2";
+            this.materialContextMenuStrip2.Size = new System.Drawing.Size(94, 48);
             // 
-            // button1
+            // testToolStripMenuItem
             // 
-            this.button1.Location = new System.Drawing.Point(226, 348);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(87, 36);
-            this.button1.TabIndex = 16;
-            this.button1.Text = "Activeer";
-            this.button1.UseVisualStyleBackColor = true;
+            this.testToolStripMenuItem.Name = "testToolStripMenuItem";
+            this.testToolStripMenuItem.Size = new System.Drawing.Size(93, 22);
+            this.testToolStripMenuItem.Text = "test";
             // 
-            // textBox2
+            // testToolStripMenuItem1
             // 
-            this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.ForeColor = System.Drawing.SystemColors.ScrollBar;
-            this.textBox2.Location = new System.Drawing.Point(98, 271);
-            this.textBox2.Multiline = true;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(331, 71);
-            this.textBox2.TabIndex = 15;
-            this.textBox2.Text = "Plak hier de activeringscode";
-            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
+            this.testToolStripMenuItem1.Name = "testToolStripMenuItem1";
+            this.testToolStripMenuItem1.Size = new System.Drawing.Size(93, 22);
+            this.testToolStripMenuItem1.Text = "test";
             // 
-            // pictureBox1
+            // materialContextMenuStrip3
             // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(226, 5);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(51, 50);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 14;
-            this.pictureBox1.TabStop = false;
+            this.materialContextMenuStrip3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.materialContextMenuStrip3.Depth = 0;
+            this.materialContextMenuStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ditIs1ToolStripMenuItem,
+            this.ditIs2ToolStripMenuItem,
+            this.ditIs3ToolStripMenuItem});
+            this.materialContextMenuStrip3.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialContextMenuStrip3.Name = "materialContextMenuStrip3";
+            this.materialContextMenuStrip3.Size = new System.Drawing.Size(104, 70);
             // 
-            // button2
+            // ditIs1ToolStripMenuItem
             // 
-            this.button2.Location = new System.Drawing.Point(226, 194);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(87, 36);
-            this.button2.TabIndex = 13;
-            this.button2.Text = "Kopieer key naar klembord";
-            this.button2.UseVisualStyleBackColor = true;
+            this.ditIs1ToolStripMenuItem.Name = "ditIs1ToolStripMenuItem";
+            this.ditIs1ToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.ditIs1ToolStripMenuItem.Text = "DitIs1";
+            this.ditIs1ToolStripMenuItem.Click += new System.EventHandler(this.ditIs1ToolStripMenuItem_Click);
             // 
-            // label2
+            // ditIs2ToolStripMenuItem
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(95, 81);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(167, 13);
-            this.label2.TabIndex = 9;
-            this.label2.Text = "onderstaande key te mailen naar: ";
+            this.ditIs2ToolStripMenuItem.Name = "ditIs2ToolStripMenuItem";
+            this.ditIs2ToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.ditIs2ToolStripMenuItem.Text = "DitIs2";
             // 
-            // textBox1
+            // ditIs3ToolStripMenuItem
             // 
-            this.textBox1.Location = new System.Drawing.Point(98, 113);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(331, 71);
-            this.textBox1.TabIndex = 8;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged_1);
+            this.ditIs3ToolStripMenuItem.Name = "ditIs3ToolStripMenuItem";
+            this.ditIs3ToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.ditIs3ToolStripMenuItem.Text = "DitIs3";
             // 
-            // label1
+            // materialTabControl
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(95, 64);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(393, 13);
-            this.label1.TabIndex = 7;
-            this.label1.Text = "Er is geen geldige licentie aanwezig . U kunt een activeringscode aanvragen door";
+            this.materialTabControl.Controls.Add(this.tabPageLoadFiles);
+            this.materialTabControl.Controls.Add(this.tabPage2);
+            this.materialTabControl.Depth = 0;
+            this.materialTabControl.Location = new System.Drawing.Point(24, 103);
+            this.materialTabControl.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialTabControl.Name = "materialTabControl";
+            this.materialTabControl.SelectedIndex = 0;
+            this.materialTabControl.Size = new System.Drawing.Size(1265, 464);
+            this.materialTabControl.TabIndex = 3;
+            // 
+            // tabPageLoadFiles
+            // 
+            this.tabPageLoadFiles.BackColor = System.Drawing.Color.White;
+            this.tabPageLoadFiles.Controls.Add(this.materialLabel2);
+            this.tabPageLoadFiles.Controls.Add(this.materialLabel1);
+            this.tabPageLoadFiles.Controls.Add(this.gridFieldMappingRecords);
+            this.tabPageLoadFiles.Controls.Add(this.gridFieldMappingDossiers);
+            this.tabPageLoadFiles.Controls.Add(this.filelocationRecords);
+            this.tabPageLoadFiles.Controls.Add(this.btSelectRecords);
+            this.tabPageLoadFiles.Controls.Add(this.filelocationDossiers);
+            this.tabPageLoadFiles.Controls.Add(this.btSelectDossiers);
+            this.tabPageLoadFiles.Location = new System.Drawing.Point(4, 22);
+            this.tabPageLoadFiles.Name = "tabPageLoadFiles";
+            this.tabPageLoadFiles.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageLoadFiles.Size = new System.Drawing.Size(1257, 438);
+            this.tabPageLoadFiles.TabIndex = 0;
+            this.tabPageLoadFiles.Text = "Load Files";
+            // 
+            // filelocationRecords
+            // 
+            this.filelocationRecords.Depth = 0;
+            this.filelocationRecords.Hint = "";
+            this.filelocationRecords.Location = new System.Drawing.Point(774, 38);
+            this.filelocationRecords.MouseState = MaterialSkin.MouseState.HOVER;
+            this.filelocationRecords.Name = "filelocationRecords";
+            this.filelocationRecords.PasswordChar = '\0';
+            this.filelocationRecords.SelectedText = "";
+            this.filelocationRecords.SelectionLength = 0;
+            this.filelocationRecords.SelectionStart = 0;
+            this.filelocationRecords.Size = new System.Drawing.Size(214, 23);
+            this.filelocationRecords.TabIndex = 4;
+            this.filelocationRecords.UseSystemPasswordChar = false;
+            // 
+            // btSelectRecords
+            // 
+            this.btSelectRecords.AutoSize = true;
+            this.btSelectRecords.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btSelectRecords.Depth = 0;
+            this.btSelectRecords.Location = new System.Drawing.Point(602, 32);
+            this.btSelectRecords.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btSelectRecords.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btSelectRecords.Name = "btSelectRecords";
+            this.btSelectRecords.Primary = false;
+            this.btSelectRecords.Size = new System.Drawing.Size(149, 36);
+            this.btSelectRecords.TabIndex = 3;
+            this.btSelectRecords.Text = "Selecteer records";
+            this.btSelectRecords.UseVisualStyleBackColor = true;
+            this.btSelectRecords.Click += new System.EventHandler(this.btSelectRecords_Click);
+            // 
+            // filelocationDossiers
+            // 
+            this.filelocationDossiers.Depth = 0;
+            this.filelocationDossiers.Hint = "";
+            this.filelocationDossiers.Location = new System.Drawing.Point(215, 38);
+            this.filelocationDossiers.MouseState = MaterialSkin.MouseState.HOVER;
+            this.filelocationDossiers.Name = "filelocationDossiers";
+            this.filelocationDossiers.PasswordChar = '\0';
+            this.filelocationDossiers.SelectedText = "";
+            this.filelocationDossiers.SelectionLength = 0;
+            this.filelocationDossiers.SelectionStart = 0;
+            this.filelocationDossiers.Size = new System.Drawing.Size(214, 23);
+            this.filelocationDossiers.TabIndex = 2;
+            this.filelocationDossiers.UseSystemPasswordChar = false;
+            // 
+            // btSelectDossiers
+            // 
+            this.btSelectDossiers.AutoSize = true;
+            this.btSelectDossiers.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btSelectDossiers.Depth = 0;
+            this.btSelectDossiers.Location = new System.Drawing.Point(43, 32);
+            this.btSelectDossiers.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btSelectDossiers.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btSelectDossiers.Name = "btSelectDossiers";
+            this.btSelectDossiers.Primary = false;
+            this.btSelectDossiers.Size = new System.Drawing.Size(152, 36);
+            this.btSelectDossiers.TabIndex = 1;
+            this.btSelectDossiers.Text = "Selecteer dossiers";
+            this.btSelectDossiers.UseVisualStyleBackColor = true;
+            this.btSelectDossiers.Click += new System.EventHandler(this.btSelectDossiers_Click);
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(1257, 438);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Process";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // materialTabSelector1
+            // 
+            this.materialTabSelector1.BaseTabControl = this.materialTabControl;
+            this.materialTabSelector1.Depth = 0;
+            this.materialTabSelector1.Location = new System.Drawing.Point(0, 65);
+            this.materialTabSelector1.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialTabSelector1.Name = "materialTabSelector1";
+            this.materialTabSelector1.Size = new System.Drawing.Size(1289, 23);
+            this.materialTabSelector1.TabIndex = 4;
+            this.materialTabSelector1.Text = "materialTabSelector1";
+            // 
+            // openFileDialogDossiers
+            // 
+            this.openFileDialogDossiers.FileName = "openDossierFileDialog";
+            // 
+            // openFileDialogRecords
+            // 
+            this.openFileDialogRecords.FileName = "openDossierFileDialog";
+            // 
+            // gridFieldMappingDossiers
+            // 
+            this.gridFieldMappingDossiers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gridFieldMappingDossiers.Location = new System.Drawing.Point(43, 117);
+            this.gridFieldMappingDossiers.Name = "gridFieldMappingDossiers";
+            this.gridFieldMappingDossiers.Size = new System.Drawing.Size(386, 292);
+            this.gridFieldMappingDossiers.TabIndex = 5;
+            // 
+            // gridFieldMappingRecords
+            // 
+            this.gridFieldMappingRecords.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gridFieldMappingRecords.Location = new System.Drawing.Point(602, 117);
+            this.gridFieldMappingRecords.Name = "gridFieldMappingRecords";
+            this.gridFieldMappingRecords.Size = new System.Drawing.Size(386, 292);
+            this.gridFieldMappingRecords.TabIndex = 6;
+            // 
+            // materialLabel1
+            // 
+            this.materialLabel1.AutoSize = true;
+            this.materialLabel1.Depth = 0;
+            this.materialLabel1.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialLabel1.Location = new System.Drawing.Point(43, 98);
+            this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel1.Name = "materialLabel1";
+            this.materialLabel1.Size = new System.Drawing.Size(160, 19);
+            this.materialLabel1.TabIndex = 7;
+            this.materialLabel1.Text = "Veldmapping Dossiers";
+            // 
+            // materialLabel2
+            // 
+            this.materialLabel2.AutoSize = true;
+            this.materialLabel2.Depth = 0;
+            this.materialLabel2.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialLabel2.Location = new System.Drawing.Point(598, 98);
+            this.materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel2.Name = "materialLabel2";
+            this.materialLabel2.Size = new System.Drawing.Size(155, 19);
+            this.materialLabel2.TabIndex = 8;
+            this.materialLabel2.Text = "Veldmapping Records";
             // 
             // TopXConverter
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.panel1);
+            this.ClientSize = new System.Drawing.Size(1289, 611);
+            this.Controls.Add(this.materialTabSelector1);
+            this.Controls.Add(this.materialTabControl);
             this.Name = "TopXConverter";
             this.Text = "TopX Creator";
             this.Load += new System.EventHandler(this.TopXConverter_Load);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.materialContextMenuStrip2.ResumeLayout(false);
+            this.materialContextMenuStrip3.ResumeLayout(false);
+            this.materialTabControl.ResumeLayout(false);
+            this.tabPageLoadFiles.ResumeLayout(false);
+            this.tabPageLoadFiles.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridFieldMappingDossiers)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridFieldMappingRecords)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.LinkLabel linkLabel1;
+        private MaterialSkin.Controls.MaterialContextMenuStrip materialContextMenuStrip1;
+        private MaterialSkin.Controls.MaterialContextMenuStrip materialContextMenuStrip2;
+        private System.Windows.Forms.ToolStripMenuItem testToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem testToolStripMenuItem1;
+        private MaterialSkin.Controls.MaterialContextMenuStrip materialContextMenuStrip3;
+        private System.Windows.Forms.ToolStripMenuItem ditIs1ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ditIs2ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ditIs3ToolStripMenuItem;
+        private MaterialSkin.Controls.MaterialTabControl materialTabControl;
+        private System.Windows.Forms.TabPage tabPageLoadFiles;
+        private System.Windows.Forms.TabPage tabPage2;
+        private MaterialSkin.Controls.MaterialTabSelector materialTabSelector1;
+        private MaterialSkin.Controls.MaterialFlatButton btSelectDossiers;
+        private System.Windows.Forms.OpenFileDialog openFileDialogDossiers;
+        private MaterialSkin.Controls.MaterialSingleLineTextField filelocationDossiers;
+        private MaterialSkin.Controls.MaterialSingleLineTextField filelocationRecords;
+        private MaterialSkin.Controls.MaterialFlatButton btSelectRecords;
+        private System.Windows.Forms.OpenFileDialog openFileDialogRecords;
+        private MaterialSkin.Controls.MaterialLabel materialLabel2;
+        private MaterialSkin.Controls.MaterialLabel materialLabel1;
+        private System.Windows.Forms.DataGridView gridFieldMappingRecords;
+        private System.Windows.Forms.DataGridView gridFieldMappingDossiers;
     }
 }
 

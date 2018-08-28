@@ -1,0 +1,234 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ModelTopx.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Bestanden">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Dossier_IdentificatieKenmerk" Type="nvarchar" MaxLength="50" />
+          <Property Name="Naam" Type="nvarchar(max)" />
+          <Property Name="Relatie_RelatieId" Type="nvarchar" MaxLength="50" />
+          <Property Name="Relatie_TypeRelatie" Type="nvarchar" MaxLength="50" />
+          <Property Name="Relatie_DatumOfPperiode" Type="nvarchar" MaxLength="50" />
+          <Property Name="Vorm_RedactieGenre" Type="nvarchar" MaxLength="50" />
+          <Property Name="Formaat_IdentificatieKenmerk" Type="nvarchar" MaxLength="50" />
+          <Property Name="Formaat_Bestandsnaam_Naam" Type="nvarchar" MaxLength="50" />
+          <Property Name="Formaat_Bestandsnaam_Extentie" Type="nvarchar" MaxLength="10" />
+          <Property Name="Formaat_Omvang" Type="bigint" />
+          <Property Name="Formaat_Bestandsformaat" Type="nvarchar" MaxLength="50" />
+          <Property Name="Formaat_FysiekeIntegriteit_Algoritme" Type="nvarchar" MaxLength="50" />
+          <Property Name="Formaat_FysiekeIntegriteit_Waarde" Type="nvarchar" MaxLength="250" />
+          <Property Name="Formaat_FysiekeIntegriteit_DatumEnTijd" Type="nvarchar" MaxLength="50" />
+          <Property Name="Formaat_DatumAanmaak" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'TOPX_Generic.dbo.Dossiers' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="Dossiers">
+          <Property Name="Id" Type="uniqueidentifier" />
+          <Property Name="IdentificatieKenmerk" Type="nvarchar" MaxLength="50" />
+          <Property Name="Naam" Type="nvarchar" MaxLength="250" />
+          <Property Name="Classificatie_Code" Type="nvarchar" MaxLength="50" />
+          <Property Name="Classificatie_Omschrijving" Type="nvarchar" MaxLength="50" />
+          <Property Name="Classificatie_Bron" Type="nvarchar" MaxLength="50" />
+          <Property Name="Classificatie_DatumOfPeriode" Type="nvarchar" MaxLength="50" />
+          <Property Name="Dekking_InTijd_Begin" Type="nvarchar" MaxLength="50" />
+          <Property Name="Dekking_InTijd_Eind" Type="nvarchar" MaxLength="50" />
+          <Property Name="Dekking_GeografischGebied" Type="nvarchar" MaxLength="250" />
+          <Property Name="Taal" Type="nvarchar" MaxLength="10" />
+          <Property Name="Eventgeschiedenis_DatumOfPeriode" Type="nvarchar" MaxLength="50" />
+          <Property Name="Eventgeschiedenis_Type" Type="nvarchar" MaxLength="50" />
+          <Property Name="Eventgeschiedenis_VerantwoordelijkeFunctionaris" Type="nvarchar" MaxLength="50" />
+          <Property Name="Eventplan_DatumOfPeriode" Type="nvarchar" MaxLength="50" />
+          <Property Name="Eventplan_DatumOfPeriode_Type" Type="nvarchar" MaxLength="50" />
+          <Property Name="Eventplan_Aanleiding" Type="nvarchar" MaxLength="50" />
+          <Property Name="Eventplan_Beschrijving" Type="nvarchar(max)" />
+          <Property Name="Relatie_Id" Type="nvarchar" MaxLength="50" />
+          <Property Name="Relatie_Type" Type="nvarchar" MaxLength="50" />
+          <Property Name="Relatie_DatumOfPeriode" Type="nvarchar" MaxLength="50" />
+          <Property Name="Context_Actor_IdentificatieKenmerk" Type="nvarchar" MaxLength="50" />
+          <Property Name="Context_Actor_AggregatieNiveau" Type="nvarchar" MaxLength="50" />
+          <Property Name="Context_Actor_GeautoriseerdeNaam" Type="nvarchar" MaxLength="50" />
+          <Property Name="Context_Activiteit_Naam" Type="nvarchar" MaxLength="50" />
+          <Property Name="Gebruiksrechten_OmschrijvingVoorwaarden" Type="nvarchar(max)" />
+          <Property Name="Gebruiksrechten_DatumOfPeriode" Type="nvarchar" MaxLength="50" />
+          <Property Name="Vertrouwelijkheid_ClassificatieNiveau" Type="nvarchar" MaxLength="50" />
+          <Property Name="Vertrouwelijkheid_DatumOfPeriode" Type="nvarchar" MaxLength="50" />
+          <Property Name="Openbaarheid_OmschrijvingBeperkingen" Type="nvarchar" MaxLength="50" />
+          <Property Name="Openbaarheid_DatumOfPeriode" Type="nvarchar" MaxLength="50" />
+          <Property Name="Integriteit" Type="nvarchar" MaxLength="50" />
+        </EntityType>-->
+        <EntityType Name="FieldMappings">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DatabaseFieldName" Type="nvarchar" MaxLength="250" />
+          <Property Name="MappedFieldName" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="Records">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Naam" Type="nvarchar" MaxLength="50" />
+          <Property Name="Taal" Type="nvarchar" MaxLength="10" />
+          <Property Name="Gebruiksrechten_OmschrijvingVoorwaarden" Type="nvarchar(max)" />
+          <Property Name="Gebruiksrechten_DatumOfPeriode" Type="nvarchar" MaxLength="50" />
+          <Property Name="Vertrouwelijkheid_ClassificatieNiveau" Type="nvarchar" MaxLength="50" />
+          <Property Name="Vertrouwelijkheid_DatumOfPeriode" Type="nvarchar" MaxLength="50" />
+          <Property Name="Openbaarheid_OmschrijvingBeperkingen" Type="nvarchar(max)" />
+          <Property Name="Bestand_Vorm_Redactiegenre" Type="nvarchar" MaxLength="50" />
+          <Property Name="Bestand_Formaat_Bestandsnaam" Type="nvarchar" MaxLength="50" />
+          <Property Name="Bestand_Formaat_BestandsOmvang" Type="bigint" />
+          <Property Name="Bestand_Formaat_BestandsFormaat" Type="nvarchar" MaxLength="20" />
+          <Property Name="Bestand_Formaat_FysiekeIntegriteit_Algoritme" Type="nvarchar" MaxLength="10" />
+          <Property Name="Bestand_Formaat_FysiekeIntegriteit_Waarde" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityContainer Name="ModelTopxStoreContainer">
+          <EntitySet Name="Bestanden" EntityType="Self.Bestanden" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FieldMappings" EntityType="Self.FieldMappings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Records" EntityType="Self.Records" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ModelTopx" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="TOPX_GenericEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Bestand" EntityType="ModelTopx.Bestanden" />
+          <EntitySet Name="FieldMapping" EntityType="ModelTopx.FieldMappings" />
+          <EntitySet Name="Record" EntityType="ModelTopx.Records" />
+        </EntityContainer>
+        <EntityType Name="Bestanden">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Dossier_IdentificatieKenmerk" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Naam" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Relatie_RelatieId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Relatie_TypeRelatie" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Relatie_DatumOfPperiode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Vorm_RedactieGenre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Formaat_IdentificatieKenmerk" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Formaat_Bestandsnaam_Naam" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Formaat_Bestandsnaam_Extentie" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Formaat_Omvang" Type="Int64" />
+          <Property Name="Formaat_Bestandsformaat" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Formaat_FysiekeIntegriteit_Algoritme" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Formaat_FysiekeIntegriteit_Waarde" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Formaat_FysiekeIntegriteit_DatumEnTijd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Formaat_DatumAanmaak" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="FieldMappings">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DatabaseFieldName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="MappedFieldName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Records">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Naam" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Taal" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Gebruiksrechten_OmschrijvingVoorwaarden" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Gebruiksrechten_DatumOfPeriode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Vertrouwelijkheid_ClassificatieNiveau" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Vertrouwelijkheid_DatumOfPeriode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Openbaarheid_OmschrijvingBeperkingen" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Bestand_Vorm_Redactiegenre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Bestand_Formaat_Bestandsnaam" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Bestand_Formaat_BestandsOmvang" Type="Int64" />
+          <Property Name="Bestand_Formaat_BestandsFormaat" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Bestand_Formaat_FysiekeIntegriteit_Algoritme" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Bestand_Formaat_FysiekeIntegriteit_Waarde" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelTopxStoreContainer" CdmEntityContainer="TOPX_GenericEntities">
+          <EntitySetMapping Name="Bestand">
+            <EntityTypeMapping TypeName="ModelTopx.Bestanden">
+              <MappingFragment StoreEntitySet="Bestanden">
+                <ScalarProperty Name="Formaat_DatumAanmaak" ColumnName="Formaat_DatumAanmaak" />
+                <ScalarProperty Name="Formaat_FysiekeIntegriteit_DatumEnTijd" ColumnName="Formaat_FysiekeIntegriteit_DatumEnTijd" />
+                <ScalarProperty Name="Formaat_FysiekeIntegriteit_Waarde" ColumnName="Formaat_FysiekeIntegriteit_Waarde" />
+                <ScalarProperty Name="Formaat_FysiekeIntegriteit_Algoritme" ColumnName="Formaat_FysiekeIntegriteit_Algoritme" />
+                <ScalarProperty Name="Formaat_Bestandsformaat" ColumnName="Formaat_Bestandsformaat" />
+                <ScalarProperty Name="Formaat_Omvang" ColumnName="Formaat_Omvang" />
+                <ScalarProperty Name="Formaat_Bestandsnaam_Extentie" ColumnName="Formaat_Bestandsnaam_Extentie" />
+                <ScalarProperty Name="Formaat_Bestandsnaam_Naam" ColumnName="Formaat_Bestandsnaam_Naam" />
+                <ScalarProperty Name="Formaat_IdentificatieKenmerk" ColumnName="Formaat_IdentificatieKenmerk" />
+                <ScalarProperty Name="Vorm_RedactieGenre" ColumnName="Vorm_RedactieGenre" />
+                <ScalarProperty Name="Relatie_DatumOfPperiode" ColumnName="Relatie_DatumOfPperiode" />
+                <ScalarProperty Name="Relatie_TypeRelatie" ColumnName="Relatie_TypeRelatie" />
+                <ScalarProperty Name="Relatie_RelatieId" ColumnName="Relatie_RelatieId" />
+                <ScalarProperty Name="Naam" ColumnName="Naam" />
+                <ScalarProperty Name="Dossier_IdentificatieKenmerk" ColumnName="Dossier_IdentificatieKenmerk" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FieldMapping">
+            <EntityTypeMapping TypeName="ModelTopx.FieldMappings">
+              <MappingFragment StoreEntitySet="FieldMappings">
+                <ScalarProperty Name="MappedFieldName" ColumnName="MappedFieldName" />
+                <ScalarProperty Name="DatabaseFieldName" ColumnName="DatabaseFieldName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Record">
+            <EntityTypeMapping TypeName="ModelTopx.Records">
+              <MappingFragment StoreEntitySet="Records">
+                <ScalarProperty Name="Bestand_Formaat_FysiekeIntegriteit_Waarde" ColumnName="Bestand_Formaat_FysiekeIntegriteit_Waarde" />
+                <ScalarProperty Name="Bestand_Formaat_FysiekeIntegriteit_Algoritme" ColumnName="Bestand_Formaat_FysiekeIntegriteit_Algoritme" />
+                <ScalarProperty Name="Bestand_Formaat_BestandsFormaat" ColumnName="Bestand_Formaat_BestandsFormaat" />
+                <ScalarProperty Name="Bestand_Formaat_BestandsOmvang" ColumnName="Bestand_Formaat_BestandsOmvang" />
+                <ScalarProperty Name="Bestand_Formaat_Bestandsnaam" ColumnName="Bestand_Formaat_Bestandsnaam" />
+                <ScalarProperty Name="Bestand_Vorm_Redactiegenre" ColumnName="Bestand_Vorm_Redactiegenre" />
+                <ScalarProperty Name="Openbaarheid_OmschrijvingBeperkingen" ColumnName="Openbaarheid_OmschrijvingBeperkingen" />
+                <ScalarProperty Name="Vertrouwelijkheid_DatumOfPeriode" ColumnName="Vertrouwelijkheid_DatumOfPeriode" />
+                <ScalarProperty Name="Vertrouwelijkheid_ClassificatieNiveau" ColumnName="Vertrouwelijkheid_ClassificatieNiveau" />
+                <ScalarProperty Name="Gebruiksrechten_DatumOfPeriode" ColumnName="Gebruiksrechten_DatumOfPeriode" />
+                <ScalarProperty Name="Gebruiksrechten_OmschrijvingVoorwaarden" ColumnName="Gebruiksrechten_OmschrijvingVoorwaarden" />
+                <ScalarProperty Name="Taal" ColumnName="Taal" />
+                <ScalarProperty Name="Naam" ColumnName="Naam" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
