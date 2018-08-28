@@ -50,6 +50,9 @@
     <Reference Include="ComponentFactory.Krypton.Workspace, Version=4.62.536.0, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e, processorArchitecture=MSIL">
       <HintPath>..\packages\KryptonToolkitSuite462.4.62.554\lib\ComponentFactory.Krypton.Workspace.dll</HintPath>
     </Reference>
+    <Reference Include="MaterialSkin, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialSkin.0.2.1\lib\MaterialSkin.dll</HintPath>
+    </Reference>
     <Reference Include="PaletteDesigner, Version=4.62.6000.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\KryptonToolkitSuite462.4.62.554\lib\PaletteDesigner.exe</HintPath>
     </Reference>
