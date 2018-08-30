@@ -9,7 +9,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Dossier_IdentificatieKenmerk" Type="nvarchar" MaxLength="50" />
           <Property Name="Naam" Type="nvarchar(max)" />
           <Property Name="Relatie_RelatieId" Type="nvarchar" MaxLength="50" />
@@ -26,10 +26,11 @@
           <Property Name="Formaat_FysiekeIntegriteit_DatumEnTijd" Type="nvarchar" MaxLength="50" />
           <Property Name="Formaat_DatumAanmaak" Type="nvarchar" MaxLength="50" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'TOPX_Generic.dbo.Dossiers' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
         <EntityType Name="Dossiers">
-          <Property Name="Id" Type="uniqueidentifier" />
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="IdentificatieKenmerk" Type="nvarchar" MaxLength="50" />
           <Property Name="Naam" Type="nvarchar" MaxLength="250" />
           <Property Name="Classificatie_Code" Type="nvarchar" MaxLength="50" />
@@ -61,7 +62,7 @@ warning 6013: The table/view 'TOPX_Generic.dbo.Dossiers' does not have a primary
           <Property Name="Openbaarheid_OmschrijvingBeperkingen" Type="nvarchar" MaxLength="50" />
           <Property Name="Openbaarheid_DatumOfPeriode" Type="nvarchar" MaxLength="50" />
           <Property Name="Integriteit" Type="nvarchar" MaxLength="50" />
-        </EntityType>-->
+        </EntityType>
         <EntityType Name="FieldMappings">
           <Key>
             <PropertyRef Name="Id" />
@@ -69,12 +70,13 @@ warning 6013: The table/view 'TOPX_Generic.dbo.Dossiers' does not have a primary
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="DatabaseFieldName" Type="nvarchar" MaxLength="250" />
           <Property Name="MappedFieldName" Type="nvarchar" MaxLength="250" />
+          <Property Name="Type" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Records">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Naam" Type="nvarchar" MaxLength="50" />
           <Property Name="Taal" Type="nvarchar" MaxLength="10" />
           <Property Name="Gebruiksrechten_OmschrijvingVoorwaarden" Type="nvarchar(max)" />
@@ -91,6 +93,7 @@ warning 6013: The table/view 'TOPX_Generic.dbo.Dossiers' does not have a primary
         </EntityType>
         <EntityContainer Name="ModelTopxStoreContainer">
           <EntitySet Name="Bestanden" EntityType="Self.Bestanden" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Dossiers" EntityType="Self.Dossiers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FieldMappings" EntityType="Self.FieldMappings" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Records" EntityType="Self.Records" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
@@ -99,15 +102,16 @@ warning 6013: The table/view 'TOPX_Generic.dbo.Dossiers' does not have a primary
     <edmx:ConceptualModels>
       <Schema Namespace="ModelTopx" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="TOPX_GenericEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Bestand" EntityType="ModelTopx.Bestanden" />
-          <EntitySet Name="FieldMapping" EntityType="ModelTopx.FieldMappings" />
-          <EntitySet Name="Record" EntityType="ModelTopx.Records" />
+          <EntitySet Name="Bestand" EntityType="ModelTopx.Bestand" />
+          <EntitySet Name="FieldMapping" EntityType="ModelTopx.FieldMapping" />
+          <EntitySet Name="Record" EntityType="ModelTopx.Record" />
+          <EntitySet Name="Dossier" EntityType="ModelTopx.Dossier" />
         </EntityContainer>
-        <EntityType Name="Bestanden">
+        <EntityType Name="Bestand">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Dossier_IdentificatieKenmerk" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Naam" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Relatie_RelatieId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -124,19 +128,20 @@ warning 6013: The table/view 'TOPX_Generic.dbo.Dossiers' does not have a primary
           <Property Name="Formaat_FysiekeIntegriteit_DatumEnTijd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Formaat_DatumAanmaak" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="FieldMappings">
+        <EntityType Name="FieldMapping">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DatabaseFieldName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="MappedFieldName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="Records">
+        <EntityType Name="Record">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Naam" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Taal" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="Gebruiksrechten_OmschrijvingVoorwaarden" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -151,6 +156,43 @@ warning 6013: The table/view 'TOPX_Generic.dbo.Dossiers' does not have a primary
           <Property Name="Bestand_Formaat_FysiekeIntegriteit_Algoritme" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="Bestand_Formaat_FysiekeIntegriteit_Waarde" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="Dossier">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdentificatieKenmerk" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Naam" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Classificatie_Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Classificatie_Omschrijving" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Classificatie_Bron" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Classificatie_DatumOfPeriode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Dekking_InTijd_Begin" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Dekking_InTijd_Eind" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Dekking_GeografischGebied" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Taal" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Eventgeschiedenis_DatumOfPeriode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Eventgeschiedenis_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Eventgeschiedenis_VerantwoordelijkeFunctionaris" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Eventplan_DatumOfPeriode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Eventplan_DatumOfPeriode_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Eventplan_Aanleiding" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Eventplan_Beschrijving" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Relatie_Id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Relatie_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Relatie_DatumOfPeriode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Context_Actor_IdentificatieKenmerk" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Context_Actor_AggregatieNiveau" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Context_Actor_GeautoriseerdeNaam" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Context_Activiteit_Naam" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Gebruiksrechten_OmschrijvingVoorwaarden" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Gebruiksrechten_DatumOfPeriode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Vertrouwelijkheid_ClassificatieNiveau" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Vertrouwelijkheid_DatumOfPeriode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Openbaarheid_OmschrijvingBeperkingen" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Openbaarheid_DatumOfPeriode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Integriteit" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -158,7 +200,7 @@ warning 6013: The table/view 'TOPX_Generic.dbo.Dossiers' does not have a primary
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="ModelTopxStoreContainer" CdmEntityContainer="TOPX_GenericEntities">
           <EntitySetMapping Name="Bestand">
-            <EntityTypeMapping TypeName="ModelTopx.Bestanden">
+            <EntityTypeMapping TypeName="ModelTopx.Bestand">
               <MappingFragment StoreEntitySet="Bestanden">
                 <ScalarProperty Name="Formaat_DatumAanmaak" ColumnName="Formaat_DatumAanmaak" />
                 <ScalarProperty Name="Formaat_FysiekeIntegriteit_DatumEnTijd" ColumnName="Formaat_FysiekeIntegriteit_DatumEnTijd" />
@@ -180,8 +222,9 @@ warning 6013: The table/view 'TOPX_Generic.dbo.Dossiers' does not have a primary
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="FieldMapping">
-            <EntityTypeMapping TypeName="ModelTopx.FieldMappings">
+            <EntityTypeMapping TypeName="ModelTopx.FieldMapping">
               <MappingFragment StoreEntitySet="FieldMappings">
+                <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="MappedFieldName" ColumnName="MappedFieldName" />
                 <ScalarProperty Name="DatabaseFieldName" ColumnName="DatabaseFieldName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
@@ -189,7 +232,7 @@ warning 6013: The table/view 'TOPX_Generic.dbo.Dossiers' does not have a primary
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Record">
-            <EntityTypeMapping TypeName="ModelTopx.Records">
+            <EntityTypeMapping TypeName="ModelTopx.Record">
               <MappingFragment StoreEntitySet="Records">
                 <ScalarProperty Name="Bestand_Formaat_FysiekeIntegriteit_Waarde" ColumnName="Bestand_Formaat_FysiekeIntegriteit_Waarde" />
                 <ScalarProperty Name="Bestand_Formaat_FysiekeIntegriteit_Algoritme" ColumnName="Bestand_Formaat_FysiekeIntegriteit_Algoritme" />
@@ -204,6 +247,44 @@ warning 6013: The table/view 'TOPX_Generic.dbo.Dossiers' does not have a primary
                 <ScalarProperty Name="Gebruiksrechten_OmschrijvingVoorwaarden" ColumnName="Gebruiksrechten_OmschrijvingVoorwaarden" />
                 <ScalarProperty Name="Taal" ColumnName="Taal" />
                 <ScalarProperty Name="Naam" ColumnName="Naam" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Dossier">
+            <EntityTypeMapping TypeName="ModelTopx.Dossier">
+              <MappingFragment StoreEntitySet="Dossiers">
+                <ScalarProperty Name="Integriteit" ColumnName="Integriteit" />
+                <ScalarProperty Name="Openbaarheid_DatumOfPeriode" ColumnName="Openbaarheid_DatumOfPeriode" />
+                <ScalarProperty Name="Openbaarheid_OmschrijvingBeperkingen" ColumnName="Openbaarheid_OmschrijvingBeperkingen" />
+                <ScalarProperty Name="Vertrouwelijkheid_DatumOfPeriode" ColumnName="Vertrouwelijkheid_DatumOfPeriode" />
+                <ScalarProperty Name="Vertrouwelijkheid_ClassificatieNiveau" ColumnName="Vertrouwelijkheid_ClassificatieNiveau" />
+                <ScalarProperty Name="Gebruiksrechten_DatumOfPeriode" ColumnName="Gebruiksrechten_DatumOfPeriode" />
+                <ScalarProperty Name="Gebruiksrechten_OmschrijvingVoorwaarden" ColumnName="Gebruiksrechten_OmschrijvingVoorwaarden" />
+                <ScalarProperty Name="Context_Activiteit_Naam" ColumnName="Context_Activiteit_Naam" />
+                <ScalarProperty Name="Context_Actor_GeautoriseerdeNaam" ColumnName="Context_Actor_GeautoriseerdeNaam" />
+                <ScalarProperty Name="Context_Actor_AggregatieNiveau" ColumnName="Context_Actor_AggregatieNiveau" />
+                <ScalarProperty Name="Context_Actor_IdentificatieKenmerk" ColumnName="Context_Actor_IdentificatieKenmerk" />
+                <ScalarProperty Name="Relatie_DatumOfPeriode" ColumnName="Relatie_DatumOfPeriode" />
+                <ScalarProperty Name="Relatie_Type" ColumnName="Relatie_Type" />
+                <ScalarProperty Name="Relatie_Id" ColumnName="Relatie_Id" />
+                <ScalarProperty Name="Eventplan_Beschrijving" ColumnName="Eventplan_Beschrijving" />
+                <ScalarProperty Name="Eventplan_Aanleiding" ColumnName="Eventplan_Aanleiding" />
+                <ScalarProperty Name="Eventplan_DatumOfPeriode_Type" ColumnName="Eventplan_DatumOfPeriode_Type" />
+                <ScalarProperty Name="Eventplan_DatumOfPeriode" ColumnName="Eventplan_DatumOfPeriode" />
+                <ScalarProperty Name="Eventgeschiedenis_VerantwoordelijkeFunctionaris" ColumnName="Eventgeschiedenis_VerantwoordelijkeFunctionaris" />
+                <ScalarProperty Name="Eventgeschiedenis_Type" ColumnName="Eventgeschiedenis_Type" />
+                <ScalarProperty Name="Eventgeschiedenis_DatumOfPeriode" ColumnName="Eventgeschiedenis_DatumOfPeriode" />
+                <ScalarProperty Name="Taal" ColumnName="Taal" />
+                <ScalarProperty Name="Dekking_GeografischGebied" ColumnName="Dekking_GeografischGebied" />
+                <ScalarProperty Name="Dekking_InTijd_Eind" ColumnName="Dekking_InTijd_Eind" />
+                <ScalarProperty Name="Dekking_InTijd_Begin" ColumnName="Dekking_InTijd_Begin" />
+                <ScalarProperty Name="Classificatie_DatumOfPeriode" ColumnName="Classificatie_DatumOfPeriode" />
+                <ScalarProperty Name="Classificatie_Bron" ColumnName="Classificatie_Bron" />
+                <ScalarProperty Name="Classificatie_Omschrijving" ColumnName="Classificatie_Omschrijving" />
+                <ScalarProperty Name="Classificatie_Code" ColumnName="Classificatie_Code" />
+                <ScalarProperty Name="Naam" ColumnName="Naam" />
+                <ScalarProperty Name="IdentificatieKenmerk" ColumnName="IdentificatieKenmerk" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

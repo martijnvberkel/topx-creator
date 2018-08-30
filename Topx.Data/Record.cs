@@ -12,7 +12,7 @@ namespace Topx.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class Records
+    public partial class Record
     {
         public System.Guid Id { get; set; }
         public string Naam { get; set; }

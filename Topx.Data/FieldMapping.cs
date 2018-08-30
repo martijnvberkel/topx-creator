@@ -12,10 +12,11 @@ namespace Topx.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class FieldMappings
+    public partial class FieldMapping
     {
         public int Id { get; set; }
         public string DatabaseFieldName { get; set; }
         public string MappedFieldName { get; set; }
+        public string Type { get; set; }
     }
 }

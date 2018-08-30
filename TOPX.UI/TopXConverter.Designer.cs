@@ -38,6 +38,10 @@
             this.ditIs3ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.materialTabControl = new MaterialSkin.Controls.MaterialTabControl();
             this.tabPageLoadFiles = new System.Windows.Forms.TabPage();
+            this.materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
+            this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
+            this.gridFieldMappingRecords = new System.Windows.Forms.DataGridView();
+            this.gridFieldMappingDossiers = new System.Windows.Forms.DataGridView();
             this.filelocationRecords = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.btSelectRecords = new MaterialSkin.Controls.MaterialFlatButton();
             this.filelocationDossiers = new MaterialSkin.Controls.MaterialSingleLineTextField();
@@ -46,16 +50,16 @@
             this.materialTabSelector1 = new MaterialSkin.Controls.MaterialTabSelector();
             this.openFileDialogDossiers = new System.Windows.Forms.OpenFileDialog();
             this.openFileDialogRecords = new System.Windows.Forms.OpenFileDialog();
-            this.gridFieldMappingDossiers = new System.Windows.Forms.DataGridView();
-            this.gridFieldMappingRecords = new System.Windows.Forms.DataGridView();
-            this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
-            this.materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
+            this.MappedFieldName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DatabaseFieldName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DatabaseFieldNameRecords = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MappedFieldNameRecords = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.materialContextMenuStrip2.SuspendLayout();
             this.materialContextMenuStrip3.SuspendLayout();
             this.materialTabControl.SuspendLayout();
             this.tabPageLoadFiles.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gridFieldMappingDossiers)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridFieldMappingRecords)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridFieldMappingDossiers)).BeginInit();
             this.SuspendLayout();
             // 
             // materialContextMenuStrip1
@@ -150,18 +154,67 @@
             this.tabPageLoadFiles.TabIndex = 0;
             this.tabPageLoadFiles.Text = "Load Files";
             // 
+            // materialLabel2
+            // 
+            this.materialLabel2.AutoSize = true;
+            this.materialLabel2.Depth = 0;
+            this.materialLabel2.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialLabel2.Location = new System.Drawing.Point(605, 98);
+            this.materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel2.Name = "materialLabel2";
+            this.materialLabel2.Size = new System.Drawing.Size(249, 19);
+            this.materialLabel2.TabIndex = 8;
+            this.materialLabel2.Text = "Veldmapping Records en Bestanden";
+            // 
+            // materialLabel1
+            // 
+            this.materialLabel1.AutoSize = true;
+            this.materialLabel1.BackColor = System.Drawing.Color.White;
+            this.materialLabel1.Depth = 0;
+            this.materialLabel1.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialLabel1.Location = new System.Drawing.Point(43, 98);
+            this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel1.Name = "materialLabel1";
+            this.materialLabel1.Size = new System.Drawing.Size(160, 19);
+            this.materialLabel1.TabIndex = 7;
+            this.materialLabel1.Text = "Veldmapping Dossiers";
+            // 
+            // gridFieldMappingRecords
+            // 
+            this.gridFieldMappingRecords.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gridFieldMappingRecords.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.DatabaseFieldNameRecords,
+            this.MappedFieldNameRecords});
+            this.gridFieldMappingRecords.Location = new System.Drawing.Point(609, 120);
+            this.gridFieldMappingRecords.Name = "gridFieldMappingRecords";
+            this.gridFieldMappingRecords.Size = new System.Drawing.Size(488, 292);
+            this.gridFieldMappingRecords.TabIndex = 6;
+            // 
+            // gridFieldMappingDossiers
+            // 
+            this.gridFieldMappingDossiers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gridFieldMappingDossiers.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.MappedFieldName,
+            this.DatabaseFieldName});
+            this.gridFieldMappingDossiers.Location = new System.Drawing.Point(43, 120);
+            this.gridFieldMappingDossiers.Name = "gridFieldMappingDossiers";
+            this.gridFieldMappingDossiers.Size = new System.Drawing.Size(483, 292);
+            this.gridFieldMappingDossiers.TabIndex = 5;
+            // 
             // filelocationRecords
             // 
             this.filelocationRecords.Depth = 0;
             this.filelocationRecords.Hint = "";
-            this.filelocationRecords.Location = new System.Drawing.Point(774, 38);
+            this.filelocationRecords.Location = new System.Drawing.Point(964, 38);
             this.filelocationRecords.MouseState = MaterialSkin.MouseState.HOVER;
             this.filelocationRecords.Name = "filelocationRecords";
             this.filelocationRecords.PasswordChar = '\0';
             this.filelocationRecords.SelectedText = "";
             this.filelocationRecords.SelectionLength = 0;
             this.filelocationRecords.SelectionStart = 0;
-            this.filelocationRecords.Size = new System.Drawing.Size(214, 23);
+            this.filelocationRecords.Size = new System.Drawing.Size(212, 23);
             this.filelocationRecords.TabIndex = 4;
             this.filelocationRecords.UseSystemPasswordChar = false;
             // 
@@ -175,9 +228,9 @@
             this.btSelectRecords.MouseState = MaterialSkin.MouseState.HOVER;
             this.btSelectRecords.Name = "btSelectRecords";
             this.btSelectRecords.Primary = false;
-            this.btSelectRecords.Size = new System.Drawing.Size(149, 36);
+            this.btSelectRecords.Size = new System.Drawing.Size(355, 36);
             this.btSelectRecords.TabIndex = 3;
-            this.btSelectRecords.Text = "Selecteer records";
+            this.btSelectRecords.Text = "Selecteer records en bestanden-metadatafile";
             this.btSelectRecords.UseVisualStyleBackColor = true;
             this.btSelectRecords.Click += new System.EventHandler(this.btSelectRecords_Click);
             // 
@@ -185,7 +238,7 @@
             // 
             this.filelocationDossiers.Depth = 0;
             this.filelocationDossiers.Hint = "";
-            this.filelocationDossiers.Location = new System.Drawing.Point(215, 38);
+            this.filelocationDossiers.Location = new System.Drawing.Point(312, 38);
             this.filelocationDossiers.MouseState = MaterialSkin.MouseState.HOVER;
             this.filelocationDossiers.Name = "filelocationDossiers";
             this.filelocationDossiers.PasswordChar = '\0';
@@ -200,16 +253,18 @@
             // 
             this.btSelectDossiers.AutoSize = true;
             this.btSelectDossiers.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btSelectDossiers.BackColor = System.Drawing.Color.DimGray;
             this.btSelectDossiers.Depth = 0;
+            this.btSelectDossiers.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btSelectDossiers.Location = new System.Drawing.Point(43, 32);
             this.btSelectDossiers.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btSelectDossiers.MouseState = MaterialSkin.MouseState.HOVER;
             this.btSelectDossiers.Name = "btSelectDossiers";
             this.btSelectDossiers.Primary = false;
-            this.btSelectDossiers.Size = new System.Drawing.Size(152, 36);
+            this.btSelectDossiers.Size = new System.Drawing.Size(247, 36);
             this.btSelectDossiers.TabIndex = 1;
-            this.btSelectDossiers.Text = "Selecteer dossiers";
-            this.btSelectDossiers.UseVisualStyleBackColor = true;
+            this.btSelectDossiers.Text = "Selecteer dossier-metadatafile";
+            this.btSelectDossiers.UseVisualStyleBackColor = false;
             this.btSelectDossiers.Click += new System.EventHandler(this.btSelectDossiers_Click);
             // 
             // tabPage2
@@ -241,54 +296,40 @@
             // 
             this.openFileDialogRecords.FileName = "openDossierFileDialog";
             // 
-            // gridFieldMappingDossiers
+            // MappedFieldName
             // 
-            this.gridFieldMappingDossiers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gridFieldMappingDossiers.Location = new System.Drawing.Point(43, 117);
-            this.gridFieldMappingDossiers.Name = "gridFieldMappingDossiers";
-            this.gridFieldMappingDossiers.Size = new System.Drawing.Size(386, 292);
-            this.gridFieldMappingDossiers.TabIndex = 5;
+            this.MappedFieldName.DataPropertyName = "MappedFieldName";
+            this.MappedFieldName.HeaderText = "Veldnaam Bron";
+            this.MappedFieldName.Name = "MappedFieldName";
+            this.MappedFieldName.Width = 220;
             // 
-            // gridFieldMappingRecords
+            // DatabaseFieldName
             // 
-            this.gridFieldMappingRecords.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gridFieldMappingRecords.Location = new System.Drawing.Point(602, 117);
-            this.gridFieldMappingRecords.Name = "gridFieldMappingRecords";
-            this.gridFieldMappingRecords.Size = new System.Drawing.Size(386, 292);
-            this.gridFieldMappingRecords.TabIndex = 6;
+            this.DatabaseFieldName.DataPropertyName = "DatabaseFieldName";
+            this.DatabaseFieldName.HeaderText = "Veldnaam TopX";
+            this.DatabaseFieldName.Name = "DatabaseFieldName";
+            this.DatabaseFieldName.Width = 220;
             // 
-            // materialLabel1
+            // DatabaseFieldNameRecords
             // 
-            this.materialLabel1.AutoSize = true;
-            this.materialLabel1.Depth = 0;
-            this.materialLabel1.Font = new System.Drawing.Font("Roboto", 11F);
-            this.materialLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel1.Location = new System.Drawing.Point(43, 98);
-            this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel1.Name = "materialLabel1";
-            this.materialLabel1.Size = new System.Drawing.Size(160, 19);
-            this.materialLabel1.TabIndex = 7;
-            this.materialLabel1.Text = "Veldmapping Dossiers";
+            this.DatabaseFieldNameRecords.DataPropertyName = "MappedFieldName";
+            this.DatabaseFieldNameRecords.HeaderText = "Veldnaam Bron";
+            this.DatabaseFieldNameRecords.Name = "DatabaseFieldNameRecords";
+            this.DatabaseFieldNameRecords.Width = 220;
             // 
-            // materialLabel2
+            // MappedFieldNameRecords
             // 
-            this.materialLabel2.AutoSize = true;
-            this.materialLabel2.Depth = 0;
-            this.materialLabel2.Font = new System.Drawing.Font("Roboto", 11F);
-            this.materialLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel2.Location = new System.Drawing.Point(598, 98);
-            this.materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel2.Name = "materialLabel2";
-            this.materialLabel2.Size = new System.Drawing.Size(155, 19);
-            this.materialLabel2.TabIndex = 8;
-            this.materialLabel2.Text = "Veldmapping Records";
+            this.MappedFieldNameRecords.DataPropertyName = "DatabaseFieldName";
+            this.MappedFieldNameRecords.HeaderText = "Veldnaam TopX";
+            this.MappedFieldNameRecords.Name = "MappedFieldNameRecords";
+            this.MappedFieldNameRecords.Width = 220;
             // 
             // TopXConverter
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.ClientSize = new System.Drawing.Size(1289, 611);
+            this.ClientSize = new System.Drawing.Size(1244, 611);
             this.Controls.Add(this.materialTabSelector1);
             this.Controls.Add(this.materialTabControl);
             this.Name = "TopXConverter";
@@ -299,8 +340,8 @@
             this.materialTabControl.ResumeLayout(false);
             this.tabPageLoadFiles.ResumeLayout(false);
             this.tabPageLoadFiles.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gridFieldMappingDossiers)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridFieldMappingRecords)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridFieldMappingDossiers)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -329,6 +370,10 @@
         private MaterialSkin.Controls.MaterialLabel materialLabel1;
         private System.Windows.Forms.DataGridView gridFieldMappingRecords;
         private System.Windows.Forms.DataGridView gridFieldMappingDossiers;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DatabaseFieldNameRecords;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MappedFieldNameRecords;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MappedFieldName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DatabaseFieldName;
     }
 }
 

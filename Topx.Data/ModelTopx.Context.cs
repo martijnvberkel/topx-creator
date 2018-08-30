@@ -25,8 +25,9 @@ namespace Topx.Data
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Bestanden> Bestand { get; set; }
-        public virtual DbSet<FieldMappings> FieldMapping { get; set; }
-        public virtual DbSet<Records> Record { get; set; }
+        public virtual DbSet<Bestand> Bestand { get; set; }
+        public virtual DbSet<FieldMapping> FieldMapping { get; set; }
+        public virtual DbSet<Record> Record { get; set; }
+        public virtual DbSet<Dossier> Dossier { get; set; }
     }
 }

@@ -50,6 +50,12 @@
     <Reference Include="ComponentFactory.Krypton.Workspace, Version=4.62.536.0, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e, processorArchitecture=MSIL">
       <HintPath>..\packages\KryptonToolkitSuite462.4.62.554\lib\ComponentFactory.Krypton.Workspace.dll</HintPath>
     </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="MaterialSkin, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialSkin.0.2.1\lib\MaterialSkin.dll</HintPath>
     </Reference>
@@ -57,6 +63,7 @@
       <HintPath>..\packages\KryptonToolkitSuite462.4.62.554\lib\PaletteDesigner.exe</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -102,6 +109,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Topx.Data\Topx.Data.csproj">
+      <Project>{71ff9484-30cd-4406-a6e5-e8d9d62c0ca5}</Project>
+      <Name>Topx.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Topx.Interface\Topx.Interface.csproj">
+      <Project>{91592173-F613-4370-A362-0EF1AB0F3A65}</Project>
+      <Name>Topx.Interface</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

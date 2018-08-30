@@ -12,7 +12,7 @@ namespace Topx.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class Bestanden
+    public partial class Bestand
     {
         public System.Guid Id { get; set; }
         public string Dossier_IdentificatieKenmerk { get; set; }

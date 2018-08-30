@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MaterialSkin;
 using MaterialSkin.Controls;
+using Topx.Data;
+using Topx.Interface;
 
 namespace TOPX.UI
 {
@@ -17,6 +19,7 @@ namespace TOPX.UI
     {
         private List<string> _headersDossiers = new List<string>();
         private List<string> _headersRecords = new List<string>();
+        private Headers _headers;
         public TopXConverter()
         {
             InitializeComponent();
@@ -24,12 +27,16 @@ namespace TOPX.UI
             materialSkinManager.AddFormToManage(this);
             materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
             materialSkinManager.ColorScheme = new ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.LightBlue200, TextShade.WHITE);
+
+
         }
-       
+
 
         private void TopXConverter_Load(object sender, EventArgs e)
         {
-            
+            _headers = new Headers(new TOPX_GenericEntities());
+            gridFieldMappingDossiers.AutoGenerateColumns = false;
+            gridFieldMappingRecords.AutoGenerateColumns = false;
         }
 
         private void ditIs1ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -37,10 +44,6 @@ namespace TOPX.UI
 
         }
 
-        private void materialFlatButton1_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void btSelectDossiers_Click(object sender, EventArgs e)
         {
@@ -52,6 +55,7 @@ namespace TOPX.UI
                     _headersDossiers = sr.ReadLine().Split(";"[0]).ToList();
                 }
             }
+            gridFieldMappingDossiers.DataSource = _headers.GetHeaderMappingDossiers(_headersDossiers);
         }
 
         private void btSelectRecords_Click(object sender, EventArgs e)
@@ -64,6 +68,7 @@ namespace TOPX.UI
                     _headersRecords = sr.ReadLine().Split(";"[0]).ToList();
                 }
             }
+            gridFieldMappingRecords.DataSource = _headers.GetHeaderMappingRecordsBestanden(_headersRecords);
         }
     }
 }
