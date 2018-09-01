@@ -11,11 +11,13 @@ namespace Topx.Interface
     public class Headers
     {
         private readonly TOPX_GenericEntities _entities;
-        public List<string> HeadersDossiers;
-        public List<string> HeadersRecords;
-        public List<string> HeadersBestanden;
+        private enum MappingType { DOSSIER, RECORD, BESTAND}
 
-        public List<string> HeadersRecordsBestanden =>  HeadersRecords.Concat(HeadersBestanden) .ToList();
+        private readonly List<FieldMapping> _headersDossiers;
+        private readonly List<FieldMapping> _headersRecords;
+        private readonly List<FieldMapping> _headersBestanden;
+
+        public List<FieldMapping> HeadersRecordsBestanden =>  _headersRecords.Concat(_headersBestanden) .ToList();
 
         public Headers(TOPX_GenericEntities entities)
         {
@@ -24,53 +26,59 @@ namespace Topx.Interface
                                                        BindingFlags.Public |
                                                        BindingFlags.Instance) ;
 
-            HeadersDossiers = GetPropertyInfoNames(propertyInfosDossiers);
+            _headersDossiers = GetPropertyInfoNames(propertyInfosDossiers);
 
             var propertyInfosRecords= new Record().GetType().GetProperties(BindingFlags.DeclaredOnly |
                                                                        BindingFlags.Public |
                                                                        BindingFlags.Instance);
 
-            HeadersRecords = GetPropertyInfoNames(propertyInfosRecords);
+            _headersRecords = GetPropertyInfoNames(propertyInfosRecords);
 
             var propertyInfosBestand = new Bestand().GetType().GetProperties(BindingFlags.DeclaredOnly |
                                                                              BindingFlags.Public |
                                                                              BindingFlags.Instance);
 
-            HeadersBestanden = GetPropertyInfoNames(propertyInfosBestand);
+            _headersBestanden = GetPropertyInfoNames(propertyInfosBestand);
 
         }
 
-        private List<string> GetPropertyInfoNames(PropertyInfo[] propertyInfos)
+        private List<FieldMapping> GetPropertyInfoNames(PropertyInfo[] propertyInfos)
         {
-            return (from propertyInfo in propertyInfos where propertyInfo.Name != "Id" select propertyInfo.Name).ToList();
+            var listOfFields = propertyInfos.Where(propertyInfo => propertyInfo.Name != "Id" && propertyInfo.Name != "DossierId").Select(propertyInfo => propertyInfo.Name);
+
+            return listOfFields.Select(listOfField => new FieldMapping() {DatabaseFieldName = listOfField}).ToList();
         }
 
         public List<FieldMapping> GetHeaderMappingDossiers(List<string> sourceHeaders)
         {
-            var fieldmappings = new List<FieldMapping>();
-            foreach (var sourceHeader in sourceHeaders)
-            {
-                fieldmappings.Add(new FieldMapping()
-                {
-                    MappedFieldName = sourceHeader,
-                    DatabaseFieldName = HeadersDossiers.Find(t => t == sourceHeader)
-                });
+           foreach (var sourceHeader in sourceHeaders)
+           {
+               var headersDossier = _headersDossiers.FirstOrDefault(t => t.DatabaseFieldName == sourceHeader);
+               if (headersDossier != null)
+                   headersDossier.MappedFieldName = sourceHeader;
+               else
+               {
+                   _headersDossiers.Add(new FieldMapping() { MappedFieldName = sourceHeader});
+               }
+              
             }
-            return fieldmappings;
+            return _headersDossiers;
         }
 
         public List<FieldMapping> GetHeaderMappingRecordsBestanden(List<string> sourceHeaders)
         {
-            var fieldmappings = new List<FieldMapping>();
             foreach (var sourceHeader in sourceHeaders)
             {
-                fieldmappings.Add(new FieldMapping()
+                var headerRecords = _headersRecords.FirstOrDefault(t => t.DatabaseFieldName == sourceHeader);
+                if (headerRecords != null)
+                    headerRecords.MappedFieldName = sourceHeader;
+                else
                 {
-                    MappedFieldName = sourceHeader,
-                    DatabaseFieldName = HeadersRecordsBestanden.Find(t => t == sourceHeader)
-                });
+                    _headersRecords.Add(new FieldMapping() { MappedFieldName = sourceHeader });
+                }
+
             }
-            return fieldmappings;
+            return _headersRecords;
         }
     }
 }
