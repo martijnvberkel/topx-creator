@@ -18,7 +18,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "External Refs", "External R
 		External Refs\LumenWorks.Framework.IO.XML = External Refs\LumenWorks.Framework.IO.XML
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topx.Importer", "Topx.Importer\Topx.Importer.csproj", "{13D3E7C0-AB77-4555-94B0-6EBFE2AA908D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topx.Import", "Topx.Importer\Topx.Import.csproj", "{13D3E7C0-AB77-4555-94B0-6EBFE2AA908D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TOPX.UI", "TOPX.UI\TOPX.UI.csproj", "{118C7B5B-3AE8-497D-961C-D0E62476A879}"
 EndProject
@@ -27,6 +27,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topx.Interface", "Topx.Interface\Topx.Interface.csproj", "{91592173-F613-4370-A362-0EF1AB0F3A65}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topx.UnitTests", "Topx.UnitTests\Topx.UnitTests.csproj", "{CE3AF6BA-3CC6-4017-8C73-C9CCA945642E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topx.FileAnalysis", "Topx.FileAnalysis\Topx.FileAnalysis.csproj", "{A9504EF0-E9EC-4308-9C9B-ACE575AAD67E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -62,12 +64,16 @@ Global
 		{CE3AF6BA-3CC6-4017-8C73-C9CCA945642E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CE3AF6BA-3CC6-4017-8C73-C9CCA945642E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CE3AF6BA-3CC6-4017-8C73-C9CCA945642E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A9504EF0-E9EC-4308-9C9B-ACE575AAD67E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9504EF0-E9EC-4308-9C9B-ACE575AAD67E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9504EF0-E9EC-4308-9C9B-ACE575AAD67E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9504EF0-E9EC-4308-9C9B-ACE575AAD67E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		VisualSVNWorkingCopyRoot = .
 		SolutionGuid = {AD535C3E-945A-4562-BAA7-F55B7E855B40}
+		VisualSVNWorkingCopyRoot = .
 	EndGlobalSection
 EndGlobal

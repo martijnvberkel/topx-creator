@@ -11,6 +11,8 @@ using System.Windows.Forms;
 using MaterialSkin;
 using MaterialSkin.Controls;
 using Topx.Data;
+using Topx.FileAnalysis;
+using Topx.Importer;
 using Topx.Interface;
 
 namespace TOPX.UI
@@ -19,6 +21,10 @@ namespace TOPX.UI
     {
         private List<string> _headersDossiers = new List<string>();
         private List<string> _headersRecords = new List<string>();
+
+        private List<FieldMapping> _fieldmappingsDossiers;
+        private List<FieldMapping> _fieldmappingsRecords;
+
         private Headers _headers;
         public TopXConverter()
         {
@@ -69,6 +75,69 @@ namespace TOPX.UI
                 }
             }
             gridFieldMappingRecords.DataSource = _headers.GetHeaderMappingRecordsBestanden(_headersRecords);
+        }
+
+        private void btImportFiles_Click(object sender, EventArgs e)
+        {
+            using (var entities = new TOPX_GenericEntities())
+            {
+                entities.Database.ExecuteSqlCommand("truncate table Dossiers");
+                entities.Database.ExecuteSqlCommand("truncate table Records");
+                entities.Database.ExecuteSqlCommand("truncate table Bestanden");
+
+                _fieldmappingsDossiers = _headers.GetHeaderMappingDossiers(_headersDossiers);
+                _fieldmappingsRecords = _headers.GetHeaderMappingRecordsBestanden(_headersRecords);
+
+                var importer = new Importer(entities);
+                using (var dossiers = new StreamReader(openFileDialogDossiers.FileName))
+                {
+                    importer.ImportDossiers(_fieldmappingsDossiers, _headersDossiers, dossiers, Headers.MappingType.DOSSIER);
+                    if (importer.Error)
+                    {
+                        txtErrorsDossiers.Text = importer.ErrorMessage;
+                    }
+                }
+
+                importer = new Importer(entities);
+                using (var records = new StreamReader(openFileDialogRecords.FileName))
+                {
+                    importer.ImportDossiers(_fieldmappingsRecords, _headersRecords, records, Headers.MappingType.RECORD);
+                    if (importer.Error)
+                    {
+                        txtErrorRecords.Text = importer.ErrorMessage;
+                    }
+                }
+            }
+        }
+
+        private void btFileLocation_Click(object sender, EventArgs e)
+        {
+            using (var entities = new TOPX_GenericEntities())
+            {
+               
+                var dialogResult = folderBrowserDialogFiles.ShowDialog();
+                if (dialogResult == DialogResult.OK)
+                {
+                    txtFileLocation.Text = folderBrowserDialogFiles.SelectedPath;
+                }
+            }
+        }
+
+        private void btAnalyse_Click(object sender, EventArgs e)
+        {
+            if (!Directory.Exists(txtFileLocation.Text))
+            {
+                MessageBox.Show("Directory bestaat niet");
+                return;
+            }
+            using (var entities = new TOPX_GenericEntities())
+            {
+                var records = (from r in entities.Record select r).ToList();
+                var bestanden = (from b in entities.Bestand select b).ToList();
+                var metadata = new Metadata();
+                metadata.Collect(txtFileLocation.Text, records, bestanden);
+                entities.SaveChanges();
+            }
         }
     }
 }

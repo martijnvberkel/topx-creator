@@ -115,6 +115,14 @@
       <Project>{71ff9484-30cd-4406-a6e5-e8d9d62c0ca5}</Project>
       <Name>Topx.Data</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Topx.FileAnalysis\Topx.FileAnalysis.csproj">
+      <Project>{A9504EF0-E9EC-4308-9C9B-ACE575AAD67E}</Project>
+      <Name>Topx.FileAnalysis</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Topx.Importer\Topx.Import.csproj">
+      <Project>{13D3E7C0-AB77-4555-94B0-6EBFE2AA908D}</Project>
+      <Name>Topx.Import</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Topx.Interface\Topx.Interface.csproj">
       <Project>{91592173-F613-4370-A362-0EF1AB0F3A65}</Project>
       <Name>Topx.Interface</Name>

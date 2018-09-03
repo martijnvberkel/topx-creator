@@ -41,25 +41,37 @@
             this.materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             this.gridFieldMappingRecords = new System.Windows.Forms.DataGridView();
+            this.DatabaseFieldNameRecords = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MappedFieldNameRecords = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gridFieldMappingDossiers = new System.Windows.Forms.DataGridView();
+            this.MappedFieldName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DatabaseFieldName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.filelocationRecords = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.btSelectRecords = new MaterialSkin.Controls.MaterialFlatButton();
             this.filelocationDossiers = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.btSelectDossiers = new MaterialSkin.Controls.MaterialFlatButton();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tabImport = new System.Windows.Forms.TabPage();
             this.materialTabSelector1 = new MaterialSkin.Controls.MaterialTabSelector();
             this.openFileDialogDossiers = new System.Windows.Forms.OpenFileDialog();
             this.openFileDialogRecords = new System.Windows.Forms.OpenFileDialog();
-            this.MappedFieldName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DatabaseFieldName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DatabaseFieldNameRecords = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MappedFieldNameRecords = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btImportFiles = new MaterialSkin.Controls.MaterialFlatButton();
+            this.txtErrorsDossiers = new System.Windows.Forms.TextBox();
+            this.txtErrorRecords = new System.Windows.Forms.TextBox();
+            this.materialLabel3 = new MaterialSkin.Controls.MaterialLabel();
+            this.materialLabel4 = new MaterialSkin.Controls.MaterialLabel();
+            this.Bestanden = new System.Windows.Forms.TabPage();
+            this.folderBrowserDialogFiles = new System.Windows.Forms.FolderBrowserDialog();
+            this.btFileLocation = new MaterialSkin.Controls.MaterialRaisedButton();
+            this.txtFileLocation = new MaterialSkin.Controls.MaterialSingleLineTextField();
+            this.btAnalyse = new MaterialSkin.Controls.MaterialRaisedButton();
             this.materialContextMenuStrip2.SuspendLayout();
             this.materialContextMenuStrip3.SuspendLayout();
             this.materialTabControl.SuspendLayout();
             this.tabPageLoadFiles.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridFieldMappingRecords)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridFieldMappingDossiers)).BeginInit();
+            this.tabImport.SuspendLayout();
+            this.Bestanden.SuspendLayout();
             this.SuspendLayout();
             // 
             // materialContextMenuStrip1
@@ -127,7 +139,8 @@
             // materialTabControl
             // 
             this.materialTabControl.Controls.Add(this.tabPageLoadFiles);
-            this.materialTabControl.Controls.Add(this.tabPage2);
+            this.materialTabControl.Controls.Add(this.tabImport);
+            this.materialTabControl.Controls.Add(this.Bestanden);
             this.materialTabControl.Depth = 0;
             this.materialTabControl.Location = new System.Drawing.Point(24, 103);
             this.materialTabControl.MouseState = MaterialSkin.MouseState.HOVER;
@@ -192,6 +205,20 @@
             this.gridFieldMappingRecords.Size = new System.Drawing.Size(488, 292);
             this.gridFieldMappingRecords.TabIndex = 6;
             // 
+            // DatabaseFieldNameRecords
+            // 
+            this.DatabaseFieldNameRecords.DataPropertyName = "MappedFieldName";
+            this.DatabaseFieldNameRecords.HeaderText = "Veldnaam Bron";
+            this.DatabaseFieldNameRecords.Name = "DatabaseFieldNameRecords";
+            this.DatabaseFieldNameRecords.Width = 220;
+            // 
+            // MappedFieldNameRecords
+            // 
+            this.MappedFieldNameRecords.DataPropertyName = "DatabaseFieldName";
+            this.MappedFieldNameRecords.HeaderText = "Veldnaam TopX";
+            this.MappedFieldNameRecords.Name = "MappedFieldNameRecords";
+            this.MappedFieldNameRecords.Width = 220;
+            // 
             // gridFieldMappingDossiers
             // 
             this.gridFieldMappingDossiers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -202,6 +229,20 @@
             this.gridFieldMappingDossiers.Name = "gridFieldMappingDossiers";
             this.gridFieldMappingDossiers.Size = new System.Drawing.Size(483, 292);
             this.gridFieldMappingDossiers.TabIndex = 5;
+            // 
+            // MappedFieldName
+            // 
+            this.MappedFieldName.DataPropertyName = "MappedFieldName";
+            this.MappedFieldName.HeaderText = "Veldnaam Bron";
+            this.MappedFieldName.Name = "MappedFieldName";
+            this.MappedFieldName.Width = 220;
+            // 
+            // DatabaseFieldName
+            // 
+            this.DatabaseFieldName.DataPropertyName = "DatabaseFieldName";
+            this.DatabaseFieldName.HeaderText = "Veldnaam TopX";
+            this.DatabaseFieldName.Name = "DatabaseFieldName";
+            this.DatabaseFieldName.Width = 220;
             // 
             // filelocationRecords
             // 
@@ -267,15 +308,20 @@
             this.btSelectDossiers.UseVisualStyleBackColor = false;
             this.btSelectDossiers.Click += new System.EventHandler(this.btSelectDossiers_Click);
             // 
-            // tabPage2
+            // tabImport
             // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1257, 438);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Process";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.tabImport.BackColor = System.Drawing.Color.White;
+            this.tabImport.Controls.Add(this.materialLabel4);
+            this.tabImport.Controls.Add(this.materialLabel3);
+            this.tabImport.Controls.Add(this.txtErrorRecords);
+            this.tabImport.Controls.Add(this.txtErrorsDossiers);
+            this.tabImport.Controls.Add(this.btImportFiles);
+            this.tabImport.Location = new System.Drawing.Point(4, 22);
+            this.tabImport.Name = "tabImport";
+            this.tabImport.Padding = new System.Windows.Forms.Padding(3);
+            this.tabImport.Size = new System.Drawing.Size(1257, 438);
+            this.tabImport.TabIndex = 1;
+            this.tabImport.Text = "Import";
             // 
             // materialTabSelector1
             // 
@@ -296,40 +342,125 @@
             // 
             this.openFileDialogRecords.FileName = "openDossierFileDialog";
             // 
-            // MappedFieldName
+            // btImportFiles
             // 
-            this.MappedFieldName.DataPropertyName = "MappedFieldName";
-            this.MappedFieldName.HeaderText = "Veldnaam Bron";
-            this.MappedFieldName.Name = "MappedFieldName";
-            this.MappedFieldName.Width = 220;
+            this.btImportFiles.AutoSize = true;
+            this.btImportFiles.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btImportFiles.BackColor = System.Drawing.Color.White;
+            this.btImportFiles.Depth = 0;
+            this.btImportFiles.Location = new System.Drawing.Point(85, 13);
+            this.btImportFiles.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btImportFiles.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btImportFiles.Name = "btImportFiles";
+            this.btImportFiles.Primary = false;
+            this.btImportFiles.Size = new System.Drawing.Size(191, 36);
+            this.btImportFiles.TabIndex = 0;
+            this.btImportFiles.Text = "Import files in database";
+            this.btImportFiles.UseVisualStyleBackColor = false;
+            this.btImportFiles.Click += new System.EventHandler(this.btImportFiles_Click);
             // 
-            // DatabaseFieldName
+            // txtErrorsDossiers
             // 
-            this.DatabaseFieldName.DataPropertyName = "DatabaseFieldName";
-            this.DatabaseFieldName.HeaderText = "Veldnaam TopX";
-            this.DatabaseFieldName.Name = "DatabaseFieldName";
-            this.DatabaseFieldName.Width = 220;
+            this.txtErrorsDossiers.Location = new System.Drawing.Point(89, 115);
+            this.txtErrorsDossiers.Multiline = true;
+            this.txtErrorsDossiers.Name = "txtErrorsDossiers";
+            this.txtErrorsDossiers.Size = new System.Drawing.Size(512, 307);
+            this.txtErrorsDossiers.TabIndex = 1;
             // 
-            // DatabaseFieldNameRecords
+            // txtErrorRecords
             // 
-            this.DatabaseFieldNameRecords.DataPropertyName = "MappedFieldName";
-            this.DatabaseFieldNameRecords.HeaderText = "Veldnaam Bron";
-            this.DatabaseFieldNameRecords.Name = "DatabaseFieldNameRecords";
-            this.DatabaseFieldNameRecords.Width = 220;
+            this.txtErrorRecords.Location = new System.Drawing.Point(607, 115);
+            this.txtErrorRecords.Multiline = true;
+            this.txtErrorRecords.Name = "txtErrorRecords";
+            this.txtErrorRecords.Size = new System.Drawing.Size(499, 307);
+            this.txtErrorRecords.TabIndex = 2;
             // 
-            // MappedFieldNameRecords
+            // materialLabel3
             // 
-            this.MappedFieldNameRecords.DataPropertyName = "DatabaseFieldName";
-            this.MappedFieldNameRecords.HeaderText = "Veldnaam TopX";
-            this.MappedFieldNameRecords.Name = "MappedFieldNameRecords";
-            this.MappedFieldNameRecords.Width = 220;
+            this.materialLabel3.AutoSize = true;
+            this.materialLabel3.Depth = 0;
+            this.materialLabel3.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialLabel3.Location = new System.Drawing.Point(85, 84);
+            this.materialLabel3.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel3.Name = "materialLabel3";
+            this.materialLabel3.Size = new System.Drawing.Size(114, 19);
+            this.materialLabel3.TabIndex = 3;
+            this.materialLabel3.Text = "Errors Dossiers";
+            // 
+            // materialLabel4
+            // 
+            this.materialLabel4.AutoSize = true;
+            this.materialLabel4.Depth = 0;
+            this.materialLabel4.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialLabel4.Location = new System.Drawing.Point(603, 93);
+            this.materialLabel4.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel4.Name = "materialLabel4";
+            this.materialLabel4.Size = new System.Drawing.Size(109, 19);
+            this.materialLabel4.TabIndex = 4;
+            this.materialLabel4.Text = "Errors Records";
+            // 
+            // Bestanden
+            // 
+            this.Bestanden.BackColor = System.Drawing.Color.White;
+            this.Bestanden.Controls.Add(this.btAnalyse);
+            this.Bestanden.Controls.Add(this.txtFileLocation);
+            this.Bestanden.Controls.Add(this.btFileLocation);
+            this.Bestanden.Location = new System.Drawing.Point(4, 22);
+            this.Bestanden.Name = "Bestanden";
+            this.Bestanden.Padding = new System.Windows.Forms.Padding(3);
+            this.Bestanden.Size = new System.Drawing.Size(1257, 438);
+            this.Bestanden.TabIndex = 2;
+            this.Bestanden.Text = "Bestanden";
+            // 
+            // btFileLocation
+            // 
+            this.btFileLocation.Depth = 0;
+            this.btFileLocation.Location = new System.Drawing.Point(24, 30);
+            this.btFileLocation.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btFileLocation.Name = "btFileLocation";
+            this.btFileLocation.Primary = true;
+            this.btFileLocation.Size = new System.Drawing.Size(98, 23);
+            this.btFileLocation.TabIndex = 0;
+            this.btFileLocation.Text = "Locatie";
+            this.btFileLocation.UseVisualStyleBackColor = true;
+            this.btFileLocation.Click += new System.EventHandler(this.btFileLocation_Click);
+            // 
+            // txtFileLocation
+            // 
+            this.txtFileLocation.Depth = 0;
+            this.txtFileLocation.Hint = "";
+            this.txtFileLocation.Location = new System.Drawing.Point(152, 29);
+            this.txtFileLocation.MouseState = MaterialSkin.MouseState.HOVER;
+            this.txtFileLocation.Name = "txtFileLocation";
+            this.txtFileLocation.PasswordChar = '\0';
+            this.txtFileLocation.SelectedText = "";
+            this.txtFileLocation.SelectionLength = 0;
+            this.txtFileLocation.SelectionStart = 0;
+            this.txtFileLocation.Size = new System.Drawing.Size(292, 23);
+            this.txtFileLocation.TabIndex = 1;
+            this.txtFileLocation.UseSystemPasswordChar = false;
+            // 
+            // btAnalyse
+            // 
+            this.btAnalyse.Depth = 0;
+            this.btAnalyse.Location = new System.Drawing.Point(480, 29);
+            this.btAnalyse.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btAnalyse.Name = "btAnalyse";
+            this.btAnalyse.Primary = true;
+            this.btAnalyse.Size = new System.Drawing.Size(156, 23);
+            this.btAnalyse.TabIndex = 2;
+            this.btAnalyse.Text = "Analyse bestanden";
+            this.btAnalyse.UseVisualStyleBackColor = true;
+            this.btAnalyse.Click += new System.EventHandler(this.btAnalyse_Click);
             // 
             // TopXConverter
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.ClientSize = new System.Drawing.Size(1244, 611);
+            this.ClientSize = new System.Drawing.Size(1307, 611);
             this.Controls.Add(this.materialTabSelector1);
             this.Controls.Add(this.materialTabControl);
             this.Name = "TopXConverter";
@@ -342,6 +473,9 @@
             this.tabPageLoadFiles.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridFieldMappingRecords)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridFieldMappingDossiers)).EndInit();
+            this.tabImport.ResumeLayout(false);
+            this.tabImport.PerformLayout();
+            this.Bestanden.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -358,7 +492,7 @@
         private System.Windows.Forms.ToolStripMenuItem ditIs3ToolStripMenuItem;
         private MaterialSkin.Controls.MaterialTabControl materialTabControl;
         private System.Windows.Forms.TabPage tabPageLoadFiles;
-        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage tabImport;
         private MaterialSkin.Controls.MaterialTabSelector materialTabSelector1;
         private MaterialSkin.Controls.MaterialFlatButton btSelectDossiers;
         private System.Windows.Forms.OpenFileDialog openFileDialogDossiers;
@@ -374,6 +508,16 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn MappedFieldNameRecords;
         private System.Windows.Forms.DataGridViewTextBoxColumn MappedFieldName;
         private System.Windows.Forms.DataGridViewTextBoxColumn DatabaseFieldName;
+        private MaterialSkin.Controls.MaterialFlatButton btImportFiles;
+        private MaterialSkin.Controls.MaterialLabel materialLabel4;
+        private MaterialSkin.Controls.MaterialLabel materialLabel3;
+        private System.Windows.Forms.TextBox txtErrorRecords;
+        private System.Windows.Forms.TextBox txtErrorsDossiers;
+        private System.Windows.Forms.TabPage Bestanden;
+        private MaterialSkin.Controls.MaterialSingleLineTextField txtFileLocation;
+        private MaterialSkin.Controls.MaterialRaisedButton btFileLocation;
+        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialogFiles;
+        private MaterialSkin.Controls.MaterialRaisedButton btAnalyse;
     }
 }
 

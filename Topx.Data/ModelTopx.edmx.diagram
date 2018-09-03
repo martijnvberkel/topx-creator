@@ -5,10 +5,10 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="2fc512f5b8a9406fa2577039038a68e2" Name="Diagram1">
-        <EntityTypeShape EntityType="ModelTopx.Bestand" Width="2.125" PointX="0.5" PointY="1" />
-        <EntityTypeShape EntityType="ModelTopx.FieldMapping" Width="1.5" PointX="2.75" PointY="0.75" />
-        <EntityTypeShape EntityType="ModelTopx.Record" Width="3.75" PointX="7.625" PointY="3.125" />
-        <EntityTypeShape EntityType="ModelTopx.Dossier" Width="2.75" PointX="4.625" PointY="0.75" />
+        <EntityTypeShape EntityType="ModelTopx.Bestand" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="ModelTopx.Dossier" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="ModelTopx.FieldMapping" Width="1.5" PointX="4.75" PointY="0.75" />
+        <EntityTypeShape EntityType="ModelTopx.Record" Width="1.5" PointX="4.75" PointY="3.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

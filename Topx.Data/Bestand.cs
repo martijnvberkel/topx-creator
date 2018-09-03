@@ -14,7 +14,7 @@ namespace Topx.Data
     
     public partial class Bestand
     {
-        public System.Guid Id { get; set; }
+        public long Id { get; set; }
         public string Dossier_IdentificatieKenmerk { get; set; }
         public string Naam { get; set; }
         public string Relatie_RelatieId { get; set; }

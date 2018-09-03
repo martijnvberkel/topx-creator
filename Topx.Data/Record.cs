@@ -14,7 +14,7 @@ namespace Topx.Data
     
     public partial class Record
     {
-        public System.Guid Id { get; set; }
+        public long Id { get; set; }
         public string Naam { get; set; }
         public string Taal { get; set; }
         public string Gebruiksrechten_OmschrijvingVoorwaarden { get; set; }
@@ -28,5 +28,6 @@ namespace Topx.Data
         public string Bestand_Formaat_BestandsFormaat { get; set; }
         public string Bestand_Formaat_FysiekeIntegriteit_Algoritme { get; set; }
         public string Bestand_Formaat_FysiekeIntegriteit_Waarde { get; set; }
+        public string DossierId { get; set; }
     }
 }

@@ -9,7 +9,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Dossier_IdentificatieKenmerk" Type="nvarchar" MaxLength="50" />
           <Property Name="Naam" Type="nvarchar(max)" />
           <Property Name="Relatie_RelatieId" Type="nvarchar" MaxLength="50" />
@@ -30,9 +30,9 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdentificatieKenmerk" Type="nvarchar" MaxLength="50" />
-          <Property Name="Naam" Type="nvarchar" MaxLength="250" />
+          <Property Name="Naam" Type="nvarchar(max)" />
           <Property Name="Classificatie_Code" Type="nvarchar" MaxLength="50" />
           <Property Name="Classificatie_Omschrijving" Type="nvarchar" MaxLength="50" />
           <Property Name="Classificatie_Bron" Type="nvarchar" MaxLength="50" />
@@ -76,8 +76,8 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="Naam" Type="nvarchar" MaxLength="50" />
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Naam" Type="nvarchar(max)" />
           <Property Name="Taal" Type="nvarchar" MaxLength="10" />
           <Property Name="Gebruiksrechten_OmschrijvingVoorwaarden" Type="nvarchar(max)" />
           <Property Name="Gebruiksrechten_DatumOfPeriode" Type="nvarchar" MaxLength="50" />
@@ -90,6 +90,7 @@
           <Property Name="Bestand_Formaat_BestandsFormaat" Type="nvarchar" MaxLength="20" />
           <Property Name="Bestand_Formaat_FysiekeIntegriteit_Algoritme" Type="nvarchar" MaxLength="10" />
           <Property Name="Bestand_Formaat_FysiekeIntegriteit_Waarde" Type="nvarchar" MaxLength="250" />
+          <Property Name="DossierId" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityContainer Name="ModelTopxStoreContainer">
           <EntitySet Name="Bestanden" EntityType="Self.Bestanden" Schema="dbo" store:Type="Tables" />
@@ -103,15 +104,15 @@
       <Schema Namespace="ModelTopx" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="TOPX_GenericEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Bestand" EntityType="ModelTopx.Bestand" />
+          <EntitySet Name="Dossier" EntityType="ModelTopx.Dossier" />
           <EntitySet Name="FieldMapping" EntityType="ModelTopx.FieldMapping" />
           <EntitySet Name="Record" EntityType="ModelTopx.Record" />
-          <EntitySet Name="Dossier" EntityType="ModelTopx.Dossier" />
         </EntityContainer>
         <EntityType Name="Bestand">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Dossier_IdentificatieKenmerk" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Naam" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Relatie_RelatieId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -128,41 +129,13 @@
           <Property Name="Formaat_FysiekeIntegriteit_DatumEnTijd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Formaat_DatumAanmaak" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="FieldMapping">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DatabaseFieldName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="MappedFieldName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="Record">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Naam" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Taal" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="Gebruiksrechten_OmschrijvingVoorwaarden" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Gebruiksrechten_DatumOfPeriode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Vertrouwelijkheid_ClassificatieNiveau" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Vertrouwelijkheid_DatumOfPeriode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Openbaarheid_OmschrijvingBeperkingen" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Bestand_Vorm_Redactiegenre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Bestand_Formaat_Bestandsnaam" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Bestand_Formaat_BestandsOmvang" Type="Int64" />
-          <Property Name="Bestand_Formaat_BestandsFormaat" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Bestand_Formaat_FysiekeIntegriteit_Algoritme" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="Bestand_Formaat_FysiekeIntegriteit_Waarde" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="Dossier">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IdentificatieKenmerk" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Naam" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Naam" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Classificatie_Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Classificatie_Omschrijving" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Classificatie_Bron" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -193,7 +166,36 @@
           <Property Name="Openbaarheid_DatumOfPeriode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Integriteit" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
-      </Schema>
+        <EntityType Name="FieldMapping">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DatabaseFieldName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="MappedFieldName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Record">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Naam" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Taal" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Gebruiksrechten_OmschrijvingVoorwaarden" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Gebruiksrechten_DatumOfPeriode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Vertrouwelijkheid_ClassificatieNiveau" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Vertrouwelijkheid_DatumOfPeriode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Openbaarheid_OmschrijvingBeperkingen" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Bestand_Vorm_Redactiegenre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Bestand_Formaat_Bestandsnaam" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Bestand_Formaat_BestandsOmvang" Type="Int64" />
+          <Property Name="Bestand_Formaat_BestandsFormaat" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Bestand_Formaat_FysiekeIntegriteit_Algoritme" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Bestand_Formaat_FysiekeIntegriteit_Waarde" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="DossierId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -217,36 +219,6 @@
                 <ScalarProperty Name="Relatie_RelatieId" ColumnName="Relatie_RelatieId" />
                 <ScalarProperty Name="Naam" ColumnName="Naam" />
                 <ScalarProperty Name="Dossier_IdentificatieKenmerk" ColumnName="Dossier_IdentificatieKenmerk" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="FieldMapping">
-            <EntityTypeMapping TypeName="ModelTopx.FieldMapping">
-              <MappingFragment StoreEntitySet="FieldMappings">
-                <ScalarProperty Name="Type" ColumnName="Type" />
-                <ScalarProperty Name="MappedFieldName" ColumnName="MappedFieldName" />
-                <ScalarProperty Name="DatabaseFieldName" ColumnName="DatabaseFieldName" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Record">
-            <EntityTypeMapping TypeName="ModelTopx.Record">
-              <MappingFragment StoreEntitySet="Records">
-                <ScalarProperty Name="Bestand_Formaat_FysiekeIntegriteit_Waarde" ColumnName="Bestand_Formaat_FysiekeIntegriteit_Waarde" />
-                <ScalarProperty Name="Bestand_Formaat_FysiekeIntegriteit_Algoritme" ColumnName="Bestand_Formaat_FysiekeIntegriteit_Algoritme" />
-                <ScalarProperty Name="Bestand_Formaat_BestandsFormaat" ColumnName="Bestand_Formaat_BestandsFormaat" />
-                <ScalarProperty Name="Bestand_Formaat_BestandsOmvang" ColumnName="Bestand_Formaat_BestandsOmvang" />
-                <ScalarProperty Name="Bestand_Formaat_Bestandsnaam" ColumnName="Bestand_Formaat_Bestandsnaam" />
-                <ScalarProperty Name="Bestand_Vorm_Redactiegenre" ColumnName="Bestand_Vorm_Redactiegenre" />
-                <ScalarProperty Name="Openbaarheid_OmschrijvingBeperkingen" ColumnName="Openbaarheid_OmschrijvingBeperkingen" />
-                <ScalarProperty Name="Vertrouwelijkheid_DatumOfPeriode" ColumnName="Vertrouwelijkheid_DatumOfPeriode" />
-                <ScalarProperty Name="Vertrouwelijkheid_ClassificatieNiveau" ColumnName="Vertrouwelijkheid_ClassificatieNiveau" />
-                <ScalarProperty Name="Gebruiksrechten_DatumOfPeriode" ColumnName="Gebruiksrechten_DatumOfPeriode" />
-                <ScalarProperty Name="Gebruiksrechten_OmschrijvingVoorwaarden" ColumnName="Gebruiksrechten_OmschrijvingVoorwaarden" />
-                <ScalarProperty Name="Taal" ColumnName="Taal" />
-                <ScalarProperty Name="Naam" ColumnName="Naam" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -285,6 +257,37 @@
                 <ScalarProperty Name="Classificatie_Code" ColumnName="Classificatie_Code" />
                 <ScalarProperty Name="Naam" ColumnName="Naam" />
                 <ScalarProperty Name="IdentificatieKenmerk" ColumnName="IdentificatieKenmerk" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FieldMapping">
+            <EntityTypeMapping TypeName="ModelTopx.FieldMapping">
+              <MappingFragment StoreEntitySet="FieldMappings">
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="MappedFieldName" ColumnName="MappedFieldName" />
+                <ScalarProperty Name="DatabaseFieldName" ColumnName="DatabaseFieldName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Record">
+            <EntityTypeMapping TypeName="ModelTopx.Record">
+              <MappingFragment StoreEntitySet="Records">
+                <ScalarProperty Name="DossierId" ColumnName="DossierId" />
+                <ScalarProperty Name="Bestand_Formaat_FysiekeIntegriteit_Waarde" ColumnName="Bestand_Formaat_FysiekeIntegriteit_Waarde" />
+                <ScalarProperty Name="Bestand_Formaat_FysiekeIntegriteit_Algoritme" ColumnName="Bestand_Formaat_FysiekeIntegriteit_Algoritme" />
+                <ScalarProperty Name="Bestand_Formaat_BestandsFormaat" ColumnName="Bestand_Formaat_BestandsFormaat" />
+                <ScalarProperty Name="Bestand_Formaat_BestandsOmvang" ColumnName="Bestand_Formaat_BestandsOmvang" />
+                <ScalarProperty Name="Bestand_Formaat_Bestandsnaam" ColumnName="Bestand_Formaat_Bestandsnaam" />
+                <ScalarProperty Name="Bestand_Vorm_Redactiegenre" ColumnName="Bestand_Vorm_Redactiegenre" />
+                <ScalarProperty Name="Openbaarheid_OmschrijvingBeperkingen" ColumnName="Openbaarheid_OmschrijvingBeperkingen" />
+                <ScalarProperty Name="Vertrouwelijkheid_DatumOfPeriode" ColumnName="Vertrouwelijkheid_DatumOfPeriode" />
+                <ScalarProperty Name="Vertrouwelijkheid_ClassificatieNiveau" ColumnName="Vertrouwelijkheid_ClassificatieNiveau" />
+                <ScalarProperty Name="Gebruiksrechten_DatumOfPeriode" ColumnName="Gebruiksrechten_DatumOfPeriode" />
+                <ScalarProperty Name="Gebruiksrechten_OmschrijvingVoorwaarden" ColumnName="Gebruiksrechten_OmschrijvingVoorwaarden" />
+                <ScalarProperty Name="Taal" ColumnName="Taal" />
+                <ScalarProperty Name="Naam" ColumnName="Naam" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

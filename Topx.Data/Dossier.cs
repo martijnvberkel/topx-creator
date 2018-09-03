@@ -14,7 +14,7 @@ namespace Topx.Data
     
     public partial class Dossier
     {
-        public System.Guid Id { get; set; }
+        public long Id { get; set; }
         public string IdentificatieKenmerk { get; set; }
         public string Naam { get; set; }
         public string Classificatie_Code { get; set; }
