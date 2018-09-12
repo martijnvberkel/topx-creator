@@ -30,5 +30,7 @@ namespace Topx.Data
         public string Formaat_FysiekeIntegriteit_Waarde { get; set; }
         public string Formaat_FysiekeIntegriteit_DatumEnTijd { get; set; }
         public string Formaat_DatumAanmaak { get; set; }
+    
+        public virtual Dossier Dossiers { get; set; }
     }
 }

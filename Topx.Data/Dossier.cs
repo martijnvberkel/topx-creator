@@ -14,7 +14,13 @@ namespace Topx.Data
     
     public partial class Dossier
     {
-        public long Id { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Dossier()
+        {
+            this.Bestanden = new HashSet<Bestand>();
+            this.Records = new HashSet<Record>();
+        }
+    
         public string IdentificatieKenmerk { get; set; }
         public string Naam { get; set; }
         public string Classificatie_Code { get; set; }
@@ -46,5 +52,10 @@ namespace Topx.Data
         public string Openbaarheid_OmschrijvingBeperkingen { get; set; }
         public string Openbaarheid_DatumOfPeriode { get; set; }
         public string Integriteit { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Bestand> Bestanden { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Record> Records { get; set; }
     }
 }

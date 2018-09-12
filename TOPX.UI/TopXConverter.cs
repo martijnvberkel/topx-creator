@@ -81,9 +81,10 @@ namespace TOPX.UI
         {
             using (var entities = new TOPX_GenericEntities())
             {
-                entities.Database.ExecuteSqlCommand("truncate table Dossiers");
+               
                 entities.Database.ExecuteSqlCommand("truncate table Records");
                 entities.Database.ExecuteSqlCommand("truncate table Bestanden");
+                entities.Database.ExecuteSqlCommand("delete from Dossiers");
 
                 _fieldmappingsDossiers = _headers.GetHeaderMappingDossiers(_headersDossiers);
                 _fieldmappingsRecords = _headers.GetHeaderMappingRecordsBestanden(_headersRecords);
@@ -135,7 +136,7 @@ namespace TOPX.UI
                 var records = (from r in entities.Record select r).ToList();
                 var bestanden = (from b in entities.Bestand select b).ToList();
                 var metadata = new Metadata();
-                metadata.Collect(txtFileLocation.Text, records, bestanden);
+                //metadata.Collect(txtFileLocation.Text, records, bestanden);
                 entities.SaveChanges();
             }
         }

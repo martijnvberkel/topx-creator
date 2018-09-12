@@ -29,5 +29,6 @@ namespace Topx.Data
         public virtual DbSet<Dossier> Dossier { get; set; }
         public virtual DbSet<FieldMapping> FieldMapping { get; set; }
         public virtual DbSet<Record> Record { get; set; }
+        public virtual DbSet<Log> Log { get; set; }
     }
 }

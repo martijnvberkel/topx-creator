@@ -51,19 +51,22 @@
             this.filelocationDossiers = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.btSelectDossiers = new MaterialSkin.Controls.MaterialFlatButton();
             this.tabImport = new System.Windows.Forms.TabPage();
+            this.materialLabel4 = new MaterialSkin.Controls.MaterialLabel();
+            this.materialLabel3 = new MaterialSkin.Controls.MaterialLabel();
+            this.txtErrorRecords = new System.Windows.Forms.TextBox();
+            this.txtErrorsDossiers = new System.Windows.Forms.TextBox();
+            this.btImportFiles = new MaterialSkin.Controls.MaterialFlatButton();
+            this.Bestanden = new System.Windows.Forms.TabPage();
+            this.btAnalyse = new MaterialSkin.Controls.MaterialRaisedButton();
+            this.txtFileLocation = new MaterialSkin.Controls.MaterialSingleLineTextField();
+            this.btFileLocation = new MaterialSkin.Controls.MaterialRaisedButton();
             this.materialTabSelector1 = new MaterialSkin.Controls.MaterialTabSelector();
             this.openFileDialogDossiers = new System.Windows.Forms.OpenFileDialog();
             this.openFileDialogRecords = new System.Windows.Forms.OpenFileDialog();
-            this.btImportFiles = new MaterialSkin.Controls.MaterialFlatButton();
-            this.txtErrorsDossiers = new System.Windows.Forms.TextBox();
-            this.txtErrorRecords = new System.Windows.Forms.TextBox();
-            this.materialLabel3 = new MaterialSkin.Controls.MaterialLabel();
-            this.materialLabel4 = new MaterialSkin.Controls.MaterialLabel();
-            this.Bestanden = new System.Windows.Forms.TabPage();
             this.folderBrowserDialogFiles = new System.Windows.Forms.FolderBrowserDialog();
-            this.btFileLocation = new MaterialSkin.Controls.MaterialRaisedButton();
-            this.txtFileLocation = new MaterialSkin.Controls.MaterialSingleLineTextField();
-            this.btAnalyse = new MaterialSkin.Controls.MaterialRaisedButton();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.btCreateTopX = new MaterialSkin.Controls.MaterialRaisedButton();
+            this.txtLogTopXCreate = new System.Windows.Forms.TextBox();
             this.materialContextMenuStrip2.SuspendLayout();
             this.materialContextMenuStrip3.SuspendLayout();
             this.materialTabControl.SuspendLayout();
@@ -72,6 +75,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridFieldMappingDossiers)).BeginInit();
             this.tabImport.SuspendLayout();
             this.Bestanden.SuspendLayout();
+            this.tabPage1.SuspendLayout();
             this.SuspendLayout();
             // 
             // materialContextMenuStrip1
@@ -141,6 +145,7 @@
             this.materialTabControl.Controls.Add(this.tabPageLoadFiles);
             this.materialTabControl.Controls.Add(this.tabImport);
             this.materialTabControl.Controls.Add(this.Bestanden);
+            this.materialTabControl.Controls.Add(this.tabPage1);
             this.materialTabControl.Depth = 0;
             this.materialTabControl.Location = new System.Drawing.Point(24, 103);
             this.materialTabControl.MouseState = MaterialSkin.MouseState.HOVER;
@@ -323,6 +328,119 @@
             this.tabImport.TabIndex = 1;
             this.tabImport.Text = "Import";
             // 
+            // materialLabel4
+            // 
+            this.materialLabel4.AutoSize = true;
+            this.materialLabel4.Depth = 0;
+            this.materialLabel4.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialLabel4.Location = new System.Drawing.Point(603, 93);
+            this.materialLabel4.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel4.Name = "materialLabel4";
+            this.materialLabel4.Size = new System.Drawing.Size(109, 19);
+            this.materialLabel4.TabIndex = 4;
+            this.materialLabel4.Text = "Errors Records";
+            // 
+            // materialLabel3
+            // 
+            this.materialLabel3.AutoSize = true;
+            this.materialLabel3.Depth = 0;
+            this.materialLabel3.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialLabel3.Location = new System.Drawing.Point(85, 84);
+            this.materialLabel3.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel3.Name = "materialLabel3";
+            this.materialLabel3.Size = new System.Drawing.Size(114, 19);
+            this.materialLabel3.TabIndex = 3;
+            this.materialLabel3.Text = "Errors Dossiers";
+            // 
+            // txtErrorRecords
+            // 
+            this.txtErrorRecords.Location = new System.Drawing.Point(607, 115);
+            this.txtErrorRecords.Multiline = true;
+            this.txtErrorRecords.Name = "txtErrorRecords";
+            this.txtErrorRecords.Size = new System.Drawing.Size(499, 307);
+            this.txtErrorRecords.TabIndex = 2;
+            // 
+            // txtErrorsDossiers
+            // 
+            this.txtErrorsDossiers.Location = new System.Drawing.Point(89, 115);
+            this.txtErrorsDossiers.Multiline = true;
+            this.txtErrorsDossiers.Name = "txtErrorsDossiers";
+            this.txtErrorsDossiers.Size = new System.Drawing.Size(512, 307);
+            this.txtErrorsDossiers.TabIndex = 1;
+            // 
+            // btImportFiles
+            // 
+            this.btImportFiles.AutoSize = true;
+            this.btImportFiles.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btImportFiles.BackColor = System.Drawing.Color.White;
+            this.btImportFiles.Depth = 0;
+            this.btImportFiles.Location = new System.Drawing.Point(85, 13);
+            this.btImportFiles.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btImportFiles.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btImportFiles.Name = "btImportFiles";
+            this.btImportFiles.Primary = false;
+            this.btImportFiles.Size = new System.Drawing.Size(191, 36);
+            this.btImportFiles.TabIndex = 0;
+            this.btImportFiles.Text = "Import files in database";
+            this.btImportFiles.UseVisualStyleBackColor = false;
+            this.btImportFiles.Click += new System.EventHandler(this.btImportFiles_Click);
+            // 
+            // Bestanden
+            // 
+            this.Bestanden.BackColor = System.Drawing.Color.White;
+            this.Bestanden.Controls.Add(this.btAnalyse);
+            this.Bestanden.Controls.Add(this.txtFileLocation);
+            this.Bestanden.Controls.Add(this.btFileLocation);
+            this.Bestanden.Location = new System.Drawing.Point(4, 22);
+            this.Bestanden.Name = "Bestanden";
+            this.Bestanden.Padding = new System.Windows.Forms.Padding(3);
+            this.Bestanden.Size = new System.Drawing.Size(1257, 438);
+            this.Bestanden.TabIndex = 2;
+            this.Bestanden.Text = "Bestanden";
+            // 
+            // btAnalyse
+            // 
+            this.btAnalyse.Depth = 0;
+            this.btAnalyse.Location = new System.Drawing.Point(480, 29);
+            this.btAnalyse.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btAnalyse.Name = "btAnalyse";
+            this.btAnalyse.Primary = true;
+            this.btAnalyse.Size = new System.Drawing.Size(156, 23);
+            this.btAnalyse.TabIndex = 2;
+            this.btAnalyse.Text = "Analyse bestanden";
+            this.btAnalyse.UseVisualStyleBackColor = true;
+            this.btAnalyse.Click += new System.EventHandler(this.btAnalyse_Click);
+            // 
+            // txtFileLocation
+            // 
+            this.txtFileLocation.Depth = 0;
+            this.txtFileLocation.Hint = "";
+            this.txtFileLocation.Location = new System.Drawing.Point(152, 29);
+            this.txtFileLocation.MouseState = MaterialSkin.MouseState.HOVER;
+            this.txtFileLocation.Name = "txtFileLocation";
+            this.txtFileLocation.PasswordChar = '\0';
+            this.txtFileLocation.SelectedText = "";
+            this.txtFileLocation.SelectionLength = 0;
+            this.txtFileLocation.SelectionStart = 0;
+            this.txtFileLocation.Size = new System.Drawing.Size(292, 23);
+            this.txtFileLocation.TabIndex = 1;
+            this.txtFileLocation.UseSystemPasswordChar = false;
+            // 
+            // btFileLocation
+            // 
+            this.btFileLocation.Depth = 0;
+            this.btFileLocation.Location = new System.Drawing.Point(24, 30);
+            this.btFileLocation.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btFileLocation.Name = "btFileLocation";
+            this.btFileLocation.Primary = true;
+            this.btFileLocation.Size = new System.Drawing.Size(98, 23);
+            this.btFileLocation.TabIndex = 0;
+            this.btFileLocation.Text = "Locatie";
+            this.btFileLocation.UseVisualStyleBackColor = true;
+            this.btFileLocation.Click += new System.EventHandler(this.btFileLocation_Click);
+            // 
             // materialTabSelector1
             // 
             this.materialTabSelector1.BaseTabControl = this.materialTabControl;
@@ -342,118 +460,37 @@
             // 
             this.openFileDialogRecords.FileName = "openDossierFileDialog";
             // 
-            // btImportFiles
+            // tabPage1
             // 
-            this.btImportFiles.AutoSize = true;
-            this.btImportFiles.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btImportFiles.BackColor = System.Drawing.Color.White;
-            this.btImportFiles.Depth = 0;
-            this.btImportFiles.Location = new System.Drawing.Point(85, 13);
-            this.btImportFiles.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btImportFiles.MouseState = MaterialSkin.MouseState.HOVER;
-            this.btImportFiles.Name = "btImportFiles";
-            this.btImportFiles.Primary = false;
-            this.btImportFiles.Size = new System.Drawing.Size(191, 36);
-            this.btImportFiles.TabIndex = 0;
-            this.btImportFiles.Text = "Import files in database";
-            this.btImportFiles.UseVisualStyleBackColor = false;
-            this.btImportFiles.Click += new System.EventHandler(this.btImportFiles_Click);
+            this.tabPage1.BackColor = System.Drawing.Color.White;
+            this.tabPage1.Controls.Add(this.txtLogTopXCreate);
+            this.tabPage1.Controls.Add(this.btCreateTopX);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Size = new System.Drawing.Size(1257, 438);
+            this.tabPage1.TabIndex = 3;
+            this.tabPage1.Text = "TopX";
             // 
-            // txtErrorsDossiers
+            // btCreateTopX
             // 
-            this.txtErrorsDossiers.Location = new System.Drawing.Point(89, 115);
-            this.txtErrorsDossiers.Multiline = true;
-            this.txtErrorsDossiers.Name = "txtErrorsDossiers";
-            this.txtErrorsDossiers.Size = new System.Drawing.Size(512, 307);
-            this.txtErrorsDossiers.TabIndex = 1;
+            this.btCreateTopX.Depth = 0;
+            this.btCreateTopX.Location = new System.Drawing.Point(70, 57);
+            this.btCreateTopX.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btCreateTopX.Name = "btCreateTopX";
+            this.btCreateTopX.Primary = true;
+            this.btCreateTopX.Size = new System.Drawing.Size(133, 23);
+            this.btCreateTopX.TabIndex = 0;
+            this.btCreateTopX.Text = "Create TopX";
+            this.btCreateTopX.UseVisualStyleBackColor = true;
             // 
-            // txtErrorRecords
+            // txtLogTopXCreate
             // 
-            this.txtErrorRecords.Location = new System.Drawing.Point(607, 115);
-            this.txtErrorRecords.Multiline = true;
-            this.txtErrorRecords.Name = "txtErrorRecords";
-            this.txtErrorRecords.Size = new System.Drawing.Size(499, 307);
-            this.txtErrorRecords.TabIndex = 2;
-            // 
-            // materialLabel3
-            // 
-            this.materialLabel3.AutoSize = true;
-            this.materialLabel3.Depth = 0;
-            this.materialLabel3.Font = new System.Drawing.Font("Roboto", 11F);
-            this.materialLabel3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel3.Location = new System.Drawing.Point(85, 84);
-            this.materialLabel3.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel3.Name = "materialLabel3";
-            this.materialLabel3.Size = new System.Drawing.Size(114, 19);
-            this.materialLabel3.TabIndex = 3;
-            this.materialLabel3.Text = "Errors Dossiers";
-            // 
-            // materialLabel4
-            // 
-            this.materialLabel4.AutoSize = true;
-            this.materialLabel4.Depth = 0;
-            this.materialLabel4.Font = new System.Drawing.Font("Roboto", 11F);
-            this.materialLabel4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel4.Location = new System.Drawing.Point(603, 93);
-            this.materialLabel4.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel4.Name = "materialLabel4";
-            this.materialLabel4.Size = new System.Drawing.Size(109, 19);
-            this.materialLabel4.TabIndex = 4;
-            this.materialLabel4.Text = "Errors Records";
-            // 
-            // Bestanden
-            // 
-            this.Bestanden.BackColor = System.Drawing.Color.White;
-            this.Bestanden.Controls.Add(this.btAnalyse);
-            this.Bestanden.Controls.Add(this.txtFileLocation);
-            this.Bestanden.Controls.Add(this.btFileLocation);
-            this.Bestanden.Location = new System.Drawing.Point(4, 22);
-            this.Bestanden.Name = "Bestanden";
-            this.Bestanden.Padding = new System.Windows.Forms.Padding(3);
-            this.Bestanden.Size = new System.Drawing.Size(1257, 438);
-            this.Bestanden.TabIndex = 2;
-            this.Bestanden.Text = "Bestanden";
-            // 
-            // btFileLocation
-            // 
-            this.btFileLocation.Depth = 0;
-            this.btFileLocation.Location = new System.Drawing.Point(24, 30);
-            this.btFileLocation.MouseState = MaterialSkin.MouseState.HOVER;
-            this.btFileLocation.Name = "btFileLocation";
-            this.btFileLocation.Primary = true;
-            this.btFileLocation.Size = new System.Drawing.Size(98, 23);
-            this.btFileLocation.TabIndex = 0;
-            this.btFileLocation.Text = "Locatie";
-            this.btFileLocation.UseVisualStyleBackColor = true;
-            this.btFileLocation.Click += new System.EventHandler(this.btFileLocation_Click);
-            // 
-            // txtFileLocation
-            // 
-            this.txtFileLocation.Depth = 0;
-            this.txtFileLocation.Hint = "";
-            this.txtFileLocation.Location = new System.Drawing.Point(152, 29);
-            this.txtFileLocation.MouseState = MaterialSkin.MouseState.HOVER;
-            this.txtFileLocation.Name = "txtFileLocation";
-            this.txtFileLocation.PasswordChar = '\0';
-            this.txtFileLocation.SelectedText = "";
-            this.txtFileLocation.SelectionLength = 0;
-            this.txtFileLocation.SelectionStart = 0;
-            this.txtFileLocation.Size = new System.Drawing.Size(292, 23);
-            this.txtFileLocation.TabIndex = 1;
-            this.txtFileLocation.UseSystemPasswordChar = false;
-            // 
-            // btAnalyse
-            // 
-            this.btAnalyse.Depth = 0;
-            this.btAnalyse.Location = new System.Drawing.Point(480, 29);
-            this.btAnalyse.MouseState = MaterialSkin.MouseState.HOVER;
-            this.btAnalyse.Name = "btAnalyse";
-            this.btAnalyse.Primary = true;
-            this.btAnalyse.Size = new System.Drawing.Size(156, 23);
-            this.btAnalyse.TabIndex = 2;
-            this.btAnalyse.Text = "Analyse bestanden";
-            this.btAnalyse.UseVisualStyleBackColor = true;
-            this.btAnalyse.Click += new System.EventHandler(this.btAnalyse_Click);
+            this.txtLogTopXCreate.Location = new System.Drawing.Point(70, 107);
+            this.txtLogTopXCreate.Multiline = true;
+            this.txtLogTopXCreate.Name = "txtLogTopXCreate";
+            this.txtLogTopXCreate.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.txtLogTopXCreate.Size = new System.Drawing.Size(831, 237);
+            this.txtLogTopXCreate.TabIndex = 1;
             // 
             // TopXConverter
             // 
@@ -476,6 +513,8 @@
             this.tabImport.ResumeLayout(false);
             this.tabImport.PerformLayout();
             this.Bestanden.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -518,6 +557,9 @@
         private MaterialSkin.Controls.MaterialRaisedButton btFileLocation;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialogFiles;
         private MaterialSkin.Controls.MaterialRaisedButton btAnalyse;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TextBox txtLogTopXCreate;
+        private MaterialSkin.Controls.MaterialRaisedButton btCreateTopX;
     }
 }
 

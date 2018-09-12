@@ -29,5 +29,9 @@ namespace Topx.Data
         public string Bestand_Formaat_FysiekeIntegriteit_Algoritme { get; set; }
         public string Bestand_Formaat_FysiekeIntegriteit_Waarde { get; set; }
         public string DossierId { get; set; }
+        public string Bestand_Formaat_FysiekeIntegriteit_DatumEnTijd { get; set; }
+        public string Bestand_Formaat_DatumAanmaak { get; set; }
+    
+        public virtual Dossier Dossiers { get; set; }
     }
 }

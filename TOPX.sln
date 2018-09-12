@@ -30,6 +30,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topx.UnitTests", "Topx.Unit
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topx.FileAnalysis", "Topx.FileAnalysis\Topx.FileAnalysis.csproj", "{A9504EF0-E9EC-4308-9C9B-ACE575AAD67E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topx.Creator", "Topx.Parser\Topx.Creator.csproj", "{1E9B8660-0142-4818-AC8E-2B3FC0619783}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topx.Utility", "Topx.Utility\Topx.Utility.csproj", "{5862F3AF-2B57-4EE0-8E94-3A3D211737F1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -68,6 +72,14 @@ Global
 		{A9504EF0-E9EC-4308-9C9B-ACE575AAD67E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A9504EF0-E9EC-4308-9C9B-ACE575AAD67E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A9504EF0-E9EC-4308-9C9B-ACE575AAD67E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E9B8660-0142-4818-AC8E-2B3FC0619783}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E9B8660-0142-4818-AC8E-2B3FC0619783}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E9B8660-0142-4818-AC8E-2B3FC0619783}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E9B8660-0142-4818-AC8E-2B3FC0619783}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5862F3AF-2B57-4EE0-8E94-3A3D211737F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5862F3AF-2B57-4EE0-8E94-3A3D211737F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5862F3AF-2B57-4EE0-8E94-3A3D211737F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5862F3AF-2B57-4EE0-8E94-3A3D211737F1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

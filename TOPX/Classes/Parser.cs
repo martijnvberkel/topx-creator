@@ -44,8 +44,6 @@ namespace TOPX
                 {
                     try
                     {
-
-
                         var entries = (from d in entities.Source where d.C2_dn_Bestand.StartsWith(dossier) select d).ToList();
                         var dossiersZonderBeschikking =
                             (from d in entities.DossiersZonderBeschikking select d.DossierZonderBeschikking).ToList();
