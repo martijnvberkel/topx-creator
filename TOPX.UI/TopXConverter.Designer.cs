@@ -60,13 +60,13 @@
             this.btAnalyse = new MaterialSkin.Controls.MaterialRaisedButton();
             this.txtFileLocation = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.btFileLocation = new MaterialSkin.Controls.MaterialRaisedButton();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.txtLogTopXCreate = new System.Windows.Forms.TextBox();
+            this.btCreateTopX = new MaterialSkin.Controls.MaterialRaisedButton();
             this.materialTabSelector1 = new MaterialSkin.Controls.MaterialTabSelector();
             this.openFileDialogDossiers = new System.Windows.Forms.OpenFileDialog();
             this.openFileDialogRecords = new System.Windows.Forms.OpenFileDialog();
             this.folderBrowserDialogFiles = new System.Windows.Forms.FolderBrowserDialog();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.btCreateTopX = new MaterialSkin.Controls.MaterialRaisedButton();
-            this.txtLogTopXCreate = new System.Windows.Forms.TextBox();
             this.materialContextMenuStrip2.SuspendLayout();
             this.materialContextMenuStrip3.SuspendLayout();
             this.materialTabControl.SuspendLayout();
@@ -441,6 +441,39 @@
             this.btFileLocation.UseVisualStyleBackColor = true;
             this.btFileLocation.Click += new System.EventHandler(this.btFileLocation_Click);
             // 
+            // tabPage1
+            // 
+            this.tabPage1.BackColor = System.Drawing.Color.White;
+            this.tabPage1.Controls.Add(this.txtLogTopXCreate);
+            this.tabPage1.Controls.Add(this.btCreateTopX);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Size = new System.Drawing.Size(1257, 438);
+            this.tabPage1.TabIndex = 3;
+            this.tabPage1.Text = "TopX";
+            // 
+            // txtLogTopXCreate
+            // 
+            this.txtLogTopXCreate.Location = new System.Drawing.Point(70, 107);
+            this.txtLogTopXCreate.Multiline = true;
+            this.txtLogTopXCreate.Name = "txtLogTopXCreate";
+            this.txtLogTopXCreate.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.txtLogTopXCreate.Size = new System.Drawing.Size(831, 237);
+            this.txtLogTopXCreate.TabIndex = 1;
+            // 
+            // btCreateTopX
+            // 
+            this.btCreateTopX.Depth = 0;
+            this.btCreateTopX.Location = new System.Drawing.Point(70, 57);
+            this.btCreateTopX.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btCreateTopX.Name = "btCreateTopX";
+            this.btCreateTopX.Primary = true;
+            this.btCreateTopX.Size = new System.Drawing.Size(133, 23);
+            this.btCreateTopX.TabIndex = 0;
+            this.btCreateTopX.Text = "Create TopX";
+            this.btCreateTopX.UseVisualStyleBackColor = true;
+            this.btCreateTopX.Click += new System.EventHandler(this.btCreateTopX_Click);
+            // 
             // materialTabSelector1
             // 
             this.materialTabSelector1.BaseTabControl = this.materialTabControl;
@@ -459,38 +492,6 @@
             // openFileDialogRecords
             // 
             this.openFileDialogRecords.FileName = "openDossierFileDialog";
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.BackColor = System.Drawing.Color.White;
-            this.tabPage1.Controls.Add(this.txtLogTopXCreate);
-            this.tabPage1.Controls.Add(this.btCreateTopX);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Size = new System.Drawing.Size(1257, 438);
-            this.tabPage1.TabIndex = 3;
-            this.tabPage1.Text = "TopX";
-            // 
-            // btCreateTopX
-            // 
-            this.btCreateTopX.Depth = 0;
-            this.btCreateTopX.Location = new System.Drawing.Point(70, 57);
-            this.btCreateTopX.MouseState = MaterialSkin.MouseState.HOVER;
-            this.btCreateTopX.Name = "btCreateTopX";
-            this.btCreateTopX.Primary = true;
-            this.btCreateTopX.Size = new System.Drawing.Size(133, 23);
-            this.btCreateTopX.TabIndex = 0;
-            this.btCreateTopX.Text = "Create TopX";
-            this.btCreateTopX.UseVisualStyleBackColor = true;
-            // 
-            // txtLogTopXCreate
-            // 
-            this.txtLogTopXCreate.Location = new System.Drawing.Point(70, 107);
-            this.txtLogTopXCreate.Multiline = true;
-            this.txtLogTopXCreate.Name = "txtLogTopXCreate";
-            this.txtLogTopXCreate.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtLogTopXCreate.Size = new System.Drawing.Size(831, 237);
-            this.txtLogTopXCreate.TabIndex = 1;
             // 
             // TopXConverter
             // 

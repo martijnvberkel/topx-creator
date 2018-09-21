@@ -31,6 +31,10 @@ namespace Topx.Data
         public string DossierId { get; set; }
         public string Bestand_Formaat_FysiekeIntegriteit_DatumEnTijd { get; set; }
         public string Bestand_Formaat_DatumAanmaak { get; set; }
+        public string Relatie_RelatieId { get; set; }
+        public string Relatie_TypeRelatie { get; set; }
+        public string Relatie_DatumOfPperiode { get; set; }
+        public string Bestand_Formaat_IdentificatieKenmerk { get; set; }
     
         public virtual Dossier Dossiers { get; set; }
     }

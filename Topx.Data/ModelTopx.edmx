@@ -5,27 +5,6 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="ModelTopx.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="Bestanden">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Dossier_IdentificatieKenmerk" Type="nvarchar" MaxLength="50" />
-          <Property Name="Naam" Type="nvarchar(max)" />
-          <Property Name="Relatie_RelatieId" Type="nvarchar" MaxLength="50" />
-          <Property Name="Relatie_TypeRelatie" Type="nvarchar" MaxLength="50" />
-          <Property Name="Relatie_DatumOfPperiode" Type="nvarchar" MaxLength="50" />
-          <Property Name="Vorm_RedactieGenre" Type="nvarchar" MaxLength="50" />
-          <Property Name="Formaat_IdentificatieKenmerk" Type="nvarchar" MaxLength="50" />
-          <Property Name="Formaat_Bestandsnaam_Naam" Type="nvarchar" MaxLength="50" />
-          <Property Name="Formaat_Bestandsnaam_Extentie" Type="nvarchar" MaxLength="10" />
-          <Property Name="Formaat_Omvang" Type="bigint" />
-          <Property Name="Formaat_Bestandsformaat" Type="nvarchar" MaxLength="50" />
-          <Property Name="Formaat_FysiekeIntegriteit_Algoritme" Type="nvarchar" MaxLength="50" />
-          <Property Name="Formaat_FysiekeIntegriteit_Waarde" Type="nvarchar" MaxLength="250" />
-          <Property Name="Formaat_FysiekeIntegriteit_DatumEnTijd" Type="nvarchar" MaxLength="50" />
-          <Property Name="Formaat_DatumAanmaak" Type="nvarchar" MaxLength="50" />
-        </EntityType>
         <EntityType Name="Dossiers">
           <Key>
             <PropertyRef Name="IdentificatieKenmerk" />
@@ -101,19 +80,11 @@
           <Property Name="Bestand_Formaat_FysiekeIntegriteit_DatumEnTijd" Type="nvarchar" MaxLength="50" />
           <Property Name="Bestand_Formaat_DatumAanmaak" Type="nvarchar" MaxLength="50" />
           <Property Name="DossierId" Type="nvarchar" MaxLength="50" />
+          <Property Name="Relatie_RelatieId" Type="nvarchar" MaxLength="50" />
+          <Property Name="Relatie_TypeRelatie" Type="nvarchar" MaxLength="50" />
+          <Property Name="Relatie_DatumOfPperiode" Type="nvarchar" MaxLength="50" />
+          <Property Name="Bestand_Formaat_IdentificatieKenmerk" Type="nvarchar" MaxLength="50" />
         </EntityType>
-        <Association Name="FK_Bestanden_Dossiers">
-          <End Role="Dossiers" Type="Self.Dossiers" Multiplicity="0..1" />
-          <End Role="Bestanden" Type="Self.Bestanden" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Dossiers">
-              <PropertyRef Name="IdentificatieKenmerk" />
-            </Principal>
-            <Dependent Role="Bestanden">
-              <PropertyRef Name="Dossier_IdentificatieKenmerk" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Records_Dossiers">
           <End Role="Dossiers" Type="Self.Dossiers" Multiplicity="0..1" />
           <End Role="Records" Type="Self.Records" Multiplicity="*" />
@@ -127,15 +98,10 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="ModelTopxStoreContainer">
-          <EntitySet Name="Bestanden" EntityType="Self.Bestanden" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Dossiers" EntityType="Self.Dossiers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FieldMappings" EntityType="Self.FieldMappings" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Log" EntityType="Self.Log" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Records" EntityType="Self.Records" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_Bestanden_Dossiers" Association="Self.FK_Bestanden_Dossiers">
-            <End Role="Dossiers" EntitySet="Dossiers" />
-            <End Role="Bestanden" EntitySet="Bestanden" />
-          </AssociationSet>
           <AssociationSet Name="FK_Records_Dossiers" Association="Self.FK_Records_Dossiers">
             <End Role="Dossiers" EntitySet="Dossiers" />
             <End Role="Records" EntitySet="Records" />
@@ -146,42 +112,15 @@
     <edmx:ConceptualModels>
       <Schema Namespace="ModelTopx" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="TOPX_GenericEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Bestand" EntityType="ModelTopx.Bestand" />
           <EntitySet Name="Dossier" EntityType="ModelTopx.Dossier" />
           <EntitySet Name="FieldMapping" EntityType="ModelTopx.FieldMapping" />
           <EntitySet Name="Record" EntityType="ModelTopx.Record" />
-          <AssociationSet Name="FK_Bestanden_Dossiers" Association="ModelTopx.FK_Bestanden_Dossiers">
-            <End Role="Dossiers" EntitySet="Dossier" />
-            <End Role="Bestanden" EntitySet="Bestand" />
-          </AssociationSet>
           <AssociationSet Name="FK_Records_Dossiers" Association="ModelTopx.FK_Records_Dossiers">
             <End Role="Dossiers" EntitySet="Dossier" />
             <End Role="Records" EntitySet="Record" />
           </AssociationSet>
           <EntitySet Name="Log" EntityType="ModelTopx.Log" />
         </EntityContainer>
-        <EntityType Name="Bestand">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Dossier_IdentificatieKenmerk" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Naam" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Relatie_RelatieId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Relatie_TypeRelatie" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Relatie_DatumOfPperiode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Vorm_RedactieGenre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Formaat_IdentificatieKenmerk" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Formaat_Bestandsnaam_Naam" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Formaat_Bestandsnaam_Extentie" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="Formaat_Omvang" Type="Int64" />
-          <Property Name="Formaat_Bestandsformaat" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Formaat_FysiekeIntegriteit_Algoritme" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Formaat_FysiekeIntegriteit_Waarde" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="Formaat_FysiekeIntegriteit_DatumEnTijd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Formaat_DatumAanmaak" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Dossiers" Relationship="ModelTopx.FK_Bestanden_Dossiers" FromRole="Bestanden" ToRole="Dossiers" />
-        </EntityType>
         <EntityType Name="Dossier">
           <Key>
             <PropertyRef Name="IdentificatieKenmerk" />
@@ -217,7 +156,6 @@
           <Property Name="Openbaarheid_OmschrijvingBeperkingen" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Openbaarheid_DatumOfPeriode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Integriteit" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Bestanden" Relationship="ModelTopx.FK_Bestanden_Dossiers" FromRole="Dossiers" ToRole="Bestanden" />
           <NavigationProperty Name="Records" Relationship="ModelTopx.FK_Records_Dossiers" FromRole="Dossiers" ToRole="Records" />
         </EntityType>
         <EntityType Name="FieldMapping">
@@ -251,19 +189,11 @@
           <NavigationProperty Name="Dossiers" Relationship="ModelTopx.FK_Records_Dossiers" FromRole="Records" ToRole="Dossiers" />
           <Property Name="Bestand_Formaat_FysiekeIntegriteit_DatumEnTijd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Bestand_Formaat_DatumAanmaak" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Relatie_RelatieId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Relatie_TypeRelatie" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Relatie_DatumOfPperiode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Bestand_Formaat_IdentificatieKenmerk" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
-        <Association Name="FK_Bestanden_Dossiers">
-          <End Type="ModelTopx.Dossier" Role="Dossiers" Multiplicity="0..1" />
-          <End Type="ModelTopx.Bestand" Role="Bestanden" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Dossiers">
-              <PropertyRef Name="IdentificatieKenmerk" />
-            </Principal>
-            <Dependent Role="Bestanden">
-              <PropertyRef Name="Dossier_IdentificatieKenmerk" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Records_Dossiers">
           <End Type="ModelTopx.Dossier" Role="Dossiers" Multiplicity="0..1" />
           <End Type="ModelTopx.Record" Role="Records" Multiplicity="*" />
@@ -291,28 +221,6 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="ModelTopxStoreContainer" CdmEntityContainer="TOPX_GenericEntities">
-          <EntitySetMapping Name="Bestand">
-            <EntityTypeMapping TypeName="ModelTopx.Bestand">
-              <MappingFragment StoreEntitySet="Bestanden">
-                <ScalarProperty Name="Formaat_DatumAanmaak" ColumnName="Formaat_DatumAanmaak" />
-                <ScalarProperty Name="Formaat_FysiekeIntegriteit_DatumEnTijd" ColumnName="Formaat_FysiekeIntegriteit_DatumEnTijd" />
-                <ScalarProperty Name="Formaat_FysiekeIntegriteit_Waarde" ColumnName="Formaat_FysiekeIntegriteit_Waarde" />
-                <ScalarProperty Name="Formaat_FysiekeIntegriteit_Algoritme" ColumnName="Formaat_FysiekeIntegriteit_Algoritme" />
-                <ScalarProperty Name="Formaat_Bestandsformaat" ColumnName="Formaat_Bestandsformaat" />
-                <ScalarProperty Name="Formaat_Omvang" ColumnName="Formaat_Omvang" />
-                <ScalarProperty Name="Formaat_Bestandsnaam_Extentie" ColumnName="Formaat_Bestandsnaam_Extentie" />
-                <ScalarProperty Name="Formaat_Bestandsnaam_Naam" ColumnName="Formaat_Bestandsnaam_Naam" />
-                <ScalarProperty Name="Formaat_IdentificatieKenmerk" ColumnName="Formaat_IdentificatieKenmerk" />
-                <ScalarProperty Name="Vorm_RedactieGenre" ColumnName="Vorm_RedactieGenre" />
-                <ScalarProperty Name="Relatie_DatumOfPperiode" ColumnName="Relatie_DatumOfPperiode" />
-                <ScalarProperty Name="Relatie_TypeRelatie" ColumnName="Relatie_TypeRelatie" />
-                <ScalarProperty Name="Relatie_RelatieId" ColumnName="Relatie_RelatieId" />
-                <ScalarProperty Name="Naam" ColumnName="Naam" />
-                <ScalarProperty Name="Dossier_IdentificatieKenmerk" ColumnName="Dossier_IdentificatieKenmerk" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Dossier">
             <EntityTypeMapping TypeName="ModelTopx.Dossier">
               <MappingFragment StoreEntitySet="Dossiers">
@@ -363,6 +271,10 @@
           <EntitySetMapping Name="Record">
             <EntityTypeMapping TypeName="ModelTopx.Record">
               <MappingFragment StoreEntitySet="Records">
+                <ScalarProperty Name="Bestand_Formaat_IdentificatieKenmerk" ColumnName="Bestand_Formaat_IdentificatieKenmerk" />
+                <ScalarProperty Name="Relatie_DatumOfPperiode" ColumnName="Relatie_DatumOfPperiode" />
+                <ScalarProperty Name="Relatie_TypeRelatie" ColumnName="Relatie_TypeRelatie" />
+                <ScalarProperty Name="Relatie_RelatieId" ColumnName="Relatie_RelatieId" />
                 <ScalarProperty Name="Bestand_Formaat_DatumAanmaak" ColumnName="Bestand_Formaat_DatumAanmaak" />
                 <ScalarProperty Name="Bestand_Formaat_FysiekeIntegriteit_DatumEnTijd" ColumnName="Bestand_Formaat_FysiekeIntegriteit_DatumEnTijd" />
                 <ScalarProperty Name="DossierId" ColumnName="DossierId" />

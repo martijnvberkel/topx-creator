@@ -127,6 +127,14 @@
       <Project>{91592173-F613-4370-A362-0EF1AB0F3A65}</Project>
       <Name>Topx.Interface</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Topx.Parser\Topx.Creator.csproj">
+      <Project>{1e9b8660-0142-4818-ac8e-2b3fc0619783}</Project>
+      <Name>Topx.Creator</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Topx.Utility\Topx.Utility.csproj">
+      <Project>{5862f3af-2b57-4ee0-8e94-3a3d211737f1}</Project>
+      <Name>Topx.Utility</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

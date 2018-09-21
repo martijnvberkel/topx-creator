@@ -8,12 +8,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Serialization;
 using MaterialSkin;
 using MaterialSkin.Controls;
+using Topx.Creator;
 using Topx.Data;
 using Topx.FileAnalysis;
 using Topx.Importer;
 using Topx.Interface;
+using Topx.Parser.Model;
+using Topx.Utility;
+
 
 namespace TOPX.UI
 {
@@ -53,9 +58,14 @@ namespace TOPX.UI
 
         private void btSelectDossiers_Click(object sender, EventArgs e)
         {
-            if (openFileDialogDossiers.ShowDialog() == DialogResult.OK)
+          if (openFileDialogDossiers.ShowDialog() == DialogResult.OK)
             {
-                filelocationDossiers.Text = Path.GetFileName(openFileDialogDossiers.FileName);
+                if (IsFileOpen(openFileDialogDossiers.FileName))
+                {
+                    MessageBox.Show("Dossierbestand is geopend door een andere applicatie");
+                    return;
+                }
+                    filelocationDossiers.Text = Path.GetFileName(openFileDialogDossiers.FileName);
                 using (var sr = new StreamReader(openFileDialogDossiers.FileName))
                 {
                     _headersDossiers = sr.ReadLine().Split(";"[0]).ToList();
@@ -68,6 +78,11 @@ namespace TOPX.UI
         {
             if (openFileDialogRecords.ShowDialog() == DialogResult.OK)
             {
+                if (IsFileOpen(openFileDialogDossiers.FileName))
+                {
+                    MessageBox.Show("Dossierbestand is geopend door een andere applicatie");
+                    return;
+                }
                 filelocationRecords.Text = Path.GetFileName(openFileDialogRecords.FileName);
                 using (var sr = new StreamReader(openFileDialogRecords.FileName))
                 {
@@ -81,7 +96,7 @@ namespace TOPX.UI
         {
             using (var entities = new TOPX_GenericEntities())
             {
-               
+
                 entities.Database.ExecuteSqlCommand("truncate table Records");
                 entities.Database.ExecuteSqlCommand("truncate table Bestanden");
                 entities.Database.ExecuteSqlCommand("delete from Dossiers");
@@ -115,7 +130,7 @@ namespace TOPX.UI
         {
             using (var entities = new TOPX_GenericEntities())
             {
-               
+
                 var dialogResult = folderBrowserDialogFiles.ShowDialog();
                 if (dialogResult == DialogResult.OK)
                 {
@@ -134,11 +149,68 @@ namespace TOPX.UI
             using (var entities = new TOPX_GenericEntities())
             {
                 var records = (from r in entities.Record select r).ToList();
-                var bestanden = (from b in entities.Bestand select b).ToList();
+                //var bestanden = (from b in entities.Bestand select b).ToList();
                 var metadata = new Metadata();
                 //metadata.Collect(txtFileLocation.Text, records, bestanden);
                 entities.SaveChanges();
             }
+        }
+
+        private void btCreateTopX_Click(object sender, EventArgs e)
+        {
+            var parser = new Parser();
+            var result = parser.ParseDataToTopx();
+
+
+            txtLogTopXCreate.Text = Logger.GetLog();
+            Cursor.Current = Cursors.Default;
+
+            if (MessageBox.Show("Save xml?", "xml", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                SaveAsXml(result);
+
+        }
+
+        private void SaveAsXml(recordInformationPackage result)
+        {
+            var savefile = new SaveFileDialog();
+
+            savefile.FileName = "export.xml";
+            if (savefile.ShowDialog() == DialogResult.OK)
+            {
+                var encoding = Encoding.UTF8;//.GetEncoding("ISO-8859-1");
+                using (var writer = new StreamWriter(savefile.FileName, false, encoding))
+                {
+                    var serializer = new XmlSerializer(typeof(recordInformationPackage));
+                    serializer.Serialize(writer, result);
+                    writer.Flush();
+                }
+            }
+        }
+
+        private bool IsFileOpen(string fileName)
+        {
+            FileStream stream = null;
+            var file = new FileInfo(fileName);
+
+            try
+            {
+                stream = file.Open(FileMode.Open, FileAccess.Read, FileShare.None);
+            }
+            catch (IOException)
+            {
+                //the file is unavailable because it is:
+                //still being written to
+                //or being processed by another thread
+                //or does not exist (has already been processed)
+                return true;
+            }
+            finally
+            {
+                stream?.Close();
+            }
+
+            //file is not locked
+            return false;
         }
     }
 }

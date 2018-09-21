@@ -49,9 +49,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Bestand.cs">
-      <DependentUpon>ModelTopx.tt</DependentUpon>
-    </Compile>
     <Compile Include="Dossier.cs">
       <DependentUpon>ModelTopx.tt</DependentUpon>
     </Compile>

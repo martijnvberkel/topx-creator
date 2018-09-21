@@ -15,7 +15,7 @@ namespace Topx.FileAnalysis
         public bool Error;
         public StringBuilder ErrorMessages = new StringBuilder();
 
-        public void Collect(string path, List<Record> records, List<Bestand> bestanden)
+        public void Collect(string path, List<Record> records)
         {
             foreach (var record in records)
             {

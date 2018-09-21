@@ -16,6 +16,14 @@ namespace Topx.Utility
             }
         }
 
+        public static void ClearLog()
+        {
+            using (var entities = new TOPX_GenericEntities())
+            {
+                entities.Database.ExecuteSqlCommand("TRUNCATE TABLE log");
+            }
+        }
+
         public static string GetLog()
         {
             using (var entities = new TOPX_GenericEntities())

@@ -7,8 +7,8 @@
     <ProjectGuid>{1E9B8660-0142-4818-AC8E-2B3FC0619783}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Topx.Parser</RootNamespace>
-    <AssemblyName>Topx.Parser</AssemblyName>
+    <RootNamespace>Topx.Creator</RootNamespace>
+    <AssemblyName>Topx.Creator</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

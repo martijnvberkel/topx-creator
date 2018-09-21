@@ -35,11 +35,11 @@ namespace Topx.Interface
 
             _headersRecords = GetPropertyInfoNames(propertyInfosRecords, MappingType.RECORD);
 
-            var propertyInfosBestand = new Bestand().GetType().GetProperties(BindingFlags.DeclaredOnly |
-                                                                             BindingFlags.Public |
-                                                                             BindingFlags.Instance);
+            //var propertyInfosBestand = new Bestand().GetType().GetProperties(BindingFlags.DeclaredOnly |
+            //                                                                 BindingFlags.Public |
+            //                                                                 BindingFlags.Instance);
 
-            _headersBestanden = GetPropertyInfoNames(propertyInfosBestand, MappingType.BESTAND);
+           // _headersBestanden = GetPropertyInfoNames(propertyInfosBestand, MappingType.BESTAND);
 
         }
 
