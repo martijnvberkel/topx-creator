@@ -65,38 +65,16 @@ namespace Topx.Creator
                             Logger.Log(dossier.IdentificatieKenmerk, "Veld Naam is leeg");
                         }
 
-
-                        //var testForDoubles = from t in entities.Source
-                        //    where
-                        //    t.C2zn__Zaaknummer == source.C2zn__Zaaknummer
-                        //    && t.C2_dn_Bestand.Substring(0, t.C2_dn_Bestand.Length - 3) != source.C2_dn_Bestand.Substring(0, source.C2_dn_Bestand.Length - 3)
-                        //    select t;
-
-                        //if (testForDoubles.Any())
-                        //{
-                        //    Logger.Log(source.C2_dn_Bestand, $"Zaaknummer {source.C2zn__Zaaknummer} komt meer dan 1 keer voor bij verschillende dossiers.");
-                        //    continue;
-                        //}
-
                         ValidateDossier(dossier);
 
                         Rip.record.Add(RipBeschikkingAsDossier(dossier));
-                        //ZaaknummerMarkForDelivered.Add(dossier);
-
-                        Rip.record.Add(RipOobjectAsDoc(dossier));
+                      
+                        //Rip.record.Add(RipOobjectAsDoc(dossier, dossier.IdentificatieKenmerk));
 
                         foreach (var record in dossier.Records)
                         {
-                            //double test2;
-                            //if (!double.TryParse(bestandEntry.FileSize_Bytes.ToString(), out test2))
-                            //{
-                            //    throw new Exception("File size is not in correct format");
-
-                            //}
-
-                           
+                            Rip.record.Add(RipOobjectAsDoc(dossier, $"{dossier.IdentificatieKenmerk}_{Path.GetFileNameWithoutExtension(record.Bestand_Formaat_Bestandsnaam)}" ));
                             Rip.record.Add(RipObjectAsBestand(record));
-
                         }
                     }
                     catch (Exception ex)
@@ -121,25 +99,25 @@ namespace Topx.Creator
         }
 
 
-        private ripRecordType RipOobjectAsDoc(Dossier dossier)
+        private ripRecordType RipOobjectAsDoc(Dossier dossier, string identificatieKenmerk)
         {
             //var identificatie = dossierId + "_FILE_" + count;
             var riprecordType = new ripRecordType()
             {
                 recordHeader = new ripRecordHeaderType()
                 {
-                    identificatie = dossier.IdentificatieKenmerk,
+                    identificatie = identificatieKenmerk,
                 },
                 metadata = new[] {new  ripMetadataType()
                 {
                     schemaURI = "topx",
-                    Any = ConvertTopxToXmlElement(GetDocAsTopx(dossier))
+                    Any = ConvertTopxToXmlElement(GetRecordAsTopx(dossier, identificatieKenmerk))
                 }}
             };
             return riprecordType;
         }
 
-        private topxType GetDocAsTopx(Dossier dossier)
+        private topxType GetRecordAsTopx(Dossier dossier, string identificatieKenmerk)
         {
             
             var eventgeschiedenis_DatumOfPeriode = DateTime.ParseExact(dossier.Eventgeschiedenis_DatumOfPeriode, DateParsing, CultureInfo.InvariantCulture).ToString("yyyy-MM-dd");
@@ -169,7 +147,7 @@ namespace Topx.Creator
             {
                 Item = new aggregatieType()
                 {
-                    identificatiekenmerk = new nonEmptyStringTypeAttribuut() { Value = dossier.IdentificatieKenmerk },
+                    identificatiekenmerk = new nonEmptyStringTypeAttribuut() { Value = identificatieKenmerk },
 
                     eventGeschiedenis = new eventGeschiedenisType[] { new eventGeschiedenisType() {datumOfPeriode = new datumOfPeriodeType()
                         { datum = eventgeschiedenis_DatumOfPeriode },
@@ -215,94 +193,10 @@ namespace Topx.Creator
                     }
                 }
             };
-
-
-
             return topx;
         }
 
-        private gebruiksrechtenType[] GetGebruiksrechten(Record record)
-        {
-            //var datum = DateTime.ParseExact(source.C91_zn_Datum_vergunning,
-            //    "yyyy.MM.dd", CultureInfo.InvariantCulture);
-
-            //var gebruiksrechtenCol = from o in entities.Gebruiksrechten where o.naam == source.C2_dn_Bestand orderby o.begin select o;
-           // if (!gebruiksrechtenCol.Any())
-            {
-                return new gebruiksrechtenType[]
-                {
-                    new gebruiksrechtenType()
-                    {
-                        omschrijvingVoorwaarden = new nonEmptyStringTypeAttribuut()
-                        {
-                            Value = record.Gebruiksrechten_OmschrijvingVoorwaarden
-                        },
-                        datumOfPeriode = new datumOfPeriodeType()
-                        {
-                            datum = DateTime.ParseExact(record.Gebruiksrechten_OmschrijvingVoorwaarden,
-                                "dd-MM-yyyy",CultureInfo.InvariantCulture).ToString("yyyy-MM-dd")
-                        }
-                    }
-                };
-            }
-            // record(s) gebruiksrechten gevonden
-            //List<gebruiksrechtenType> listGebruiksrechten = new List<gebruiksrechtenType>();
-
-            //foreach (var gebruiksrechten in gebruiksrechtenCol)
-            //{
-            //    if (gebruiksrechten.eind != null)
-            //    {
-            //        listGebruiksrechten.Add(
-            //            new gebruiksrechtenType()
-            //            {
-            //                omschrijvingVoorwaarden = new nonEmptyStringTypeAttribuut()
-
-            //                { Value = gebruiksrechten.omschrijvingVoorwaarden },
-            //                datumOfPeriode = new datumOfPeriodeType()
-            //                {
-            //                    periode = new periodeType()
-            //                    {
-            //                        begin = new datumOfJaarType()
-            //                        {
-            //                            Item = new datumOfJaarTypeDatum()
-            //                            {
-            //                                Value = (DateTime)gebruiksrechten.begin
-            //                            }
-            //                        },
-            //                        //eind = new datumOfJaarType()
-            //                        //{
-            //                        //    Item = new datumOfJaarTypeDatum()
-            //                        //    {
-            //                        //        Value = (DateTime)gebruiksrechten.eind
-            //                        //    }
-            //                        //}
-            //                    }
-            //                }
-            //            });
-            //    }
-            //    else // openbaarheid.eind is niet ingevuld 
-            //    {
-            //        listGebruiksrechten.Add(
-            //            new gebruiksrechtenType()
-            //            {
-            //                omschrijvingVoorwaarden = new nonEmptyStringTypeAttribuut()
-            //                {
-            //                    Value = gebruiksrechten.omschrijvingVoorwaarden
-            //                },
-            //                datumOfPeriode = new datumOfPeriodeType()
-            //                {
-            //                    //datum = new datumOfPeriodeType() { datum = Convert.ToDateTime(gebruiksrechten.begin).ToString("yyyy-MM-dd") }
-            //                    datum = DateTime.ParseExact(gebruiksrechten.begin,
-            //                        "dd-MM-yyyy", CultureInfo.InvariantCulture).ToString("yyyy-MM-dd")
-                                
-            //                }
-            //            });
-
-            //    }
-            //}
-            //return listGebruiksrechten.ToArray();
-
-        }
+       
 
         private openbaarheidType[] GetOpenbaarheid(Dossier dossier)
         {
@@ -597,7 +491,7 @@ namespace Topx.Creator
                 taal = new taalTypeAttribuut[] { new taalTypeAttribuut() { Value = (taalType)Enum.Parse(typeof(taalType), dossier.Taal) } },
                 relatie = new[] {new relatieType()
                 {
-                    relatieID = new nonEmptyStringTypeAttribuut() {Value = dossier.IdentificatieKenmerk },
+                    relatieID = new nonEmptyStringTypeAttribuut() {Value = _identificatieArchief },
                     typeRelatie = new nonEmptyStringTypeAttribuut() {Value = dossier.Relatie_Type == null ? "Hiërarchisch" : dossier.Relatie_Type},
                     datumOfPeriode = new datumOfPeriodeType() {
                         datum = relatie_DatumOfPeriode
