@@ -9,7 +9,6 @@ D:\Visual Studio Projects\TOPX\TOPX\Topx.Converter\bin\Debug\TOPX.pdb
 D:\Visual Studio Projects\TOPX\TOPX\Topx.Converter\bin\Debug\EntityFramework.xml
 D:\Visual Studio Projects\TOPX\TOPX\Topx.Converter\bin\Debug\EntityFramework.SqlServer.xml
 D:\Visual Studio Projects\TOPX\TOPX\Topx.Converter\bin\Debug\LumenWorks.Framework.IO.xml
-D:\Visual Studio Projects\TOPX\TOPX\Topx.Converter\obj\Debug\Topx.Converter.csprojResolveAssemblyReference.cache
 D:\Visual Studio Projects\TOPX\TOPX\Topx.Converter\obj\Debug\Topx.Converter.Topx.resources
 D:\Visual Studio Projects\TOPX\TOPX\Topx.Converter\obj\Debug\Topx.Converter.Properties.Resources.resources
 D:\Visual Studio Projects\TOPX\TOPX\Topx.Converter\obj\Debug\Topx.Converter.csproj.GenerateResource.Cache
@@ -18,3 +17,4 @@ D:\Visual Studio Projects\TOPX\TOPX\Topx.Converter\obj\Debug\Topx.Converter.pdb
 D:\Visual Studio Projects\TOPX\TOPX\Topx.Converter\bin\Debug\TOPX.dll.config
 D:\Visual Studio Projects\TOPX\TOPX\Topx.Converter\obj\Debug\Topx.Converter.csproj.CoreCompileInputs.cache
 D:\Visual Studio Projects\TOPX\TOPX\Topx.Converter\obj\Debug\Topx.Converter.csproj.CopyComplete
+D:\Visual Studio Projects\TOPX\TOPX\Topx.Converter\obj\Debug\Topx.Converter.csprojAssemblyReference.cache
