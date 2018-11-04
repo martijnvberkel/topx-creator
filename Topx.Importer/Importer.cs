@@ -14,11 +14,11 @@ namespace Topx.Importer
 {
     public class Importer
     {
-        private readonly TOPX_GenericEntities _entities;
+        private readonly ModelTopX _entities;
         public string ErrorMessage;
         public bool Error;
 
-        public Importer(TOPX_GenericEntities entities)
+        public Importer(ModelTopX entities)
         {
             _entities = entities;
         }

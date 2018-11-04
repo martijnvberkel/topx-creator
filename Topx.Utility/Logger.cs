@@ -9,7 +9,7 @@ namespace Topx.Utility
     {
         public static void Log(string dossier, string message)
         {
-            using (var entities = new TOPX_GenericEntities())
+            using (var entities = new ModelTopX())
             {
                 entities.Log.Add(new Log() { Identifier = dossier, Description = message, DateTime = DateTime.Now });
                 entities.SaveChanges();
@@ -18,7 +18,7 @@ namespace Topx.Utility
 
         public static void ClearLog()
         {
-            using (var entities = new TOPX_GenericEntities())
+            using (var entities = new ModelTopX())
             {
                 entities.Database.ExecuteSqlCommand("TRUNCATE TABLE log");
             }
@@ -26,7 +26,7 @@ namespace Topx.Utility
 
         public static string GetLog()
         {
-            using (var entities = new TOPX_GenericEntities())
+            using (var entities = new ModelTopX())
             {
                 var logEntries = from l in entities.Log select l;
                 var stringBuilder = new StringBuilder();

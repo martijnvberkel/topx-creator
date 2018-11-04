@@ -56,7 +56,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Topx.Data\Topx.Data.csproj">
-      <Project>{71ff9484-30cd-4406-a6e5-e8d9d62c0ca5}</Project>
+      <Project>{982EDCDB-E044-43D5-8071-BB4728C6A173}</Project>
       <Name>Topx.Data</Name>
     </ProjectReference>
   </ItemGroup>

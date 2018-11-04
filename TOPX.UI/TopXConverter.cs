@@ -39,13 +39,19 @@ namespace TOPX.UI
             materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
             materialSkinManager.ColorScheme = new ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.LightBlue200, TextShade.WHITE);
 
-
         }
 
 
         private void TopXConverter_Load(object sender, EventArgs e)
         {
-            _headers = new Headers(new TOPX_GenericEntities());
+            _headers = new Headers(new ModelTopX());
+            using (var entities = new ModelTopX())
+            {
+                var x = (from i in entities.Dossiers select i).ToList();
+                x.Add(new Dossier() { Classificatie_Bron = "test" });
+                entities.SaveChanges();
+            }
+
             gridFieldMappingDossiers.AutoGenerateColumns = false;
             gridFieldMappingRecords.AutoGenerateColumns = false;
         }
@@ -55,46 +61,9 @@ namespace TOPX.UI
 
         }
 
-
-        private void btSelectDossiers_Click(object sender, EventArgs e)
-        {
-          if (openFileDialogDossiers.ShowDialog() == DialogResult.OK)
-            {
-                if (IsFileOpen(openFileDialogDossiers.FileName))
-                {
-                    MessageBox.Show("Dossierbestand is geopend door een andere applicatie");
-                    return;
-                }
-                    filelocationDossiers.Text = Path.GetFileName(openFileDialogDossiers.FileName);
-                using (var sr = new StreamReader(openFileDialogDossiers.FileName))
-                {
-                    _headersDossiers = sr.ReadLine().Split(";"[0]).ToList();
-                }
-            }
-            gridFieldMappingDossiers.DataSource = _headers.GetHeaderMappingDossiers(_headersDossiers);
-        }
-
-        private void btSelectRecords_Click(object sender, EventArgs e)
-        {
-            if (openFileDialogRecords.ShowDialog() == DialogResult.OK)
-            {
-                if (IsFileOpen(openFileDialogDossiers.FileName))
-                {
-                    MessageBox.Show("Dossierbestand is geopend door een andere applicatie");
-                    return;
-                }
-                filelocationRecords.Text = Path.GetFileName(openFileDialogRecords.FileName);
-                using (var sr = new StreamReader(openFileDialogRecords.FileName))
-                {
-                    _headersRecords = sr.ReadLine().Split(";"[0]).ToList();
-                }
-            }
-            gridFieldMappingRecords.DataSource = _headers.GetHeaderMappingRecordsBestanden(_headersRecords);
-        }
-
         private void btImportFiles_Click(object sender, EventArgs e)
         {
-            using (var entities = new TOPX_GenericEntities())
+            using (var entities = new ModelTopX())
             {
 
                 entities.Database.ExecuteSqlCommand("truncate table Records");
@@ -128,7 +97,7 @@ namespace TOPX.UI
 
         private void btFileLocation_Click(object sender, EventArgs e)
         {
-            using (var entities = new TOPX_GenericEntities())
+            using (var entities = new ModelTopX())
             {
 
                 var dialogResult = folderBrowserDialogFiles.ShowDialog();
@@ -146,9 +115,9 @@ namespace TOPX.UI
                 MessageBox.Show("Directory bestaat niet");
                 return;
             }
-            using (var entities = new TOPX_GenericEntities())
+            using (var entities = new ModelTopX())
             {
-                var records = (from r in entities.Record select r).ToList();
+                var records = (from r in entities.Records select r).ToList();
                 //var bestanden = (from b in entities.Bestand select b).ToList();
                 var metadata = new Metadata();
                 //metadata.Collect(txtFileLocation.Text, records, bestanden);
@@ -211,6 +180,43 @@ namespace TOPX.UI
 
             //file is not locked
             return false;
+        }
+
+        private void txtDossierLocation_Click(object sender, EventArgs e)
+        {
+            if (openFileDialogDossiers.ShowDialog() == DialogResult.OK)
+            {
+                if (IsFileOpen(openFileDialogDossiers.FileName))
+                {
+                    MessageBox.Show("Dossierbestand is geopend door een andere applicatie");
+                    return;
+                }
+                txtDossierLocation.Text = Path.GetFileName(openFileDialogDossiers.FileName);
+                using (var sr = new StreamReader(openFileDialogDossiers.FileName))
+                {
+                    _headersDossiers = sr.ReadLine().Split(";"[0]).ToList();
+                }
+            }
+            gridFieldMappingDossiers.DataSource = _headers.GetHeaderMappingDossiers(_headersDossiers);
+
+        }
+
+        private void txtRecordBestandLocation_Click(object sender, EventArgs e)
+        {
+            if (openFileDialogRecords.ShowDialog() == DialogResult.OK)
+            {
+                if (IsFileOpen(openFileDialogDossiers.FileName))
+                {
+                    MessageBox.Show("Dossierbestand is geopend door een andere applicatie");
+                    return;
+                }
+                txtRecordBestandLocation.Text = Path.GetFileName(openFileDialogRecords.FileName);
+                using (var sr = new StreamReader(openFileDialogRecords.FileName))
+                {
+                    _headersRecords = sr.ReadLine().Split(";"[0]).ToList();
+                }
+            }
+            gridFieldMappingRecords.DataSource = _headers.GetHeaderMappingRecordsBestanden(_headersRecords);
         }
     }
 }

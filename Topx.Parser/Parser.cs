@@ -27,7 +27,7 @@ namespace Topx.Creator
         }
         public recordInformationPackage ParseDataToTopx(int nrOfRecords = 0)
         {
-            using (var entities = new TOPX_GenericEntities())
+            using (var entities = new ModelTopX())
             {
                 _identificatieArchief = "NL-0784-10009";
                 var datumArchief = Convert.ToDateTime(DateTime.Today);
@@ -49,7 +49,7 @@ namespace Topx.Creator
                     record = RipArchief(_identificatieArchief, naamArchief)
                 };
 
-                var listOfDossiers = from d in entities.Dossier select d;
+                var listOfDossiers = from d in entities.Dossiers select d;
                 var recordCounter = 0;
                 foreach (var dossier in listOfDossiers)
                 {

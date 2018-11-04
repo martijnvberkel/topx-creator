@@ -93,10 +93,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Topx.Data\Topx.Data.csproj">
-      <Project>{71ff9484-30cd-4406-a6e5-e8d9d62c0ca5}</Project>
-      <Name>Topx.Data</Name>
-    </ProjectReference>
     <ProjectReference Include="..\TOPX\TOPX.csproj">
       <Project>{1dbc2faf-54db-4626-af20-3996ee6e68c3}</Project>
       <Name>TOPX</Name>

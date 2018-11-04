@@ -6,42 +6,44 @@ using System.Text;
 using System.Threading.Tasks;
 using Topx.Data;
 
+
 namespace Topx.Interface
 {
     public class Headers
     {
-        private readonly TOPX_GenericEntities _entities;
+        private readonly ModelTopX _entities;
         public enum MappingType { DOSSIER, RECORD, BESTAND}
 
-        private readonly List<FieldMapping> _headersDossiers;
-        private readonly List<FieldMapping> _headersRecords;
+        private List<FieldMapping> _headersDossiers;
+        private List<FieldMapping> _headersRecords;
         private readonly List<FieldMapping> _headersBestanden;
         private List<FieldMapping> _headerMappingRecordsBestanden;
 
         public List<FieldMapping> HeadersRecordsBestanden =>  _headersRecords.Concat(_headersBestanden) .ToList();
 
-        public Headers(TOPX_GenericEntities entities)
+        public Headers(ModelTopX entities)
         {
             _entities = entities;
+        }
+
+        private void CreateListOfAvailableColumnsOfDossiers()
+        {
             var propertyInfosDossiers = new Dossier().GetType().GetProperties(BindingFlags.DeclaredOnly |
-                                                       BindingFlags.Public |
-                                                       BindingFlags.Instance) ;
+                                                                              BindingFlags.Public |
+                                                                              BindingFlags.Instance);
 
             _headersDossiers = GetPropertyInfoNames(propertyInfosDossiers, MappingType.DOSSIER);
+        }
 
-            var propertyInfosRecords= new Record().GetType().GetProperties(BindingFlags.DeclaredOnly |
-                                                                       BindingFlags.Public |
-                                                                       BindingFlags.Instance);
+        private void CreateListOfAvailableColumnsOfRecords()
+        {
+            var propertyInfosRecords = new Record().GetType().GetProperties(BindingFlags.DeclaredOnly |
+                                                                            BindingFlags.Public |
+                                                                            BindingFlags.Instance);
 
             _headersRecords = GetPropertyInfoNames(propertyInfosRecords, MappingType.RECORD);
-
-            //var propertyInfosBestand = new Bestand().GetType().GetProperties(BindingFlags.DeclaredOnly |
-            //                                                                 BindingFlags.Public |
-            //                                                                 BindingFlags.Instance);
-
-           // _headersBestanden = GetPropertyInfoNames(propertyInfosBestand, MappingType.BESTAND);
-
         }
+
 
         private List<FieldMapping> GetPropertyInfoNames(PropertyInfo[] propertyInfos, MappingType type)
         {
@@ -51,6 +53,7 @@ namespace Topx.Interface
 
         public List<FieldMapping> GetHeaderMappingDossiers(List<string> sourceHeaders)
         {
+            CreateListOfAvailableColumnsOfDossiers();
            foreach (var sourceHeader in sourceHeaders)
            {
                var headersDossier = _headersDossiers.FirstOrDefault(t => t.DatabaseFieldName == sourceHeader);
@@ -70,6 +73,7 @@ namespace Topx.Interface
 
         public List<FieldMapping> GetHeaderMappingRecordsBestanden(List<string> sourceHeaders)
         {
+            CreateListOfAvailableColumnsOfRecords();
             foreach (var sourceHeader in sourceHeaders)
             {
                 var headerRecords = _headersRecords.FirstOrDefault(t => t.DatabaseFieldName == sourceHeader);
