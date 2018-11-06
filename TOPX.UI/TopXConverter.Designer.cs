@@ -1,4 +1,5 @@
-﻿using TOPX.UI.Controls;
+﻿using System.Windows.Forms;
+using TOPX.UI.Controls;
 
 namespace TOPX.UI
 {
@@ -44,15 +45,19 @@ namespace TOPX.UI
             this.materialTabSelector1 = new MaterialSkin.Controls.MaterialTabSelector();
             this.materialTabControl1 = new MaterialSkin.Controls.MaterialTabControl();
             this.tabGlobals = new System.Windows.Forms.TabPage();
+            this.txtIdentificatieArchief = new TOPX.UI.Controls.PlaceHolderTextBox();
+            this.materialLabel12 = new MaterialSkin.Controls.MaterialLabel();
+            this.btSaveGlobals = new System.Windows.Forms.Button();
+            this.btFillDatumArchief = new System.Windows.Forms.Button();
             this.txtNaamArchief = new TOPX.UI.Controls.PlaceHolderTextBox();
             this.materialLabel9 = new MaterialSkin.Controls.MaterialLabel();
-            this.txtDoelArchief = new System.Windows.Forms.TextBox();
+            this.txtDoelArchief = new TOPX.UI.Controls.PlaceHolderTextBox();
             this.materialLabel11 = new MaterialSkin.Controls.MaterialLabel();
-            this.txtBronArchief = new System.Windows.Forms.TextBox();
+            this.txtBronArchief = new TOPX.UI.Controls.PlaceHolderTextBox();
             this.materialLabel8 = new MaterialSkin.Controls.MaterialLabel();
-            this.txtOmschrijvingArchief = new System.Windows.Forms.TextBox();
+            this.txtOmschrijvingArchief = new TOPX.UI.Controls.PlaceHolderTextBox();
             this.materialLabel7 = new MaterialSkin.Controls.MaterialLabel();
-            this.txtDatumArchief = new System.Windows.Forms.TextBox();
+            this.txtDatumArchief = new System.Windows.Forms.MaskedTextBox();
             this.materialLabel10 = new MaterialSkin.Controls.MaterialLabel();
             this.tabLoadFiles = new System.Windows.Forms.TabPage();
             this.materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
@@ -143,7 +148,6 @@ namespace TOPX.UI
             this.ditIs1ToolStripMenuItem.Name = "ditIs1ToolStripMenuItem";
             this.ditIs1ToolStripMenuItem.Size = new System.Drawing.Size(130, 30);
             this.ditIs1ToolStripMenuItem.Text = "DitIs1";
-            this.ditIs1ToolStripMenuItem.Click += new System.EventHandler(this.ditIs1ToolStripMenuItem_Click);
             // 
             // ditIs2ToolStripMenuItem
             // 
@@ -193,6 +197,10 @@ namespace TOPX.UI
             // 
             // tabGlobals
             // 
+            this.tabGlobals.Controls.Add(this.txtIdentificatieArchief);
+            this.tabGlobals.Controls.Add(this.materialLabel12);
+            this.tabGlobals.Controls.Add(this.btSaveGlobals);
+            this.tabGlobals.Controls.Add(this.btFillDatumArchief);
             this.tabGlobals.Controls.Add(this.txtNaamArchief);
             this.tabGlobals.Controls.Add(this.materialLabel9);
             this.tabGlobals.Controls.Add(this.txtDoelArchief);
@@ -211,11 +219,55 @@ namespace TOPX.UI
             this.tabGlobals.Text = "Gegevens";
             this.tabGlobals.UseVisualStyleBackColor = true;
             // 
+            // txtIdentificatieArchief
+            // 
+            this.txtIdentificatieArchief.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Italic);
+            this.txtIdentificatieArchief.ForeColor = System.Drawing.Color.Gray;
+            this.txtIdentificatieArchief.Location = new System.Drawing.Point(402, 119);
+            this.txtIdentificatieArchief.Name = "txtIdentificatieArchief";
+            this.txtIdentificatieArchief.PlaceHolderText = "NL-0784-10009";
+            this.txtIdentificatieArchief.Size = new System.Drawing.Size(289, 26);
+            this.txtIdentificatieArchief.TabIndex = 13;
+            this.txtIdentificatieArchief.Text = "NL-0784-10009";
+            // 
+            // materialLabel12
+            // 
+            this.materialLabel12.AutoSize = true;
+            this.materialLabel12.Depth = 0;
+            this.materialLabel12.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialLabel12.Location = new System.Drawing.Point(169, 119);
+            this.materialLabel12.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel12.Name = "materialLabel12";
+            this.materialLabel12.Size = new System.Drawing.Size(202, 27);
+            this.materialLabel12.TabIndex = 12;
+            this.materialLabel12.Text = "Identificatie Archief";
+            // 
+            // btSaveGlobals
+            // 
+            this.btSaveGlobals.Location = new System.Drawing.Point(402, 399);
+            this.btSaveGlobals.Name = "btSaveGlobals";
+            this.btSaveGlobals.Size = new System.Drawing.Size(120, 29);
+            this.btSaveGlobals.TabIndex = 10;
+            this.btSaveGlobals.Text = "Opslaan";
+            this.btSaveGlobals.UseVisualStyleBackColor = true;
+            this.btSaveGlobals.Click += new System.EventHandler(this.btSaveGlobals_Click);
+            // 
+            // btFillDatumArchief
+            // 
+            this.btFillDatumArchief.Location = new System.Drawing.Point(571, 172);
+            this.btFillDatumArchief.Name = "btFillDatumArchief";
+            this.btFillDatumArchief.Size = new System.Drawing.Size(120, 29);
+            this.btFillDatumArchief.TabIndex = 9;
+            this.btFillDatumArchief.Text = "Vandaag";
+            this.btFillDatumArchief.UseVisualStyleBackColor = true;
+            this.btFillDatumArchief.Click += new System.EventHandler(this.btFillDatumArchief_Click);
+            // 
             // txtNaamArchief
             // 
             this.txtNaamArchief.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Italic);
             this.txtNaamArchief.ForeColor = System.Drawing.Color.Gray;
-            this.txtNaamArchief.Location = new System.Drawing.Point(398, 50);
+            this.txtNaamArchief.Location = new System.Drawing.Point(402, 72);
             this.txtNaamArchief.Name = "txtNaamArchief";
             this.txtNaamArchief.PlaceHolderText = "Bouwvergunningen Gemeente Raamsdonk 1993 - 1996";
             this.txtNaamArchief.Size = new System.Drawing.Size(718, 26);
@@ -228,7 +280,7 @@ namespace TOPX.UI
             this.materialLabel9.Depth = 0;
             this.materialLabel9.Font = new System.Drawing.Font("Roboto", 11F);
             this.materialLabel9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel9.Location = new System.Drawing.Point(165, 50);
+            this.materialLabel9.Location = new System.Drawing.Point(169, 72);
             this.materialLabel9.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel9.Name = "materialLabel9";
             this.materialLabel9.Size = new System.Drawing.Size(146, 27);
@@ -237,10 +289,14 @@ namespace TOPX.UI
             // 
             // txtDoelArchief
             // 
-            this.txtDoelArchief.Location = new System.Drawing.Point(398, 235);
+            this.txtDoelArchief.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Italic);
+            this.txtDoelArchief.ForeColor = System.Drawing.Color.Gray;
+            this.txtDoelArchief.Location = new System.Drawing.Point(402, 311);
             this.txtDoelArchief.Name = "txtDoelArchief";
+            this.txtDoelArchief.PlaceHolderText = "Bouwvergunningen om op te nemen in e-Depot";
             this.txtDoelArchief.Size = new System.Drawing.Size(718, 26);
             this.txtDoelArchief.TabIndex = 7;
+            this.txtDoelArchief.Text = "Bouwvergunningen om op te nemen in e-Depot";
             // 
             // materialLabel11
             // 
@@ -248,7 +304,7 @@ namespace TOPX.UI
             this.materialLabel11.Depth = 0;
             this.materialLabel11.Font = new System.Drawing.Font("Roboto", 11F);
             this.materialLabel11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel11.Location = new System.Drawing.Point(165, 235);
+            this.materialLabel11.Location = new System.Drawing.Point(169, 311);
             this.materialLabel11.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel11.Name = "materialLabel11";
             this.materialLabel11.Size = new System.Drawing.Size(131, 27);
@@ -257,10 +313,14 @@ namespace TOPX.UI
             // 
             // txtBronArchief
             // 
-            this.txtBronArchief.Location = new System.Drawing.Point(398, 189);
+            this.txtBronArchief.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Italic);
+            this.txtBronArchief.ForeColor = System.Drawing.Color.Gray;
+            this.txtBronArchief.Location = new System.Drawing.Point(402, 265);
             this.txtBronArchief.Name = "txtBronArchief";
+            this.txtBronArchief.PlaceHolderText = "Digitale bouwvergunningen";
             this.txtBronArchief.Size = new System.Drawing.Size(718, 26);
             this.txtBronArchief.TabIndex = 5;
+            this.txtBronArchief.Text = "Digitale bouwvergunningen";
             // 
             // materialLabel8
             // 
@@ -268,7 +328,7 @@ namespace TOPX.UI
             this.materialLabel8.Depth = 0;
             this.materialLabel8.Font = new System.Drawing.Font("Roboto", 11F);
             this.materialLabel8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel8.Location = new System.Drawing.Point(165, 189);
+            this.materialLabel8.Location = new System.Drawing.Point(169, 265);
             this.materialLabel8.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel8.Name = "materialLabel8";
             this.materialLabel8.Size = new System.Drawing.Size(133, 27);
@@ -277,10 +337,14 @@ namespace TOPX.UI
             // 
             // txtOmschrijvingArchief
             // 
-            this.txtOmschrijvingArchief.Location = new System.Drawing.Point(398, 143);
+            this.txtOmschrijvingArchief.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Italic);
+            this.txtOmschrijvingArchief.ForeColor = System.Drawing.Color.Gray;
+            this.txtOmschrijvingArchief.Location = new System.Drawing.Point(402, 219);
             this.txtOmschrijvingArchief.Name = "txtOmschrijvingArchief";
+            this.txtOmschrijvingArchief.PlaceHolderText = "Bouwvergunningen Gemeente Raamsdonk 1993 - 1996";
             this.txtOmschrijvingArchief.Size = new System.Drawing.Size(718, 26);
             this.txtOmschrijvingArchief.TabIndex = 3;
+            this.txtOmschrijvingArchief.Text = "Bouwvergunningen Gemeente Raamsdonk 1993 - 1996";
             // 
             // materialLabel7
             // 
@@ -288,7 +352,7 @@ namespace TOPX.UI
             this.materialLabel7.Depth = 0;
             this.materialLabel7.Font = new System.Drawing.Font("Roboto", 11F);
             this.materialLabel7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel7.Location = new System.Drawing.Point(165, 143);
+            this.materialLabel7.Location = new System.Drawing.Point(169, 219);
             this.materialLabel7.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel7.Name = "materialLabel7";
             this.materialLabel7.Size = new System.Drawing.Size(213, 27);
@@ -297,10 +361,12 @@ namespace TOPX.UI
             // 
             // txtDatumArchief
             // 
-            this.txtDatumArchief.Location = new System.Drawing.Point(398, 97);
+            this.txtDatumArchief.Location = new System.Drawing.Point(402, 173);
+            this.txtDatumArchief.Mask = "00-00-0000";
             this.txtDatumArchief.Name = "txtDatumArchief";
-            this.txtDatumArchief.Size = new System.Drawing.Size(221, 26);
+            this.txtDatumArchief.Size = new System.Drawing.Size(120, 26);
             this.txtDatumArchief.TabIndex = 2;
+            this.txtDatumArchief.ValidatingType = typeof(System.DateTime);
             // 
             // materialLabel10
             // 
@@ -308,7 +374,7 @@ namespace TOPX.UI
             this.materialLabel10.Depth = 0;
             this.materialLabel10.Font = new System.Drawing.Font("Roboto", 11F);
             this.materialLabel10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel10.Location = new System.Drawing.Point(165, 97);
+            this.materialLabel10.Location = new System.Drawing.Point(169, 173);
             this.materialLabel10.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel10.Name = "materialLabel10";
             this.materialLabel10.Size = new System.Drawing.Size(151, 27);
@@ -707,16 +773,20 @@ namespace TOPX.UI
         private System.Windows.Forms.TabPage tabGenerateTopX;
         private System.Windows.Forms.TextBox txtLogTopXCreate;
         private MaterialSkin.Controls.MaterialRaisedButton btCreateTopX;
-        private System.Windows.Forms.TextBox txtDatumArchief;
+        private MaskedTextBox txtDatumArchief;
         private MaterialSkin.Controls.MaterialLabel materialLabel10;
         private MaterialSkin.Controls.MaterialLabel materialLabel9;
-        private System.Windows.Forms.TextBox txtDoelArchief;
         private MaterialSkin.Controls.MaterialLabel materialLabel11;
-        private System.Windows.Forms.TextBox txtBronArchief;
         private MaterialSkin.Controls.MaterialLabel materialLabel8;
-        private System.Windows.Forms.TextBox txtOmschrijvingArchief;
+        private PlaceHolderTextBox txtOmschrijvingArchief;
         private MaterialSkin.Controls.MaterialLabel materialLabel7;
         private PlaceHolderTextBox txtNaamArchief;
+        private PlaceHolderTextBox txtDoelArchief;
+        private PlaceHolderTextBox txtBronArchief;
+        private System.Windows.Forms.Button btFillDatumArchief;
+        private System.Windows.Forms.Button btSaveGlobals;
+        private MaterialSkin.Controls.MaterialLabel materialLabel12;
+        private PlaceHolderTextBox txtIdentificatieArchief;
     }
 }
 

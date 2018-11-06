@@ -16,6 +16,7 @@ namespace Topx.Data
         {
         }
         [Key]
+        public int Id { get; set; }
         public string IdentificatieArchief { get; set; }
         public DateTime DatumArchief { get; set; }
         public string OmschrijvingArchief { get; set; }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -54,11 +55,6 @@ namespace TOPX.UI
 
             gridFieldMappingDossiers.AutoGenerateColumns = false;
             gridFieldMappingRecords.AutoGenerateColumns = false;
-        }
-
-        private void ditIs1ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void btImportFiles_Click(object sender, EventArgs e)
@@ -217,6 +213,39 @@ namespace TOPX.UI
                 }
             }
             gridFieldMappingRecords.DataSource = _headers.GetHeaderMappingRecordsBestanden(_headersRecords);
+        }
+
+        private void btFillDatumArchief_Click(object sender, EventArgs e)
+        {
+            txtDatumArchief.Text = DateTime.Now.Date.ToString("dd-MM-yyyy");
+        }
+
+        private void btSaveGlobals_Click(object sender, EventArgs e)
+        {
+            using (var entities = new ModelTopX())
+            {
+                DateTime tempdatumArchief;
+                if (!DateTime.TryParseExact(txtDatumArchief.Text, "dd-MM-yyyy", new CultureInfo("nl-NL"), DateTimeStyles.None,  out tempdatumArchief))
+                {
+                    MessageBox.Show("Datum Archief is niet correct.");
+                    return;
+                }
+
+                var globals = (from g in entities.Globals select g).FirstOrDefault();
+                if (globals == null)
+                {
+                    globals = new Globals();
+                    entities.Globals.Add(globals);
+                }
+
+                globals.BronArchief = txtBronArchief.Text;
+                globals.DoelArchief = txtDoelArchief.Text;
+                globals.DatumArchief = tempdatumArchief;
+                globals.NaamArchief = txtNaamArchief.Text;
+                globals.IdentificatieArchief = txtIdentificatieArchief.Text;
+                globals.OmschrijvingArchief = txtOmschrijvingArchief.Text;
+                entities.SaveChanges();
+            }
         }
     }
 }
