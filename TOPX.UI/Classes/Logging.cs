@@ -1,23 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using NLog;
+﻿using NLog;
+using NLog.Config;
 using NLog.Targets;
-using NLog.Windows.Forms;
+
 
 namespace TOPX.UI.Classes
 {
     class Logging
     {
-        static void Init()
+        public static void Init()
         {
-            
-            // var logfile = new FileTarget() { FileName = "Log_${shortdate}.txt", ArchiveEvery = FileArchivePeriod.Day, MaxArchiveFiles = 3 };
-            var target = new FormControlTarget() {ControlName = "txtLogMessage", FormName = "FormLog", Append = true};
+            var config = new LoggingConfiguration();
 
-            NLog.Config.SimpleConfigurator.ConfigureForTargetLogging(target, LogLevel.Trace);
+            var logfile = new FileTarget() { FileName = "${specialfolder:folder=ApplicationData}/TopX/Logs/Log_${shortdate}.txt", ArchiveEvery = FileArchivePeriod.Day, MaxArchiveFiles = 3 };
+
+            config.AddTarget("logfile", logfile);
+            NLog.LogManager.Configuration = config;
         }
     }
 }

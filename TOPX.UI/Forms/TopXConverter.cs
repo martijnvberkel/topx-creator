@@ -1,27 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Serialization;
 using MaterialSkin;
 using MaterialSkin.Controls;
+using NLog;
 using Topx.Creator;
 using Topx.Data;
 using Topx.FileAnalysis;
 using Topx.Importer;
 using Topx.Interface;
 using Topx.Parser.Model;
-using Topx.Utility;
+using TOPX.UI.Classes;
 
-
-namespace TOPX.UI
+namespace TOPX.UI.Forms
 {
     public partial class TopXConverter : MaterialForm
     {
@@ -30,6 +26,9 @@ namespace TOPX.UI
 
         private List<FieldMapping> _fieldmappingsDossiers;
         private List<FieldMapping> _fieldmappingsRecords;
+
+        private static  Logger _logger;
+        private FormLog _formLog = new FormLog();
 
         private Headers _headers;
         public TopXConverter()
@@ -42,9 +41,10 @@ namespace TOPX.UI
 
         }
 
-
         private void TopXConverter_Load(object sender, EventArgs e)
         {
+            Logging.Init();
+            _logger = LogManager.GetCurrentClassLogger();
             _headers = new Headers(new ModelTopX());
             using (var entities = new ModelTopX())
             {
@@ -55,6 +55,8 @@ namespace TOPX.UI
 
             gridFieldMappingDossiers.AutoGenerateColumns = false;
             gridFieldMappingRecords.AutoGenerateColumns = false;
+
+            
         }
 
         private void btImportFiles_Click(object sender, EventArgs e)
@@ -127,7 +129,7 @@ namespace TOPX.UI
             var result = parser.ParseDataToTopx();
 
 
-            txtLogTopXCreate.Text = Logger.GetLog();
+            
             Cursor.Current = Cursors.Default;
 
             if (MessageBox.Show("Save xml?", "xml", MessageBoxButtons.YesNo) == DialogResult.Yes)
@@ -222,6 +224,8 @@ namespace TOPX.UI
 
         private void btSaveGlobals_Click(object sender, EventArgs e)
         {
+            _logger.Error("Test");
+           
             using (var entities = new ModelTopX())
             {
                 DateTime tempdatumArchief;
@@ -246,6 +250,11 @@ namespace TOPX.UI
                 globals.OmschrijvingArchief = txtOmschrijvingArchief.Text;
                 entities.SaveChanges();
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            _formLog.Show();
         }
     }
 }

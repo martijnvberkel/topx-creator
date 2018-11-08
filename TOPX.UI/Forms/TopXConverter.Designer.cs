@@ -1,7 +1,7 @@
 ﻿using System.Windows.Forms;
 using TOPX.UI.Controls;
 
-namespace TOPX.UI
+namespace TOPX.UI.Forms
 {
     partial class TopXConverter
     {
@@ -85,6 +85,8 @@ namespace TOPX.UI
             this.tabGenerateTopX = new System.Windows.Forms.TabPage();
             this.txtLogTopXCreate = new System.Windows.Forms.TextBox();
             this.btCreateTopX = new MaterialSkin.Controls.MaterialRaisedButton();
+            this.txtLogMessage = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.materialContextMenuStrip2.SuspendLayout();
             this.materialContextMenuStrip3.SuspendLayout();
             this.materialTabControl1.SuspendLayout();
@@ -197,6 +199,8 @@ namespace TOPX.UI
             // 
             // tabGlobals
             // 
+            this.tabGlobals.Controls.Add(this.button1);
+            this.tabGlobals.Controls.Add(this.txtLogMessage);
             this.tabGlobals.Controls.Add(this.txtIdentificatieArchief);
             this.tabGlobals.Controls.Add(this.materialLabel12);
             this.tabGlobals.Controls.Add(this.btSaveGlobals);
@@ -700,6 +704,23 @@ namespace TOPX.UI
             this.btCreateTopX.Text = "Create TopX";
             this.btCreateTopX.UseVisualStyleBackColor = true;
             // 
+            // txtLogMessage
+            // 
+            this.txtLogMessage.Location = new System.Drawing.Point(402, 569);
+            this.txtLogMessage.Name = "txtLogMessage";
+            this.txtLogMessage.Size = new System.Drawing.Size(403, 26);
+            this.txtLogMessage.TabIndex = 14;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(708, 404);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 15;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // TopXConverter
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -787,6 +808,8 @@ namespace TOPX.UI
         private System.Windows.Forms.Button btSaveGlobals;
         private MaterialSkin.Controls.MaterialLabel materialLabel12;
         private PlaceHolderTextBox txtIdentificatieArchief;
+        private TextBox txtLogMessage;
+        private Button button1;
     }
 }
 
