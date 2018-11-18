@@ -7,13 +7,13 @@ namespace Topx.Data.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class idchange : IMigrationMetadata
+    public sealed partial class changeid_2 : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(idchange));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(changeid_2));
         
         string IMigrationMetadata.Id
         {
-            get { return "201811180832180_idchange"; }
+            get { return "201811181119322_changeid_2"; }
         }
         
         string IMigrationMetadata.Source

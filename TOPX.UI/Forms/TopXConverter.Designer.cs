@@ -71,13 +71,14 @@ namespace TOPX.UI.Forms
             this.materialLabel6 = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel5 = new MaterialSkin.Controls.MaterialLabel();
             this.txtDossierLocation = new System.Windows.Forms.TextBox();
-            this.gridFieldMappingRecords = new System.Windows.Forms.DataGridView();
+            this.gridFieldMappingRecords = new TOPX.UI.Controls.DragDropGridView();
             this.DatabaseFieldNameRecords = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MappedFieldNameRecords = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.gridFieldMappingDossiers = new System.Windows.Forms.DataGridView();
+            this.gridFieldMappingDossiers = new TOPX.UI.Controls.DragDropGridView();
             this.MappedFieldName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DatabaseFieldName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabImportFiles = new System.Windows.Forms.TabPage();
+            this.btImportFilesInDb = new System.Windows.Forms.Button();
             this.materialLabel4 = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel3 = new MaterialSkin.Controls.MaterialLabel();
             this.txtErrorRecords = new System.Windows.Forms.TextBox();
@@ -89,7 +90,6 @@ namespace TOPX.UI.Forms
             this.tabGenerateTopX = new System.Windows.Forms.TabPage();
             this.txtLogTopXCreate = new System.Windows.Forms.TextBox();
             this.btCreateTopX = new MaterialSkin.Controls.MaterialRaisedButton();
-            this.btImportFilesInDb = new System.Windows.Forms.Button();
             this.materialContextMenuStrip2.SuspendLayout();
             this.materialContextMenuStrip3.SuspendLayout();
             this.materialTabControl1.SuspendLayout();
@@ -478,7 +478,7 @@ namespace TOPX.UI.Forms
             this.materialLabel2.Depth = 0;
             this.materialLabel2.Font = new System.Drawing.Font("Roboto", 11F);
             this.materialLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel2.Location = new System.Drawing.Point(678, 151);
+            this.materialLabel2.Location = new System.Drawing.Point(678, 101);
             this.materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel2.Name = "materialLabel2";
             this.materialLabel2.Size = new System.Drawing.Size(249, 19);
@@ -492,7 +492,7 @@ namespace TOPX.UI.Forms
             this.materialLabel1.Depth = 0;
             this.materialLabel1.Font = new System.Drawing.Font("Roboto", 11F);
             this.materialLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel1.Location = new System.Drawing.Point(71, 151);
+            this.materialLabel1.Location = new System.Drawing.Point(71, 101);
             this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel1.Name = "materialLabel1";
             this.materialLabel1.Size = new System.Drawing.Size(160, 19);
@@ -550,13 +550,10 @@ namespace TOPX.UI.Forms
             this.DatabaseFieldNameRecords,
             this.MappedFieldNameRecords});
             this.gridFieldMappingRecords.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.gridFieldMappingRecords.Location = new System.Drawing.Point(680, 171);
+            this.gridFieldMappingRecords.Location = new System.Drawing.Point(680, 123);
             this.gridFieldMappingRecords.Name = "gridFieldMappingRecords";
-            this.gridFieldMappingRecords.Size = new System.Drawing.Size(488, 440);
+            this.gridFieldMappingRecords.Size = new System.Drawing.Size(488, 587);
             this.gridFieldMappingRecords.TabIndex = 14;
-            this.gridFieldMappingRecords.CellMouseMove += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.gridFieldMappingRecords_CellMouseMove);
-            this.gridFieldMappingRecords.DragDrop += new System.Windows.Forms.DragEventHandler(this.gridFieldMappingRecords_DragDrop);
-            this.gridFieldMappingRecords.DragOver += new System.Windows.Forms.DragEventHandler(this.gridFieldMappingRecords_DragOver);
             // 
             // DatabaseFieldNameRecords
             // 
@@ -575,13 +572,15 @@ namespace TOPX.UI.Forms
             // gridFieldMappingDossiers
             // 
             this.gridFieldMappingDossiers.AllowDrop = true;
+            this.gridFieldMappingDossiers.AllowUserToAddRows = false;
+            this.gridFieldMappingDossiers.AllowUserToDeleteRows = false;
             this.gridFieldMappingDossiers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gridFieldMappingDossiers.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.MappedFieldName,
             this.DatabaseFieldName});
-            this.gridFieldMappingDossiers.Location = new System.Drawing.Point(75, 171);
+            this.gridFieldMappingDossiers.Location = new System.Drawing.Point(75, 123);
             this.gridFieldMappingDossiers.Name = "gridFieldMappingDossiers";
-            this.gridFieldMappingDossiers.Size = new System.Drawing.Size(483, 440);
+            this.gridFieldMappingDossiers.Size = new System.Drawing.Size(483, 587);
             this.gridFieldMappingDossiers.TabIndex = 13;
             // 
             // MappedFieldName
@@ -612,6 +611,16 @@ namespace TOPX.UI.Forms
             this.tabImportFiles.TabIndex = 2;
             this.tabImportFiles.Text = "Import";
             this.tabImportFiles.UseVisualStyleBackColor = true;
+            // 
+            // btImportFilesInDb
+            // 
+            this.btImportFilesInDb.Location = new System.Drawing.Point(111, 34);
+            this.btImportFilesInDb.Name = "btImportFilesInDb";
+            this.btImportFilesInDb.Size = new System.Drawing.Size(112, 26);
+            this.btImportFilesInDb.TabIndex = 10;
+            this.btImportFilesInDb.Text = "Import bestanden";
+            this.btImportFilesInDb.UseVisualStyleBackColor = true;
+            this.btImportFilesInDb.Click += new System.EventHandler(this.btImportFilesInDb_Click);
             // 
             // materialLabel4
             // 
@@ -751,16 +760,6 @@ namespace TOPX.UI.Forms
             this.btCreateTopX.Text = "Create TopX";
             this.btCreateTopX.UseVisualStyleBackColor = true;
             // 
-            // btImportFilesInDb
-            // 
-            this.btImportFilesInDb.Location = new System.Drawing.Point(111, 34);
-            this.btImportFilesInDb.Name = "btImportFilesInDb";
-            this.btImportFilesInDb.Size = new System.Drawing.Size(112, 26);
-            this.btImportFilesInDb.TabIndex = 10;
-            this.btImportFilesInDb.Text = "Import bestanden";
-            this.btImportFilesInDb.UseVisualStyleBackColor = true;
-            this.btImportFilesInDb.Click += new System.EventHandler(this.btImportFilesInDb_Click);
-            // 
             // TopXConverter
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -816,10 +815,8 @@ namespace TOPX.UI.Forms
         private MaterialSkin.Controls.MaterialLabel materialLabel6;
         private MaterialSkin.Controls.MaterialLabel materialLabel5;
         private System.Windows.Forms.TextBox txtDossierLocation;
-        private System.Windows.Forms.DataGridView gridFieldMappingRecords;
         private System.Windows.Forms.DataGridViewTextBoxColumn DatabaseFieldNameRecords;
         private System.Windows.Forms.DataGridViewTextBoxColumn MappedFieldNameRecords;
-        private System.Windows.Forms.DataGridView gridFieldMappingDossiers;
         private System.Windows.Forms.DataGridViewTextBoxColumn MappedFieldName;
         private System.Windows.Forms.DataGridViewTextBoxColumn DatabaseFieldName;
         private System.Windows.Forms.TabPage tabImportFiles;
@@ -853,6 +850,8 @@ namespace TOPX.UI.Forms
         private Button btLoadRecords;
         private Button btImportDossiers;
         private Button btImportFilesInDb;
+        private DragDropGridView gridFieldMappingRecords;
+        private DragDropGridView gridFieldMappingDossiers;
     }
 }
 

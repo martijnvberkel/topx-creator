@@ -91,7 +91,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\DragDropExtensions.cs" />
     <Compile Include="Classes\Logging.cs" />
     <Compile Include="Controls\DragDropGridView.cs">
       <SubType>Component</SubType>

@@ -8,9 +8,7 @@ namespace Topx.Data
 
     public partial class FieldMapping
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid Id { get; set; }
+        public int Id { get; set; }
 
         [StringLength(250)]
         public string DatabaseFieldName { get; set; }
