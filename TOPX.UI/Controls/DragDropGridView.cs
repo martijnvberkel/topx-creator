@@ -11,7 +11,7 @@ using Topx.Data;
 namespace TOPX.UI.Controls
 {
     /// <summary>
-    /// This extension takes care of drag & drop behaviour, en keeping the datasource in sync
+    /// This extension takes care of drag & drop behaviour, and keeping the datasource in sync
     /// The first column can be dragged / dropped, the second is static. When a drop takes place
     /// in a non-empty row, a new element is added with only the value of the targetted row 
     /// </summary>

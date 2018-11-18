@@ -72,11 +72,7 @@ namespace TOPX.UI.Forms
             this.materialLabel5 = new MaterialSkin.Controls.MaterialLabel();
             this.txtDossierLocation = new System.Windows.Forms.TextBox();
             this.gridFieldMappingRecords = new TOPX.UI.Controls.DragDropGridView();
-            this.DatabaseFieldNameRecords = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MappedFieldNameRecords = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gridFieldMappingDossiers = new TOPX.UI.Controls.DragDropGridView();
-            this.MappedFieldName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DatabaseFieldName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabImportFiles = new System.Windows.Forms.TabPage();
             this.btImportFilesInDb = new System.Windows.Forms.Button();
             this.materialLabel4 = new MaterialSkin.Controls.MaterialLabel();
@@ -89,7 +85,12 @@ namespace TOPX.UI.Forms
             this.btFileLocation = new MaterialSkin.Controls.MaterialRaisedButton();
             this.tabGenerateTopX = new System.Windows.Forms.TabPage();
             this.txtLogTopXCreate = new System.Windows.Forms.TextBox();
-            this.btCreateTopX = new MaterialSkin.Controls.MaterialRaisedButton();
+            this.MappedFieldName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DatabaseFieldName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DatabaseFieldNameRecords = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MappedFieldNameRecords = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btGenerateTopX = new System.Windows.Forms.Button();
+            this.materialLabel13 = new MaterialSkin.Controls.MaterialLabel();
             this.materialContextMenuStrip2.SuspendLayout();
             this.materialContextMenuStrip3.SuspendLayout();
             this.materialTabControl1.SuspendLayout();
@@ -430,7 +431,7 @@ namespace TOPX.UI.Forms
             // 
             // btLoadRecords
             // 
-            this.btLoadRecords.Location = new System.Drawing.Point(985, 52);
+            this.btLoadRecords.Location = new System.Drawing.Point(1103, 52);
             this.btLoadRecords.Name = "btLoadRecords";
             this.btLoadRecords.Size = new System.Drawing.Size(102, 23);
             this.btLoadRecords.TabIndex = 24;
@@ -440,7 +441,7 @@ namespace TOPX.UI.Forms
             // 
             // btImportDossiers
             // 
-            this.btImportDossiers.Location = new System.Drawing.Point(356, 51);
+            this.btImportDossiers.Location = new System.Drawing.Point(495, 51);
             this.btImportDossiers.Name = "btImportDossiers";
             this.btImportDossiers.Size = new System.Drawing.Size(104, 23);
             this.btImportDossiers.TabIndex = 23;
@@ -451,7 +452,7 @@ namespace TOPX.UI.Forms
             // picRecordsSelector
             // 
             this.picRecordsSelector.Image = ((System.Drawing.Image)(resources.GetObject("picRecordsSelector.Image")));
-            this.picRecordsSelector.Location = new System.Drawing.Point(900, 42);
+            this.picRecordsSelector.Location = new System.Drawing.Point(1049, 41);
             this.picRecordsSelector.Margin = new System.Windows.Forms.Padding(2);
             this.picRecordsSelector.Name = "picRecordsSelector";
             this.picRecordsSelector.Size = new System.Drawing.Size(31, 33);
@@ -463,7 +464,7 @@ namespace TOPX.UI.Forms
             // picDossierSelector
             // 
             this.picDossierSelector.Image = ((System.Drawing.Image)(resources.GetObject("picDossierSelector.Image")));
-            this.picDossierSelector.Location = new System.Drawing.Point(294, 42);
+            this.picDossierSelector.Location = new System.Drawing.Point(446, 41);
             this.picDossierSelector.Margin = new System.Windows.Forms.Padding(2);
             this.picDossierSelector.Name = "picDossierSelector";
             this.picDossierSelector.Size = new System.Drawing.Size(31, 33);
@@ -503,7 +504,7 @@ namespace TOPX.UI.Forms
             // 
             this.txtRecordBestandLocation.Location = new System.Drawing.Point(682, 54);
             this.txtRecordBestandLocation.Name = "txtRecordBestandLocation";
-            this.txtRecordBestandLocation.Size = new System.Drawing.Size(214, 20);
+            this.txtRecordBestandLocation.Size = new System.Drawing.Size(362, 20);
             this.txtRecordBestandLocation.TabIndex = 18;
             // 
             // materialLabel6
@@ -536,7 +537,7 @@ namespace TOPX.UI.Forms
             // 
             this.txtDossierLocation.Location = new System.Drawing.Point(75, 51);
             this.txtDossierLocation.Name = "txtDossierLocation";
-            this.txtDossierLocation.Size = new System.Drawing.Size(214, 20);
+            this.txtDossierLocation.Size = new System.Drawing.Size(366, 20);
             this.txtDossierLocation.TabIndex = 15;
             this.txtDossierLocation.TextChanged += new System.EventHandler(this.txtDossierLocation_TextChanged);
             // 
@@ -552,22 +553,8 @@ namespace TOPX.UI.Forms
             this.gridFieldMappingRecords.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.gridFieldMappingRecords.Location = new System.Drawing.Point(680, 123);
             this.gridFieldMappingRecords.Name = "gridFieldMappingRecords";
-            this.gridFieldMappingRecords.Size = new System.Drawing.Size(488, 587);
+            this.gridFieldMappingRecords.Size = new System.Drawing.Size(525, 587);
             this.gridFieldMappingRecords.TabIndex = 14;
-            // 
-            // DatabaseFieldNameRecords
-            // 
-            this.DatabaseFieldNameRecords.DataPropertyName = "MappedFieldName";
-            this.DatabaseFieldNameRecords.HeaderText = "Veldnaam Bron";
-            this.DatabaseFieldNameRecords.Name = "DatabaseFieldNameRecords";
-            this.DatabaseFieldNameRecords.Width = 220;
-            // 
-            // MappedFieldNameRecords
-            // 
-            this.MappedFieldNameRecords.DataPropertyName = "DatabaseFieldName";
-            this.MappedFieldNameRecords.HeaderText = "Veldnaam TopX";
-            this.MappedFieldNameRecords.Name = "MappedFieldNameRecords";
-            this.MappedFieldNameRecords.Width = 220;
             // 
             // gridFieldMappingDossiers
             // 
@@ -580,22 +567,8 @@ namespace TOPX.UI.Forms
             this.DatabaseFieldName});
             this.gridFieldMappingDossiers.Location = new System.Drawing.Point(75, 123);
             this.gridFieldMappingDossiers.Name = "gridFieldMappingDossiers";
-            this.gridFieldMappingDossiers.Size = new System.Drawing.Size(483, 587);
+            this.gridFieldMappingDossiers.Size = new System.Drawing.Size(524, 587);
             this.gridFieldMappingDossiers.TabIndex = 13;
-            // 
-            // MappedFieldName
-            // 
-            this.MappedFieldName.DataPropertyName = "MappedFieldName";
-            this.MappedFieldName.HeaderText = "Veldnaam Bron";
-            this.MappedFieldName.Name = "MappedFieldName";
-            this.MappedFieldName.Width = 220;
-            // 
-            // DatabaseFieldName
-            // 
-            this.DatabaseFieldName.DataPropertyName = "DatabaseFieldName";
-            this.DatabaseFieldName.HeaderText = "Veldnaam TopX";
-            this.DatabaseFieldName.Name = "DatabaseFieldName";
-            this.DatabaseFieldName.Width = 220;
             // 
             // tabImportFiles
             // 
@@ -726,8 +699,9 @@ namespace TOPX.UI.Forms
             // 
             // tabGenerateTopX
             // 
+            this.tabGenerateTopX.Controls.Add(this.materialLabel13);
+            this.tabGenerateTopX.Controls.Add(this.btGenerateTopX);
             this.tabGenerateTopX.Controls.Add(this.txtLogTopXCreate);
-            this.tabGenerateTopX.Controls.Add(this.btCreateTopX);
             this.tabGenerateTopX.Location = new System.Drawing.Point(4, 22);
             this.tabGenerateTopX.Margin = new System.Windows.Forms.Padding(2);
             this.tabGenerateTopX.Name = "tabGenerateTopX";
@@ -738,27 +712,63 @@ namespace TOPX.UI.Forms
             // 
             // txtLogTopXCreate
             // 
-            this.txtLogTopXCreate.Location = new System.Drawing.Point(214, 39);
+            this.txtLogTopXCreate.Location = new System.Drawing.Point(107, 142);
             this.txtLogTopXCreate.Multiline = true;
             this.txtLogTopXCreate.Name = "txtLogTopXCreate";
             this.txtLogTopXCreate.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtLogTopXCreate.Size = new System.Drawing.Size(830, 236);
+            this.txtLogTopXCreate.Size = new System.Drawing.Size(709, 377);
             this.txtLogTopXCreate.TabIndex = 3;
             // 
-            // btCreateTopX
+            // MappedFieldName
             // 
-            this.btCreateTopX.AutoSize = true;
-            this.btCreateTopX.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btCreateTopX.Depth = 0;
-            this.btCreateTopX.Icon = null;
-            this.btCreateTopX.Location = new System.Drawing.Point(214, 89);
-            this.btCreateTopX.MouseState = MaterialSkin.MouseState.HOVER;
-            this.btCreateTopX.Name = "btCreateTopX";
-            this.btCreateTopX.Primary = true;
-            this.btCreateTopX.Size = new System.Drawing.Size(110, 36);
-            this.btCreateTopX.TabIndex = 2;
-            this.btCreateTopX.Text = "Create TopX";
-            this.btCreateTopX.UseVisualStyleBackColor = true;
+            this.MappedFieldName.DataPropertyName = "MappedFieldName";
+            this.MappedFieldName.HeaderText = "Veldnaam Bron";
+            this.MappedFieldName.Name = "MappedFieldName";
+            this.MappedFieldName.Width = 220;
+            // 
+            // DatabaseFieldName
+            // 
+            this.DatabaseFieldName.DataPropertyName = "DatabaseFieldName";
+            this.DatabaseFieldName.HeaderText = "Veldnaam TopX";
+            this.DatabaseFieldName.Name = "DatabaseFieldName";
+            this.DatabaseFieldName.Width = 250;
+            // 
+            // DatabaseFieldNameRecords
+            // 
+            this.DatabaseFieldNameRecords.DataPropertyName = "MappedFieldName";
+            this.DatabaseFieldNameRecords.HeaderText = "Veldnaam Bron";
+            this.DatabaseFieldNameRecords.Name = "DatabaseFieldNameRecords";
+            this.DatabaseFieldNameRecords.Width = 220;
+            // 
+            // MappedFieldNameRecords
+            // 
+            this.MappedFieldNameRecords.DataPropertyName = "DatabaseFieldName";
+            this.MappedFieldNameRecords.HeaderText = "Veldnaam TopX";
+            this.MappedFieldNameRecords.Name = "MappedFieldNameRecords";
+            this.MappedFieldNameRecords.Width = 250;
+            // 
+            // btGenerateTopX
+            // 
+            this.btGenerateTopX.Location = new System.Drawing.Point(107, 61);
+            this.btGenerateTopX.Name = "btGenerateTopX";
+            this.btGenerateTopX.Size = new System.Drawing.Size(97, 23);
+            this.btGenerateTopX.TabIndex = 4;
+            this.btGenerateTopX.Text = "Genereer TopX";
+            this.btGenerateTopX.UseVisualStyleBackColor = true;
+            this.btGenerateTopX.Click += new System.EventHandler(this.btGenerateTopX_Click);
+            // 
+            // materialLabel13
+            // 
+            this.materialLabel13.AutoSize = true;
+            this.materialLabel13.Depth = 0;
+            this.materialLabel13.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel13.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialLabel13.Location = new System.Drawing.Point(103, 120);
+            this.materialLabel13.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel13.Name = "materialLabel13";
+            this.materialLabel13.Size = new System.Drawing.Size(71, 19);
+            this.materialLabel13.TabIndex = 9;
+            this.materialLabel13.Text = "Error Log";
             // 
             // TopXConverter
             // 
@@ -815,10 +825,6 @@ namespace TOPX.UI.Forms
         private MaterialSkin.Controls.MaterialLabel materialLabel6;
         private MaterialSkin.Controls.MaterialLabel materialLabel5;
         private System.Windows.Forms.TextBox txtDossierLocation;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DatabaseFieldNameRecords;
-        private System.Windows.Forms.DataGridViewTextBoxColumn MappedFieldNameRecords;
-        private System.Windows.Forms.DataGridViewTextBoxColumn MappedFieldName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DatabaseFieldName;
         private System.Windows.Forms.TabPage tabImportFiles;
         private MaterialSkin.Controls.MaterialLabel materialLabel4;
         private MaterialSkin.Controls.MaterialLabel materialLabel3;
@@ -830,7 +836,6 @@ namespace TOPX.UI.Forms
         private MaterialSkin.Controls.MaterialRaisedButton btFileLocation;
         private System.Windows.Forms.TabPage tabGenerateTopX;
         private System.Windows.Forms.TextBox txtLogTopXCreate;
-        private MaterialSkin.Controls.MaterialRaisedButton btCreateTopX;
         private MaskedTextBox txtDatumArchief;
         private MaterialSkin.Controls.MaterialLabel materialLabel10;
         private MaterialSkin.Controls.MaterialLabel materialLabel9;
@@ -852,6 +857,12 @@ namespace TOPX.UI.Forms
         private Button btImportFilesInDb;
         private DragDropGridView gridFieldMappingRecords;
         private DragDropGridView gridFieldMappingDossiers;
+        private DataGridViewTextBoxColumn DatabaseFieldNameRecords;
+        private DataGridViewTextBoxColumn MappedFieldNameRecords;
+        private DataGridViewTextBoxColumn MappedFieldName;
+        private DataGridViewTextBoxColumn DatabaseFieldName;
+        private MaterialSkin.Controls.MaterialLabel materialLabel13;
+        private Button btGenerateTopX;
     }
 }
 

@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -18,14 +19,15 @@ namespace Topx.Importer
         public string ErrorMessage;
         public bool Error;
 
-        public Importer(ModelTopX entities)
+        public Importer()
         {
-            _entities = entities;
+            //_entities = entities;
         }
+       
 
-        public void ImportDossiers(List<FieldMapping> mappings, List<string> headersDossiers, StreamReader dossierStream, Headers.MappingType mappingType)
+        public void ImportDossiers(List<FieldMapping> mappings, StreamReader dossierStream, Headers.MappingType mappingType)
         {
-            var result = GetDataTable(mappings, dossierStream, mappingType);
+            var result = GetDataTable_old(mappings, dossierStream, mappingType);
         }
 
         //public void ImportDossiers(List<FieldMapping> mappings, List<string> headersDossiers, StreamReader dossierStream)
@@ -42,7 +44,7 @@ namespace Topx.Importer
 
         //}
 
-        private DataTable GetDataTable(List<FieldMapping> mappingsDossiers, StreamReader dossierStream, Headers.MappingType mappingType)
+        private DataTable GetDataTable_old(List<FieldMapping> mappingsDossiers, StreamReader dossierStream, Headers.MappingType mappingType)
         {
             var topxDataTable = new TopXDataTable(';');
             using (var dataConnection = new SqlConnection(_entities.Database.Connection.ConnectionString))
@@ -59,7 +61,7 @@ namespace Topx.Importer
                 sqldataadapter.SelectCommand = sqlCommand;
                 sqldataadapter.FillSchema(table, SchemaType.Source);
                 sqldataadapter.Fill(table);
-               
+
                 topxDataTable.LoadFromStream(mappingsDossiers, dossierStream, table);
                 if (topxDataTable.ErrorList.Length > 0)
                 {
@@ -70,6 +72,37 @@ namespace Topx.Importer
                 sqldataadapter.Update(table);
                 return table;
             }
+        }
+
+        public List<Dossier> GetDossiers(List<FieldMapping> mappingsDossiers, StreamReader dossierStream, Headers.MappingType mappingType)
+        {
+            var readLineAsHeader = dossierStream.ReadLine();
+            if (readLineAsHeader == null) return null;
+            var headersSource = readLineAsHeader.Split(';');
+
+            var dossiers = new List<Dossier>();
+            while (dossierStream.Peek() > 0)
+            {
+                var dossier = new Dossier();
+                var fieldsSource = dossierStream.ReadLine()?.Split(';');
+                if (fieldsSource == null)
+                {
+                    Error = true;
+                    ErrorMessage = "Unexpected end of stream";
+                }
+                for (var index = 0; index <= headersSource.Length - 1; index++)
+                {
+                    var mappedfield = (from f in mappingsDossiers where f.MappedFieldName == headersSource[index] select f.DatabaseFieldName).FirstOrDefault();
+                    if (mappedfield == null)
+                        continue;
+                    var propertyInfo = dossier.GetType().GetProperty(mappedfield);
+                    
+                    if (propertyInfo != null)
+                        propertyInfo.SetValue(dossier, fieldsSource[index], null);
+                }
+                dossiers.Add(dossier);
+            }
+            return dossiers;
         }
     }
 }

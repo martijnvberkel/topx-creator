@@ -58,53 +58,51 @@ namespace TOPX.UI.Forms
         private void InitDefaultFilesLoad()
         {
             var globals = GlobalsService.GetGlobals();
-            var dossierFile = globals.LastDossierFileName;
-            txtDossierLocation.Text = Path.GetFileName(dossierFile);
+            var dossierFile = globals?.LastDossierFileName;
+            txtDossierLocation.Text = globals?.LastDossierFileName;
             if (File.Exists(dossierFile))
             {
                 LoadDossierFile(dossierFile);
             }
 
-            var recordFile = globals.LastRecordsFileName;
-            txtRecordBestandLocation.Text = Path.GetFileName(recordFile);
+            var recordFile = globals?.LastRecordsFileName;
+            txtRecordBestandLocation.Text = globals?.LastDossierFileName;
             if (File.Exists(recordFile))
             {
                 LoadRecordFile(recordFile);
             }
 
-            txtBronArchief.Text = globals.BronArchief;
-            txtDatumArchief.Text = globals.DatumArchief.ToString("dd-MM-yyyy");
-            txtDoelArchief.Text = globals.DoelArchief;
-            txtDossierLocation.Text = globals.LastDossierFileName;
-            txtIdentificatieArchief.Text = globals.IdentificatieArchief;
-            txtNaamArchief.Text = globals.NaamArchief;
-            txtOmschrijvingArchief.Text = globals.OmschrijvingArchief;
+            txtBronArchief.Text = globals?.BronArchief;
+            txtDatumArchief.Text = globals?.DatumArchief.ToString("dd-MM-yyyy");
+            txtDoelArchief.Text = globals?.DoelArchief;
+            txtDossierLocation.Text = globals?.LastDossierFileName;
+            txtIdentificatieArchief.Text = globals?.IdentificatieArchief;
+            txtNaamArchief.Text = globals?.NaamArchief;
+            txtOmschrijvingArchief.Text = globals?.OmschrijvingArchief;
         }
 
         private void btImportFilesInDb_Click(object sender, EventArgs e)
         {
             using (var entities = new ModelTopX())
             {
+                if (!File.Exists(txtDossierLocation.Text))
+                {
+                    MessageBox.Show($"Dossier-file niet gevonden.");
+                    return;
+                }
+                if (!File.Exists(txtRecordBestandLocation.Text))
+                {
+                    MessageBox.Show($"Records-file niet gevonden.");
+                    return;
+                }
+
                 entities.Database.ExecuteSqlCommand("truncate table Records");
                 entities.Database.ExecuteSqlCommand("truncate table Bestanden");
                 entities.Database.ExecuteSqlCommand("delete from Dossiers");
 
-                _fieldmappingsDossiers = new List<FieldMapping>();
-
-                foreach (DataGridViewRow row in gridFieldMappingDossiers.Rows)
-                {
-                  _fieldmappingsDossiers.Add(new FieldMapping()
-                  {
-                      MappedFieldName = (string) row.Cells[0].Value,
-                      DatabaseFieldName = (string) row.Cells[1].Value
-                  });
-                }
-
-                _fieldmappingsDossiers = _headers.GetHeaderMappingDossiers(_headersDossiers);
-                _fieldmappingsRecords = _headers.GetHeaderMappingRecordsBestanden(_headersRecords);
-
                 var importer = new Importer(entities);
-                using (var dossiers = new StreamReader(openFileDialogDossiers.FileName))
+
+                using (var dossiers = new StreamReader(new FileStream(txtDossierLocation.Text, FileMode.Open, FileAccess.Read, FileShare.ReadWrite)))
                 {
                     importer.ImportDossiers(_fieldmappingsDossiers, _headersDossiers, dossiers, Headers.MappingType.DOSSIER);
                     if (importer.Error)
@@ -114,7 +112,7 @@ namespace TOPX.UI.Forms
                 }
 
                 importer = new Importer(entities);
-                using (var records = new StreamReader(openFileDialogRecords.FileName))
+                using (var records = new StreamReader(new FileStream(txtRecordBestandLocation.Text, FileMode.Open, FileAccess.Read, FileShare.ReadWrite)))
                 {
                     importer.ImportDossiers(_fieldmappingsRecords, _headersRecords, records, Headers.MappingType.RECORD);
                     if (importer.Error)
@@ -125,25 +123,31 @@ namespace TOPX.UI.Forms
             }
         }
 
-
-        private void btCreateTopX_Click(object sender, EventArgs e)
+        private void btGenerateTopX_Click(object sender, EventArgs e)
         {
-            var parser = new Parser();
-            var result = parser.ParseDataToTopx();
+            try
+            {
+                //Cursor.Current = Cursors.WaitCursor;
+                var parser = new Parser();
+                var result = parser.ParseDataToTopx();
+                txtLogTopXCreate.Text = parser.ErrorMessage.ToString();
 
+                Cursor.Current = Cursors.Default;
 
-            Cursor.Current = Cursors.Default;
-
-            if (MessageBox.Show("Save xml?", "xml", MessageBoxButtons.YesNo) == DialogResult.Yes)
-                SaveAsXml(result);
-
+                if (MessageBox.Show("Save xml?", "xml", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    SaveAsXml(result);
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+                txtLogTopXCreate.Text = exception.ToString();
+            }
         }
 
         private void SaveAsXml(recordInformationPackage result)
         {
-            var savefile = new SaveFileDialog();
+            var savefile = new SaveFileDialog { FileName = "export.xml" };
 
-            savefile.FileName = "export.xml";
             if (savefile.ShowDialog() == DialogResult.OK)
             {
                 var encoding = Encoding.UTF8;//.GetEncoding("ISO-8859-1");
@@ -212,7 +216,7 @@ namespace TOPX.UI.Forms
                 entities.SaveChanges();
             }
         }
-     
+
 
         private void txtDossierLocation_TextChanged(object sender, EventArgs e)
         {
@@ -243,8 +247,9 @@ namespace TOPX.UI.Forms
                 {
                     _headersDossiers = sr.ReadLine().Split(";"[0]).ToList();
                 }
-                gridFieldMappingDossiers.DataSource = _headers.GetHeaderMappingDossiers(_headersDossiers);
-                
+                _fieldmappingsDossiers = _headers.GetHeaderMappingDossiers(_headersDossiers);
+                gridFieldMappingDossiers.DataSource = _fieldmappingsDossiers;
+
             }
             catch (Exception e)
             {
@@ -276,8 +281,9 @@ namespace TOPX.UI.Forms
                 {
                     _headersRecords = sr.ReadLine().Split(";"[0]).ToList();
                 }
-                gridFieldMappingRecords.DataSource = _headers.GetHeaderMappingRecordsBestanden(_headersRecords);
-                
+                _fieldmappingsRecords = _headers.GetHeaderMappingRecordsBestanden(_headersRecords);
+                gridFieldMappingRecords.DataSource = _fieldmappingsRecords;
+
             }
             catch (Exception e)
             {
@@ -312,36 +318,6 @@ namespace TOPX.UI.Forms
             }
         }
 
-        private void gridFieldMappingRecords_CellMouseMove(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            //if (e.Button == System.Windows.Forms.MouseButtons.Left && gridFieldMappingRecords.CurrentCell.ColumnIndex == 0)
-            //{
-            //    gridFieldMappingRecords.DoDragDrop(gridFieldMappingRecords[e.ColumnIndex, e.RowIndex].FormattedValue, DragDropEffects.Copy);
-            //}
-        }
 
-        private void gridFieldMappingRecords_DragDrop(object sender, DragEventArgs e)
-        {
-           
-            //string cellvalue = e.Data.GetData(typeof(string)) as string;
-            //Point cursorLocation = gridFieldMappingRecords.PointToClient(new Point(e.X, e.Y));
-           
-            //System.Windows.Forms.DataGridView.HitTestInfo hittest = gridFieldMappingRecords.HitTest(cursorLocation.X, cursorLocation.Y);
-            //var currentRowIdex = gridFieldMappingRecords.CurrentCell.RowIndex;
-            
-            //if (hittest.ColumnIndex == 0 && hittest.RowIndex != -1 && hittest.RowIndex != currentRowIdex)
-            //{
-            //    gridFieldMappingRecords[hittest.ColumnIndex, hittest.RowIndex].Value = cellvalue;
-            //    gridFieldMappingRecords.CurrentCell.Value = string.Empty;
-            //    gridFieldMappingRecords.CurrentCell.Selected = false;
-            //}
-        }
-
-        private void gridFieldMappingRecords_DragOver(object sender, DragEventArgs e)
-        {
-          //  e.Effect = DragDropEffects.Copy;
-        }
-
-      
     }
 }
