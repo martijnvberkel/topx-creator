@@ -23,5 +23,7 @@ namespace Topx.Data
         public string BronArchief { get; set; }
         public string DoelArchief { get; set; }
         public string NaamArchief { get; set; }
+        public string LastDossierFileName { get; set; }
+        public string LastRecordsFileName { get; set; }
     }
 }

@@ -10,7 +10,7 @@ namespace Topx.Data
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         [StringLength(250)]
         public string DatabaseFieldName { get; set; }

@@ -12,9 +12,7 @@ namespace Topx.Data
 
         public string Naam { get; set; }
 
-        [StringLength(10)]
-        public string Taal { get; set; }
-
+      
         public string Gebruiksrechten_OmschrijvingVoorwaarden { get; set; }
 
         [StringLength(50)]

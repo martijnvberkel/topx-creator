@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -11,6 +12,7 @@ using MaterialSkin.Controls;
 using NLog;
 using Topx.Creator;
 using Topx.Data;
+using Topx.DataServices;
 using Topx.FileAnalysis;
 using Topx.Importer;
 using Topx.Interface;
@@ -27,7 +29,7 @@ namespace TOPX.UI.Forms
         private List<FieldMapping> _fieldmappingsDossiers;
         private List<FieldMapping> _fieldmappingsRecords;
 
-        private static  Logger _logger;
+        private static Logger _logger;
         private FormLog _formLog = new FormLog();
 
         private Headers _headers;
@@ -46,27 +48,57 @@ namespace TOPX.UI.Forms
             Logging.Init();
             _logger = LogManager.GetCurrentClassLogger();
             _headers = new Headers(new ModelTopX());
-            using (var entities = new ModelTopX())
-            {
-                var x = (from i in entities.Dossiers select i).ToList();
-                x.Add(new Dossier() { Classificatie_Bron = "test" });
-                entities.SaveChanges();
-            }
 
             gridFieldMappingDossiers.AutoGenerateColumns = false;
             gridFieldMappingRecords.AutoGenerateColumns = false;
 
-            
+            InitDefaultFilesLoad();
         }
 
-        private void btImportFiles_Click(object sender, EventArgs e)
+        private void InitDefaultFilesLoad()
+        {
+            var globals = GlobalsService.GetGlobals();
+            var dossierFile = globals.LastDossierFileName;
+            txtDossierLocation.Text = Path.GetFileName(dossierFile);
+            if (File.Exists(dossierFile))
+            {
+                LoadDossierFile(dossierFile);
+            }
+
+            var recordFile = globals.LastRecordsFileName;
+            txtRecordBestandLocation.Text = Path.GetFileName(recordFile);
+            if (File.Exists(recordFile))
+            {
+                LoadRecordFile(recordFile);
+            }
+
+            txtBronArchief.Text = globals.BronArchief;
+            txtDatumArchief.Text = globals.DatumArchief.ToString("dd-MM-yyyy");
+            txtDoelArchief.Text = globals.DoelArchief;
+            txtDossierLocation.Text = globals.LastDossierFileName;
+            txtIdentificatieArchief.Text = globals.IdentificatieArchief;
+            txtNaamArchief.Text = globals.NaamArchief;
+            txtOmschrijvingArchief.Text = globals.OmschrijvingArchief;
+        }
+
+        private void btImportFilesInDb_Click(object sender, EventArgs e)
         {
             using (var entities = new ModelTopX())
             {
-
                 entities.Database.ExecuteSqlCommand("truncate table Records");
                 entities.Database.ExecuteSqlCommand("truncate table Bestanden");
                 entities.Database.ExecuteSqlCommand("delete from Dossiers");
+
+                _fieldmappingsDossiers = new List<FieldMapping>();
+
+                foreach (DataGridViewRow row in gridFieldMappingDossiers.Rows)
+                {
+                  _fieldmappingsDossiers.Add(new FieldMapping()
+                  {
+                      MappedFieldName = (string) row.Cells[0].Value,
+                      DatabaseFieldName = (string) row.Cells[1].Value
+                  });
+                }
 
                 _fieldmappingsDossiers = _headers.GetHeaderMappingDossiers(_headersDossiers);
                 _fieldmappingsRecords = _headers.GetHeaderMappingRecordsBestanden(_headersRecords);
@@ -93,35 +125,6 @@ namespace TOPX.UI.Forms
             }
         }
 
-        private void btFileLocation_Click(object sender, EventArgs e)
-        {
-            using (var entities = new ModelTopX())
-            {
-
-                var dialogResult = folderBrowserDialogFiles.ShowDialog();
-                if (dialogResult == DialogResult.OK)
-                {
-                    txtFileLocation.Text = folderBrowserDialogFiles.SelectedPath;
-                }
-            }
-        }
-
-        private void btAnalyse_Click(object sender, EventArgs e)
-        {
-            if (!Directory.Exists(txtFileLocation.Text))
-            {
-                MessageBox.Show("Directory bestaat niet");
-                return;
-            }
-            using (var entities = new ModelTopX())
-            {
-                var records = (from r in entities.Records select r).ToList();
-                //var bestanden = (from b in entities.Bestand select b).ToList();
-                var metadata = new Metadata();
-                //metadata.Collect(txtFileLocation.Text, records, bestanden);
-                entities.SaveChanges();
-            }
-        }
 
         private void btCreateTopX_Click(object sender, EventArgs e)
         {
@@ -129,7 +132,6 @@ namespace TOPX.UI.Forms
             var result = parser.ParseDataToTopx();
 
 
-            
             Cursor.Current = Cursors.Default;
 
             if (MessageBox.Show("Save xml?", "xml", MessageBoxButtons.YesNo) == DialogResult.Yes)
@@ -161,14 +163,10 @@ namespace TOPX.UI.Forms
 
             try
             {
-                stream = file.Open(FileMode.Open, FileAccess.Read, FileShare.None);
+                stream = file.Open(FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
             }
             catch (IOException)
             {
-                //the file is unavailable because it is:
-                //still being written to
-                //or being processed by another thread
-                //or does not exist (has already been processed)
                 return true;
             }
             finally
@@ -180,43 +178,6 @@ namespace TOPX.UI.Forms
             return false;
         }
 
-        private void txtDossierLocation_Click(object sender, EventArgs e)
-        {
-            if (openFileDialogDossiers.ShowDialog() == DialogResult.OK)
-            {
-                if (IsFileOpen(openFileDialogDossiers.FileName))
-                {
-                    MessageBox.Show("Dossierbestand is geopend door een andere applicatie");
-                    return;
-                }
-                txtDossierLocation.Text = Path.GetFileName(openFileDialogDossiers.FileName);
-                using (var sr = new StreamReader(openFileDialogDossiers.FileName))
-                {
-                    _headersDossiers = sr.ReadLine().Split(";"[0]).ToList();
-                }
-            }
-            gridFieldMappingDossiers.DataSource = _headers.GetHeaderMappingDossiers(_headersDossiers);
-
-        }
-
-        private void txtRecordBestandLocation_Click(object sender, EventArgs e)
-        {
-            if (openFileDialogRecords.ShowDialog() == DialogResult.OK)
-            {
-                if (IsFileOpen(openFileDialogDossiers.FileName))
-                {
-                    MessageBox.Show("Dossierbestand is geopend door een andere applicatie");
-                    return;
-                }
-                txtRecordBestandLocation.Text = Path.GetFileName(openFileDialogRecords.FileName);
-                using (var sr = new StreamReader(openFileDialogRecords.FileName))
-                {
-                    _headersRecords = sr.ReadLine().Split(";"[0]).ToList();
-                }
-            }
-            gridFieldMappingRecords.DataSource = _headers.GetHeaderMappingRecordsBestanden(_headersRecords);
-        }
-
         private void btFillDatumArchief_Click(object sender, EventArgs e)
         {
             txtDatumArchief.Text = DateTime.Now.Date.ToString("dd-MM-yyyy");
@@ -225,11 +186,11 @@ namespace TOPX.UI.Forms
         private void btSaveGlobals_Click(object sender, EventArgs e)
         {
             _logger.Error("Test");
-           
+
             using (var entities = new ModelTopX())
             {
                 DateTime tempdatumArchief;
-                if (!DateTime.TryParseExact(txtDatumArchief.Text, "dd-MM-yyyy", new CultureInfo("nl-NL"), DateTimeStyles.None,  out tempdatumArchief))
+                if (!DateTime.TryParseExact(txtDatumArchief.Text, "dd-MM-yyyy", new CultureInfo("nl-NL"), DateTimeStyles.None, out tempdatumArchief))
                 {
                     MessageBox.Show("Datum Archief is niet correct.");
                     return;
@@ -251,10 +212,136 @@ namespace TOPX.UI.Forms
                 entities.SaveChanges();
             }
         }
+     
 
-        private void button1_Click(object sender, EventArgs e)
+        private void txtDossierLocation_TextChanged(object sender, EventArgs e)
         {
-            _formLog.Show();
+
         }
+
+        private void picDossierSelector_Click(object sender, EventArgs e)
+        {
+            if (openFileDialogDossiers.ShowDialog() == DialogResult.OK)
+            {
+                if (IsFileOpen(openFileDialogDossiers.FileName))
+                {
+                    MessageBox.Show("Dossierbestand is geopend door een andere applicatie");
+                    return;
+                }
+                txtDossierLocation.Text = openFileDialogDossiers.FileName;
+                LoadDossierFile(openFileDialogDossiers.FileName);
+                GlobalsService.SaveLastDossierFileName(openFileDialogDossiers.FileName);
+            }
+
+        }
+
+        private void LoadDossierFile(string fileName)
+        {
+            try
+            {
+                using (var sr = new StreamReader(new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite)))
+                {
+                    _headersDossiers = sr.ReadLine().Split(";"[0]).ToList();
+                }
+                gridFieldMappingDossiers.DataSource = _headers.GetHeaderMappingDossiers(_headersDossiers);
+                
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($"Het bestand kon niet worden ingelezen. Foutmelding: {e.Message}");
+            }
+        }
+
+        private void picRecordsSelector_Click(object sender, EventArgs e)
+        {
+            if (openFileDialogRecords.ShowDialog() == DialogResult.OK)
+            {
+                if (IsFileOpen(openFileDialogRecords.FileName))
+                {
+                    MessageBox.Show("Dossierbestand is geopend door een andere applicatie");
+                    return;
+                }
+                txtRecordBestandLocation.Text = openFileDialogRecords.FileName;
+                LoadRecordFile(openFileDialogRecords.FileName);
+                GlobalsService.SaveLastRecordsFileName(openFileDialogRecords.FileName);
+            }
+
+        }
+
+        private void LoadRecordFile(string fileName)
+        {
+            try
+            {
+                using (var sr = new StreamReader(new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite)))
+                {
+                    _headersRecords = sr.ReadLine().Split(";"[0]).ToList();
+                }
+                gridFieldMappingRecords.DataSource = _headers.GetHeaderMappingRecordsBestanden(_headersRecords);
+                
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($"Het bestand kon niet worden ingelezen. Foutmelding: {e.Message}");
+            }
+
+        }
+
+        private void btImportDossiers_Click(object sender, EventArgs e)
+        {
+            if (!File.Exists(txtDossierLocation.Text))
+            {
+                MessageBox.Show("Bestand niet gevonden.");
+            }
+            else
+            {
+                GlobalsService.SaveLastDossierFileName(txtDossierLocation.Text);
+                LoadDossierFile(txtDossierLocation.Text);
+            }
+        }
+
+        private void btLoadRecords_Click(object sender, EventArgs e)
+        {
+            if (!File.Exists(txtRecordBestandLocation.Text))
+            {
+                MessageBox.Show("Bestand niet gevonden.");
+            }
+            else
+            {
+                LoadRecordFile(txtRecordBestandLocation.Text);
+                GlobalsService.SaveLastRecordsFileName(txtRecordBestandLocation.Text);
+            }
+        }
+
+        private void gridFieldMappingRecords_CellMouseMove(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            //if (e.Button == System.Windows.Forms.MouseButtons.Left && gridFieldMappingRecords.CurrentCell.ColumnIndex == 0)
+            //{
+            //    gridFieldMappingRecords.DoDragDrop(gridFieldMappingRecords[e.ColumnIndex, e.RowIndex].FormattedValue, DragDropEffects.Copy);
+            //}
+        }
+
+        private void gridFieldMappingRecords_DragDrop(object sender, DragEventArgs e)
+        {
+           
+            //string cellvalue = e.Data.GetData(typeof(string)) as string;
+            //Point cursorLocation = gridFieldMappingRecords.PointToClient(new Point(e.X, e.Y));
+           
+            //System.Windows.Forms.DataGridView.HitTestInfo hittest = gridFieldMappingRecords.HitTest(cursorLocation.X, cursorLocation.Y);
+            //var currentRowIdex = gridFieldMappingRecords.CurrentCell.RowIndex;
+            
+            //if (hittest.ColumnIndex == 0 && hittest.RowIndex != -1 && hittest.RowIndex != currentRowIdex)
+            //{
+            //    gridFieldMappingRecords[hittest.ColumnIndex, hittest.RowIndex].Value = cellvalue;
+            //    gridFieldMappingRecords.CurrentCell.Value = string.Empty;
+            //    gridFieldMappingRecords.CurrentCell.Selected = false;
+            //}
+        }
+
+        private void gridFieldMappingRecords_DragOver(object sender, DragEventArgs e)
+        {
+          //  e.Effect = DragDropEffects.Copy;
+        }
+
+      
     }
 }

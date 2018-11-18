@@ -26,7 +26,11 @@ namespace TOPX.UI.Controls
         public new string Text
         {
             get => _isPlaceHolder ? string.Empty : base.Text;
-            set => base.Text = value;
+            set
+            {
+                base.Text = value;
+                RemovePlaceHolder();
+            }
         }
 
         //when the control loses focus, the placeholder is shown
