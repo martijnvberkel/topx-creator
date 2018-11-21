@@ -135,7 +135,7 @@ namespace Topx.Creator
             {
                 new relatieType()
                 {
-                    relatieID = new nonEmptyStringTypeAttribuut() {Value = _identificatieArchief},
+                    relatieID = new nonEmptyStringTypeAttribuut() {Value = dossier.IdentificatieKenmerk},
                     typeRelatie = new nonEmptyStringTypeAttribuut() {Value = dossier.Relatie_Type ?? "Hiërachisch" },
                     datumOfPeriode = new datumOfPeriodeType()
                     {
