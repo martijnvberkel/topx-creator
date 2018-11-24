@@ -14,6 +14,7 @@ namespace Topx.Creator
 {
     public class Parser
     {
+        private readonly Globals _globals;
         public recordInformationPackage Rip;
         public List<string> ZaaknummerMarkForDelivered = new List<string>();
         public StringBuilder ErrorMessage = new StringBuilder();
@@ -21,27 +22,22 @@ namespace Topx.Creator
         private const string DateParsing = "d-M-yyyy";
         private const string DateTimeParsing = "d-M-yyyy H:m";
 
-        public Parser()
+        public Parser(Globals globals)
         {
+            _globals = globals;
             Logger.ClearLog();
         }
         public recordInformationPackage ParseDataToTopx(int nrOfRecords = 0)
         {
             using (var entities = new ModelTopX())
             {
-                _identificatieArchief = "NL-0784-10009";
-                var datumArchief = Convert.ToDateTime(DateTime.Today);
-                var omschrijvingArchief = "Bouwvergunningen Test ABG";
-                var bronArchief = "Digitale bouwvergunningen";
-                var doelArchief = "Bouwvergunningen om op te nemen in e-Depot";
-                var naamArchief = omschrijvingArchief;
-
-                //var identificatieArchief = "NL-0779-10001";
-                //var datumArchief = Convert.ToDateTime(DateTime.Today);
-                //var omschrijvingArchief = "Bouwvergunningen Gemeente Geertruidenberg 1928 - 1975";
-                //var bronArchief = "Digitale bouwvergunningen";
-                //var doelArchief = "Bouwvergunningen om op te nemen in e-Depot";
-                //var naamArchief = "Bouwvergunningen Gemeente Geertruidenberg 1928 - 1975";
+                _identificatieArchief = _globals.IdentificatieArchief;
+                var datumArchief = _globals.DatumArchief;
+                var omschrijvingArchief = _globals.OmschrijvingArchief;
+                var bronArchief = _globals.BronArchief;
+                var doelArchief = _globals.DoelArchief;
+                var naamArchief = _globals.NaamArchief;
+               
                 Rip = new recordInformationPackage()
                 {
                     packageHeader =

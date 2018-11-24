@@ -9,100 +9,117 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Topx.Data;
+using Topx.DataServices;
 using Topx.Interface;
 
 namespace Topx.Importer
 {
     public class Importer
     {
-        private readonly ModelTopX _entities;
+        private readonly IDataService _dataservice;
         public string ErrorMessage;
+        public StringBuilder ErrorsImportDossiers = new StringBuilder();
+        public StringBuilder ErrorsImportRecords = new StringBuilder();
         public bool Error;
 
-        public Importer()
+        public Importer(IDataService globalsService)
         {
-            //_entities = entities;
-        }
-       
+            _dataservice = globalsService;
 
-        public void ImportDossiers(List<FieldMapping> mappings, StreamReader dossierStream, Headers.MappingType mappingType)
-        {
-            var result = GetDataTable_old(mappings, dossierStream, mappingType);
         }
 
-        //public void ImportDossiers(List<FieldMapping> mappings, List<string> headersDossiers, StreamReader dossierStream)
-        //{
-        //    var mappingsDossiers = mappings.Where(t => t.Type == Headers.MappingType.DOSSIER.ToString()) .ToList();
-        //    var result = GetDataTable(mappingsDossiers, dossierStream, Headers.MappingType.DOSSIER);
-
-        //}
-
-        //public void ImportRecords(List<FieldMapping> mappings, List<string> headersRecords, StreamReader dossierStream)
-        //{
-        //    var mappingsDossiers = mappings.Where(t => t.Type == Headers.MappingType.RECORD.ToString()).ToList();
-        //    var result = GetDataTable(mappingsDossiers, dossierStream, Headers.MappingType.RECORD);
-
-        //}
-
-        private DataTable GetDataTable_old(List<FieldMapping> mappingsDossiers, StreamReader dossierStream, Headers.MappingType mappingType)
-        {
-            var topxDataTable = new TopXDataTable(';');
-            using (var dataConnection = new SqlConnection(_entities.Database.Connection.ConnectionString))
-            {
-                dataConnection.Open();
-                var sqldataadapter = new SqlDataAdapter();
-
-                var query = mappingType == Headers.MappingType.DOSSIER ? "select * from Dossiers" : "select * from Records";
-
-                var sqlCommand = new SqlCommand(query, dataConnection);
-
-                var objCommandBuilder = new SqlCommandBuilder(sqldataadapter);
-                var table = new DataTable();
-                sqldataadapter.SelectCommand = sqlCommand;
-                sqldataadapter.FillSchema(table, SchemaType.Source);
-                sqldataadapter.Fill(table);
-
-                topxDataTable.LoadFromStream(mappingsDossiers, dossierStream, table);
-                if (topxDataTable.ErrorList.Length > 0)
-                {
-                    ErrorMessage = topxDataTable.ErrorList.ToString();
-                    Error = true;
-                }
-
-                sqldataadapter.Update(table);
-                return table;
-            }
-        }
-
-        public List<Dossier> GetDossiers(List<FieldMapping> mappingsDossiers, StreamReader dossierStream, Headers.MappingType mappingType)
+        public void SaveDossiers(List<FieldMapping> mappingsDossiers, StreamReader dossierStream)
         {
             var readLineAsHeader = dossierStream.ReadLine();
-            if (readLineAsHeader == null) return null;
+            if (readLineAsHeader == null)
+            {
+                Error = true;
+                ErrorMessage = "File is leeg";
+                return;
+            };
             var headersSource = readLineAsHeader.Split(';');
 
-            var dossiers = new List<Dossier>();
             while (dossierStream.Peek() > 0)
             {
                 var dossier = new Dossier();
                 var fieldsSource = dossierStream.ReadLine()?.Split(';');
-                if (fieldsSource == null)
+
+                try
                 {
+
+                    if (fieldsSource == null)
+                    {
+                        Error = true;
+                        ErrorMessage = "Unexpected end of stream";
+                        return;
+                    }
+                    for (var index = 0; index <= headersSource.Length - 1; index++)
+                    {
+                        var mappedfield = (from f in mappingsDossiers where f.MappedFieldName == headersSource[index] select f.DatabaseFieldName).FirstOrDefault();
+                        if (mappedfield == null)
+                            continue;
+                        var propertyInfo = dossier.GetType().GetProperty(mappedfield);
+
+                        if (propertyInfo != null)
+                            propertyInfo.SetValue(dossier, fieldsSource[index], null);
+                    }
+                    _dataservice.SaveDossier(dossier);
+                }
+                catch (Exception e)
+                {
+                    ErrorsImportDossiers.AppendLine($"Dossier {fieldsSource?[0]} kon niet worden geïmporteerd: {e.Message}");
                     Error = true;
-                    ErrorMessage = "Unexpected end of stream";
                 }
-                for (var index = 0; index <= headersSource.Length - 1; index++)
-                {
-                    var mappedfield = (from f in mappingsDossiers where f.MappedFieldName == headersSource[index] select f.DatabaseFieldName).FirstOrDefault();
-                    if (mappedfield == null)
-                        continue;
-                    var propertyInfo = dossier.GetType().GetProperty(mappedfield);
-                    
-                    if (propertyInfo != null)
-                        propertyInfo.SetValue(dossier, fieldsSource[index], null);
-                }
-                dossiers.Add(dossier);
             }
-            return dossiers;
+        }
+        public void SaveRecords(List<FieldMapping> mappingsRecords, StreamReader recordsStream)
+        {
+            var readLineAsHeader = recordsStream.ReadLine();
+            if (readLineAsHeader == null)
+            {
+                Error = true;
+                ErrorMessage = "File is leeg";
+                return;
+            };
+            var headersSource = readLineAsHeader.Split(';');
+
+            while (recordsStream.Peek() > 0)
+            {
+                var record = new Record();
+                var fieldsSource = recordsStream.ReadLine()?.Split(';');
+                try
+                {
+
+                    if (fieldsSource == null)
+                    {
+                        Error = true;
+                        ErrorMessage = "Unexpected end of stream";
+                        return;
+                    }
+                    for (var index = 0; index <= headersSource.Length - 1; index++)
+                    {
+                        var mappedfield = (from f in mappingsRecords where f.MappedFieldName == headersSource[index] select f.DatabaseFieldName).FirstOrDefault();
+                        if (mappedfield == null)
+                            continue;
+                        var propertyInfo = record.GetType().GetProperty(mappedfield);
+
+                        if (propertyInfo != null)
+                        {
+                            if (propertyInfo.PropertyType == typeof(string))
+                                propertyInfo.SetValue(record, fieldsSource[index], null);
+                            if (propertyInfo.PropertyType == typeof(Int64))
+                                propertyInfo.SetValue(record, Convert.ToInt64(fieldsSource[index]), null);
+
+                        }
+                    }
+                    _dataservice.SaveRecord(record);
+                }
+                catch (Exception e)
+                {
+                    ErrorsImportRecords.AppendLine($"Record {fieldsSource?[0]} kon niet worden geïmporteerd: {e.Message}");
+                    Error = true;
+                }
+            }
         }
     }
 }

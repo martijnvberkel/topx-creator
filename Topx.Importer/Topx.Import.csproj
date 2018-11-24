@@ -56,6 +56,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Topx.DataServices\Topx.DataServices.csproj">
+      <Project>{1A82E7D8-4AB0-499E-BEE9-7D1569AD2F12}</Project>
+      <Name>Topx.DataServices</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Topx.Data\Topx.Data.csproj">
       <Project>{982EDCDB-E044-43D5-8071-BB4728C6A173}</Project>
       <Name>Topx.Data</Name>
