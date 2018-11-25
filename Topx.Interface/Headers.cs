@@ -12,8 +12,8 @@ namespace Topx.Interface
 {
     public class Headers
     {
-        private readonly ModelTopX _entities;
-        public enum MappingType { DOSSIER, RECORD, BESTAND }
+        //private readonly ModelTopX _entities;
+        
 
         private List<FieldMapping> _headersDossiers;
         private List<FieldMapping> _headersRecords;
@@ -22,9 +22,9 @@ namespace Topx.Interface
 
         public List<FieldMapping> HeadersRecordsBestanden => _headersRecords.Concat(_headersBestanden).ToList();
 
-        public Headers(ModelTopX entities)
+        public Headers()
         {
-            _entities = entities;
+            //_entities = entities;
         }
 
         private void CreateListOfAvailableColumnsOfDossiers()
@@ -33,7 +33,7 @@ namespace Topx.Interface
                                                                               BindingFlags.Public |
                                                                               BindingFlags.Instance);
 
-            _headersDossiers = GetPropertyInfoNames(propertyInfosDossiers, MappingType.DOSSIER);
+            _headersDossiers = GetPropertyInfoNames(propertyInfosDossiers, FieldMappingType.DOSSIER);
         }
 
         private void CreateListOfAvailableColumnsOfRecords()
@@ -42,11 +42,11 @@ namespace Topx.Interface
                                                                             BindingFlags.Public |
                                                                             BindingFlags.Instance);
 
-            _headersRecords = GetPropertyInfoNames(propertyInfosRecords, MappingType.RECORD);
+            _headersRecords = GetPropertyInfoNames(propertyInfosRecords, FieldMappingType.RECORD);
         }
 
 
-        private List<FieldMapping> GetPropertyInfoNames(PropertyInfo[] propertyInfos, MappingType type)
+        private List<FieldMapping> GetPropertyInfoNames(PropertyInfo[] propertyInfos, FieldMappingType type)
         {
             // if (typeof(IEnumerable).IsAssignableFrom(pi.PropertyType))
             var listOfFields = propertyInfos.Where
@@ -77,11 +77,11 @@ namespace Topx.Interface
                 if (headersDossier != null)
                 {
                     headersDossier.MappedFieldName = sourceHeader;
-                    headersDossier.Type = MappingType.DOSSIER.ToString();
+                    headersDossier.Type = FieldMappingType.DOSSIER.ToString();
                 }
                 else
                 {
-                    _headersDossiers.Add(new FieldMapping() {MappedFieldName = sourceHeader, Type = MappingType.RECORD.ToString() });
+                    _headersDossiers.Add(new FieldMapping() {MappedFieldName = sourceHeader, Type = FieldMappingType.RECORD.ToString() });
                 }
 
             }
@@ -97,11 +97,11 @@ namespace Topx.Interface
                 if (headerRecords != null)
                 {
                     headerRecords.MappedFieldName = sourceHeader;
-                    headerRecords.Type = MappingType.RECORD.ToString();
+                    headerRecords.Type = FieldMappingType.RECORD.ToString();
                 }
                 else
                 {
-                    _headersRecords.Add(new FieldMapping() { MappedFieldName = sourceHeader, Type = MappingType.DOSSIER.ToString() });
+                    _headersRecords.Add(new FieldMapping() { MappedFieldName = sourceHeader, Type = FieldMappingType.DOSSIER.ToString() });
                 }
 
             }

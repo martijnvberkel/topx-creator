@@ -26,7 +26,7 @@ namespace Topx.UnitTests
             };
             var streamreader = CreateReader($"A;B;C{Environment.NewLine}TestA;TestB;TestC");
             // Act
-            var dossiers = importer.GetDossiers(mappings,streamreader, Headers.MappingType.DOSSIER);
+            var dossiers = importer.GetDossiers(mappings,streamreader, Headers.FieldMappingType.DOSSIER);
 
             // Assert
             Assert.That(dossiers.Count, Is.EqualTo(1));
@@ -46,7 +46,7 @@ namespace Topx.UnitTests
             };
             var streamreader = CreateReader($"A;B{Environment.NewLine}TestA;TestB{Environment.NewLine} this_is_not_a_good_csv");
             // Act
-            var dossiers = importer.GetDossiers(mappings, streamreader, Headers.MappingType.DOSSIER);
+            var dossiers = importer.GetDossiers(mappings, streamreader, Headers.FieldMappingType.DOSSIER);
 
             // Assert
             Assert.That(dossiers.Count, Is.EqualTo(2));

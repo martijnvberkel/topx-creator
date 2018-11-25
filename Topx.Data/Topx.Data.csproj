@@ -52,6 +52,7 @@
     <Compile Include="Bestanden.cs" />
     <Compile Include="Dossiers.cs" />
     <Compile Include="FieldMappings.cs" />
+    <Compile Include="FieldMappingType.cs" />
     <Compile Include="Globals.cs" />
     <Compile Include="Log.cs" />
     <Compile Include="Migrations\201811041042090_InitialCreate.cs" />

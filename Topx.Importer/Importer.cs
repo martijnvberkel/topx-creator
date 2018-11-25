@@ -53,6 +53,8 @@ namespace Topx.Importer
                         ErrorMessage = "Unexpected end of stream";
                         return;
                     }
+                    if (string.IsNullOrEmpty(fieldsSource[0])) continue;  // skip rows without id
+
                     for (var index = 0; index <= headersSource.Length - 1; index++)
                     {
                         var mappedfield = (from f in mappingsDossiers where f.MappedFieldName == headersSource[index] select f.DatabaseFieldName).FirstOrDefault();
@@ -96,6 +98,8 @@ namespace Topx.Importer
                         ErrorMessage = "Unexpected end of stream";
                         return;
                     }
+                    if (string.IsNullOrEmpty(fieldsSource[0])) continue;  // skip rows without id
+
                     for (var index = 0; index <= headersSource.Length - 1; index++)
                     {
                         var mappedfield = (from f in mappingsRecords where f.MappedFieldName == headersSource[index] select f.DatabaseFieldName).FirstOrDefault();

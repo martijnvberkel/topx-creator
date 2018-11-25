@@ -37,6 +37,8 @@ namespace TOPX.UI.Forms
         private FormLog _formLog = new FormLog();
 
         private Headers _headers;
+        private Globals _globals;
+
         public TopXConverter(IDataService dataservice)
         {
             _dataservice = dataservice;
@@ -52,38 +54,55 @@ namespace TOPX.UI.Forms
         {
             Logging.Init();
             _logger = LogManager.GetCurrentClassLogger();
-            _headers = new Headers(new ModelTopX());
+            _headers = new Headers();
 
             gridFieldMappingDossiers.AutoGenerateColumns = false;
             gridFieldMappingRecords.AutoGenerateColumns = false;
 
             InitDefaultFilesLoad();
+            InitTooltips();
+        }
+
+        private void InitTooltips()
+        {
+            // Todo 
+
+            //ToolTip toolTip1 = new ToolTip
+            //{
+            //    AutoPopDelay = 5000,
+            //    InitialDelay = 1000,
+            //    ReshowDelay = 500,
+            //    ShowAlways = true
+            //};
+           
+            //toolTip1.SetToolTip(this.gridFieldMappingDossiers, "De mappings zijn aan te passen door de bronvelden te verplaatsen met drag & drop");
+            //toolTip1.SetToolTip(this.gridFieldMappingRecords, "De mappings zijn aan te passen door de bronvelden te verplaatsen met drag & drop");
         }
 
         private void InitDefaultFilesLoad()
         {
-            var globals = _dataservice.GetGlobals();
-            var dossierFile = globals?.LastDossierFileName;
-            txtDossierLocation.Text = globals?.LastDossierFileName;
+            _globals = _dataservice.GetGlobals();
+            var dossierFile = _globals?.LastDossierFileName;
+            txtDossierLocation.Text = _globals?.LastDossierFileName;
             if (File.Exists(dossierFile))
             {
-                LoadDossierFile(dossierFile);
+                LoadDossierFile(dossierFile, loadfromCache: true);
             }
 
-            var recordFile = globals?.LastRecordsFileName;
-            txtRecordBestandLocation.Text = globals?.LastRecordsFileName;
+            var recordFile = _globals?.LastRecordsFileName;
+            txtRecordBestandLocation.Text = _globals?.LastRecordsFileName;
             if (File.Exists(recordFile))
             {
-                LoadRecordFile(recordFile);
+                LoadRecordFile(recordFile, loadfromCache:true);
             }
 
-            txtBronArchief.Text = globals?.BronArchief;
-            txtDatumArchief.Text = globals?.DatumArchief.ToString("dd-MM-yyyy");
-            txtDoelArchief.Text = globals?.DoelArchief;
-            txtDossierLocation.Text = globals?.LastDossierFileName;
-            txtIdentificatieArchief.Text = globals?.IdentificatieArchief;
-            txtNaamArchief.Text = globals?.NaamArchief;
-            txtOmschrijvingArchief.Text = globals?.OmschrijvingArchief;
+            txtBronArchief.Text = _globals?.BronArchief;
+            txtDatumArchief.Text = _globals?.DatumArchief.ToString("dd-MM-yyyy");
+            txtDoelArchief.Text = _globals?.DoelArchief;
+            txtDossierLocation.Text = _globals?.LastDossierFileName;
+            txtIdentificatieArchief.Text = _globals?.IdentificatieArchief;
+            txtNaamArchief.Text = _globals?.NaamArchief;
+            txtOmschrijvingArchief.Text = _globals?.OmschrijvingArchief;
         }
 
         private void btImportFilesInDb_Click(object sender, EventArgs e)
@@ -132,8 +151,8 @@ namespace TOPX.UI.Forms
         {
             try
             {
-                //Cursor.Current = Cursors.WaitCursor;
-                var parser = new Parser();
+                Cursor.Current = Cursors.WaitCursor;
+                var parser = new Parser(_globals);
                 var result = parser.ParseDataToTopx();
                 txtLogTopXCreate.Text = parser.ErrorMessage.ToString();
 
@@ -144,6 +163,7 @@ namespace TOPX.UI.Forms
             }
             catch (Exception exception)
             {
+                Cursor.Current = Cursors.Default;
                 MessageBox.Show(exception.Message);
                 txtLogTopXCreate.Text = exception.ToString();
             }
@@ -243,7 +263,13 @@ namespace TOPX.UI.Forms
                 {
                     _headersDossiers = sr.ReadLine().Split(";"[0]).ToList();
                 }
-                _fieldmappingsDossiers = loadfromCache ? _dataservice.GetMappingsDossiers() : _headers.GetHeaderMappingDossiers(_headersDossiers);
+                if (loadfromCache)
+                    _fieldmappingsDossiers = _dataservice.GetMappingsDossiers();
+                else
+                {
+                    _fieldmappingsDossiers = _headers.GetHeaderMappingDossiers(_headersDossiers);
+                    _dataservice.SaveMappings(_fieldmappingsDossiers, FieldMappingType.DOSSIER);
+                }
                 gridFieldMappingDossiers.DataSource = _fieldmappingsDossiers;
 
             }
@@ -281,7 +307,7 @@ namespace TOPX.UI.Forms
                 else
                 {
                     _fieldmappingsRecords = _headers.GetHeaderMappingRecordsBestanden(_headersRecords);
-                    _dataservice.SaveMappings(_fieldmappingsRecords);
+                    _dataservice.SaveMappings(_fieldmappingsRecords, FieldMappingType.RECORD);
                 }
                 gridFieldMappingRecords.DataSource = _fieldmappingsRecords;
 
@@ -318,7 +344,15 @@ namespace TOPX.UI.Forms
             }
         }
 
+        private void gridFieldMappingRecords_Leave(object sender, EventArgs e)
+        {
+            _dataservice.SaveMappings(_fieldmappingsRecords, FieldMappingType.RECORD);
+        }
 
+        private void gridFieldMappingDossiers_Leave(object sender, EventArgs e)
+        {
+            _dataservice.SaveMappings(_fieldmappingsDossiers, FieldMappingType.DOSSIER);
+        }
     }
 
 

@@ -61,8 +61,6 @@ namespace TOPX.UI.Forms
             this.txtDatumArchief = new System.Windows.Forms.MaskedTextBox();
             this.materialLabel10 = new MaterialSkin.Controls.MaterialLabel();
             this.tabLoadFiles = new System.Windows.Forms.TabPage();
-            this.btLoadRecords = new System.Windows.Forms.Button();
-            this.btImportDossiers = new System.Windows.Forms.Button();
             this.picRecordsSelector = new System.Windows.Forms.PictureBox();
             this.picDossierSelector = new System.Windows.Forms.PictureBox();
             this.materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
@@ -72,7 +70,11 @@ namespace TOPX.UI.Forms
             this.materialLabel5 = new MaterialSkin.Controls.MaterialLabel();
             this.txtDossierLocation = new System.Windows.Forms.TextBox();
             this.gridFieldMappingRecords = new TOPX.UI.Controls.DragDropGridView();
+            this.DatabaseFieldNameRecords = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MappedFieldNameRecords = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gridFieldMappingDossiers = new TOPX.UI.Controls.DragDropGridView();
+            this.MappedFieldName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DatabaseFieldName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabImportFiles = new System.Windows.Forms.TabPage();
             this.btImportFilesInDb = new System.Windows.Forms.Button();
             this.materialLabel4 = new MaterialSkin.Controls.MaterialLabel();
@@ -84,13 +86,9 @@ namespace TOPX.UI.Forms
             this.txtFileLocation = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.btFileLocation = new MaterialSkin.Controls.MaterialRaisedButton();
             this.tabGenerateTopX = new System.Windows.Forms.TabPage();
-            this.txtLogTopXCreate = new System.Windows.Forms.TextBox();
-            this.MappedFieldName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DatabaseFieldName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DatabaseFieldNameRecords = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MappedFieldNameRecords = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btGenerateTopX = new System.Windows.Forms.Button();
             this.materialLabel13 = new MaterialSkin.Controls.MaterialLabel();
+            this.btGenerateTopX = new System.Windows.Forms.Button();
+            this.txtLogTopXCreate = new System.Windows.Forms.TextBox();
             this.materialContextMenuStrip2.SuspendLayout();
             this.materialContextMenuStrip3.SuspendLayout();
             this.materialTabControl1.SuspendLayout();
@@ -408,8 +406,6 @@ namespace TOPX.UI.Forms
             // 
             // tabLoadFiles
             // 
-            this.tabLoadFiles.Controls.Add(this.btLoadRecords);
-            this.tabLoadFiles.Controls.Add(this.btImportDossiers);
             this.tabLoadFiles.Controls.Add(this.picRecordsSelector);
             this.tabLoadFiles.Controls.Add(this.picDossierSelector);
             this.tabLoadFiles.Controls.Add(this.materialLabel2);
@@ -428,26 +424,6 @@ namespace TOPX.UI.Forms
             this.tabLoadFiles.TabIndex = 1;
             this.tabLoadFiles.Text = "Bestanden";
             this.tabLoadFiles.UseVisualStyleBackColor = true;
-            // 
-            // btLoadRecords
-            // 
-            this.btLoadRecords.Location = new System.Drawing.Point(1103, 52);
-            this.btLoadRecords.Name = "btLoadRecords";
-            this.btLoadRecords.Size = new System.Drawing.Size(102, 23);
-            this.btLoadRecords.TabIndex = 24;
-            this.btLoadRecords.Text = "Mapping velden";
-            this.btLoadRecords.UseVisualStyleBackColor = true;
-            this.btLoadRecords.Click += new System.EventHandler(this.btLoadRecords_Click);
-            // 
-            // btImportDossiers
-            // 
-            this.btImportDossiers.Location = new System.Drawing.Point(495, 51);
-            this.btImportDossiers.Name = "btImportDossiers";
-            this.btImportDossiers.Size = new System.Drawing.Size(104, 23);
-            this.btImportDossiers.TabIndex = 23;
-            this.btImportDossiers.Text = "Mapping velden";
-            this.btImportDossiers.UseVisualStyleBackColor = true;
-            this.btImportDossiers.Click += new System.EventHandler(this.btImportDossiers_Click);
             // 
             // picRecordsSelector
             // 
@@ -555,6 +531,21 @@ namespace TOPX.UI.Forms
             this.gridFieldMappingRecords.Name = "gridFieldMappingRecords";
             this.gridFieldMappingRecords.Size = new System.Drawing.Size(525, 587);
             this.gridFieldMappingRecords.TabIndex = 14;
+            this.gridFieldMappingRecords.Leave += new System.EventHandler(this.gridFieldMappingRecords_Leave);
+            // 
+            // DatabaseFieldNameRecords
+            // 
+            this.DatabaseFieldNameRecords.DataPropertyName = "MappedFieldName";
+            this.DatabaseFieldNameRecords.HeaderText = "Veldnaam Bron";
+            this.DatabaseFieldNameRecords.Name = "DatabaseFieldNameRecords";
+            this.DatabaseFieldNameRecords.Width = 220;
+            // 
+            // MappedFieldNameRecords
+            // 
+            this.MappedFieldNameRecords.DataPropertyName = "DatabaseFieldName";
+            this.MappedFieldNameRecords.HeaderText = "Veldnaam TopX";
+            this.MappedFieldNameRecords.Name = "MappedFieldNameRecords";
+            this.MappedFieldNameRecords.Width = 250;
             // 
             // gridFieldMappingDossiers
             // 
@@ -569,6 +560,21 @@ namespace TOPX.UI.Forms
             this.gridFieldMappingDossiers.Name = "gridFieldMappingDossiers";
             this.gridFieldMappingDossiers.Size = new System.Drawing.Size(524, 587);
             this.gridFieldMappingDossiers.TabIndex = 13;
+            this.gridFieldMappingDossiers.Leave += new System.EventHandler(this.gridFieldMappingDossiers_Leave);
+            // 
+            // MappedFieldName
+            // 
+            this.MappedFieldName.DataPropertyName = "MappedFieldName";
+            this.MappedFieldName.HeaderText = "Veldnaam Bron";
+            this.MappedFieldName.Name = "MappedFieldName";
+            this.MappedFieldName.Width = 220;
+            // 
+            // DatabaseFieldName
+            // 
+            this.DatabaseFieldName.DataPropertyName = "DatabaseFieldName";
+            this.DatabaseFieldName.HeaderText = "Veldnaam TopX";
+            this.DatabaseFieldName.Name = "DatabaseFieldName";
+            this.DatabaseFieldName.Width = 250;
             // 
             // tabImportFiles
             // 
@@ -710,53 +716,6 @@ namespace TOPX.UI.Forms
             this.tabGenerateTopX.Text = "Genereer TopX";
             this.tabGenerateTopX.UseVisualStyleBackColor = true;
             // 
-            // txtLogTopXCreate
-            // 
-            this.txtLogTopXCreate.Location = new System.Drawing.Point(107, 142);
-            this.txtLogTopXCreate.Multiline = true;
-            this.txtLogTopXCreate.Name = "txtLogTopXCreate";
-            this.txtLogTopXCreate.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtLogTopXCreate.Size = new System.Drawing.Size(709, 377);
-            this.txtLogTopXCreate.TabIndex = 3;
-            // 
-            // MappedFieldName
-            // 
-            this.MappedFieldName.DataPropertyName = "MappedFieldName";
-            this.MappedFieldName.HeaderText = "Veldnaam Bron";
-            this.MappedFieldName.Name = "MappedFieldName";
-            this.MappedFieldName.Width = 220;
-            // 
-            // DatabaseFieldName
-            // 
-            this.DatabaseFieldName.DataPropertyName = "DatabaseFieldName";
-            this.DatabaseFieldName.HeaderText = "Veldnaam TopX";
-            this.DatabaseFieldName.Name = "DatabaseFieldName";
-            this.DatabaseFieldName.Width = 250;
-            // 
-            // DatabaseFieldNameRecords
-            // 
-            this.DatabaseFieldNameRecords.DataPropertyName = "MappedFieldName";
-            this.DatabaseFieldNameRecords.HeaderText = "Veldnaam Bron";
-            this.DatabaseFieldNameRecords.Name = "DatabaseFieldNameRecords";
-            this.DatabaseFieldNameRecords.Width = 220;
-            // 
-            // MappedFieldNameRecords
-            // 
-            this.MappedFieldNameRecords.DataPropertyName = "DatabaseFieldName";
-            this.MappedFieldNameRecords.HeaderText = "Veldnaam TopX";
-            this.MappedFieldNameRecords.Name = "MappedFieldNameRecords";
-            this.MappedFieldNameRecords.Width = 250;
-            // 
-            // btGenerateTopX
-            // 
-            this.btGenerateTopX.Location = new System.Drawing.Point(107, 61);
-            this.btGenerateTopX.Name = "btGenerateTopX";
-            this.btGenerateTopX.Size = new System.Drawing.Size(97, 23);
-            this.btGenerateTopX.TabIndex = 4;
-            this.btGenerateTopX.Text = "Genereer TopX";
-            this.btGenerateTopX.UseVisualStyleBackColor = true;
-            this.btGenerateTopX.Click += new System.EventHandler(this.btGenerateTopX_Click);
-            // 
             // materialLabel13
             // 
             this.materialLabel13.AutoSize = true;
@@ -769,6 +728,25 @@ namespace TOPX.UI.Forms
             this.materialLabel13.Size = new System.Drawing.Size(71, 19);
             this.materialLabel13.TabIndex = 9;
             this.materialLabel13.Text = "Error Log";
+            // 
+            // btGenerateTopX
+            // 
+            this.btGenerateTopX.Location = new System.Drawing.Point(107, 61);
+            this.btGenerateTopX.Name = "btGenerateTopX";
+            this.btGenerateTopX.Size = new System.Drawing.Size(97, 23);
+            this.btGenerateTopX.TabIndex = 4;
+            this.btGenerateTopX.Text = "Genereer TopX";
+            this.btGenerateTopX.UseVisualStyleBackColor = true;
+            this.btGenerateTopX.Click += new System.EventHandler(this.btGenerateTopX_Click);
+            // 
+            // txtLogTopXCreate
+            // 
+            this.txtLogTopXCreate.Location = new System.Drawing.Point(107, 142);
+            this.txtLogTopXCreate.Multiline = true;
+            this.txtLogTopXCreate.Name = "txtLogTopXCreate";
+            this.txtLogTopXCreate.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.txtLogTopXCreate.Size = new System.Drawing.Size(709, 377);
+            this.txtLogTopXCreate.TabIndex = 3;
             // 
             // TopXConverter
             // 
@@ -852,8 +830,6 @@ namespace TOPX.UI.Forms
         private PlaceHolderTextBox txtIdentificatieArchief;
         private PictureBox picRecordsSelector;
         private PictureBox picDossierSelector;
-        private Button btLoadRecords;
-        private Button btImportDossiers;
         private Button btImportFilesInDb;
         private DragDropGridView gridFieldMappingRecords;
         private DragDropGridView gridFieldMappingDossiers;

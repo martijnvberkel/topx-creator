@@ -1,7 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Net.Http.Headers;
 using Topx.Data;
+
 
 namespace Topx.DataServices
 {
@@ -19,7 +22,7 @@ namespace Topx.DataServices
         void ClearDossiersAndRecords();
         List<FieldMapping> GetMappingsDossiers();
         List<FieldMapping> GetMappingsRecords();
-        void SaveMappings(List<FieldMapping> fieldmappingdossiers, MappingType type);
+        void SaveMappings(List<FieldMapping> fieldmappingdossiers, FieldMappingType type);
     }
 
     public class DataService : IDataService
@@ -109,6 +112,11 @@ namespace Topx.DataServices
         {
             using (var entities = new ModelTopX())
             {
+                var dossierId = record.DossierId;
+                if (!entities.Dossiers.Any(t => t.IdentificatieKenmerk == dossierId))
+                {
+                    recorde
+                }
                 entities.Records.Add(record);
                 entities.SaveChanges();
             }
@@ -129,7 +137,7 @@ namespace Topx.DataServices
             }
         }
 
-        public void SaveMappings(List<FieldMapping> fieldmappingdossiers, MappingType type)
+        public void SaveMappings(List<FieldMapping> fieldmappingsModified, FieldMappingType type)
         {
             using (var entities = new ModelTopX())
             {
@@ -137,7 +145,7 @@ namespace Topx.DataServices
                 entities.FieldMappings.RemoveRange(fieldmappings);
                 entities.SaveChanges();
 
-                foreach (var fieldmapping in fieldmappingdossiers)
+                foreach (var fieldmapping in fieldmappingsModified)
                 {
                     fieldmapping.Type = type.ToString();
                     entities.FieldMappings.Add(fieldmapping);
