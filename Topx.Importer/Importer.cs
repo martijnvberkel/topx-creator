@@ -116,7 +116,8 @@ namespace Topx.Importer
 
                         }
                     }
-                    _dataservice.SaveRecord(record);
+                    if (!_dataservice.SaveRecord(record))
+                        ErrorsImportRecords.AppendLine(_dataservice.ErrorMessage);
                 }
                 catch (Exception e)
                 {

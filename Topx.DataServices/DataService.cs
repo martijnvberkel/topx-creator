@@ -18,15 +18,19 @@ namespace Topx.DataServices
         Globals GetGlobals();
         void SaveGlobals(Globals globals);
         void SaveDossier(Dossier dossier);
-        void SaveRecord(Record record);
+        bool SaveRecord(Record record);
         void ClearDossiersAndRecords();
-        List<FieldMapping> GetMappingsDossiers();
-        List<FieldMapping> GetMappingsRecords();
+        List<FieldMapping> GetMappingsDossiers(List<string> headersList);
+        List<FieldMapping> GetMappingsRecords(List<string> headersList);
         void SaveMappings(List<FieldMapping> fieldmappingdossiers, FieldMappingType type);
+        string ErrorMessage { get; set; }
+
     }
 
     public class DataService : IDataService
     {
+        public string ErrorMessage { get; set; }
+
         public DataService()
         {
         }
@@ -91,11 +95,10 @@ namespace Topx.DataServices
             {
                 var globalsFirstRecord = (from g in entities.Globals select g).FirstOrDefault();
                 if (globalsFirstRecord != null)
-                    entities.Entry(globalsFirstRecord).CurrentValues.SetValues(globals);
-                else
-                {
-                    entities.Globals.Add(globals);
-                }
+                    entities.Globals.Remove(globalsFirstRecord);
+
+                entities.Globals.Add(globals);
+
                 entities.SaveChanges();
             }
         }
@@ -108,32 +111,55 @@ namespace Topx.DataServices
                 entities.SaveChanges();
             }
         }
-        public void SaveRecord(Record record)
+        public bool SaveRecord(Record record)
         {
+            ErrorMessage = string.Empty;
             using (var entities = new ModelTopX())
             {
                 var dossierId = record.DossierId;
                 if (!entities.Dossiers.Any(t => t.IdentificatieKenmerk == dossierId))
                 {
-                    recorde
+                    ErrorMessage = $"ERROR: Record met bestandsnaam {record.Naam} is niet geïmporteerd, verwijst naar niet-bestaande DossierId {record.DossierId} ";
+                    return false;
                 }
                 entities.Records.Add(record);
                 entities.SaveChanges();
             }
+            return true;
         }
 
-        public List<FieldMapping> GetMappingsDossiers()
+        public List<FieldMapping> GetMappingsDossiers(List<string> headersList)
         {
             using (var entities = new ModelTopX())
             {
-                return (from m in entities.FieldMappings where m.Type == "DOSSIER" select m) .ToList();
+                var listFieldmappings = (from m in entities.FieldMappings where m.Type == "DOSSIER" select m).ToList();
+
+                // Als er een element van de opgeslagen fieldmappings niet voorkomt in de header-collectie, is deze niet consistent -> return null
+                if (listFieldmappings.Any(fieldMapping => !string.IsNullOrEmpty(fieldMapping.MappedFieldName) && !headersList.Contains(fieldMapping.MappedFieldName)))
+                    return null;
+
+                // Als er een element van de header-collectie niet voorkomt in de opgeslagen fieldmappings, is deze niet consistent -> return null
+                if (headersList.Any(header => !string.IsNullOrEmpty(header) && !listFieldmappings.Select(t => t.MappedFieldName == header).Any()))
+                    return null;
+
+                return listFieldmappings;
             }
         }
-        public List<FieldMapping> GetMappingsRecords()
+        public List<FieldMapping> GetMappingsRecords(List<string> headersList)
         {
             using (var entities = new ModelTopX())
             {
-                return (from m in entities.FieldMappings where m.Type == "RECORD" select m).ToList();
+                var listFieldmappings = (from m in entities.FieldMappings where m.Type == "RECORD" select m).ToList();
+
+                // Als er een element van de opgeslagen fieldmappings niet voorkomt in de header-collectie, is deze niet consistent -> return null
+                if (listFieldmappings.Any(fieldMapping => !string.IsNullOrEmpty(fieldMapping.MappedFieldName) && !headersList.Contains(fieldMapping.MappedFieldName)))
+                    return null;
+
+                // Als er een element van de header-collectie niet voorkomt in de opgeslagen fieldmappings, is deze niet consistent -> return null
+                if (headersList.Any(header => !string.IsNullOrEmpty(header) && !listFieldmappings.Select(t => t.MappedFieldName == header).Any()))
+                    return null;
+
+                return listFieldmappings;
             }
         }
 
@@ -148,7 +174,8 @@ namespace Topx.DataServices
                 foreach (var fieldmapping in fieldmappingsModified)
                 {
                     fieldmapping.Type = type.ToString();
-                    entities.FieldMappings.Add(fieldmapping);
+                    if (!string.IsNullOrEmpty(fieldmapping.DatabaseFieldName) || !string.IsNullOrEmpty(fieldmapping.MappedFieldName))
+                        entities.FieldMappings.Add(fieldmapping);
                 }
                 entities.SaveChanges();
             }

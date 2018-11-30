@@ -86,7 +86,7 @@ namespace TOPX.UI.Forms
             txtDossierLocation.Text = _globals?.LastDossierFileName;
             if (File.Exists(dossierFile))
             {
-                LoadDossierFile(dossierFile, loadfromCache: true);
+                LoadDossierFile(dossierFile);
             }
 
             var recordFile = _globals?.LastRecordsFileName;
@@ -144,7 +144,7 @@ namespace TOPX.UI.Forms
             txtErrorsDossiers.Text = importer.ErrorsImportDossiers.ToString();
             Cursor.Current = Cursors.Default;
 
-            MessageBox.Show(importer.Error ? "De dossiers- en records/bestanden-metadata zijn succesvol geïmporteerd." : "De import is afgerond met errors.");
+            MessageBox.Show(importer.Error ? "De import is afgerond met errors." : "De dossiers- en records/bestanden-metadata zijn succesvol geïmporteerd.");
         }
 
         private void btGenerateTopX_Click(object sender, EventArgs e)
@@ -221,7 +221,7 @@ namespace TOPX.UI.Forms
                 return;
             }
 
-            var globals = new Globals
+            _globals = new Globals
             {
                 BronArchief = txtBronArchief.Text,
                 DoelArchief = txtDoelArchief.Text,
@@ -230,7 +230,7 @@ namespace TOPX.UI.Forms
                 IdentificatieArchief = txtIdentificatieArchief.Text,
                 OmschrijvingArchief = txtOmschrijvingArchief.Text
             };
-            _dataservice.SaveGlobals(globals);
+            _dataservice.SaveGlobals(_globals);
         }
 
 
@@ -255,7 +255,7 @@ namespace TOPX.UI.Forms
 
         }
 
-        private void LoadDossierFile(string fileName, bool loadfromCache = false)
+        private void LoadDossierFile(string fileName)
         {
             try
             {
@@ -263,14 +263,36 @@ namespace TOPX.UI.Forms
                 {
                     _headersDossiers = sr.ReadLine().Split(";"[0]).ToList();
                 }
-                if (loadfromCache)
-                    _fieldmappingsDossiers = _dataservice.GetMappingsDossiers();
-                else
+                _fieldmappingsDossiers = _dataservice.GetMappingsDossiers(_headersDossiers);
+                if (_fieldmappingsDossiers == null)
                 {
                     _fieldmappingsDossiers = _headers.GetHeaderMappingDossiers(_headersDossiers);
                     _dataservice.SaveMappings(_fieldmappingsDossiers, FieldMappingType.DOSSIER);
                 }
                 gridFieldMappingDossiers.DataSource = _fieldmappingsDossiers;
+
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($"Het bestand kon niet worden ingelezen. Foutmelding: {e.Message}");
+            }
+        }
+        private void LoadRecordFile(string fileName, bool loadfromCache = false)
+        {
+            try
+            {
+                using (var sr = new StreamReader(new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite)))
+                {
+                    _headersRecords = sr.ReadLine().Split(";"[0]).ToList();
+                }
+               
+                _fieldmappingsRecords = _dataservice.GetMappingsRecords(_headersRecords);
+               if (_fieldmappingsRecords == null)
+                {
+                    _fieldmappingsRecords = _headers.GetHeaderMappingRecordsBestanden(_headersRecords);
+                    _dataservice.SaveMappings(_fieldmappingsRecords, FieldMappingType.RECORD);
+                }
+                gridFieldMappingRecords.DataSource = _fieldmappingsRecords;
 
             }
             catch (Exception e)
@@ -294,29 +316,7 @@ namespace TOPX.UI.Forms
             }
         }
 
-        private void LoadRecordFile(string fileName, bool loadfromCache = false)
-        {
-            try
-            {
-                using (var sr = new StreamReader(new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite)))
-                {
-                    _headersRecords = sr.ReadLine().Split(";"[0]).ToList();
-                }
-                if (loadfromCache)
-                    _fieldmappingsRecords = _dataservice.GetMappingsRecords();
-                else
-                {
-                    _fieldmappingsRecords = _headers.GetHeaderMappingRecordsBestanden(_headersRecords);
-                    _dataservice.SaveMappings(_fieldmappingsRecords, FieldMappingType.RECORD);
-                }
-                gridFieldMappingRecords.DataSource = _fieldmappingsRecords;
-
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show($"Het bestand kon niet worden ingelezen. Foutmelding: {e.Message}");
-            }
-        }
+       
 
         private void btImportDossiers_Click(object sender, EventArgs e)
         {
@@ -349,9 +349,37 @@ namespace TOPX.UI.Forms
             _dataservice.SaveMappings(_fieldmappingsRecords, FieldMappingType.RECORD);
         }
 
+        //private void gridFieldMappingDossiers_Leave(object sender, EventArgs e)
+        //{
+        //    _dataservice.SaveMappings(_fieldmappingsDossiers, FieldMappingType.DOSSIER);
+        //}
+
+        private void linkCopyErrorsDossiers_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Clipboard.SetText(txtErrorsDossiers.Text);
+        }
+
+        private void linkCopyErrorsRecords_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Clipboard.SetText(txtErrorRecords.Text);
+        }
+
+
         private void gridFieldMappingDossiers_Leave(object sender, EventArgs e)
         {
-            _dataservice.SaveMappings(_fieldmappingsDossiers, FieldMappingType.DOSSIER);
+            
+        }
+
+        private void gridFieldMappingDossiers_DataSourceChanged(object sender, EventArgs e)
+        {
+            if (_fieldmappingsDossiers != null)
+                _dataservice.SaveMappings(_fieldmappingsDossiers, FieldMappingType.DOSSIER);
+        }
+
+        private void gridFieldMappingRecords_DataSourceChanged(object sender, EventArgs e)
+        {
+            if (_fieldmappingsRecords != null)
+                _dataservice.SaveMappings(_fieldmappingsRecords, FieldMappingType.RECORD);
         }
     }
 
