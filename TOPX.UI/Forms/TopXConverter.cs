@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -14,7 +12,6 @@ using NLog;
 using Topx.Creator;
 using Topx.Data;
 using Topx.DataServices;
-using Topx.FileAnalysis;
 using Topx.Importer;
 using Topx.Interface;
 using Topx.Parser.Model;
