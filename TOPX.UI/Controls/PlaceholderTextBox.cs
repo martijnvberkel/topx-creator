@@ -28,8 +28,15 @@ namespace TOPX.UI.Controls
             get => _isPlaceHolder ? string.Empty : base.Text;
             set
             {
-                base.Text = value;
-                RemovePlaceHolder();
+                if (!string.IsNullOrEmpty(value))
+                {
+                    base.Text = value;
+                    RemovePlaceHolder();
+                }
+                else
+                {
+                    SetPlaceholder();
+                }
             }
         }
 
