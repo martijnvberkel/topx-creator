@@ -7,6 +7,7 @@ namespace Topx.Data
         public ModelTopX()
             : base("name=ModelTopX")
         {
+            Database.SetInitializer(new CreateDatabaseIfNotExists<ModelTopX>());
         }
 
         public virtual DbSet<Bestand> Bestanden { get; set; }

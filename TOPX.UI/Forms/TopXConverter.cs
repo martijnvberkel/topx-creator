@@ -36,6 +36,8 @@ namespace TOPX.UI.Forms
         private Headers _headers;
         private Globals _globals;
 
+        private WaitForm _waitForm;
+
         public TopXConverter(IDataService dataservice)
         {
             _dataservice = dataservice;
@@ -49,6 +51,7 @@ namespace TOPX.UI.Forms
 
         private void TopXConverter_Load(object sender, EventArgs e)
         {
+            ShowWaitForm();
             Logging.Init();
             _logger = LogManager.GetCurrentClassLogger();
             _headers = new Headers();
@@ -74,6 +77,24 @@ namespace TOPX.UI.Forms
            
             //toolTip1.SetToolTip(this.gridFieldMappingDossiers, "De mappings zijn aan te passen door de bronvelden te verplaatsen met drag & drop");
             //toolTip1.SetToolTip(this.gridFieldMappingRecords, "De mappings zijn aan te passen door de bronvelden te verplaatsen met drag & drop");
+        }
+
+        private void ShowWaitForm()
+        {
+            _waitForm = new WaitForm
+            {
+                TopMost = true,
+                StartPosition = FormStartPosition.CenterScreen
+            };
+            _waitForm.Show();
+            _waitForm.Refresh();
+            System.Threading.Thread.Sleep(700);
+            Application.Idle += OnLoaded;
+        }
+        private void OnLoaded(object sender, EventArgs e)
+        {
+            Application.Idle -= OnLoaded;
+            _waitForm.Close();
         }
 
         private void InitDefaultFilesLoad()

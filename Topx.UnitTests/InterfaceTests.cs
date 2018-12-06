@@ -27,7 +27,7 @@ namespace Topx.UnitTests
             var moq = new Mock<ModelTopX>();
 
             // when
-            var headers = new Headers(moq.Object);
+           // var headers = new Headers(moq.Object);
             
             // assert
            // Assert.That(headers.GetHeaderMappingDossiers(), Is.EqualTo(Statics.MockHeaders));
