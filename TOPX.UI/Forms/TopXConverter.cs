@@ -45,23 +45,27 @@ namespace TOPX.UI.Forms
             var materialSkinManager = MaterialSkinManager.Instance;
             materialSkinManager.AddFormToManage(this);
             materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
-            materialSkinManager.ColorScheme = new ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.LightBlue200, TextShade.WHITE);
+            //materialSkinManager.ColorScheme = new ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.LightBlue200, TextShade.WHITE);
+            materialSkinManager.ColorScheme = new ColorScheme(Primary.BlueGrey500, Primary.BlueGrey900, Primary.BlueGrey500, Accent.LightBlue200, TextShade.WHITE);
 
         }
 
         private void TopXConverter_Load(object sender, EventArgs e)
         {
-            ShowWaitForm();
-            Logging.Init();
-            _logger = LogManager.GetCurrentClassLogger();
-            _headers = new Headers();
+            {
+                ShowWaitForm("een moment geduld...");
+                Logging.Init();
+                _logger = LogManager.GetCurrentClassLogger();
+                _headers = new Headers();
 
-            gridFieldMappingDossiers.AutoGenerateColumns = false;
-            gridFieldMappingRecords.AutoGenerateColumns = false;
+                gridFieldMappingDossiers.AutoGenerateColumns = false;
+                gridFieldMappingRecords.AutoGenerateColumns = false;
 
-            InitDefaultFilesLoad();
-            InitTooltips();
+                InitDefaultFilesLoad();
+                InitTooltips();
+            }
         }
+
 
         private void InitTooltips()
         {
@@ -74,14 +78,14 @@ namespace TOPX.UI.Forms
             //    ReshowDelay = 500,
             //    ShowAlways = true
             //};
-           
+
             //toolTip1.SetToolTip(this.gridFieldMappingDossiers, "De mappings zijn aan te passen door de bronvelden te verplaatsen met drag & drop");
             //toolTip1.SetToolTip(this.gridFieldMappingRecords, "De mappings zijn aan te passen door de bronvelden te verplaatsen met drag & drop");
         }
 
-        private void ShowWaitForm()
+        private void ShowWaitForm(string message)
         {
-            _waitForm = new WaitForm
+            _waitForm = new WaitForm(message)
             {
                 TopMost = true,
                 StartPosition = FormStartPosition.CenterScreen
@@ -111,11 +115,11 @@ namespace TOPX.UI.Forms
             txtRecordBestandLocation.Text = _globals?.LastRecordsFileName;
             if (File.Exists(recordFile))
             {
-                LoadRecordFile(recordFile, loadfromCache:true);
+                LoadRecordFile(recordFile, loadfromCache: true);
             }
 
             txtBronArchief.Text = _globals?.BronArchief;
-            txtDatumArchief.Text = _globals?.DatumArchief.ToString("dd-MM-yyyy");
+            txtDatumArchief.Text = _globals?.DatumArchief?.ToString("dd-MM-yyyy");
             txtDoelArchief.Text = _globals?.DoelArchief;
             txtDossierLocation.Text = _globals?.LastDossierFileName;
             txtIdentificatieArchief.Text = _globals?.IdentificatieArchief;
@@ -138,8 +142,15 @@ namespace TOPX.UI.Forms
 
             _dataservice.ClearDossiersAndRecords();
 
-            Cursor.Current = Cursors.WaitCursor;
+
             var importer = new Importer(_dataservice);
+            if (!importer.CheckHealthyFieldmappings(_fieldmappingsDossiers) || !importer.CheckHealthyFieldmappings(_fieldmappingsRecords))
+            {
+                MessageBox.Show("Niet alle velden zijn gemapped. Corrigeer dit eerst, in de tab 'Bestanden'. ");
+                return;
+            }
+
+            Cursor.Current = Cursors.WaitCursor;
             using (var dossiers = new StreamReader(new FileStream(txtDossierLocation.Text, FileMode.Open, FileAccess.Read, FileShare.ReadWrite)))
             {
                 importer.SaveDossiers(_fieldmappingsDossiers, dossiers);
@@ -170,14 +181,36 @@ namespace TOPX.UI.Forms
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
-                var parser = new Parser(_globals);
-                var result = parser.ParseDataToTopx();
+                var parser = new Parser(_globals, _dataservice);
+
+                var listofdossiers = _dataservice.GetAllDossiers();
+                var result = parser.ParseDataToTopx(listofdossiers);
                 txtLogTopXCreate.Text = parser.ErrorMessage.ToString();
 
                 Cursor.Current = Cursors.Default;
 
-                if (MessageBox.Show("Save xml?", "xml", MessageBoxButtons.YesNo) == DialogResult.Yes)
-                    SaveAsXml(result);
+                if (result != null && parser.ErrorMessage.Length == 0)
+                {
+                    if (MessageBox.Show("Save xml?", "xml", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    {
+                        SaveAsXml(result);
+                    }
+                }
+                else
+                {
+                    if (parser.ErrorMessage.Length > 0 && result == null)
+                    {
+                        MessageBox.Show("Er zijn fouten opgetreden tijdens de conversie, TopX xml kan niet worden gegenereerd", "xml", MessageBoxButtons.OK);
+                    }
+                    else
+                    {
+                        if (MessageBox.Show("Er zijn fouten opgetreden tijdens de conversie. Wilt u de gegenereerde TopX xml toch opslaan?", "xml", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                        {
+                            SaveAsXml(result);
+                        }
+                    }
+                }
+            
             }
             catch (Exception exception)
             {
@@ -226,30 +259,36 @@ namespace TOPX.UI.Forms
 
         private void btFillDatumArchief_Click(object sender, EventArgs e)
         {
-            txtDatumArchief.Text = DateTime.Now.Date.ToString("dd-MM-yyyy");
+            var datetimeToday = DateTime.Now.Date;
+            txtDatumArchief.Text = datetimeToday.ToString("dd-MM-yyyy");
+            _globals.DatumArchief = datetimeToday;
+            _dataservice.SaveGlobals(_globals);
         }
 
-        private void btSaveGlobals_Click(object sender, EventArgs e)
+
+        private void SaveGlobals(object sender, EventArgs e)
         {
-
-            DateTime tempdatumArchief;
-            if (!DateTime.TryParseExact(txtDatumArchief.Text, "dd-MM-yyyy", new CultureInfo("nl-NL"), DateTimeStyles.None, out tempdatumArchief))
-            {
-                MessageBox.Show("Datum Archief is niet correct.");
-                return;
-            }
-
             _globals = new Globals
             {
                 BronArchief = txtBronArchief.Text,
                 DoelArchief = txtDoelArchief.Text,
-                DatumArchief = tempdatumArchief,
+
                 NaamArchief = txtNaamArchief.Text,
                 IdentificatieArchief = txtIdentificatieArchief.Text,
                 OmschrijvingArchief = txtOmschrijvingArchief.Text
             };
+
+            if (!string.IsNullOrEmpty(txtDatumArchief.Text))
+            {
+                DateTime tempdatumArchief;
+                if (DateTime.TryParseExact(txtDatumArchief.Text, "dd-MM-yyyy", new CultureInfo("nl-NL"), DateTimeStyles.None, out tempdatumArchief))
+                {
+                    _globals.DatumArchief = tempdatumArchief;
+                }
+            }
             _dataservice.SaveGlobals(_globals);
         }
+
 
 
         private void txtDossierLocation_TextChanged(object sender, EventArgs e)
@@ -303,9 +342,9 @@ namespace TOPX.UI.Forms
                 {
                     _headersRecords = sr.ReadLine().Split(";"[0]).ToList();
                 }
-               
+
                 _fieldmappingsRecords = _dataservice.GetMappingsRecords(_headersRecords);
-               if (_fieldmappingsRecords == null)
+                if (_fieldmappingsRecords == null)
                 {
                     _fieldmappingsRecords = _headers.GetHeaderMappingRecordsBestanden(_headersRecords);
                     _dataservice.SaveMappings(_fieldmappingsRecords, FieldMappingType.RECORD);
@@ -334,7 +373,7 @@ namespace TOPX.UI.Forms
             }
         }
 
-       
+
 
         private void btImportDossiers_Click(object sender, EventArgs e)
         {
@@ -385,7 +424,7 @@ namespace TOPX.UI.Forms
 
         private void gridFieldMappingDossiers_Leave(object sender, EventArgs e)
         {
-            
+
         }
 
         private void gridFieldMappingDossiers_DataSourceChanged(object sender, EventArgs e)
@@ -398,6 +437,11 @@ namespace TOPX.UI.Forms
         {
             if (_fieldmappingsRecords != null)
                 _dataservice.SaveMappings(_fieldmappingsRecords, FieldMappingType.RECORD);
+        }
+
+        private void linkCopyTopXCreateError_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Clipboard.SetText(txtLogTopXCreate.Text);
         }
     }
 

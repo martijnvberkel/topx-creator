@@ -126,5 +126,11 @@ namespace Topx.Importer
                 }
             }
         }
+
+        public bool CheckHealthyFieldmappings(List<FieldMapping> fieldmappings)
+        {
+            return fieldmappings.Where(t => !string.IsNullOrEmpty(t.DatabaseFieldName)).All(fieldmapping
+                => !string.IsNullOrEmpty(fieldmapping.MappedFieldName));
+        }
     }
 }

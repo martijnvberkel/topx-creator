@@ -7,6 +7,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml;
 using Topx.Data;
+using Topx.DataServices;
 using Topx.Parser.Model;
 using Topx.Utility;
 
@@ -15,6 +16,10 @@ namespace Topx.Creator
     public class Parser
     {
         private readonly Globals _globals;
+
+        private readonly IDataService _dataservice;
+
+        // private readonly ModelTopX _entities;
         public recordInformationPackage Rip;
         public List<string> ZaaknummerMarkForDelivered = new List<string>();
         public StringBuilder ErrorMessage = new StringBuilder();
@@ -22,15 +27,20 @@ namespace Topx.Creator
         private const string DateParsing = "d-M-yyyy";
         private const string DateTimeParsing = "d-M-yyyy H:m";
 
-        public Parser(Globals globals)
+        public Parser(Globals globals, IDataService dataservice)
         {
             _globals = globals;
-            Logger.ClearLog();
+            _dataservice = dataservice;
+            _dataservice.ClearLog();
         }
-        public recordInformationPackage ParseDataToTopx(int nrOfRecords = 0)
+        public recordInformationPackage ParseDataToTopx(List<Dossier> listOfDossiers, int nrOfRecords = 0)
         {
-            using (var entities = new ModelTopX())
+            //using (var entities = new ModelTopX())
             {
+                if (!TestHealthyGlobals())
+                {
+                    return null;
+                }
                 _identificatieArchief = _globals.IdentificatieArchief;
                 var datumArchief = _globals.DatumArchief;
                 var omschrijvingArchief = _globals.OmschrijvingArchief;
@@ -41,11 +51,11 @@ namespace Topx.Creator
                 Rip = new recordInformationPackage()
                 {
                     packageHeader =
-                        RipHeader(_identificatieArchief, datumArchief, omschrijvingArchief, bronArchief, doelArchief),
+                        RipHeader(_identificatieArchief, (DateTime) datumArchief, omschrijvingArchief, bronArchief, doelArchief),
                     record = RipArchief(_identificatieArchief, naamArchief)
                 };
 
-                var listOfDossiers = from d in entities.Dossiers select d;
+               // var listOfDossiers = from d in _entities.Dossiers select d;
                 var recordCounter = 0;
                 foreach (var dossier in listOfDossiers)
                 {
@@ -53,12 +63,12 @@ namespace Topx.Creator
                     {
                         if (!dossier.Records.Any())
                         {
-                            Logger.Log(dossier.IdentificatieKenmerk, "Geen records gevonden");
+                            _dataservice.Log(dossier.IdentificatieKenmerk, "Geen records gevonden");
                         }
 
                         if (string.IsNullOrEmpty(dossier.Naam))
                         {
-                            Logger.Log(dossier.IdentificatieKenmerk, "Veld Naam is leeg");
+                            _dataservice.Log(dossier.IdentificatieKenmerk, "Veld Naam is leeg");
                         }
 
                         ValidateDossier(dossier);
@@ -75,7 +85,7 @@ namespace Topx.Creator
                     }
                     catch (Exception ex)
                     {
-                        Logger.Log(dossier.IdentificatieKenmerk, $"ERROR: {ex.Message}");
+                        _dataservice.Log(dossier.IdentificatieKenmerk, $"ERROR: {ex.Message}");
                     }
 
                     recordCounter++;
@@ -86,6 +96,38 @@ namespace Topx.Creator
 
                 return Rip; //.Serialize();
             }
+        }
+
+        private bool TestHealthyGlobals()
+        {
+            var error = false;
+            if (string.IsNullOrEmpty(_globals.BronArchief))
+            {
+                ErrorMessage.AppendLine("Bron Archief mag niet leeg zijn");
+                error = true;
+            }
+            if (string.IsNullOrEmpty(_globals.DoelArchief))
+            {
+                ErrorMessage.AppendLine("Doel Archief mag niet leeg zijn");
+                error = true;
+            }
+            if (string.IsNullOrEmpty(_globals.IdentificatieArchief))
+            {
+                ErrorMessage.AppendLine("Identificatie Archief mag niet leeg zijn");
+                error = true;
+            }
+            if (string.IsNullOrEmpty(_globals.NaamArchief))
+            {
+                ErrorMessage.AppendLine("Naam Archief mag niet leeg zijn");
+                error = true;
+            }
+            if (_globals.DatumArchief == null)
+            {
+                ErrorMessage.AppendLine("Datum Archief mag niet leeg zijn");
+                error = true;
+            }
+            return !error;
+
         }
 
         private void ValidateDossier(Dossier dossier)
@@ -222,7 +264,7 @@ namespace Topx.Creator
                 };
             }
 
-            Logger.Log(dossier.IdentificatieKenmerk, "Openbaarheid_OmschrijvingBeperkingen mag niet leeg zijn" );
+            _dataservice.Log(dossier.IdentificatieKenmerk, "Openbaarheid_OmschrijvingBeperkingen mag niet leeg zijn" );
             return new[] {new openbaarheidType()
             {
                 omschrijvingBeperkingen = new[]

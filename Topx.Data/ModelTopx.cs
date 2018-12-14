@@ -4,8 +4,8 @@ namespace Topx.Data
 
     public partial class ModelTopX : DbContext
     {
-        public ModelTopX()
-            : base("name=ModelTopX")
+        public ModelTopX(string connectionString)
+            : base(connectionString)
         {
             Database.SetInitializer(new CreateDatabaseIfNotExists<ModelTopX>());
         }

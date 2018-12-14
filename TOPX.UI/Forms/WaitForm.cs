@@ -12,9 +12,10 @@ namespace TOPX.UI.Forms
 {
     public partial class WaitForm : Form
     {
-        public WaitForm()
+        public WaitForm(string message)
         {
             InitializeComponent();
+            lblMessage.Text = message;
         }
     }
 }

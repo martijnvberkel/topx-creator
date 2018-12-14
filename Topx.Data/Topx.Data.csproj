@@ -54,35 +54,8 @@
     <Compile Include="FieldMappings.cs" />
     <Compile Include="FieldMappingType.cs" />
     <Compile Include="Globals.cs" />
+    <Compile Include="LocalDbHelper.cs" />
     <Compile Include="Log.cs" />
-    <Compile Include="Migrations\201811041042090_InitialCreate.cs" />
-    <Compile Include="Migrations\201811041042090_InitialCreate.Designer.cs">
-      <DependentUpon>201811041042090_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201811041146574_Globals.cs" />
-    <Compile Include="Migrations\201811041146574_Globals.Designer.cs">
-      <DependentUpon>201811041146574_Globals.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201811061859317_globalsId.cs" />
-    <Compile Include="Migrations\201811061859317_globalsId.Designer.cs">
-      <DependentUpon>201811061859317_globalsId.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201811061910435_globalsId2.cs" />
-    <Compile Include="Migrations\201811061910435_globalsId2.Designer.cs">
-      <DependentUpon>201811061910435_globalsId2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201811102015214_lastdossiers.cs" />
-    <Compile Include="Migrations\201811102015214_lastdossiers.Designer.cs">
-      <DependentUpon>201811102015214_lastdossiers.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201811180811204_taalverwijded.cs" />
-    <Compile Include="Migrations\201811180811204_taalverwijded.Designer.cs">
-      <DependentUpon>201811180811204_taalverwijded.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201811181119322_changeid_2.cs" />
-    <Compile Include="Migrations\201811181119322_changeid_2.Designer.cs">
-      <DependentUpon>201811181119322_changeid_2.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ModelTopX.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -92,29 +65,6 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201811041042090_InitialCreate.resx">
-      <DependentUpon>201811041042090_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201811041146574_Globals.resx">
-      <DependentUpon>201811041146574_Globals.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201811061859317_globalsId.resx">
-      <DependentUpon>201811061859317_globalsId.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201811061910435_globalsId2.resx">
-      <DependentUpon>201811061910435_globalsId2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201811102015214_lastdossiers.resx">
-      <DependentUpon>201811102015214_lastdossiers.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201811180811204_taalverwijded.resx">
-      <DependentUpon>201811180811204_taalverwijded.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201811181119322_changeid_2.resx">
-      <DependentUpon>201811181119322_changeid_2.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

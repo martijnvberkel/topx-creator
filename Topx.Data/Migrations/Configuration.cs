@@ -9,7 +9,7 @@ namespace Topx.Data.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
             ContextKey = "Topx.Data.ModelTopX";
         }
 

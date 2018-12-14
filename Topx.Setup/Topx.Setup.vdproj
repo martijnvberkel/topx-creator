@@ -15,20 +15,14 @@
     {
         "Entry"
         {
+        "MsmKey" = "8:_0602814A5B154AD5A4CB1DCF616994C8"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_08E8A25F7B5FD75EEBB5338B947A730C"
         "OwnerKey" = "8:_92FE3F54B4A04468B70314ED7ACB3B95"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_08E8A25F7B5FD75EEBB5338B947A730C"
-        "OwnerKey" = "8:_BC05713D47A30B02A43F1E3CC2B93689"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_08E8A25F7B5FD75EEBB5338B947A730C"
-        "OwnerKey" = "8:_290817821FB0A392E06937A2245A27B7"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -136,12 +130,6 @@
         "Entry"
         {
         "MsmKey" = "8:_70143016471501144DEAF86A0479EB49"
-        "OwnerKey" = "8:_BC05713D47A30B02A43F1E3CC2B93689"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_70143016471501144DEAF86A0479EB49"
         "OwnerKey" = "8:_290817821FB0A392E06937A2245A27B7"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -232,12 +220,6 @@
         "Entry"
         {
         "MsmKey" = "8:_BC05713D47A30B02A43F1E3CC2B93689"
-        "OwnerKey" = "8:_290817821FB0A392E06937A2245A27B7"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_BC05713D47A30B02A43F1E3CC2B93689"
         "OwnerKey" = "8:_92FE3F54B4A04468B70314ED7ACB3B95"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -263,6 +245,12 @@
         {
         "MsmKey" = "8:_DBC019F46FE5408A808CE663CC97F40C"
         "OwnerKey" = "8:_92FE3F54B4A04468B70314ED7ACB3B95"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_DBC019F46FE5408A808CE663CC97F40C"
+        "OwnerKey" = "8:_290817821FB0A392E06937A2245A27B7"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -488,6 +476,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.6.1"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.6.1 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.6.1"
+                    }
+                }
             }
         }
         "Release"
@@ -512,6 +508,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.6.1"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.6.1 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.6.1"
+                    }
+                }
             }
         }
     }
@@ -542,6 +546,26 @@
         }
         "File"
         {
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_0602814A5B154AD5A4CB1DCF616994C8"
+            {
+            "SourcePath" = "8:..\\TOPX.UI\\TC2.ico"
+            "TargetName" = "8:TC2.ico"
+            "Tag" = "8:"
+            "Folder" = "8:_B859A7C0BCC047D5B1BDF81323303DE3"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_08E8A25F7B5FD75EEBB5338B947A730C"
             {
             "AssemblyRegister" = "3:1"
@@ -1273,10 +1297,22 @@
                 {
                 }
             }
+            "{994432C3-9487-495D-8656-3E829A8DBDDE}:_B859A7C0BCC047D5B1BDF81323303DE3"
+            {
+            "DefaultLocation" = "8:[TARGETDIR]"
+            "Name" = "8:Icon"
+            "AlwaysCreate" = "11:FALSE"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Property" = "8:NEWPROPERTY1"
+                "Folders"
+                {
+                }
+            }
             "{1525181F-901A-416C-8A58-119130FE478E}:_DCB8C1D4EAB049BE8104441B24585D6D"
             {
             "Name" = "8:#1919"
-            "AlwaysCreate" = "11:FALSE"
+            "AlwaysCreate" = "11:TRUE"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Property" = "8:ProgramMenuFolder"
@@ -1287,7 +1323,7 @@
             "{1525181F-901A-416C-8A58-119130FE478E}:_FACD81E3823A44C5994D277AB72C10BD"
             {
             "Name" = "8:#1916"
-            "AlwaysCreate" = "11:FALSE"
+            "AlwaysCreate" = "11:TRUE"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Property" = "8:DesktopFolder"
@@ -1311,15 +1347,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:TopxCreator"
-        "ProductCode" = "8:{C5D78C68-050B-4CBF-ADF6-2B714129AE1C}"
-        "PackageCode" = "8:{4A6ADBFB-DEF2-4439-9C6C-C9B00A0BD6B7}"
+        "ProductCode" = "8:{639377AD-685C-4B3D-8D80-145B325C62D1}"
+        "PackageCode" = "8:{F642D1A4-2B79-4206-9262-61E7CA6F3690}"
         "UpgradeCode" = "8:{1097B1AF-D51A-4033-B4DA-39AA6D8EB4F4}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
-        "RemovePreviousVersions" = "11:FALSE"
+        "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.0.0"
+        "ProductVersion" = "8:1.0.1"
         "Manufacturer" = "8:MVBWorks"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -1432,6 +1468,34 @@
         }
         "Shortcut"
         {
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_6E55F649FFE741F6A1FE4EC49467857A"
+            {
+            "Name" = "8:TopX Creator"
+            "Arguments" = "8:"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:0"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_92FE3F54B4A04468B70314ED7ACB3B95"
+            "Folder" = "8:_DCB8C1D4EAB049BE8104441B24585D6D"
+            "WorkingFolder" = "8:_9CA3CB116441426EB693E0F040484869"
+            "Icon" = "8:_0602814A5B154AD5A4CB1DCF616994C8"
+            "Feature" = "8:"
+            }
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_B675D4BCB9414AB4AEE91D907358698F"
+            {
+            "Name" = "8:TopX Creator"
+            "Arguments" = "8:"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:0"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_FACD81E3823A44C5994D277AB72C10BD"
+            "Folder" = "8:_FACD81E3823A44C5994D277AB72C10BD"
+            "WorkingFolder" = "8:_FACD81E3823A44C5994D277AB72C10BD"
+            "Icon" = "8:_0602814A5B154AD5A4CB1DCF616994C8"
+            "Feature" = "8:"
+            }
         }
         "UserInterface"
         {
