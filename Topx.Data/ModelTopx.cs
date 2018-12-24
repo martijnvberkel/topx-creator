@@ -1,3 +1,5 @@
+using System.Data.Entity.Infrastructure;
+
 namespace Topx.Data
 {
     using System.Data.Entity;

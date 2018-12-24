@@ -32,6 +32,8 @@ namespace TOPX.UI.Forms
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TopXConverter));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.materialContextMenuStrip1 = new MaterialSkin.Controls.MaterialContextMenuStrip();
             this.materialContextMenuStrip2 = new MaterialSkin.Controls.MaterialContextMenuStrip();
             this.testToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -83,10 +85,10 @@ namespace TOPX.UI.Forms
             this.txtErrorRecords = new System.Windows.Forms.TextBox();
             this.txtErrorsDossiers = new System.Windows.Forms.TextBox();
             this.tabGenerateTopX = new System.Windows.Forms.TabPage();
+            this.linkCopyTopXCreateError = new System.Windows.Forms.LinkLabel();
             this.materialLabel13 = new MaterialSkin.Controls.MaterialLabel();
             this.btGenerateTopX = new System.Windows.Forms.Button();
             this.txtLogTopXCreate = new System.Windows.Forms.TextBox();
-            this.linkCopyTopXCreateError = new System.Windows.Forms.LinkLabel();
             this.materialContextMenuStrip2.SuspendLayout();
             this.materialContextMenuStrip3.SuspendLayout();
             this.materialTabControl1.SuspendLayout();
@@ -517,11 +519,20 @@ namespace TOPX.UI.Forms
             this.gridFieldMappingRecords.AllowUserToDeleteRows = false;
             this.gridFieldMappingRecords.BackgroundColor = System.Drawing.SystemColors.Window;
             this.gridFieldMappingRecords.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.ControlDark;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gridFieldMappingRecords.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.gridFieldMappingRecords.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gridFieldMappingRecords.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.DatabaseFieldNameRecords,
             this.MappedFieldNameRecords});
             this.gridFieldMappingRecords.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.gridFieldMappingRecords.EnableHeadersVisualStyles = false;
             this.gridFieldMappingRecords.Location = new System.Drawing.Point(643, 121);
             this.gridFieldMappingRecords.Name = "gridFieldMappingRecords";
             this.gridFieldMappingRecords.RowHeadersVisible = false;
@@ -555,10 +566,19 @@ namespace TOPX.UI.Forms
             this.gridFieldMappingDossiers.AllowUserToDeleteRows = false;
             this.gridFieldMappingDossiers.BackgroundColor = System.Drawing.SystemColors.Window;
             this.gridFieldMappingDossiers.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.ControlDark;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gridFieldMappingDossiers.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.gridFieldMappingDossiers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gridFieldMappingDossiers.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.MappedFieldName,
             this.DatabaseFieldName});
+            this.gridFieldMappingDossiers.EnableHeadersVisualStyles = false;
             this.gridFieldMappingDossiers.Location = new System.Drawing.Point(38, 121);
             this.gridFieldMappingDossiers.Name = "gridFieldMappingDossiers";
             this.gridFieldMappingDossiers.RowHeadersVisible = false;
@@ -693,6 +713,17 @@ namespace TOPX.UI.Forms
             this.tabGenerateTopX.Text = "Genereer TopX";
             this.tabGenerateTopX.UseVisualStyleBackColor = true;
             // 
+            // linkCopyTopXCreateError
+            // 
+            this.linkCopyTopXCreateError.AutoSize = true;
+            this.linkCopyTopXCreateError.Location = new System.Drawing.Point(649, 110);
+            this.linkCopyTopXCreateError.Name = "linkCopyTopXCreateError";
+            this.linkCopyTopXCreateError.Size = new System.Drawing.Size(49, 13);
+            this.linkCopyTopXCreateError.TabIndex = 12;
+            this.linkCopyTopXCreateError.TabStop = true;
+            this.linkCopyTopXCreateError.Text = "Kopiëren";
+            this.linkCopyTopXCreateError.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkCopyTopXCreateError_LinkClicked);
+            // 
             // materialLabel13
             // 
             this.materialLabel13.AutoSize = true;
@@ -724,17 +755,6 @@ namespace TOPX.UI.Forms
             this.txtLogTopXCreate.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.txtLogTopXCreate.Size = new System.Drawing.Size(616, 377);
             this.txtLogTopXCreate.TabIndex = 3;
-            // 
-            // linkCopyTopXCreateError
-            // 
-            this.linkCopyTopXCreateError.AutoSize = true;
-            this.linkCopyTopXCreateError.Location = new System.Drawing.Point(649, 110);
-            this.linkCopyTopXCreateError.Name = "linkCopyTopXCreateError";
-            this.linkCopyTopXCreateError.Size = new System.Drawing.Size(49, 13);
-            this.linkCopyTopXCreateError.TabIndex = 12;
-            this.linkCopyTopXCreateError.TabStop = true;
-            this.linkCopyTopXCreateError.Text = "Kopiëren";
-            this.linkCopyTopXCreateError.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkCopyTopXCreateError_LinkClicked);
             // 
             // TopXConverter
             // 

@@ -36,7 +36,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topx.Data", "Topx.Data\Topx
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topx.DataServices", "Topx.DataServices\Topx.DataServices.csproj", "{1A82E7D8-4AB0-499E-BEE9-7D1569AD2F12}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Topx.Setup", "Topx.Setup\Topx.Setup.vdproj", "{FD34975A-1344-4DD9-82DF-7DAAE6AC579F}"
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Topx.Setup.x86", "Topx.Setup\Topx.Setup.vdproj", "{FD34975A-1344-4DD9-82DF-7DAAE6AC579F}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Topx.Setup.x64", "Topx.Setup.x64\Topx.Setup.x64.vdproj", "{E8CCE9AE-A14D-44A1-B181-C0B5687715E2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -90,12 +92,16 @@ Global
 		{1A82E7D8-4AB0-499E-BEE9-7D1569AD2F12}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FD34975A-1344-4DD9-82DF-7DAAE6AC579F}.Debug|Any CPU.ActiveCfg = Debug
 		{FD34975A-1344-4DD9-82DF-7DAAE6AC579F}.Release|Any CPU.ActiveCfg = Release
+		{E8CCE9AE-A14D-44A1-B181-C0B5687715E2}.Debug|Any CPU.ActiveCfg = Debug
+		{E8CCE9AE-A14D-44A1-B181-C0B5687715E2}.Debug|Any CPU.Build.0 = Debug
+		{E8CCE9AE-A14D-44A1-B181-C0B5687715E2}.Release|Any CPU.ActiveCfg = Release
+		{E8CCE9AE-A14D-44A1-B181-C0B5687715E2}.Release|Any CPU.Build.0 = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {AD535C3E-945A-4562-BAA7-F55B7E855B40}
 		VisualSVNWorkingCopyRoot = .
+		SolutionGuid = {AD535C3E-945A-4562-BAA7-F55B7E855B40}
 	EndGlobalSection
 EndGlobal

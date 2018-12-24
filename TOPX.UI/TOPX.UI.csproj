@@ -7,7 +7,7 @@
     <ProjectGuid>{118C7B5B-3AE8-497D-961C-D0E62476A879}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>TOPX.UI</RootNamespace>
-    <AssemblyName>TOPX.UI</AssemblyName>
+    <AssemblyName>TOPX Creator</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -38,6 +38,9 @@
     <ApplicationIcon>TC2.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoUpdater.NET, Version=1.4.11.0, Culture=neutral, PublicKeyToken=501435c91b35f4bc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autoupdater.NET.Official.1.4.11\lib\net40\AutoUpdater.NET.dll</HintPath>
+    </Reference>
     <Reference Include="ComponentFactory.Krypton.Design, Version=4.62.0.0, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e, processorArchitecture=MSIL">
       <HintPath>..\packages\KryptonToolkitSuite462.4.62.554\lib\ComponentFactory.Krypton.Design.dll</HintPath>
     </Reference>
@@ -92,6 +95,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\Logging.cs" />
+    <Compile Include="Classes\Updater.cs" />
     <Compile Include="Controls\DragDropGridView.cs">
       <SubType>Component</SubType>
     </Compile>

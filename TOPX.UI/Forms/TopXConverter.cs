@@ -16,6 +16,7 @@ using Topx.Importer;
 using Topx.Interface;
 using Topx.Parser.Model;
 using TOPX.UI.Classes;
+using AutoUpdaterDotNET;
 
 namespace TOPX.UI.Forms
 {
@@ -54,6 +55,12 @@ namespace TOPX.UI.Forms
         {
             {
                 ShowWaitForm("een moment geduld...");
+                if (!_dataservice.CanConnect())
+                {
+                    MessageBox.Show($"Kan de database niet vinden. {Environment.NewLine} Connectionstring: {_dataservice.Conectionstring}");
+                    Application.Exit();
+                    return;
+                }
                 Logging.Init();
                 _logger = LogManager.GetCurrentClassLogger();
                 _headers = new Headers();
@@ -63,9 +70,11 @@ namespace TOPX.UI.Forms
 
                 InitDefaultFilesLoad();
                 InitTooltips();
+                Updater.InitAutoUpdater();
             }
         }
 
+        
 
         private void InitTooltips()
         {

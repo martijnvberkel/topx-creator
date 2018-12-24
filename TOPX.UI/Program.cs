@@ -1,17 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Runtime.InteropServices;
+using System.Threading;
 using System.Windows.Forms;
+using AutoUpdaterDotNET;
 using TOPX.UI.Forms;
-using Unity;
 using SimpleInjector;
 using Topx.Data;
 using Topx.DataServices;
-using Unity.Policy;
 using Container = SimpleInjector.Container;
+
 
 namespace TOPX.UI
 {
@@ -27,13 +24,19 @@ namespace TOPX.UI
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+          
             if (Bootstrap())
+            {
+                Cursor.Current = Cursors.Default;
                 Application.Run(container.GetInstance<TopXConverter>());
+            }
+            Cursor.Current = Cursors.Default;
 
         }
 
         private static bool Bootstrap()
         {
+           
             container = new Container();
             var connectionstring = LocalDbHelper.GetConnectionString();
             if (string.IsNullOrEmpty(connectionstring))
@@ -42,18 +45,10 @@ namespace TOPX.UI
                 return false;
             }
 
-            var test = new DataService(connectionstring);
-            if (!test.CanConnect())
-            {
-                MessageBox.Show("Kan de database niet vinden.");
-                return false;
-            }
-
+          
             container.Register<IDataService>(() => new DataService(connectionstring), Lifestyle.Singleton);
             container.Register<TopXConverter>();
             return true;
         }
-
-
     }
 }
