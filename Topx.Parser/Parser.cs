@@ -7,6 +7,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml;
 using Topx.Data;
+using Topx.DataServices;
 using Topx.Parser.Model;
 using Topx.Utility;
 
@@ -14,6 +15,11 @@ namespace Topx.Creator
 {
     public class Parser
     {
+        private readonly Globals _globals;
+
+        private readonly IDataService _dataservice;
+
+        // private readonly ModelTopX _entities;
         public recordInformationPackage Rip;
         public List<string> ZaaknummerMarkForDelivered = new List<string>();
         public StringBuilder ErrorMessage = new StringBuilder();
@@ -21,35 +27,35 @@ namespace Topx.Creator
         private const string DateParsing = "d-M-yyyy";
         private const string DateTimeParsing = "d-M-yyyy H:m";
 
-        public Parser()
+        public Parser(Globals globals, IDataService dataservice)
         {
-            Logger.ClearLog();
+            _globals = globals;
+            _dataservice = dataservice;
+            _dataservice.ClearLog();
         }
-        public recordInformationPackage ParseDataToTopx(int nrOfRecords = 0)
+        public recordInformationPackage ParseDataToTopx(List<Dossier> listOfDossiers, int nrOfRecords = 0)
         {
-            using (var entities = new TOPX_GenericEntities())
+            //using (var entities = new ModelTopX())
             {
-                _identificatieArchief = "NL-0784-10009";
-                var datumArchief = Convert.ToDateTime(DateTime.Today);
-                var omschrijvingArchief = "Bouwvergunningen Test ABG";
-                var bronArchief = "Digitale bouwvergunningen";
-                var doelArchief = "Bouwvergunningen om op te nemen in e-Depot";
-                var naamArchief = omschrijvingArchief;
-
-                //var identificatieArchief = "NL-0779-10001";
-                //var datumArchief = Convert.ToDateTime(DateTime.Today);
-                //var omschrijvingArchief = "Bouwvergunningen Gemeente Geertruidenberg 1928 - 1975";
-                //var bronArchief = "Digitale bouwvergunningen";
-                //var doelArchief = "Bouwvergunningen om op te nemen in e-Depot";
-                //var naamArchief = "Bouwvergunningen Gemeente Geertruidenberg 1928 - 1975";
+                if (!TestHealthyGlobals())
+                {
+                    return null;
+                }
+                _identificatieArchief = _globals.IdentificatieArchief;
+                var datumArchief = _globals.DatumArchief;
+                var omschrijvingArchief = _globals.OmschrijvingArchief;
+                var bronArchief = _globals.BronArchief;
+                var doelArchief = _globals.DoelArchief;
+                var naamArchief = _globals.NaamArchief;
+               
                 Rip = new recordInformationPackage()
                 {
                     packageHeader =
-                        RipHeader(_identificatieArchief, datumArchief, omschrijvingArchief, bronArchief, doelArchief),
+                        RipHeader(_identificatieArchief, (DateTime) datumArchief, omschrijvingArchief, bronArchief, doelArchief),
                     record = RipArchief(_identificatieArchief, naamArchief)
                 };
 
-                var listOfDossiers = from d in entities.Dossier select d;
+               // var listOfDossiers = from d in _entities.Dossiers select d;
                 var recordCounter = 0;
                 foreach (var dossier in listOfDossiers)
                 {
@@ -57,12 +63,12 @@ namespace Topx.Creator
                     {
                         if (!dossier.Records.Any())
                         {
-                            Logger.Log(dossier.IdentificatieKenmerk, "Geen records gevonden");
+                            _dataservice.Log(dossier.IdentificatieKenmerk, "Geen records gevonden");
                         }
 
                         if (string.IsNullOrEmpty(dossier.Naam))
                         {
-                            Logger.Log(dossier.IdentificatieKenmerk, "Veld Naam is leeg");
+                            _dataservice.Log(dossier.IdentificatieKenmerk, "Veld Naam is leeg");
                         }
 
                         ValidateDossier(dossier);
@@ -79,7 +85,7 @@ namespace Topx.Creator
                     }
                     catch (Exception ex)
                     {
-                        Logger.Log(dossier.IdentificatieKenmerk, $"ERROR: {ex.Message}");
+                        _dataservice.Log(dossier.IdentificatieKenmerk, $"ERROR: {ex.Message}");
                     }
 
                     recordCounter++;
@@ -90,6 +96,38 @@ namespace Topx.Creator
 
                 return Rip; //.Serialize();
             }
+        }
+
+        private bool TestHealthyGlobals()
+        {
+            var error = false;
+            if (string.IsNullOrEmpty(_globals.BronArchief))
+            {
+                ErrorMessage.AppendLine("Bron Archief mag niet leeg zijn");
+                error = true;
+            }
+            if (string.IsNullOrEmpty(_globals.DoelArchief))
+            {
+                ErrorMessage.AppendLine("Doel Archief mag niet leeg zijn");
+                error = true;
+            }
+            if (string.IsNullOrEmpty(_globals.IdentificatieArchief))
+            {
+                ErrorMessage.AppendLine("Identificatie Archief mag niet leeg zijn");
+                error = true;
+            }
+            if (string.IsNullOrEmpty(_globals.NaamArchief))
+            {
+                ErrorMessage.AppendLine("Naam Archief mag niet leeg zijn");
+                error = true;
+            }
+            if (_globals.DatumArchief == null)
+            {
+                ErrorMessage.AppendLine("Datum Archief mag niet leeg zijn");
+                error = true;
+            }
+            return !error;
+
         }
 
         private void ValidateDossier(Dossier dossier)
@@ -135,7 +173,7 @@ namespace Topx.Creator
             {
                 new relatieType()
                 {
-                    relatieID = new nonEmptyStringTypeAttribuut() {Value = _identificatieArchief},
+                    relatieID = new nonEmptyStringTypeAttribuut() {Value = dossier.IdentificatieKenmerk},
                     typeRelatie = new nonEmptyStringTypeAttribuut() {Value = dossier.Relatie_Type ?? "Hiërachisch" },
                     datumOfPeriode = new datumOfPeriodeType()
                     {
@@ -226,7 +264,7 @@ namespace Topx.Creator
                 };
             }
 
-            Logger.Log(dossier.IdentificatieKenmerk, "Openbaarheid_OmschrijvingBeperkingen mag niet leeg zijn" );
+            _dataservice.Log(dossier.IdentificatieKenmerk, "Openbaarheid_OmschrijvingBeperkingen mag niet leeg zijn" );
             return new[] {new openbaarheidType()
             {
                 omschrijvingBeperkingen = new[]

@@ -22,8 +22,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topx.Import", "Topx.Importe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TOPX.UI", "TOPX.UI\TOPX.UI.csproj", "{118C7B5B-3AE8-497D-961C-D0E62476A879}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topx.Data", "Topx.Data\Topx.Data.csproj", "{71FF9484-30CD-4406-A6E5-E8D9D62C0CA5}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topx.Interface", "Topx.Interface\Topx.Interface.csproj", "{91592173-F613-4370-A362-0EF1AB0F3A65}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topx.UnitTests", "Topx.UnitTests\Topx.UnitTests.csproj", "{CE3AF6BA-3CC6-4017-8C73-C9CCA945642E}"
@@ -33,6 +31,14 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topx.Creator", "Topx.Parser\Topx.Creator.csproj", "{1E9B8660-0142-4818-AC8E-2B3FC0619783}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topx.Utility", "Topx.Utility\Topx.Utility.csproj", "{5862F3AF-2B57-4EE0-8E94-3A3D211737F1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topx.Data", "Topx.Data\Topx.Data.csproj", "{982EDCDB-E044-43D5-8071-BB4728C6A173}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topx.DataServices", "Topx.DataServices\Topx.DataServices.csproj", "{1A82E7D8-4AB0-499E-BEE9-7D1569AD2F12}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Topx.Setup.x86", "Topx.Setup\Topx.Setup.vdproj", "{FD34975A-1344-4DD9-82DF-7DAAE6AC579F}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Topx.Setup.x64", "Topx.Setup.x64\Topx.Setup.x64.vdproj", "{E8CCE9AE-A14D-44A1-B181-C0B5687715E2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -56,10 +62,6 @@ Global
 		{118C7B5B-3AE8-497D-961C-D0E62476A879}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{118C7B5B-3AE8-497D-961C-D0E62476A879}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{118C7B5B-3AE8-497D-961C-D0E62476A879}.Release|Any CPU.Build.0 = Release|Any CPU
-		{71FF9484-30CD-4406-A6E5-E8D9D62C0CA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{71FF9484-30CD-4406-A6E5-E8D9D62C0CA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{71FF9484-30CD-4406-A6E5-E8D9D62C0CA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{71FF9484-30CD-4406-A6E5-E8D9D62C0CA5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{91592173-F613-4370-A362-0EF1AB0F3A65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{91592173-F613-4370-A362-0EF1AB0F3A65}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{91592173-F613-4370-A362-0EF1AB0F3A65}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -80,12 +82,26 @@ Global
 		{5862F3AF-2B57-4EE0-8E94-3A3D211737F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5862F3AF-2B57-4EE0-8E94-3A3D211737F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5862F3AF-2B57-4EE0-8E94-3A3D211737F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{982EDCDB-E044-43D5-8071-BB4728C6A173}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{982EDCDB-E044-43D5-8071-BB4728C6A173}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{982EDCDB-E044-43D5-8071-BB4728C6A173}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{982EDCDB-E044-43D5-8071-BB4728C6A173}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A82E7D8-4AB0-499E-BEE9-7D1569AD2F12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A82E7D8-4AB0-499E-BEE9-7D1569AD2F12}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A82E7D8-4AB0-499E-BEE9-7D1569AD2F12}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A82E7D8-4AB0-499E-BEE9-7D1569AD2F12}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD34975A-1344-4DD9-82DF-7DAAE6AC579F}.Debug|Any CPU.ActiveCfg = Debug
+		{FD34975A-1344-4DD9-82DF-7DAAE6AC579F}.Release|Any CPU.ActiveCfg = Release
+		{E8CCE9AE-A14D-44A1-B181-C0B5687715E2}.Debug|Any CPU.ActiveCfg = Debug
+		{E8CCE9AE-A14D-44A1-B181-C0B5687715E2}.Debug|Any CPU.Build.0 = Debug
+		{E8CCE9AE-A14D-44A1-B181-C0B5687715E2}.Release|Any CPU.ActiveCfg = Release
+		{E8CCE9AE-A14D-44A1-B181-C0B5687715E2}.Release|Any CPU.Build.0 = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {AD535C3E-945A-4562-BAA7-F55B7E855B40}
 		VisualSVNWorkingCopyRoot = .
+		SolutionGuid = {AD535C3E-945A-4562-BAA7-F55B7E855B40}
 	EndGlobalSection
 EndGlobal

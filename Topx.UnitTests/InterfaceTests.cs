@@ -24,10 +24,10 @@ namespace Topx.UnitTests
         public void TestDossierHeaders()
         {
             // given
-            var moq = new Mock<TOPX_GenericEntities>();
+            var moq = new Mock<ModelTopX>();
 
             // when
-            var headers = new Headers(moq.Object);
+           // var headers = new Headers(moq.Object);
             
             // assert
            // Assert.That(headers.GetHeaderMappingDossiers(), Is.EqualTo(Statics.MockHeaders));

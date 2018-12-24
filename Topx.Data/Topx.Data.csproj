@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{71FF9484-30CD-4406-A6E5-E8D9D62C0CA5}</ProjectGuid>
+    <ProjectGuid>{982EDCDB-E044-43D5-8071-BB4728C6A173}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Topx.Data</RootNamespace>
@@ -49,60 +49,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Dossier.cs">
-      <DependentUpon>ModelTopx.tt</DependentUpon>
-    </Compile>
-    <Compile Include="FieldMapping.cs">
-      <DependentUpon>ModelTopx.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Log.cs">
-      <DependentUpon>ModelTopx.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ModelTopx.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ModelTopx.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ModelTopx.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ModelTopx.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ModelTopx.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ModelTopx.edmx</DependentUpon>
-    </Compile>
+    <Compile Include="Bestanden.cs" />
+    <Compile Include="Dossiers.cs" />
+    <Compile Include="FieldMappings.cs" />
+    <Compile Include="FieldMappingType.cs" />
+    <Compile Include="Globals.cs" />
+    <Compile Include="LocalDbHelper.cs" />
+    <Compile Include="Log.cs" />
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="ModelTopX.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Record.cs">
-      <DependentUpon>ModelTopx.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Records.cs" />
+    <Compile Include="sysdiagrams.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <EntityDeploy Include="ModelTopx.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ModelTopx.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="ModelTopx.edmx.diagram">
-      <DependentUpon>ModelTopx.edmx</DependentUpon>
-    </None>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="ModelTopx.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ModelTopx.edmx</DependentUpon>
-      <LastGenOutput>ModelTopx.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="ModelTopx.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ModelTopx.edmx</DependentUpon>
-      <LastGenOutput>ModelTopx.cs</LastGenOutput>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
