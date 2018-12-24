@@ -306,7 +306,15 @@
             </datumOfPeriode>
             <type>Afsluiting</type>
             <verantwoordelijkeFunctionaris>Afdeling Ondersteuning</verantwoordelijkeFunctionaris>
+			  
           </eventGeschiedenis>
+			<eventPlan>
+				<datumOfPeriode>
+					<datum>2000-01-01</datum>
+				</datumOfPeriode>
+				<type>Vernietigen</type>
+				
+			</eventPlan>
           <relatie>
             <relatieID>NL-0834-10002</relatieID>
             <typeRelatie>Hiërarchisch</typeRelatie>
@@ -329,6 +337,7 @@
             <datumOfPeriode>
               <datum>1993-01-07</datum>
             </datumOfPeriode>
+			  
           </gebruiksrechten>
           <vertrouwelijkheid>
             <classificatieNiveau>Niet vertrouwelijk</classificatieNiveau>
@@ -338,11 +347,12 @@
           </vertrouwelijkheid>
           <openbaarheid>
             <omschrijvingBeperkingen>Openbaar</omschrijvingBeperkingen>
+			 
             <datumOfPeriode>
               <datum>1993-01-07</datum>
             </datumOfPeriode>
           </openbaarheid>
-          <integriteit>Integer</integriteit>
+			<integriteit>Integer</integriteit>
         </aggregatie>
       </ToPX>
     </metadata>

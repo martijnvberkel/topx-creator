@@ -214,37 +214,53 @@ namespace Topx.Converter
 
         private void btTroep_Click(object sender, EventArgs e)
         {
-            var zaaknrs = new List<string>();
-
+            var errors = new List<string>();
             using (var entities = new TOPXEntities())
-            { 
+            {
                 var file = new OpenFileDialog();
                 if (file.ShowDialog() == DialogResult.OK)
                 {
                     var xml = XDocument.Load(file.FileName);
-                    IEnumerable<XElement> result =
-                        xml.Descendants().Where(a => a.Name.LocalName == "identificatiekenmerk");
-                    foreach (var xElement in result)
+                    //foreach (var record in entities.Source)
+
+                    var results = xml.Descendants("item");
+                    foreach (var r in results)
                     {
-                        var value = xElement.Value;
-                        if (value.StartsWith("GDB"))
+                        var sha = r.Element("sha-256").Value;
+                        var filename = r.Element("filename").Value;
+
+                        var checksdumrecord = (from a in entities.checksum where a.Filename == filename select a).FirstOrDefault();
+                        if (checksdumrecord == null)
                         {
-                           zaaknrs.Add(value.Substring(0, value.Length-3));
+                            errors.Add($"file {filename} not found in checksums");
                         }
+                        checksdumrecord.Checksum1 = sha;
                     }
 
-                    foreach (var zaaknr in zaaknrs.Distinct())
-                    {
-                        var markedAsDelivered = new MarkedAsDelivered()
-                        {
-                            DatumProcessed = DateTime.Now,
-                            Zaaknr = zaaknr
-                        };
-                        entities.MarkedAsDelivered.Add(markedAsDelivered);
-                       
-                    }
                     entities.SaveChanges();
 
+                    //IEnumerable<XElement> resultx =
+                    //    xml.Descendants().Where(a => a.Name.LocalName == "identificatiekenmerk");
+                    //foreach (var xElement in result)
+                    //{
+                    //    var value = xElement.Value;
+                    //    if (value.StartsWith("GDB"))
+                    //    {
+                    //       zaaknrs.Add(value.Substring(0, value.Length-3));
+                    //    }
+                    //}
+
+                    //foreach (var zaaknr in zaaknrs.Distinct())
+                    //{
+                    //    var markedAsDelivered = new MarkedAsDelivered()
+                    //    {
+                    //        DatumProcessed = DateTime.Now,
+                    //        Zaaknr = zaaknr
+                    //    };
+                    //    entities.MarkedAsDelivered.Add(markedAsDelivered);
+
+                    //}
+                    //entities.SaveChanges();
                 }
             }
         }
