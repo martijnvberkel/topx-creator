@@ -10,10 +10,11 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Topx.UnitTests</RootNamespace>
     <AssemblyName>Topx.UnitTests</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -42,6 +43,9 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Gu.SerializationAsserts, Version=0.4.3.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Gu.SerializationAsserts.0.4.3.1\lib\net45\Gu.SerializationAsserts.dll</HintPath>
+    </Reference>
     <Reference Include="Moq, Version=4.5.28.0, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
       <HintPath>..\packages\Moq.4.5.28\lib\net45\Moq.dll</HintPath>
     </Reference>
@@ -69,6 +73,14 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Topx.Data.DTO\Topx.Data.DTO.csproj">
+      <Project>{6c2cf74e-2518-4de6-85b7-436007b94a1e}</Project>
+      <Name>Topx.Data.DTO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Topx.DataServices\Topx.DataServices.csproj">
+      <Project>{1A82E7D8-4AB0-499E-BEE9-7D1569AD2F12}</Project>
+      <Name>Topx.DataServices</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Topx.Data\Topx.Data.csproj">
       <Project>{982EDCDB-E044-43D5-8071-BB4728C6A173}</Project>
       <Name>Topx.Data</Name>
@@ -81,6 +93,17 @@
       <Project>{91592173-F613-4370-A362-0EF1AB0F3A65}</Project>
       <Name>Topx.Interface</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Topx.Parser\Topx.Creator.csproj">
+      <Project>{1E9B8660-0142-4818-AC8E-2B3FC0619783}</Project>
+      <Name>Topx.Creator</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Topx.Utility\Topx.Utility.csproj">
+      <Project>{5862f3af-2b57-4ee0-8e94-3a3d211737f1}</Project>
+      <Name>Topx.Utility</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TestResources\ExpectedOutput1.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

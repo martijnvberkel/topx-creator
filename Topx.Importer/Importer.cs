@@ -46,14 +46,21 @@ namespace Topx.Importer
 
                 try
                 {
-
                     if (fieldsSource == null)
                     {
                         Error = true;
                         ErrorMessage = "Unexpected end of stream";
                         return;
                     }
-                    if (string.IsNullOrEmpty(fieldsSource[0])) continue;  // skip rows without id
+                    if (string.IsNullOrEmpty(fieldsSource[0]))
+                        continue;  // skip rows without id
+
+                    if (headersSource.Length != fieldsSource.Length)
+                    {
+                        Error = true;
+                        ErrorsImportDossiers.AppendLine($"ERROR: Dossier {fieldsSource?[0]} kon niet worden ingelezen, aantal kolommen is onjuist");
+                        continue;
+                    }
 
                     for (var index = 0; index <= headersSource.Length - 1; index++)
                     {
