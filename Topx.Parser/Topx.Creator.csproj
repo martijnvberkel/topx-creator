@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Topx.Creator</RootNamespace>
     <AssemblyName>Topx.Creator</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -47,13 +48,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\Extensions.cs" />
     <Compile Include="Parser.cs" />
-    <Compile Include="Model\RIP_v0_3.cs" />
-    <Compile Include="Model\topx-2_3_0.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Topx.Data.DTO\Topx.Data.DTO.csproj">
+      <Project>{6C2CF74E-2518-4DE6-85B7-436007B94A1E}</Project>
+      <Name>Topx.Data.DTO</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Topx.DataServices\Topx.DataServices.csproj">
       <Project>{1A82E7D8-4AB0-499E-BEE9-7D1569AD2F12}</Project>
       <Name>Topx.DataServices</Name>
