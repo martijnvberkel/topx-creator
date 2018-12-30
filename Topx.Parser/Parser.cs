@@ -7,9 +7,10 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml;
 using Topx.Data;
+using Topx.Data.DTO;
 using Topx.DataServices;
-using Topx.Parser.Model;
-using Topx.Utility;
+using static  Topx.Data.DTO.RIP;
+using static  Topx.Data.DTO.TopX;
 
 namespace Topx.Creator
 {
@@ -20,7 +21,7 @@ namespace Topx.Creator
         private readonly IDataService _dataservice;
 
         // private readonly ModelTopX _entities;
-        public recordInformationPackage Rip;
+        public RIP.recordInformationPackage Rip;
         public List<string> ZaaknummerMarkForDelivered = new List<string>();
         public StringBuilder ErrorMessage = new StringBuilder();
         private string _identificatieArchief;
@@ -33,69 +34,63 @@ namespace Topx.Creator
             _dataservice = dataservice;
             _dataservice.ClearLog();
         }
-        public recordInformationPackage ParseDataToTopx(List<Dossier> listOfDossiers, int nrOfRecords = 0)
+        public RIP.recordInformationPackage ParseDataToTopx(List<Dossier> listOfDossiers, int nrOfRecords = 0)
         {
-            //using (var entities = new ModelTopX())
+            if (!TestHealthyGlobals())
             {
-                if (!TestHealthyGlobals())
-                {
-                    return null;
-                }
-                _identificatieArchief = _globals.IdentificatieArchief;
-                var datumArchief = _globals.DatumArchief;
-                var omschrijvingArchief = _globals.OmschrijvingArchief;
-                var bronArchief = _globals.BronArchief;
-                var doelArchief = _globals.DoelArchief;
-                var naamArchief = _globals.NaamArchief;
-               
-                Rip = new recordInformationPackage()
-                {
-                    packageHeader =
-                        RipHeader(_identificatieArchief, (DateTime) datumArchief, omschrijvingArchief, bronArchief, doelArchief),
-                    record = RipArchief(_identificatieArchief, naamArchief)
-                };
-
-               // var listOfDossiers = from d in _entities.Dossiers select d;
-                var recordCounter = 0;
-                foreach (var dossier in listOfDossiers)
-                {
-                    try
-                    {
-                        if (!dossier.Records.Any())
-                        {
-                            _dataservice.Log(dossier.IdentificatieKenmerk, "Geen records gevonden");
-                        }
-
-                        if (string.IsNullOrEmpty(dossier.Naam))
-                        {
-                            _dataservice.Log(dossier.IdentificatieKenmerk, "Veld Naam is leeg");
-                        }
-
-                        ValidateDossier(dossier);
-
-                        Rip.record.Add(RipBeschikkingAsDossier(dossier));
-                      
-                        //Rip.record.Add(RipOobjectAsDoc(dossier, dossier.IdentificatieKenmerk));
-
-                        foreach (var record in dossier.Records)
-                        {
-                            Rip.record.Add(RipOobjectAsDoc(dossier, $"{dossier.IdentificatieKenmerk}_{Path.GetFileNameWithoutExtension(record.Bestand_Formaat_Bestandsnaam)}" ));
-                            Rip.record.Add(RipObjectAsBestand(record));
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        _dataservice.Log(dossier.IdentificatieKenmerk, $"ERROR: {ex.Message}");
-                    }
-
-                    recordCounter++;
-                    if (nrOfRecords > 0)
-                        if (recordCounter >= nrOfRecords)
-                            return Rip;
-                }
-
-                return Rip; //.Serialize();
+                return null;
             }
+            _identificatieArchief = _globals.IdentificatieArchief;
+            var datumArchief = _globals.DatumArchief;
+            var omschrijvingArchief = _globals.OmschrijvingArchief;
+            var bronArchief = _globals.BronArchief;
+            var doelArchief = _globals.DoelArchief;
+            var naamArchief = _globals.NaamArchief;
+
+            Rip = new RIP.recordInformationPackage()
+            {
+                packageHeader =
+                    RipHeader(_identificatieArchief, (DateTime) datumArchief, omschrijvingArchief, bronArchief, doelArchief),
+                record = RipArchief(_identificatieArchief, naamArchief)
+            };
+
+            var recordCounter = 0;
+            foreach (var dossier in listOfDossiers)
+            {
+                try
+                {
+                    if (!dossier.Records.Any())
+                    {
+                        _dataservice.Log(dossier.IdentificatieKenmerk, "Geen records gevonden");
+                    }
+
+                    if (string.IsNullOrEmpty(dossier.Naam))
+                    {
+                        _dataservice.Log(dossier.IdentificatieKenmerk, "Veld Naam is leeg");
+                    }
+
+                    ValidateDossier(dossier);
+
+                    Rip.record.Add(RipBeschikkingAsDossier(dossier));
+
+                    foreach (var record in dossier.Records)
+                    {
+                        Rip.record.Add(RipOobjectAsDoc(dossier, $"{dossier.IdentificatieKenmerk}_{Path.GetFileNameWithoutExtension(record.Bestand_Formaat_Bestandsnaam)}"));
+                        Rip.record.Add(RipObjectAsBestand(record));
+                    }
+                }
+                catch (Exception ex)
+                {
+                    _dataservice.Log(dossier.IdentificatieKenmerk, $"ERROR: {ex.Message}");
+                }
+
+                recordCounter++;
+                if (nrOfRecords > 0)
+                    if (recordCounter >= nrOfRecords)
+                        return Rip;
+            }
+
+            return Rip; //.Serialize();
         }
 
         private bool TestHealthyGlobals()
@@ -137,16 +132,16 @@ namespace Topx.Creator
         }
 
 
-        private ripRecordType RipOobjectAsDoc(Dossier dossier, string identificatieKenmerk)
+        private RIP.ripRecordType RipOobjectAsDoc(Dossier dossier, string identificatieKenmerk)
         {
             //var identificatie = dossierId + "_FILE_" + count;
-            var riprecordType = new ripRecordType()
+            var riprecordType = new RIP.ripRecordType()
             {
-                recordHeader = new ripRecordHeaderType()
+                recordHeader = new RIP.ripRecordHeaderType()
                 {
                     identificatie = identificatieKenmerk,
                 },
-                metadata = new[] {new  ripMetadataType()
+                metadata = new[] {new  RIP.ripMetadataType()
                 {
                     schemaURI = "topx",
                     Any = ConvertTopxToXmlElement(GetRecordAsTopx(dossier, identificatieKenmerk))
@@ -155,7 +150,7 @@ namespace Topx.Creator
             return riprecordType;
         }
 
-        private topxType GetRecordAsTopx(Dossier dossier, string identificatieKenmerk)
+        private TopX.topxType GetRecordAsTopx(Dossier dossier, string identificatieKenmerk)
         {
             
             var eventgeschiedenis_DatumOfPeriode = DateTime.ParseExact(dossier.Eventgeschiedenis_DatumOfPeriode, DateParsing, CultureInfo.InvariantCulture).ToString("yyyy-MM-dd");
@@ -171,10 +166,10 @@ namespace Topx.Creator
 
             var relatie = new[]
             {
-                new relatieType()
+                new TopX.relatieType()
                 {
-                    relatieID = new nonEmptyStringTypeAttribuut() {Value = dossier.IdentificatieKenmerk},
-                    typeRelatie = new nonEmptyStringTypeAttribuut() {Value = dossier.Relatie_Type ?? "Hiërachisch" },
+                    relatieID = new TopX.nonEmptyStringTypeAttribuut() {Value = dossier.IdentificatieKenmerk},
+                    typeRelatie = new TopX.nonEmptyStringTypeAttribuut() {Value = dossier.Relatie_Type ?? "Hiërachisch" },
                     datumOfPeriode = new datumOfPeriodeType()
                     {
                         datum = relatie_DatumOfPeriode
@@ -274,17 +269,17 @@ namespace Topx.Creator
             } };
         }
 
-        private ripRecordType RipObjectAsBestand(Record record)
+        private RIP.ripRecordType RipObjectAsBestand(Record record)
         {
             var identificatieKenmerkBestand = Path.GetFileNameWithoutExtension(record.Bestand_Formaat_Bestandsnaam);
-            var riprecordType = new ripRecordType()
+            var riprecordType = new RIP.ripRecordType()
             {
-                recordHeader = new ripRecordHeaderType()
+                recordHeader = new RIP.ripRecordHeaderType()
                 {
                     identificatie = identificatieKenmerkBestand,
 
                 },
-                metadata = new[] {new  ripMetadataType()
+                metadata = new[] {new  RIP.ripMetadataType()
                 {
                     schemaURI = "topx",
 
@@ -384,18 +379,18 @@ namespace Topx.Creator
         }
 
 
-        private ripRecordType RipBeschikkingAsDossier(Dossier dossier)
+        private RIP.ripRecordType RipBeschikkingAsDossier(Dossier dossier)
         {
             
-            var riprecordType = new ripRecordType()
+            var riprecordType = new RIP.ripRecordType()
             {
-                recordHeader = new ripRecordHeaderType()
+                recordHeader = new RIP.ripRecordHeaderType()
                 {
                     identificatie = dossier.IdentificatieKenmerk
                     //omschrijving = new[] { source.C19_1_DN_Tabnaam },
                     //status = ripRecordStatusType.gewijzigd
                 },
-                metadata = new[] {new  ripMetadataType()
+                metadata = new[] {new  RIP.ripMetadataType()
                 {
                     schemaURI = "topx",
                     Any = ConvertTopxToXmlElement(GetDossierAsTopx(dossier))
@@ -405,9 +400,9 @@ namespace Topx.Creator
         }
 
 
-        private packageHeaderType RipHeader(string identificatie, DateTime datum, string omschrijving, string bron, string doel)
+        private RIP.packageHeaderType RipHeader(string identificatie, DateTime datum, string omschrijving, string bron, string doel)
         {
-            return new packageHeaderType()
+            return new RIP.packageHeaderType()
             {
                 identificatie = identificatie,
                 datum = datum,
@@ -417,17 +412,17 @@ namespace Topx.Creator
             };
         }
 
-        private List<ripRecordType> RipArchief(string archiefId, string naamArchief)
+        private List<RIP.ripRecordType> RipArchief(string archiefId, string naamArchief)
         {
-            var result = new List<ripRecordType>();
+            var result = new List<RIP.ripRecordType>();
             result.Add(
-                new ripRecordType()
+                new RIP.ripRecordType()
                 {
-                    recordHeader = new ripRecordHeaderType()
+                    recordHeader = new RIP.ripRecordHeaderType()
                     {
                         identificatie = archiefId
                     },
-                    metadata = new[] {new  ripMetadataType()
+                    metadata = new[] {new  RIP.ripMetadataType()
                     {
                         schemaURI = "topx",
                         Any = ConvertTopxToXmlElement( GetTopxArchiefNiveau(archiefId, naamArchief))

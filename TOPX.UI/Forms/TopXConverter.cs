@@ -14,9 +14,11 @@ using Topx.Data;
 using Topx.DataServices;
 using Topx.Importer;
 using Topx.Interface;
-using Topx.Parser.Model;
 using TOPX.UI.Classes;
 using AutoUpdaterDotNET;
+using Topx.Data.DTO;
+using Topx.Utility;
+using Logger = NLog.Logger;
 
 namespace TOPX.UI.Forms
 {
@@ -37,6 +39,7 @@ namespace TOPX.UI.Forms
         private Headers _headers;
         private Globals _globals;
 
+        private RIP.recordInformationPackage _resultRecordInforamtionPackage;
         private WaitForm _waitForm;
 
         public TopXConverter(IDataService dataservice)
@@ -68,13 +71,13 @@ namespace TOPX.UI.Forms
                 gridFieldMappingDossiers.AutoGenerateColumns = false;
                 gridFieldMappingRecords.AutoGenerateColumns = false;
 
-                InitDefaultFilesLoad();
+                Initialize();
                 InitTooltips();
                 Updater.InitAutoUpdater();
             }
         }
 
-        
+
 
         private void InitTooltips()
         {
@@ -110,7 +113,7 @@ namespace TOPX.UI.Forms
             _waitForm.Close();
         }
 
-        private void InitDefaultFilesLoad()
+        private void Initialize()
         {
             _globals = _dataservice.GetGlobals();
             var dossierFile = _globals?.LastDossierFileName;
@@ -134,6 +137,8 @@ namespace TOPX.UI.Forms
             txtIdentificatieArchief.Text = _globals?.IdentificatieArchief;
             txtNaamArchief.Text = _globals?.NaamArchief;
             txtOmschrijvingArchief.Text = _globals?.OmschrijvingArchief;
+
+            btSaveTopxXml.Enabled = false;
         }
 
         private void btImportFilesInDb_Click(object sender, EventArgs e)
@@ -189,37 +194,44 @@ namespace TOPX.UI.Forms
         {
             try
             {
+                _resultRecordInforamtionPackage = null;
                 Cursor.Current = Cursors.WaitCursor;
                 var parser = new Parser(_globals, _dataservice);
 
                 var listofdossiers = _dataservice.GetAllDossiers();
-                var result = parser.ParseDataToTopx(listofdossiers);
+                _resultRecordInforamtionPackage = parser.ParseDataToTopx(listofdossiers);
                 txtLogTopXCreate.Text = parser.ErrorMessage.ToString();
 
                 Cursor.Current = Cursors.Default;
 
-                if (result != null && parser.ErrorMessage.Length == 0)
+                if (_resultRecordInforamtionPackage != null && parser.ErrorMessage.Length == 0)
                 {
+                    btSaveTopxXml.Enabled = true;
+                    txtResultXml.Text = XmlHelper.GetXmlStringFromObject(_resultRecordInforamtionPackage, 10000);
+                    
                     if (MessageBox.Show("Save xml?", "xml", MessageBoxButtons.YesNo) == DialogResult.Yes)
                     {
-                        SaveAsXml(result);
+                        SaveAsXml(_resultRecordInforamtionPackage);
                     }
                 }
                 else
                 {
-                    if (parser.ErrorMessage.Length > 0 && result == null)
+
+                    if (parser.ErrorMessage.Length > 0 && _resultRecordInforamtionPackage == null)
                     {
+                        btSaveTopxXml.Enabled = false;
                         MessageBox.Show("Er zijn fouten opgetreden tijdens de conversie, TopX xml kan niet worden gegenereerd", "xml", MessageBoxButtons.OK);
                     }
                     else
                     {
+                        btSaveTopxXml.Enabled = true;
                         if (MessageBox.Show("Er zijn fouten opgetreden tijdens de conversie. Wilt u de gegenereerde TopX xml toch opslaan?", "xml", MessageBoxButtons.YesNo) == DialogResult.Yes)
                         {
-                            SaveAsXml(result);
+                            SaveAsXml(_resultRecordInforamtionPackage);
                         }
                     }
                 }
-            
+
             }
             catch (Exception exception)
             {
@@ -229,16 +241,16 @@ namespace TOPX.UI.Forms
             }
         }
 
-        private void SaveAsXml(recordInformationPackage result)
+        private void SaveAsXml(RIP.recordInformationPackage result)
         {
-            var savefile = new SaveFileDialog { FileName = "export.xml" };
+            var savefile = new SaveFileDialog { FileName = $"{_globals.NaamArchief}.xml" };
 
             if (savefile.ShowDialog() == DialogResult.OK)
             {
                 var encoding = Encoding.UTF8;
                 using (var writer = new StreamWriter(savefile.FileName, false, encoding))
                 {
-                    var serializer = new XmlSerializer(typeof(recordInformationPackage));
+                    var serializer = new XmlSerializer(typeof(RIP.recordInformationPackage));
                     serializer.Serialize(writer, result);
                     writer.Flush();
                 }
@@ -298,12 +310,6 @@ namespace TOPX.UI.Forms
             _dataservice.SaveGlobals(_globals);
         }
 
-
-
-        private void txtDossierLocation_TextChanged(object sender, EventArgs e)
-        {
-
-        }
 
         private void picDossierSelector_Click(object sender, EventArgs e)
         {
@@ -415,11 +421,6 @@ namespace TOPX.UI.Forms
             _dataservice.SaveMappings(_fieldmappingsRecords, FieldMappingType.RECORD);
         }
 
-        //private void gridFieldMappingDossiers_Leave(object sender, EventArgs e)
-        //{
-        //    _dataservice.SaveMappings(_fieldmappingsDossiers, FieldMappingType.DOSSIER);
-        //}
-
         private void linkCopyErrorsDossiers_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Clipboard.SetText(txtErrorsDossiers.Text);
@@ -429,7 +430,6 @@ namespace TOPX.UI.Forms
         {
             Clipboard.SetText(txtErrorRecords.Text);
         }
-
 
         private void gridFieldMappingDossiers_Leave(object sender, EventArgs e)
         {
@@ -451,6 +451,16 @@ namespace TOPX.UI.Forms
         private void linkCopyTopXCreateError_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Clipboard.SetText(txtLogTopXCreate.Text);
+        }
+
+        private void btSaveTopxXml_Click(object sender, EventArgs e)
+        {
+            if (_resultRecordInforamtionPackage != null)
+                SaveAsXml(_resultRecordInforamtionPackage);
+            else
+            {
+                MessageBox.Show("Er is geen data aanwezig om op te slaan.");
+            }
         }
     }
 
