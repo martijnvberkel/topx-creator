@@ -309,6 +309,24 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_F5CD903E1BFF47E83209FDBF7AA8B2D7"
+        "OwnerKey" = "8:_92FE3F54B4A04468B70314ED7ACB3B95"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_F5CD903E1BFF47E83209FDBF7AA8B2D7"
+        "OwnerKey" = "8:_BC05713D47A30B02A43F1E3CC2B93689"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_F5CD903E1BFF47E83209FDBF7AA8B2D7"
+        "OwnerKey" = "8:_290817821FB0A392E06937A2245A27B7"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_F8F49E31F959F0B9D0A9F8192EB4D5B3"
         "OwnerKey" = "8:_92FE3F54B4A04468B70314ED7ACB3B95"
         "MsmSig" = "8:_UNDEFINED"
@@ -359,6 +377,12 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_70143016471501144DEAF86A0479EB49"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_F5CD903E1BFF47E83209FDBF7AA8B2D7"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1291,6 +1315,37 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_F5CD903E1BFF47E83209FDBF7AA8B2D7"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:Topx.Data.DTO, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_F5CD903E1BFF47E83209FDBF7AA8B2D7"
+                    {
+                    "Name" = "8:Topx.Data.DTO.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:Topx.Data.DTO.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_9CA3CB116441426EB693E0F040484869"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_F8F49E31F959F0B9D0A9F8192EB4D5B3"
             {
             "AssemblyRegister" = "3:1"
@@ -1391,7 +1446,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:TopxCreator"
         "ProductCode" = "8:{31E09431-1F33-476B-BFA0-FB9AF3D5981B}"
-        "PackageCode" = "8:{621ECFCD-4633-47ED-BB42-9FB17A78A1AE}"
+        "PackageCode" = "8:{45836262-16CF-4B4B-9E92-9D54CF7B7669}"
         "UpgradeCode" = "8:{1097B1AF-D51A-4033-B4DA-39AA6D8EB4F4}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -1525,17 +1580,17 @@
             "Icon" = "8:_0602814A5B154AD5A4CB1DCF616994C8"
             "Feature" = "8:"
             }
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_B675D4BCB9414AB4AEE91D907358698F"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_730E823686284B818AF1B5D31A76762A"
             {
-            "Name" = "8:TopX Creator"
+            "Name" = "8:TOPX"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
-            "Target" = "8:_FACD81E3823A44C5994D277AB72C10BD"
+            "Target" = "8:_92FE3F54B4A04468B70314ED7ACB3B95"
             "Folder" = "8:_FACD81E3823A44C5994D277AB72C10BD"
-            "WorkingFolder" = "8:_FACD81E3823A44C5994D277AB72C10BD"
+            "WorkingFolder" = "8:_9CA3CB116441426EB693E0F040484869"
             "Icon" = "8:_0602814A5B154AD5A4CB1DCF616994C8"
             "Feature" = "8:"
             }

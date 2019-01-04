@@ -13,7 +13,7 @@ namespace TOPX.UI.Classes
         {
             AutoUpdater.OpenDownloadPage = false;
             AutoUpdater.ShowSkipButton = false;
-            AutoUpdater.ShowRemindLaterButton = false;
+            AutoUpdater.ShowRemindLaterButton = true;
             AutoUpdater.AppTitle = "TopX Creator";
             AutoUpdater.LetUserSelectRemindLater = true;
             AutoUpdater.Start("https://mvbworks.com/downloads/version.xml");
