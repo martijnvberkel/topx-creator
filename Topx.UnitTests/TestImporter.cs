@@ -15,17 +15,7 @@ namespace Topx.UnitTests
     public class TestImporter
     {
 
-        public static string AppPath()
-        {
-            var appPath = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory);
-            while (appPath != null && (appPath.FullName.Contains(@"\bin\")
-                                       || appPath.FullName.EndsWith(@"\bin", StringComparison.CurrentCultureIgnoreCase)))
-            {
-                appPath = appPath.Parent;
-            }
-            return appPath.FullName;
-        }
-
+        
         [Test]
         public void IgnoreExtraField_In_FileStream()
         {
@@ -89,8 +79,8 @@ namespace Topx.UnitTests
                 Bestand_Formaat_BestandsFormaat = "fmt/354",
                 Bestand_Formaat_FysiekeIntegriteit_Algoritme = "sha256",
                 Bestand_Formaat_FysiekeIntegriteit_Waarde = "6024baa32d6a7f8ef10239d43c9dfd8b25a64b1fc8c9d34da7523ec5dbed9ac6",
-                Bestand_Formaat_FysiekeIntegriteit_DatumEnTijd = "30-7-2015 12:50",
-                Bestand_Formaat_DatumAanmaak = "20-8-2012",
+                Bestand_Formaat_FysiekeIntegriteit_DatumEnTijd = Convert.ToDateTime("30-7-2015 12:50"),
+                Bestand_Formaat_DatumAanmaak = Convert.ToDateTime("20-8-2012"),
                 DossierId = "NL-0000-10000-1"
             };
             var dossiers = new List<Dossier>() { new Dossier()
@@ -141,9 +131,9 @@ namespace Topx.UnitTests
           
             var xmlstreamActual = Utility.XmlHelper. GetXmlStringFromObject(recordinformationPackage);
 
-            var xmlCompare = File.ReadAllText(Path.Combine(AppPath(), @"TestResources\ExpectedOutput1.xml"));
+            var xmlCompare = File.ReadAllText(Path.Combine(Statics. AppPath(), @"TestResources\ExpectedOutput1.xml"));
 
-            XmlAssert.Equal(xmlstreamActual, xmlCompare);
+            XmlAssert.Equal(xmlCompare, xmlstreamActual);
 
         }
 

@@ -42,6 +42,8 @@ namespace TOPX.UI.Forms
         private RIP.recordInformationPackage _resultRecordInforamtionPackage;
         private WaitForm _waitForm;
 
+        private string _lastSelectedDirToScanForMetadata;
+
         public TopXConverter(IDataService dataservice)
         {
             _dataservice = dataservice;
@@ -462,7 +464,19 @@ namespace TOPX.UI.Forms
                 MessageBox.Show("Er is geen data aanwezig om op te slaan.");
             }
         }
+
+        private void picSelectDirToScan_Click(object sender, EventArgs e)
+        {
+          using (var folderBrowserDialog = new FolderBrowserDialog())
+          {
+              folderBrowserDialog.SelectedPath = _lastSelectedDirToScanForMetadata;
+                var result = folderBrowserDialog.ShowDialog();
+                if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(folderBrowserDialog.SelectedPath))
+                {
+                    txtFilesDirToScan.Text = folderBrowserDialog.SelectedPath;
+                    _lastSelectedDirToScanForMetadata = folderBrowserDialog.SelectedPath;
+                }
+            }
+        }
     }
-
-
 }

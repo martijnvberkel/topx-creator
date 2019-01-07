@@ -16,7 +16,7 @@ namespace TOPX.UI.Classes
             AutoUpdater.ShowRemindLaterButton = true;
             AutoUpdater.AppTitle = "TopX Creator";
             AutoUpdater.LetUserSelectRemindLater = true;
-            AutoUpdater.Start("https://mvbworks.com/downloads/version.xml");
+            AutoUpdater.Start("https://mvbworks.com/downloads/up/version.xml");
         }
     }
 }

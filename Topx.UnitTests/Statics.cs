@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,6 +9,17 @@ namespace Topx.UnitTests
 {
     public class Statics
     {
+        public static string AppPath()
+        {
+            var appPath = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory);
+            while (appPath != null && (appPath.FullName.Contains(@"\bin\")
+                                       || appPath.FullName.EndsWith(@"\bin", StringComparison.CurrentCultureIgnoreCase)))
+            {
+                appPath = appPath.Parent;
+            }
+            return appPath.FullName;
+        }
+
         public static List<string> MockHeaders = new List<string>()
         {
             "IdentificatieKenmerk",

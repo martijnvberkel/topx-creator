@@ -12,23 +12,68 @@ namespace Topx.FileAnalysis
     
     public class Metadata
     {
+        private readonly bool _setHash;
+        private readonly bool _setSize;
+        private readonly bool _setCreationDate;
+        private readonly bool _setFileFormatIdentification;
+        private readonly string _path;
+        private readonly List<Record> _records;
         public bool Error;
         public StringBuilder ErrorMessages = new StringBuilder();
 
-        public void Collect(string path, List<Record> records)
+        public Metadata(bool setHash, bool setSize, bool setCreationDate, bool setFileFormatIdentification, string path, List<Record> records)
         {
-            foreach (var record in records)
+            _setHash = setHash;
+            _setSize = setSize;
+            _setCreationDate = setCreationDate;
+            _setFileFormatIdentification = setFileFormatIdentification;
+            _path = path;
+            _records = records;
+        }
+
+        public bool TestIfAllFilesArePresent()
+        {
+            var filesInDir = Directory.GetFiles(_path) .Select(Path.GetFileName) .ToList();
+            var filesInDirCount = filesInDir.Count();
+
+            if (filesInDirCount < _records.Count)
             {
-                // Hash
-                var fileFullpath = Path.Combine(path, record.Bestand_Formaat_Bestandsnaam);
+                ErrorMessages.AppendLine($"In de dir {_path} staan {filesInDirCount} files, en er zijn {_records.Count} records aanwezig. ");
+                foreach (var record in _records)
+                {
+                    if (!filesInDir.Contains(record.Bestand_Formaat_Bestandsnaam))
+                    {
+                        ErrorMessages.Append($"File {record.Bestand_Formaat_Bestandsnaam} niet gevonden in {_path}");
+                    }
+                }
+                return false;
+            }
+            return true;
+        }
+
+        public void Collect()
+        {
+            foreach (var record in _records)
+            {
+                var fileFullpath = Path.Combine(_path, record.Bestand_Formaat_Bestandsnaam);
                 if (File.Exists(fileFullpath))
                 {
+
+                    if (_setCreationDate)
+                        record.Bestand_Formaat_DatumAanmaak = File.GetCreationTime(fileFullpath);
+
                     using (var stream = File.OpenRead(fileFullpath))
                     {
-                        record.Bestand_Formaat_FysiekeIntegriteit_Waarde = GetHash(stream);
-                        GetDateFromPdf(stream);
+                       if (_setSize)
+                            record.Bestand_Formaat_BestandsOmvang = stream.Length;
+
+                        if (_setHash)
+                        {
+                            record.Bestand_Formaat_FysiekeIntegriteit_Waarde = GetHash(stream);
+                            record.Bestand_Formaat_FysiekeIntegriteit_DatumEnTijd = DateTime.Now;
+                            record.Bestand_Formaat_FysiekeIntegriteit_Algoritme = "sha256";
+                        }
                     }
-                       
                 }
                 else
                 {

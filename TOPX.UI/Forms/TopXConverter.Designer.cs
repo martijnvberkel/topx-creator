@@ -84,6 +84,7 @@ namespace TOPX.UI.Forms
             this.materialLabel3 = new MaterialSkin.Controls.MaterialLabel();
             this.txtErrorRecords = new System.Windows.Forms.TextBox();
             this.txtErrorsDossiers = new System.Windows.Forms.TextBox();
+            this.tabMetadata = new System.Windows.Forms.TabPage();
             this.tabGenerateTopX = new System.Windows.Forms.TabPage();
             this.btSaveTopxXml = new System.Windows.Forms.Button();
             this.materialLabel14 = new MaterialSkin.Controls.MaterialLabel();
@@ -92,6 +93,8 @@ namespace TOPX.UI.Forms
             this.materialLabel13 = new MaterialSkin.Controls.MaterialLabel();
             this.btGenerateTopX = new System.Windows.Forms.Button();
             this.txtLogTopXCreate = new System.Windows.Forms.TextBox();
+            this.picSelectDirToScan = new System.Windows.Forms.PictureBox();
+            this.txtFilesDirToScan = new System.Windows.Forms.TextBox();
             this.materialContextMenuStrip2.SuspendLayout();
             this.materialContextMenuStrip3.SuspendLayout();
             this.materialTabControl1.SuspendLayout();
@@ -102,7 +105,9 @@ namespace TOPX.UI.Forms
             ((System.ComponentModel.ISupportInitialize)(this.gridFieldMappingRecords)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridFieldMappingDossiers)).BeginInit();
             this.tabImportFiles.SuspendLayout();
+            this.tabMetadata.SuspendLayout();
             this.tabGenerateTopX.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picSelectDirToScan)).BeginInit();
             this.SuspendLayout();
             // 
             // materialContextMenuStrip1
@@ -194,6 +199,7 @@ namespace TOPX.UI.Forms
             this.materialTabControl1.Controls.Add(this.tabGlobals);
             this.materialTabControl1.Controls.Add(this.tabLoadFiles);
             this.materialTabControl1.Controls.Add(this.tabImportFiles);
+            this.materialTabControl1.Controls.Add(this.tabMetadata);
             this.materialTabControl1.Controls.Add(this.tabGenerateTopX);
             this.materialTabControl1.Depth = 0;
             this.materialTabControl1.Location = new System.Drawing.Point(22, 81);
@@ -701,6 +707,18 @@ namespace TOPX.UI.Forms
             this.txtErrorsDossiers.TabIndex = 6;
             this.txtErrorsDossiers.WordWrap = false;
             // 
+            // tabMetadata
+            // 
+            this.tabMetadata.Controls.Add(this.picSelectDirToScan);
+            this.tabMetadata.Controls.Add(this.txtFilesDirToScan);
+            this.tabMetadata.Location = new System.Drawing.Point(4, 22);
+            this.tabMetadata.Name = "tabMetadata";
+            this.tabMetadata.Padding = new System.Windows.Forms.Padding(3);
+            this.tabMetadata.Size = new System.Drawing.Size(1290, 752);
+            this.tabMetadata.TabIndex = 5;
+            this.tabMetadata.Text = "Genereer Metadata";
+            this.tabMetadata.UseVisualStyleBackColor = true;
+            // 
             // tabGenerateTopX
             // 
             this.tabGenerateTopX.Controls.Add(this.btSaveTopxXml);
@@ -795,6 +813,26 @@ namespace TOPX.UI.Forms
             this.txtLogTopXCreate.TabIndex = 3;
             this.txtLogTopXCreate.WordWrap = false;
             // 
+            // picSelectDirToScan
+            // 
+            this.picSelectDirToScan.Image = ((System.Drawing.Image)(resources.GetObject("picSelectDirToScan.Image")));
+            this.picSelectDirToScan.Location = new System.Drawing.Point(522, 63);
+            this.picSelectDirToScan.Margin = new System.Windows.Forms.Padding(2);
+            this.picSelectDirToScan.Name = "picSelectDirToScan";
+            this.picSelectDirToScan.Size = new System.Drawing.Size(31, 33);
+            this.picSelectDirToScan.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picSelectDirToScan.TabIndex = 23;
+            this.picSelectDirToScan.TabStop = false;
+            this.picSelectDirToScan.Click += new System.EventHandler(this.picSelectDirToScan_Click);
+            // 
+            // txtFilesDirToScan
+            // 
+            this.txtFilesDirToScan.Location = new System.Drawing.Point(151, 73);
+            this.txtFilesDirToScan.Name = "txtFilesDirToScan";
+            this.txtFilesDirToScan.ReadOnly = true;
+            this.txtFilesDirToScan.Size = new System.Drawing.Size(366, 20);
+            this.txtFilesDirToScan.TabIndex = 22;
+            // 
             // TopXConverter
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -821,8 +859,11 @@ namespace TOPX.UI.Forms
             ((System.ComponentModel.ISupportInitialize)(this.gridFieldMappingDossiers)).EndInit();
             this.tabImportFiles.ResumeLayout(false);
             this.tabImportFiles.PerformLayout();
+            this.tabMetadata.ResumeLayout(false);
+            this.tabMetadata.PerformLayout();
             this.tabGenerateTopX.ResumeLayout(false);
             this.tabGenerateTopX.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picSelectDirToScan)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -887,6 +928,9 @@ namespace TOPX.UI.Forms
         private MaterialSkin.Controls.MaterialLabel materialLabel14;
         private TextBox txtResultXml;
         private Button btSaveTopxXml;
+        private TabPage tabMetadata;
+        private PictureBox picSelectDirToScan;
+        private TextBox txtFilesDirToScan;
     }
 }
 
