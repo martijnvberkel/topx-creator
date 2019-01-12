@@ -85,6 +85,16 @@ namespace TOPX.UI.Forms
             this.txtErrorRecords = new System.Windows.Forms.TextBox();
             this.txtErrorsDossiers = new System.Windows.Forms.TextBox();
             this.tabMetadata = new System.Windows.Forms.TabPage();
+            this.btMetadataCancel = new System.Windows.Forms.Button();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.btGenerateMetadata = new System.Windows.Forms.Button();
+            this.materialLabel16 = new MaterialSkin.Controls.MaterialLabel();
+            this.txtMetadataErrors = new System.Windows.Forms.TextBox();
+            this.chkGetFileSignature = new System.Windows.Forms.CheckBox();
+            this.chkGetFileSize = new System.Windows.Forms.CheckBox();
+            this.checkGetCreationDate = new System.Windows.Forms.CheckBox();
+            this.chkGetHash = new System.Windows.Forms.CheckBox();
+            this.materialLabel15 = new MaterialSkin.Controls.MaterialLabel();
             this.picSelectDirToScan = new System.Windows.Forms.PictureBox();
             this.txtFilesDirToScan = new System.Windows.Forms.TextBox();
             this.tabGenerateTopX = new System.Windows.Forms.TabPage();
@@ -95,6 +105,7 @@ namespace TOPX.UI.Forms
             this.materialLabel13 = new MaterialSkin.Controls.MaterialLabel();
             this.btGenerateTopX = new System.Windows.Forms.Button();
             this.txtLogTopXCreate = new System.Windows.Forms.TextBox();
+            this.linkCopyMetadataErrors = new System.Windows.Forms.LinkLabel();
             this.materialContextMenuStrip2.SuspendLayout();
             this.materialContextMenuStrip3.SuspendLayout();
             this.materialTabControl1.SuspendLayout();
@@ -709,6 +720,17 @@ namespace TOPX.UI.Forms
             // 
             // tabMetadata
             // 
+            this.tabMetadata.Controls.Add(this.linkCopyMetadataErrors);
+            this.tabMetadata.Controls.Add(this.btMetadataCancel);
+            this.tabMetadata.Controls.Add(this.progressBar1);
+            this.tabMetadata.Controls.Add(this.btGenerateMetadata);
+            this.tabMetadata.Controls.Add(this.materialLabel16);
+            this.tabMetadata.Controls.Add(this.txtMetadataErrors);
+            this.tabMetadata.Controls.Add(this.chkGetFileSignature);
+            this.tabMetadata.Controls.Add(this.chkGetFileSize);
+            this.tabMetadata.Controls.Add(this.checkGetCreationDate);
+            this.tabMetadata.Controls.Add(this.chkGetHash);
+            this.tabMetadata.Controls.Add(this.materialLabel15);
             this.tabMetadata.Controls.Add(this.picSelectDirToScan);
             this.tabMetadata.Controls.Add(this.txtFilesDirToScan);
             this.tabMetadata.Location = new System.Drawing.Point(4, 22);
@@ -719,10 +741,114 @@ namespace TOPX.UI.Forms
             this.tabMetadata.Text = "Genereer Metadata";
             this.tabMetadata.UseVisualStyleBackColor = true;
             // 
+            // btMetadataCancel
+            // 
+            this.btMetadataCancel.Location = new System.Drawing.Point(235, 296);
+            this.btMetadataCancel.Name = "btMetadataCancel";
+            this.btMetadataCancel.Size = new System.Drawing.Size(92, 23);
+            this.btMetadataCancel.TabIndex = 33;
+            this.btMetadataCancel.Text = "Cancel scan";
+            this.btMetadataCancel.UseVisualStyleBackColor = true;
+            this.btMetadataCancel.Click += new System.EventHandler(this.btMetadataCancel_Click);
+            // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(75, 343);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(252, 23);
+            this.progressBar1.TabIndex = 32;
+            // 
+            // btGenerateMetadata
+            // 
+            this.btGenerateMetadata.Location = new System.Drawing.Point(75, 296);
+            this.btGenerateMetadata.Name = "btGenerateMetadata";
+            this.btGenerateMetadata.Size = new System.Drawing.Size(95, 23);
+            this.btGenerateMetadata.TabIndex = 31;
+            this.btGenerateMetadata.Text = "Start scan";
+            this.btGenerateMetadata.UseVisualStyleBackColor = true;
+            this.btGenerateMetadata.Click += new System.EventHandler(this.btGenerateMetadata_Click);
+            // 
+            // materialLabel16
+            // 
+            this.materialLabel16.AutoSize = true;
+            this.materialLabel16.Depth = 0;
+            this.materialLabel16.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel16.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialLabel16.Location = new System.Drawing.Point(569, 27);
+            this.materialLabel16.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel16.Name = "materialLabel16";
+            this.materialLabel16.Size = new System.Drawing.Size(50, 19);
+            this.materialLabel16.TabIndex = 30;
+            this.materialLabel16.Text = "Errors";
+            // 
+            // txtMetadataErrors
+            // 
+            this.txtMetadataErrors.Location = new System.Drawing.Point(564, 59);
+            this.txtMetadataErrors.Multiline = true;
+            this.txtMetadataErrors.Name = "txtMetadataErrors";
+            this.txtMetadataErrors.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.txtMetadataErrors.Size = new System.Drawing.Size(632, 544);
+            this.txtMetadataErrors.TabIndex = 29;
+            this.txtMetadataErrors.WordWrap = false;
+            // 
+            // chkGetFileSignature
+            // 
+            this.chkGetFileSignature.AutoSize = true;
+            this.chkGetFileSignature.Enabled = false;
+            this.chkGetFileSignature.Location = new System.Drawing.Point(75, 218);
+            this.chkGetFileSignature.Name = "chkGetFileSignature";
+            this.chkGetFileSignature.Size = new System.Drawing.Size(176, 17);
+            this.chkGetFileSignature.TabIndex = 28;
+            this.chkGetFileSignature.Text = "Bestandsformaat (File signature)";
+            this.chkGetFileSignature.UseVisualStyleBackColor = true;
+            // 
+            // chkGetFileSize
+            // 
+            this.chkGetFileSize.AutoSize = true;
+            this.chkGetFileSize.Location = new System.Drawing.Point(75, 184);
+            this.chkGetFileSize.Name = "chkGetFileSize";
+            this.chkGetFileSize.Size = new System.Drawing.Size(148, 17);
+            this.chkGetFileSize.TabIndex = 27;
+            this.chkGetFileSize.Text = "Bestandsgrootte (FileSize)";
+            this.chkGetFileSize.UseVisualStyleBackColor = true;
+            // 
+            // checkGetCreationDate
+            // 
+            this.checkGetCreationDate.AutoSize = true;
+            this.checkGetCreationDate.Location = new System.Drawing.Point(75, 147);
+            this.checkGetCreationDate.Name = "checkGetCreationDate";
+            this.checkGetCreationDate.Size = new System.Drawing.Size(171, 17);
+            this.checkGetCreationDate.TabIndex = 26;
+            this.checkGetCreationDate.Text = "Aanmaakdatum (CreationDate)";
+            this.checkGetCreationDate.UseVisualStyleBackColor = true;
+            // 
+            // chkGetHash
+            // 
+            this.chkGetHash.AutoSize = true;
+            this.chkGetHash.Location = new System.Drawing.Point(75, 113);
+            this.chkGetHash.Name = "chkGetHash";
+            this.chkGetHash.Size = new System.Drawing.Size(134, 17);
+            this.chkGetHash.TabIndex = 25;
+            this.chkGetHash.Text = "Genereer sha256-hash";
+            this.chkGetHash.UseVisualStyleBackColor = true;
+            // 
+            // materialLabel15
+            // 
+            this.materialLabel15.AutoSize = true;
+            this.materialLabel15.Depth = 0;
+            this.materialLabel15.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel15.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialLabel15.Location = new System.Drawing.Point(71, 24);
+            this.materialLabel15.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel15.Name = "materialLabel15";
+            this.materialLabel15.Size = new System.Drawing.Size(245, 19);
+            this.materialLabel15.TabIndex = 24;
+            this.materialLabel15.Text = "Selecteer directory te scannen files";
+            // 
             // picSelectDirToScan
             // 
             this.picSelectDirToScan.Image = ((System.Drawing.Image)(resources.GetObject("picSelectDirToScan.Image")));
-            this.picSelectDirToScan.Location = new System.Drawing.Point(498, 45);
+            this.picSelectDirToScan.Location = new System.Drawing.Point(446, 49);
             this.picSelectDirToScan.Margin = new System.Windows.Forms.Padding(2);
             this.picSelectDirToScan.Name = "picSelectDirToScan";
             this.picSelectDirToScan.Size = new System.Drawing.Size(31, 33);
@@ -733,7 +859,7 @@ namespace TOPX.UI.Forms
             // 
             // txtFilesDirToScan
             // 
-            this.txtFilesDirToScan.Location = new System.Drawing.Point(127, 55);
+            this.txtFilesDirToScan.Location = new System.Drawing.Point(75, 59);
             this.txtFilesDirToScan.Name = "txtFilesDirToScan";
             this.txtFilesDirToScan.ReadOnly = true;
             this.txtFilesDirToScan.Size = new System.Drawing.Size(366, 20);
@@ -833,6 +959,17 @@ namespace TOPX.UI.Forms
             this.txtLogTopXCreate.TabIndex = 3;
             this.txtLogTopXCreate.WordWrap = false;
             // 
+            // linkCopyMetadataErrors
+            // 
+            this.linkCopyMetadataErrors.AutoSize = true;
+            this.linkCopyMetadataErrors.Location = new System.Drawing.Point(1147, 33);
+            this.linkCopyMetadataErrors.Name = "linkCopyMetadataErrors";
+            this.linkCopyMetadataErrors.Size = new System.Drawing.Size(49, 13);
+            this.linkCopyMetadataErrors.TabIndex = 34;
+            this.linkCopyMetadataErrors.TabStop = true;
+            this.linkCopyMetadataErrors.Text = "Kopiëren";
+            this.linkCopyMetadataErrors.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkCopyMetadataErrors_LinkClicked);
+            // 
             // TopXConverter
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -931,6 +1068,17 @@ namespace TOPX.UI.Forms
         private TabPage tabMetadata;
         private PictureBox picSelectDirToScan;
         private TextBox txtFilesDirToScan;
+        private Button btGenerateMetadata;
+        private MaterialSkin.Controls.MaterialLabel materialLabel16;
+        private TextBox txtMetadataErrors;
+        private CheckBox chkGetFileSignature;
+        private CheckBox chkGetFileSize;
+        private CheckBox checkGetCreationDate;
+        private CheckBox chkGetHash;
+        private MaterialSkin.Controls.MaterialLabel materialLabel15;
+        private ProgressBar progressBar1;
+        private Button btMetadataCancel;
+        private LinkLabel linkCopyMetadataErrors;
     }
 }
 

@@ -155,7 +155,7 @@ namespace Topx.Creator
             
             var eventgeschiedenis_DatumOfPeriode = DateTime.ParseExact(dossier.Eventgeschiedenis_DatumOfPeriode, DateParsing, CultureInfo.InvariantCulture).ToString("yyyy-MM-dd");
 
-            var relatie_DatumOfPeriode = dossier.Relatie_DatumOfPeriode ?? dossier.Records.FirstOrDefault()?.Bestand_Formaat_DatumAanmaak.ToString("yyyy-MM-dd"); ;
+            var relatie_DatumOfPeriode =  dossier.Relatie_DatumOfPeriode ?? dossier.Records.FirstOrDefault()?.Bestand_Formaat_DatumAanmaak?.ToString("yyyy-MM-dd"); ;
 
             var vertrouwelijkheid_DatumOfPeriode = DateTime.ParseExact(dossier.Vertrouwelijkheid_DatumOfPeriode, DateParsing, CultureInfo.InvariantCulture).ToString("yyyy-MM-dd");
 
@@ -315,7 +315,7 @@ namespace Topx.Creator
                                 typeRelatie = new nonEmptyStringTypeAttribuut() {Value = record.Relatie_TypeRelatie ?? "Hiërarchisch"},
                                 datumOfPeriode = new datumOfPeriodeType()
                                 {
-                                    datum = record.Bestand_Formaat_DatumAanmaak.ToString("yyyy-MM-dd")
+                                    datum = record.Bestand_Formaat_DatumAanmaak?.ToString("yyyy-MM-dd")
                                 },
                             }
                         },
@@ -342,11 +342,11 @@ namespace Topx.Creator
                                 {
                                     algoritme = new nonEmptyStringTypeAttribuut() {Value = record.Bestand_Formaat_FysiekeIntegriteit_Algoritme},
                                     waarde = new nonEmptyStringTypeAttribuut() {Value = record.Bestand_Formaat_FysiekeIntegriteit_Waarde},
-                                    datumEnTijd = new fysiekeIntegriteitTypeDatumEnTijd() {Value = record.Bestand_Formaat_FysiekeIntegriteit_DatumEnTijd}
+                                    datumEnTijd = new fysiekeIntegriteitTypeDatumEnTijd() {Value = record.Bestand_Formaat_FysiekeIntegriteit_DatumEnTijd ?? DateTime.MinValue}
                                 },
                                 datumAanmaak = new formaatTypeDatumAanmaak()
                                 {
-                                    Value = record.Bestand_Formaat_DatumAanmaak.ToString("yyyy-MM-dd")
+                                    Value = record.Bestand_Formaat_DatumAanmaak?.ToString("yyyy-MM-dd")
                                 }
                             },
                         }
@@ -454,7 +454,7 @@ namespace Topx.Creator
             var relatie_DatumOfPeriode = dossier.Relatie_DatumOfPeriode != null
                 ? DateTime.ParseExact(dossier.Relatie_DatumOfPeriode,
                     DateParsing, CultureInfo.InvariantCulture).ToString("yyyy-MM-dd")
-                : dossier.Records.FirstOrDefault().Bestand_Formaat_DatumAanmaak.ToString("yyyy-MM-dd");
+                : dossier.Records.FirstOrDefault().Bestand_Formaat_DatumAanmaak?.ToString("yyyy-MM-dd");
 
             var openbaarheid_DatumOfPeriode = DateTime.ParseExact(dossier.Openbaarheid_DatumOfPeriode,
                 DateParsing, CultureInfo.InvariantCulture).ToString("yyyy-MM-dd");

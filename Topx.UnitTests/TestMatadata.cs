@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using NUnit.Framework;
 using Topx.Data;
 using Topx.FileAnalysis;
@@ -19,7 +20,15 @@ namespace Topx.UnitTests
                 Bestand_Formaat_Bestandsnaam = "dummy.pdf"
             }};
 
-            var metadata = new Metadata(true, true, true, false, path, records);
+            var dossiers = new List<Dossier>()
+            {
+                new Dossier()
+                {
+                    Records = records
+                }
+            };
+
+            var metadata = new Metadata(true, true, true, false, path, dossiers, null);
 
             // When
             metadata.Collect();
@@ -30,32 +39,8 @@ namespace Topx.UnitTests
             Assert.That(records[0].Bestand_Formaat_FysiekeIntegriteit_Algoritme, Is.EqualTo("sha256"));
             Assert.That(records[0].Bestand_Formaat_BestandsOmvang, Is.EqualTo(13264));
         }
-        [Test]
-        public void Test_Files_NotFound()
-        {
-            // Given
-            var path = Path.Combine(Statics.AppPath(), @"TestResources\MetadataFiles");
-            var records = new List<Record>()
-            {
-                new Record()
-                {
-                    Bestand_Formaat_Bestandsnaam = "dummy.pdf"
-                },
-                new Record()
-                {
-                    Bestand_Formaat_Bestandsnaam = "dummy_does_not_exists.pdf"
-                }
-            };
 
-            var metadata = new Metadata(true, true, true, false, path, records);
-
-            // When
-            var result = metadata.TestIfAllFilesArePresent();
-
-            // Then
-            Assert.That(result, Is.EqualTo(false));
-            StringAssert.Contains("File dummy_does_not_exists.pdf niet gevonden", metadata.ErrorMessages.ToString());
-        }
+       
     }
 }
 

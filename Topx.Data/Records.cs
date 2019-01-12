@@ -43,9 +43,9 @@ namespace Topx.Data
         [StringLength(250)]
         public string Bestand_Formaat_FysiekeIntegriteit_Waarde { get; set; }
 
-        public DateTime Bestand_Formaat_FysiekeIntegriteit_DatumEnTijd { get; set; }
+        public DateTime? Bestand_Formaat_FysiekeIntegriteit_DatumEnTijd { get; set; }
        
-        public DateTime Bestand_Formaat_DatumAanmaak { get; set; }
+        public DateTime? Bestand_Formaat_DatumAanmaak { get; set; }
 
         [StringLength(50)]
         public string DossierId { get; set; }

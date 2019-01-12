@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -15,15 +16,13 @@ using Topx.DataServices;
 using Topx.Importer;
 using Topx.Interface;
 using TOPX.UI.Classes;
-using AutoUpdaterDotNET;
 using Topx.Data.DTO;
+using Topx.FileAnalysis;
 using Topx.Utility;
 using Logger = NLog.Logger;
 
 namespace TOPX.UI.Forms
 {
-
-
     public partial class TopXConverter : MaterialForm
     {
         private readonly IDataService _dataservice;
@@ -44,6 +43,8 @@ namespace TOPX.UI.Forms
 
         private string _lastSelectedDirToScanForMetadata;
 
+        private BackgroundWorker bgworker;
+
         public TopXConverter(IDataService dataservice)
         {
             _dataservice = dataservice;
@@ -51,9 +52,7 @@ namespace TOPX.UI.Forms
             var materialSkinManager = MaterialSkinManager.Instance;
             materialSkinManager.AddFormToManage(this);
             materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
-            //materialSkinManager.ColorScheme = new ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.LightBlue200, TextShade.WHITE);
             materialSkinManager.ColorScheme = new ColorScheme(Primary.BlueGrey500, Primary.BlueGrey900, Primary.BlueGrey500, Accent.LightBlue200, TextShade.WHITE);
-
         }
 
         private void TopXConverter_Load(object sender, EventArgs e)
@@ -78,8 +77,6 @@ namespace TOPX.UI.Forms
                 Updater.InitAutoUpdater();
             }
         }
-
-
 
         private void InitTooltips()
         {
@@ -139,8 +136,8 @@ namespace TOPX.UI.Forms
             txtIdentificatieArchief.Text = _globals?.IdentificatieArchief;
             txtNaamArchief.Text = _globals?.NaamArchief;
             txtOmschrijvingArchief.Text = _globals?.OmschrijvingArchief;
-
-            btSaveTopxXml.Enabled = false;
+            //_lastSelectedDirToScanForMetadata = @"D:\TopX_Data\TestFiles";
+           btSaveTopxXml.Enabled = false;
         }
 
         private void btImportFilesInDb_Click(object sender, EventArgs e)
@@ -465,6 +462,8 @@ namespace TOPX.UI.Forms
             }
         }
 
+        // ++++++++++++++++++++++++++++++++++++++++ Tab Metadata +++++++++++++++++++++++++++++++++++++++++++++++++
+
         private void picSelectDirToScan_Click(object sender, EventArgs e)
         {
           using (var folderBrowserDialog = new FolderBrowserDialog())
@@ -477,6 +476,80 @@ namespace TOPX.UI.Forms
                     _lastSelectedDirToScanForMetadata = folderBrowserDialog.SelectedPath;
                 }
             }
+        }
+
+        private void btGenerateMetadata_Click(object sender, EventArgs e)
+        {
+            if (!Directory.Exists(txtFilesDirToScan.Text))
+            {
+                MessageBox.Show($"De directory {txtFilesDirToScan.Text} kan niet worden gevonden.");
+                return;
+            }
+            if (!checkGetCreationDate.Checked && !chkGetFileSignature.Checked && !chkGetFileSize.Checked && !chkGetHash.Checked)
+            {
+                MessageBox.Show("Er is geen bewerking geselecteerd");
+                return;
+            }
+            InitBackgroundWorker();
+            if (!bgworker.IsBusy)
+            {
+                bgworker.RunWorkerAsync();
+                btGenerateMetadata.Enabled = false;
+            }
+        }
+
+        private void InitBackgroundWorker()
+        {
+            bgworker = new BackgroundWorker();
+            bgworker.DoWork += new DoWorkEventHandler(backgroundWorker_DoWork); 
+            bgworker.RunWorkerCompleted += backgroundWorker_Completed;
+            bgworker.ProgressChanged += Bgworker_ProgressChanged;
+            bgworker.WorkerReportsProgress = true;
+            bgworker.WorkerSupportsCancellation = true;
+        }
+
+        private void backgroundWorker_Completed(object sender, RunWorkerCompletedEventArgs e)
+        {
+            btGenerateMetadata.Enabled = true;
+            btGenerateMetadata.Focus();
+            btMetadataCancel.Enabled = false;
+            MessageBox.Show("Analyse metadata gereed");
+        }
+
+        private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            var path = txtFilesDirToScan.Text;
+            var fileAnalysis = new Metadata(chkGetHash.Checked, chkGetFileSize.Checked, checkGetCreationDate.Checked, chkGetFileSignature.Checked, path, _dataservice.GetAllDossiers(), _dataservice);
+            fileAnalysis.DossierHandled += IncreaseProgress;
+            fileAnalysis.Collect();
+
+            Invoke(new Action(() =>
+                {
+                    txtMetadataErrors.Text = fileAnalysis.ErrorMessages.ToString();
+                }
+            ));
+        }
+
+        private void Bgworker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            progressBar1.Value = e.ProgressPercentage;
+        }
+
+        private void btMetadataCancel_Click(object sender, EventArgs e)
+        {
+            bgworker.CancelAsync();
+            btGenerateMetadata.Enabled = true;
+        }
+
+        private void IncreaseProgress(object sender, EventArgs eventArgs)
+        {
+            var x = (MetadataEventargs) eventArgs;
+            bgworker.ReportProgress(x.GetProgress());
+        }
+
+        private void linkCopyMetadataErrors_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Clipboard.SetText(txtMetadataErrors.Text);
         }
     }
 }

@@ -40,6 +40,8 @@ Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Topx.Setup.x64", "Topx.Setu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topx.Data.DTO", "Topx.Data.DTO\Topx.Data.DTO.csproj", "{6C2CF74E-2518-4DE6-85B7-436007B94A1E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topx.UnitTests.PdfCreator", "Topx.UnitTests.PdfCreator\Topx.UnitTests.PdfCreator.csproj", "{1DE4DAEE-6378-412D-9D5F-9197E1BCE77B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -96,12 +98,16 @@ Global
 		{6C2CF74E-2518-4DE6-85B7-436007B94A1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6C2CF74E-2518-4DE6-85B7-436007B94A1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6C2CF74E-2518-4DE6-85B7-436007B94A1E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1DE4DAEE-6378-412D-9D5F-9197E1BCE77B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1DE4DAEE-6378-412D-9D5F-9197E1BCE77B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1DE4DAEE-6378-412D-9D5F-9197E1BCE77B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1DE4DAEE-6378-412D-9D5F-9197E1BCE77B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		VisualSVNWorkingCopyRoot = .
 		SolutionGuid = {AD535C3E-945A-4562-BAA7-F55B7E855B40}
+		VisualSVNWorkingCopyRoot = .
 	EndGlobalSection
 EndGlobal
