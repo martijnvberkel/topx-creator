@@ -136,6 +136,7 @@ namespace TOPX.UI.Forms
             txtIdentificatieArchief.Text = _globals?.IdentificatieArchief;
             txtNaamArchief.Text = _globals?.NaamArchief;
             txtOmschrijvingArchief.Text = _globals?.OmschrijvingArchief;
+            lblVersion.Text = $"v {System.Windows.Forms.Application.ProductVersion}";
             //_lastSelectedDirToScanForMetadata = @"D:\TopX_Data\TestFiles";
            btSaveTopxXml.Enabled = false;
         }
