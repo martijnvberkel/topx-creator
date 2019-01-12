@@ -4,14 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A9504EF0-E9EC-4308-9C9B-ACE575AAD67E}</ProjectGuid>
+    <ProjectGuid>{863E9269-80D4-4713-A69F-737E61CD5FFF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Topx.FileAnalysis</RootNamespace>
-    <AssemblyName>Topx.FileAnalysis</AssemblyName>
+    <RootNamespace>Topx.Metadata</RootNamespace>
+    <AssemblyName>Topx.Metadata</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -41,19 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Metadata.cs" />
-    <Compile Include="Pdf.cs" />
+    <Compile Include="FilesAnalyser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Topx.DataServices\Topx.DataServices.csproj">
-      <Project>{1A82E7D8-4AB0-499E-BEE9-7D1569AD2F12}</Project>
-      <Name>Topx.DataServices</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Topx.Data\Topx.Data.csproj">
-      <Project>{982EDCDB-E044-43D5-8071-BB4728C6A173}</Project>
-      <Name>Topx.Data</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

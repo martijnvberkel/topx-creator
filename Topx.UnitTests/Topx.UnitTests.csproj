@@ -63,14 +63,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="InterfaceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Statics.cs" />
     <Compile Include="TestImporter.cs" />
+    <Compile Include="TestMatadata.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <None Include="TestResources\MetadataFiles\dummy.pdf" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Topx.Data.DTO\Topx.Data.DTO.csproj">
@@ -84,6 +85,10 @@
     <ProjectReference Include="..\Topx.Data\Topx.Data.csproj">
       <Project>{982EDCDB-E044-43D5-8071-BB4728C6A173}</Project>
       <Name>Topx.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Topx.FileAnalysis\Topx.FileAnalysis.csproj">
+      <Project>{A9504EF0-E9EC-4308-9C9B-ACE575AAD67E}</Project>
+      <Name>Topx.FileAnalysis</Name>
     </ProjectReference>
     <ProjectReference Include="..\Topx.Importer\Topx.Import.csproj">
       <Project>{13D3E7C0-AB77-4555-94B0-6EBFE2AA908D}</Project>

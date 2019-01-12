@@ -23,6 +23,7 @@ namespace Topx.DataServices
         void SaveGlobals(Globals globals);
         void SaveDossier(Dossier dossier);
         bool SaveRecord(Record record);
+        void SaveRecordChanges(Record record);
         void ClearDossiersAndRecords();
         List<FieldMapping> GetMappingsDossiers(List<string> headersList);
         List<FieldMapping> GetMappingsRecords(List<string> headersList);
@@ -113,6 +114,17 @@ namespace Topx.DataServices
             using (var entities = new ModelTopX(Conectionstring))
             {
                 return (from d in entities.Dossiers select d). Include("Records"). ToList();
+            }
+        }
+
+        public void SaveRecordChanges(Record record)
+        {
+            using (var entities = new ModelTopX(Conectionstring))
+            {
+                entities.Entry(record).State = EntityState.Modified;
+                //entities.Records.Attach(record);
+                
+                entities.SaveChanges();
             }
         }
 
