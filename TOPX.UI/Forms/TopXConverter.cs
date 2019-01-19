@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -327,7 +328,7 @@ namespace TOPX.UI.Forms
 
         }
 
-        private void LoadDossierFile(string fileName)
+        private void LoadDossierFile(string fileName, bool useCachedMappings = true)
         {
             try
             {
@@ -335,8 +336,10 @@ namespace TOPX.UI.Forms
                 {
                     _headersDossiers = sr.ReadLine().Split(";"[0]).ToList();
                 }
-                _fieldmappingsDossiers = _dataservice.GetMappingsDossiers(_headersDossiers);
-                if (_fieldmappingsDossiers == null)
+                if (useCachedMappings)
+                    _fieldmappingsDossiers = _dataservice.GetMappingsDossiers(_headersDossiers);
+
+                if (_fieldmappingsDossiers == null || !useCachedMappings)
                 {
                     _fieldmappingsDossiers = _headers.GetHeaderMappingDossiers(_headersDossiers);
                     _dataservice.SaveMappings(_fieldmappingsDossiers, FieldMappingType.DOSSIER);
@@ -551,6 +554,32 @@ namespace TOPX.UI.Forms
         private void linkCopyMetadataErrors_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Clipboard.SetText(txtMetadataErrors.Text);
+        }
+
+
+        private void gridFieldMappingDossiers_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                this.BackColor = Color.Aqua;
+                int currentRow = gridFieldMappingDossiers.HitTest(e.X, e.Y).RowIndex;
+                gridFieldMappingDossiers.Rows[currentRow].Cells[1].Selected = true;
+
+                Point ScreenPoint =  ((Control)sender).PointToScreen(e.Location);
+                Point FormPoint = this.PointToClient(ScreenPoint); //this is the Form object
+                var formSelectDossierMapper =
+                    new FormSelectDossierMapper(_fieldmappingsDossiers, gridFieldMappingDossiers.Rows[currentRow].Cells[1].Value.ToString())
+                    {
+                Location = new Point(Location.X +  FormPoint.X + 50, Location.Y + FormPoint.Y - 30)
+                    };
+                formSelectDossierMapper.ShowDialog();
+                gridFieldMappingDossiers.DataSource = _fieldmappingsDossiers.ToList();
+            }
+        }
+
+        private void btClearMappingsDossiers_Click(object sender, EventArgs e)
+        {
+            LoadDossierFile(txtDossierLocation.Text, useCachedMappings: false);
         }
     }
 }
