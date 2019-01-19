@@ -1,4 +1,6 @@
-﻿using System.Windows.Forms;
+﻿using System.Drawing;
+using System.Windows.Forms;
+using MaterialSkin;
 using TOPX.UI.Controls;
 
 namespace TOPX.UI.Forms
@@ -85,6 +87,7 @@ namespace TOPX.UI.Forms
             this.txtErrorRecords = new System.Windows.Forms.TextBox();
             this.txtErrorsDossiers = new System.Windows.Forms.TextBox();
             this.tabMetadata = new System.Windows.Forms.TabPage();
+            this.linkCopyMetadataErrors = new System.Windows.Forms.LinkLabel();
             this.btMetadataCancel = new System.Windows.Forms.Button();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.btGenerateMetadata = new System.Windows.Forms.Button();
@@ -105,7 +108,7 @@ namespace TOPX.UI.Forms
             this.materialLabel13 = new MaterialSkin.Controls.MaterialLabel();
             this.btGenerateTopX = new System.Windows.Forms.Button();
             this.txtLogTopXCreate = new System.Windows.Forms.TextBox();
-            this.linkCopyMetadataErrors = new System.Windows.Forms.LinkLabel();
+            this.lblVersion = new System.Windows.Forms.Label();
             this.materialContextMenuStrip2.SuspendLayout();
             this.materialContextMenuStrip3.SuspendLayout();
             this.materialTabControl1.SuspendLayout();
@@ -197,7 +200,7 @@ namespace TOPX.UI.Forms
             // 
             this.materialTabSelector1.BaseTabControl = this.materialTabControl1;
             this.materialTabSelector1.Depth = 0;
-            this.materialTabSelector1.Location = new System.Drawing.Point(138, 27);
+            this.materialTabSelector1.Location = new System.Drawing.Point(138, 25);
             this.materialTabSelector1.Margin = new System.Windows.Forms.Padding(2);
             this.materialTabSelector1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialTabSelector1.Name = "materialTabSelector1";
@@ -741,6 +744,17 @@ namespace TOPX.UI.Forms
             this.tabMetadata.Text = "Genereer Metadata";
             this.tabMetadata.UseVisualStyleBackColor = true;
             // 
+            // linkCopyMetadataErrors
+            // 
+            this.linkCopyMetadataErrors.AutoSize = true;
+            this.linkCopyMetadataErrors.Location = new System.Drawing.Point(1147, 33);
+            this.linkCopyMetadataErrors.Name = "linkCopyMetadataErrors";
+            this.linkCopyMetadataErrors.Size = new System.Drawing.Size(49, 13);
+            this.linkCopyMetadataErrors.TabIndex = 34;
+            this.linkCopyMetadataErrors.TabStop = true;
+            this.linkCopyMetadataErrors.Text = "Kopiëren";
+            this.linkCopyMetadataErrors.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkCopyMetadataErrors_LinkClicked);
+            // 
             // btMetadataCancel
             // 
             this.btMetadataCancel.Location = new System.Drawing.Point(235, 296);
@@ -959,16 +973,18 @@ namespace TOPX.UI.Forms
             this.txtLogTopXCreate.TabIndex = 3;
             this.txtLogTopXCreate.WordWrap = false;
             // 
-            // linkCopyMetadataErrors
+            // lblVersion
             // 
-            this.linkCopyMetadataErrors.AutoSize = true;
-            this.linkCopyMetadataErrors.Location = new System.Drawing.Point(1147, 33);
-            this.linkCopyMetadataErrors.Name = "linkCopyMetadataErrors";
-            this.linkCopyMetadataErrors.Size = new System.Drawing.Size(49, 13);
-            this.linkCopyMetadataErrors.TabIndex = 34;
-            this.linkCopyMetadataErrors.TabStop = true;
-            this.linkCopyMetadataErrors.Text = "Kopiëren";
-            this.linkCopyMetadataErrors.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkCopyMetadataErrors_LinkClicked);
+            this.lblVersion.AutoSize = true;
+            this.lblVersion.BackColor = System.Drawing.Color.FromArgb(255, 96, 125, 139);
+            this.lblVersion.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.lblVersion.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.lblVersion.Location = new System.Drawing.Point(1195, 34);
+            this.lblVersion.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblVersion.Name = "lblVersion";
+            this.lblVersion.Size = new System.Drawing.Size(52, 15);
+            this.lblVersion.TabIndex = 71;
+            this.lblVersion.Text = "v 1.0.0.0";
             // 
             // TopXConverter
             // 
@@ -977,6 +993,7 @@ namespace TOPX.UI.Forms
             this.AutoScroll = true;
             this.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.ClientSize = new System.Drawing.Size(1272, 789);
+            this.Controls.Add(this.lblVersion);
             this.Controls.Add(this.materialTabControl1);
             this.Controls.Add(this.materialTabSelector1);
             this.Name = "TopXConverter";
@@ -1002,6 +1019,7 @@ namespace TOPX.UI.Forms
             this.tabGenerateTopX.ResumeLayout(false);
             this.tabGenerateTopX.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -1079,6 +1097,7 @@ namespace TOPX.UI.Forms
         private ProgressBar progressBar1;
         private Button btMetadataCancel;
         private LinkLabel linkCopyMetadataErrors;
+        private Label lblVersion;
     }
 }
 

@@ -16,7 +16,7 @@ namespace Topx.Data
             var instance = GetInstanceName();
             return instance == string.Empty 
                 ? string.Empty 
-                : $"data source = (LocalDb)\\{instance}; initial catalog = Topx.Data.ModelTopX; integrated security = True; MultipleActiveResultSets = True";
+                : $"data source = (LocalDb)\\{instance}; initial catalog = ModelTopX_v2; integrated security = True; MultipleActiveResultSets = True";
         }
 
         private static string GetInstanceName()
