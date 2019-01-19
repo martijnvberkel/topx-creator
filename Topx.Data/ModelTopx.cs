@@ -6,6 +6,11 @@ namespace Topx.Data
 
     public partial class ModelTopX : DbContext
     {
+        public ModelTopX()
+            : base(@"data source = (LocalDb)\MSSQLLocalDB; initial catalog = Topx.Data.ModelTopX; integrated security = True; MultipleActiveResultSets=True;")
+        {
+            Database.SetInitializer(new CreateDatabaseIfNotExists<ModelTopX>());
+        }
         public ModelTopX(string connectionString)
             : base(connectionString)
         {

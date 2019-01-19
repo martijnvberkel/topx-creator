@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoUpdaterDotNET;
+﻿using AutoUpdaterDotNET;
 
 namespace TOPX.UI.Classes
 {
@@ -16,7 +11,7 @@ namespace TOPX.UI.Classes
             AutoUpdater.ShowRemindLaterButton = true;
             AutoUpdater.AppTitle = "TopX Creator";
             AutoUpdater.LetUserSelectRemindLater = true;
-            AutoUpdater.Start("https://mvbworks.com/downloads/version.xml");
+            AutoUpdater.Start("https://mvbworks.com/downloads/updates/version.xml");
         }
     }
 }
