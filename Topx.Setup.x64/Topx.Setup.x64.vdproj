@@ -261,6 +261,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_DBC019F46FE5408A808CE663CC97F40C"
+        "OwnerKey" = "8:_4A1B2675E93EAD66A596B5029A38E28C"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_E2AF021B7FEB99E8D0D5187715446BDB"
         "OwnerKey" = "8:_979C460ED8FA91853DCF6F61248A00BB"
         "MsmSig" = "8:_UNDEFINED"
@@ -299,6 +305,18 @@
         {
         "MsmKey" = "8:_E2AF021B7FEB99E8D0D5187715446BDB"
         "OwnerKey" = "8:_260F35B6B4F48C65697518E317E49926"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_E5210E718EC2EA95A861C375BD9C17B9"
+        "OwnerKey" = "8:_92FE3F54B4A04468B70314ED7ACB3B95"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_E5210E718EC2EA95A861C375BD9C17B9"
+        "OwnerKey" = "8:_B9FEBCEB6D3F1D3EA143F22F71B1A72E"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -353,6 +371,12 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_B9FEBCEB6D3F1D3EA143F22F71B1A72E"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_E5210E718EC2EA95A861C375BD9C17B9"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1284,6 +1308,37 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_E5210E718EC2EA95A861C375BD9C17B9"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_E5210E718EC2EA95A861C375BD9C17B9"
+                    {
+                    "Name" = "8:Newtonsoft.Json.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:Newtonsoft.Json.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_9CA3CB116441426EB693E0F040484869"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_E864C68966C453372A5098FEEDCFA39E"
             {
             "AssemblyRegister" = "3:1"
@@ -1445,15 +1500,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:TopxCreator"
-        "ProductCode" = "8:{31E09431-1F33-476B-BFA0-FB9AF3D5981B}"
-        "PackageCode" = "8:{45836262-16CF-4B4B-9E92-9D54CF7B7669}"
+        "ProductCode" = "8:{460D9447-6D9A-4284-8B5C-28C44D04F0B6}"
+        "PackageCode" = "8:{E67FAC24-36FF-4FC3-9DBE-D52253BB15BD}"
         "UpgradeCode" = "8:{1097B1AF-D51A-4033-B4DA-39AA6D8EB4F4}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.0.0"
+        "ProductVersion" = "8:1.2.1"
         "Manufacturer" = "8:MVBWorks"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
