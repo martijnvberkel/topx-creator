@@ -108,11 +108,11 @@
     <Compile Include="Forms\FormLog.Designer.cs">
       <DependentUpon>FormLog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FormSelectDossierMapper.cs">
+    <Compile Include="Forms\FormSelectMapper.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\FormSelectDossierMapper.Designer.cs">
-      <DependentUpon>FormSelectDossierMapper.cs</DependentUpon>
+    <Compile Include="Forms\FormSelectMapper.Designer.cs">
+      <DependentUpon>FormSelectMapper.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\TopXConverter.cs">
       <SubType>Form</SubType>
@@ -131,8 +131,8 @@
     <EmbeddedResource Include="Forms\FormLog.resx">
       <DependentUpon>FormLog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormSelectDossierMapper.resx">
-      <DependentUpon>FormSelectDossierMapper.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\FormSelectMapper.resx">
+      <DependentUpon>FormSelectMapper.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\TopXConverter.resx">
       <DependentUpon>TopXConverter.cs</DependentUpon>

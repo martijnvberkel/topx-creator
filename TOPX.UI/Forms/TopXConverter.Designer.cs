@@ -34,8 +34,8 @@ namespace TOPX.UI.Forms
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TopXConverter));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.materialContextMenuStrip1 = new MaterialSkin.Controls.MaterialContextMenuStrip();
             this.materialContextMenuStrip2 = new MaterialSkin.Controls.MaterialContextMenuStrip();
             this.testToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -59,6 +59,8 @@ namespace TOPX.UI.Forms
             this.txtDatumArchief = new System.Windows.Forms.MaskedTextBox();
             this.materialLabel10 = new MaterialSkin.Controls.MaterialLabel();
             this.tabLoadFiles = new System.Windows.Forms.TabPage();
+            this.btClearMappingsRecords = new System.Windows.Forms.Button();
+            this.btClearMappingsDossiers = new System.Windows.Forms.Button();
             this.picRecordsSelector = new System.Windows.Forms.PictureBox();
             this.picDossierSelector = new System.Windows.Forms.PictureBox();
             this.materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
@@ -98,19 +100,23 @@ namespace TOPX.UI.Forms
             this.btGenerateTopX = new System.Windows.Forms.Button();
             this.txtLogTopXCreate = new System.Windows.Forms.TextBox();
             this.lblVersion = new System.Windows.Forms.Label();
-            this.btClearMappingsDossiers = new System.Windows.Forms.Button();
-            this.btClearMappingsRecords = new System.Windows.Forms.Button();
             this.txtIdentificatieArchief = new TOPX.UI.Controls.PlaceHolderTextBox();
             this.txtNaamArchief = new TOPX.UI.Controls.PlaceHolderTextBox();
             this.txtDoelArchief = new TOPX.UI.Controls.PlaceHolderTextBox();
             this.txtBronArchief = new TOPX.UI.Controls.PlaceHolderTextBox();
             this.txtOmschrijvingArchief = new TOPX.UI.Controls.PlaceHolderTextBox();
             this.gridFieldMappingRecords = new TOPX.UI.Controls.DragDropGridView();
-            this.DatabaseFieldNameRecords = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MappedFieldNameRecords = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gridFieldMappingDossiers = new TOPX.UI.Controls.DragDropGridView();
             this.MappedFieldName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DatabaseFieldName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TMLO = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DatabaseFieldNameRecords = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MappedFieldNameRecords = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TMLO_Records = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btSaveDossierMapping = new System.Windows.Forms.Button();
+            this.btLoadDossierMapping = new System.Windows.Forms.Button();
+            this.btLoadRecordMapping = new System.Windows.Forms.Button();
+            this.btSaveRecordMapping = new System.Windows.Forms.Button();
             this.materialContextMenuStrip2.SuspendLayout();
             this.materialContextMenuStrip3.SuspendLayout();
             this.materialTabControl1.SuspendLayout();
@@ -359,6 +365,10 @@ namespace TOPX.UI.Forms
             // 
             // tabLoadFiles
             // 
+            this.tabLoadFiles.Controls.Add(this.btLoadRecordMapping);
+            this.tabLoadFiles.Controls.Add(this.btSaveRecordMapping);
+            this.tabLoadFiles.Controls.Add(this.btLoadDossierMapping);
+            this.tabLoadFiles.Controls.Add(this.btSaveDossierMapping);
             this.tabLoadFiles.Controls.Add(this.btClearMappingsRecords);
             this.tabLoadFiles.Controls.Add(this.btClearMappingsDossiers);
             this.tabLoadFiles.Controls.Add(this.picRecordsSelector);
@@ -380,10 +390,30 @@ namespace TOPX.UI.Forms
             this.tabLoadFiles.Text = "Bestanden";
             this.tabLoadFiles.UseVisualStyleBackColor = true;
             // 
+            // btClearMappingsRecords
+            // 
+            this.btClearMappingsRecords.Location = new System.Drawing.Point(1143, 39);
+            this.btClearMappingsRecords.Name = "btClearMappingsRecords";
+            this.btClearMappingsRecords.Size = new System.Drawing.Size(48, 23);
+            this.btClearMappingsRecords.TabIndex = 42;
+            this.btClearMappingsRecords.Text = "Reset";
+            this.btClearMappingsRecords.UseVisualStyleBackColor = true;
+            this.btClearMappingsRecords.Click += new System.EventHandler(this.btClearMappingsRecords_Click);
+            // 
+            // btClearMappingsDossiers
+            // 
+            this.btClearMappingsDossiers.Location = new System.Drawing.Point(546, 39);
+            this.btClearMappingsDossiers.Name = "btClearMappingsDossiers";
+            this.btClearMappingsDossiers.Size = new System.Drawing.Size(43, 23);
+            this.btClearMappingsDossiers.TabIndex = 41;
+            this.btClearMappingsDossiers.Text = "Reset";
+            this.btClearMappingsDossiers.UseVisualStyleBackColor = true;
+            this.btClearMappingsDossiers.Click += new System.EventHandler(this.btClearMappingsDossiers_Click);
+            // 
             // picRecordsSelector
             // 
             this.picRecordsSelector.Image = ((System.Drawing.Image)(resources.GetObject("picRecordsSelector.Image")));
-            this.picRecordsSelector.Location = new System.Drawing.Point(975, 29);
+            this.picRecordsSelector.Location = new System.Drawing.Point(884, 34);
             this.picRecordsSelector.Margin = new System.Windows.Forms.Padding(2);
             this.picRecordsSelector.Name = "picRecordsSelector";
             this.picRecordsSelector.Size = new System.Drawing.Size(31, 33);
@@ -395,7 +425,7 @@ namespace TOPX.UI.Forms
             // picDossierSelector
             // 
             this.picDossierSelector.Image = ((System.Drawing.Image)(resources.GetObject("picDossierSelector.Image")));
-            this.picDossierSelector.Location = new System.Drawing.Point(409, 29);
+            this.picDossierSelector.Location = new System.Drawing.Point(294, 32);
             this.picDossierSelector.Margin = new System.Windows.Forms.Padding(2);
             this.picDossierSelector.Name = "picDossierSelector";
             this.picDossierSelector.Size = new System.Drawing.Size(31, 33);
@@ -410,7 +440,7 @@ namespace TOPX.UI.Forms
             this.materialLabel2.Depth = 0;
             this.materialLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.materialLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel2.Location = new System.Drawing.Point(609, 80);
+            this.materialLabel2.Location = new System.Drawing.Point(618, 79);
             this.materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel2.Name = "materialLabel2";
             this.materialLabel2.Size = new System.Drawing.Size(247, 18);
@@ -433,10 +463,10 @@ namespace TOPX.UI.Forms
             // 
             // txtRecordBestandLocation
             // 
-            this.txtRecordBestandLocation.Location = new System.Drawing.Point(608, 42);
+            this.txtRecordBestandLocation.Location = new System.Drawing.Point(623, 42);
             this.txtRecordBestandLocation.Name = "txtRecordBestandLocation";
             this.txtRecordBestandLocation.ReadOnly = true;
-            this.txtRecordBestandLocation.Size = new System.Drawing.Size(362, 20);
+            this.txtRecordBestandLocation.Size = new System.Drawing.Size(250, 20);
             this.txtRecordBestandLocation.TabIndex = 20;
             // 
             // materialLabel6
@@ -445,7 +475,7 @@ namespace TOPX.UI.Forms
             this.materialLabel6.Depth = 0;
             this.materialLabel6.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.materialLabel6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel6.Location = new System.Drawing.Point(604, 14);
+            this.materialLabel6.Location = new System.Drawing.Point(619, 14);
             this.materialLabel6.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel6.Name = "materialLabel6";
             this.materialLabel6.Size = new System.Drawing.Size(309, 18);
@@ -470,7 +500,7 @@ namespace TOPX.UI.Forms
             this.txtDossierLocation.Location = new System.Drawing.Point(38, 39);
             this.txtDossierLocation.Name = "txtDossierLocation";
             this.txtDossierLocation.ReadOnly = true;
-            this.txtDossierLocation.Size = new System.Drawing.Size(366, 20);
+            this.txtDossierLocation.Size = new System.Drawing.Size(250, 20);
             this.txtDossierLocation.TabIndex = 10;
             // 
             // tabImportFiles
@@ -514,9 +544,9 @@ namespace TOPX.UI.Forms
             // 
             // btImportFilesInDb
             // 
-            this.btImportFilesInDb.Location = new System.Drawing.Point(78, 20);
+            this.btImportFilesInDb.Location = new System.Drawing.Point(42, 19);
             this.btImportFilesInDb.Name = "btImportFilesInDb";
-            this.btImportFilesInDb.Size = new System.Drawing.Size(145, 26);
+            this.btImportFilesInDb.Size = new System.Drawing.Size(113, 26);
             this.btImportFilesInDb.TabIndex = 1;
             this.btImportFilesInDb.Text = "Import bestanden";
             this.btImportFilesInDb.Click += new System.EventHandler(this.btImportFilesInDb_Click);
@@ -832,25 +862,6 @@ namespace TOPX.UI.Forms
             this.lblVersion.TabIndex = 71;
             this.lblVersion.Text = "v 1.0.0.0";
             // 
-            // btClearMappingsDossiers
-            // 
-            this.btClearMappingsDossiers.Location = new System.Drawing.Point(538, 74);
-            this.btClearMappingsDossiers.Name = "btClearMappingsDossiers";
-            this.btClearMappingsDossiers.Size = new System.Drawing.Size(43, 23);
-            this.btClearMappingsDossiers.TabIndex = 41;
-            this.btClearMappingsDossiers.Text = "Reset";
-            this.btClearMappingsDossiers.UseVisualStyleBackColor = true;
-            this.btClearMappingsDossiers.Click += new System.EventHandler(this.btClearMappingsDossiers_Click);
-            // 
-            // btClearMappingsRecords
-            // 
-            this.btClearMappingsRecords.Location = new System.Drawing.Point(1143, 75);
-            this.btClearMappingsRecords.Name = "btClearMappingsRecords";
-            this.btClearMappingsRecords.Size = new System.Drawing.Size(48, 23);
-            this.btClearMappingsRecords.TabIndex = 42;
-            this.btClearMappingsRecords.Text = "Reset";
-            this.btClearMappingsRecords.UseVisualStyleBackColor = true;
-            // 
             // txtIdentificatieArchief
             // 
             this.txtIdentificatieArchief.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Italic);
@@ -923,45 +934,33 @@ namespace TOPX.UI.Forms
             this.gridFieldMappingRecords.AllowUserToDeleteRows = false;
             this.gridFieldMappingRecords.BackgroundColor = System.Drawing.SystemColors.Window;
             this.gridFieldMappingRecords.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.ControlDark;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gridFieldMappingRecords.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.ControlDark;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gridFieldMappingRecords.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.gridFieldMappingRecords.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gridFieldMappingRecords.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.DatabaseFieldNameRecords,
-            this.MappedFieldNameRecords});
+            this.MappedFieldNameRecords,
+            this.TMLO_Records});
             this.gridFieldMappingRecords.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.gridFieldMappingRecords.EnableHeadersVisualStyles = false;
-            this.gridFieldMappingRecords.Location = new System.Drawing.Point(606, 100);
+            this.gridFieldMappingRecords.Location = new System.Drawing.Point(621, 100);
             this.gridFieldMappingRecords.Name = "gridFieldMappingRecords";
             this.gridFieldMappingRecords.RowHeadersVisible = false;
             this.gridFieldMappingRecords.ShowCellErrors = false;
             this.gridFieldMappingRecords.ShowCellToolTips = false;
             this.gridFieldMappingRecords.ShowEditingIcon = false;
             this.gridFieldMappingRecords.ShowRowErrors = false;
-            this.gridFieldMappingRecords.Size = new System.Drawing.Size(585, 552);
+            this.gridFieldMappingRecords.Size = new System.Drawing.Size(569, 552);
             this.gridFieldMappingRecords.TabIndex = 40;
             this.gridFieldMappingRecords.DataSourceChanged += new System.EventHandler(this.gridFieldMappingRecords_DataSourceChanged);
             this.gridFieldMappingRecords.Leave += new System.EventHandler(this.gridFieldMappingRecords_Leave);
-            // 
-            // DatabaseFieldNameRecords
-            // 
-            this.DatabaseFieldNameRecords.DataPropertyName = "MappedFieldName";
-            this.DatabaseFieldNameRecords.HeaderText = "Veldnaam Bron";
-            this.DatabaseFieldNameRecords.Name = "DatabaseFieldNameRecords";
-            this.DatabaseFieldNameRecords.Width = 270;
-            // 
-            // MappedFieldNameRecords
-            // 
-            this.MappedFieldNameRecords.DataPropertyName = "DatabaseFieldName";
-            this.MappedFieldNameRecords.HeaderText = "Veldnaam TopX";
-            this.MappedFieldNameRecords.Name = "MappedFieldNameRecords";
-            this.MappedFieldNameRecords.Width = 310;
+            this.gridFieldMappingRecords.MouseClick += new System.Windows.Forms.MouseEventHandler(this.gridFieldMappingRecords_MouseClick);
             // 
             // gridFieldMappingDossiers
             // 
@@ -970,29 +969,31 @@ namespace TOPX.UI.Forms
             this.gridFieldMappingDossiers.AllowUserToDeleteRows = false;
             this.gridFieldMappingDossiers.BackgroundColor = System.Drawing.SystemColors.Window;
             this.gridFieldMappingDossiers.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.ControlDark;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gridFieldMappingDossiers.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.ControlDark;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gridFieldMappingDossiers.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.gridFieldMappingDossiers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gridFieldMappingDossiers.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.MappedFieldName,
-            this.DatabaseFieldName});
+            this.DatabaseFieldName,
+            this.TMLO});
             this.gridFieldMappingDossiers.EnableHeadersVisualStyles = false;
-            this.gridFieldMappingDossiers.Location = new System.Drawing.Point(38, 100);
+            this.gridFieldMappingDossiers.Location = new System.Drawing.Point(27, 100);
             this.gridFieldMappingDossiers.Name = "gridFieldMappingDossiers";
             this.gridFieldMappingDossiers.RowHeadersVisible = false;
             this.gridFieldMappingDossiers.ShowCellErrors = false;
             this.gridFieldMappingDossiers.ShowCellToolTips = false;
             this.gridFieldMappingDossiers.ShowEditingIcon = false;
             this.gridFieldMappingDossiers.ShowRowErrors = false;
-            this.gridFieldMappingDossiers.Size = new System.Drawing.Size(543, 555);
+            this.gridFieldMappingDossiers.Size = new System.Drawing.Size(567, 552);
             this.gridFieldMappingDossiers.TabIndex = 30;
             this.gridFieldMappingDossiers.DataSourceChanged += new System.EventHandler(this.gridFieldMappingDossiers_DataSourceChanged);
+            this.gridFieldMappingDossiers.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.gridFieldMappingDossiers_DataBindingComplete);
             this.gridFieldMappingDossiers.Leave += new System.EventHandler(this.gridFieldMappingDossiers_Leave);
             this.gridFieldMappingDossiers.MouseClick += new System.Windows.Forms.MouseEventHandler(this.gridFieldMappingDossiers_MouseClick);
             // 
@@ -1001,14 +1002,84 @@ namespace TOPX.UI.Forms
             this.MappedFieldName.DataPropertyName = "MappedFieldName";
             this.MappedFieldName.HeaderText = "Veldnaam Bron";
             this.MappedFieldName.Name = "MappedFieldName";
-            this.MappedFieldName.Width = 270;
+            this.MappedFieldName.Width = 250;
             // 
             // DatabaseFieldName
             // 
             this.DatabaseFieldName.DataPropertyName = "DatabaseFieldName";
             this.DatabaseFieldName.HeaderText = "Veldnaam TopX";
             this.DatabaseFieldName.Name = "DatabaseFieldName";
-            this.DatabaseFieldName.Width = 270;
+            this.DatabaseFieldName.Width = 250;
+            // 
+            // TMLO
+            // 
+            this.TMLO.DataPropertyName = "TMLO";
+            this.TMLO.HeaderText = "TMLO";
+            this.TMLO.Name = "TMLO";
+            this.TMLO.ReadOnly = true;
+            this.TMLO.Width = 60;
+            // 
+            // DatabaseFieldNameRecords
+            // 
+            this.DatabaseFieldNameRecords.DataPropertyName = "MappedFieldName";
+            this.DatabaseFieldNameRecords.HeaderText = "Veldnaam Bron";
+            this.DatabaseFieldNameRecords.Name = "DatabaseFieldNameRecords";
+            this.DatabaseFieldNameRecords.Width = 250;
+            // 
+            // MappedFieldNameRecords
+            // 
+            this.MappedFieldNameRecords.DataPropertyName = "DatabaseFieldName";
+            this.MappedFieldNameRecords.HeaderText = "Veldnaam TopX";
+            this.MappedFieldNameRecords.Name = "MappedFieldNameRecords";
+            this.MappedFieldNameRecords.Width = 265;
+            // 
+            // TMLO_Records
+            // 
+            this.TMLO_Records.DataPropertyName = "TMLO";
+            this.TMLO_Records.HeaderText = "TMLO";
+            this.TMLO_Records.Name = "TMLO_Records";
+            this.TMLO_Records.ReadOnly = true;
+            this.TMLO_Records.Width = 50;
+            // 
+            // btSaveDossierMapping
+            // 
+            this.btSaveDossierMapping.Location = new System.Drawing.Point(423, 39);
+            this.btSaveDossierMapping.Name = "btSaveDossierMapping";
+            this.btSaveDossierMapping.Size = new System.Drawing.Size(43, 23);
+            this.btSaveDossierMapping.TabIndex = 43;
+            this.btSaveDossierMapping.Text = "Save";
+            this.btSaveDossierMapping.UseVisualStyleBackColor = true;
+            this.btSaveDossierMapping.Click += new System.EventHandler(this.btSaveDossierMapping_Click);
+            // 
+            // btLoadDossierMapping
+            // 
+            this.btLoadDossierMapping.Location = new System.Drawing.Point(472, 39);
+            this.btLoadDossierMapping.Name = "btLoadDossierMapping";
+            this.btLoadDossierMapping.Size = new System.Drawing.Size(43, 23);
+            this.btLoadDossierMapping.TabIndex = 44;
+            this.btLoadDossierMapping.Text = "Load";
+            this.btLoadDossierMapping.UseVisualStyleBackColor = true;
+            this.btLoadDossierMapping.Click += new System.EventHandler(this.btLoadDossierMapping_Click);
+            // 
+            // btLoadRecordMapping
+            // 
+            this.btLoadRecordMapping.Location = new System.Drawing.Point(1065, 39);
+            this.btLoadRecordMapping.Name = "btLoadRecordMapping";
+            this.btLoadRecordMapping.Size = new System.Drawing.Size(43, 23);
+            this.btLoadRecordMapping.TabIndex = 46;
+            this.btLoadRecordMapping.Text = "Load";
+            this.btLoadRecordMapping.UseVisualStyleBackColor = true;
+            this.btLoadRecordMapping.Click += new System.EventHandler(this.btLoadRecordMapping_Click);
+            // 
+            // btSaveRecordMapping
+            // 
+            this.btSaveRecordMapping.Location = new System.Drawing.Point(1016, 39);
+            this.btSaveRecordMapping.Name = "btSaveRecordMapping";
+            this.btSaveRecordMapping.Size = new System.Drawing.Size(43, 23);
+            this.btSaveRecordMapping.TabIndex = 45;
+            this.btSaveRecordMapping.Text = "Save";
+            this.btSaveRecordMapping.UseVisualStyleBackColor = true;
+            this.btSaveRecordMapping.Click += new System.EventHandler(this.btSaveRecordMapping_Click);
             // 
             // TopXConverter
             // 
@@ -1099,10 +1170,6 @@ namespace TOPX.UI.Forms
         private Button btGenerateTopX;
         private LinkLabel linkCopyErrorsRecords;
         private LinkLabel linkCopyErrorsDossiers;
-        private DataGridViewTextBoxColumn MappedFieldName;
-        private DataGridViewTextBoxColumn DatabaseFieldName;
-        private DataGridViewTextBoxColumn DatabaseFieldNameRecords;
-        private DataGridViewTextBoxColumn MappedFieldNameRecords;
         private LinkLabel linkCopyTopXCreateError;
         private MaterialSkin.Controls.MaterialLabel materialLabel14;
         private TextBox txtResultXml;
@@ -1124,6 +1191,16 @@ namespace TOPX.UI.Forms
         private Label lblVersion;
         private Button btClearMappingsRecords;
         private Button btClearMappingsDossiers;
+        private DataGridViewTextBoxColumn DatabaseFieldNameRecords;
+        private DataGridViewTextBoxColumn MappedFieldNameRecords;
+        private DataGridViewTextBoxColumn TMLO_Records;
+        private DataGridViewTextBoxColumn MappedFieldName;
+        private DataGridViewTextBoxColumn DatabaseFieldName;
+        private DataGridViewTextBoxColumn TMLO;
+        private Button btSaveDossierMapping;
+        private Button btLoadDossierMapping;
+        private Button btLoadRecordMapping;
+        private Button btSaveRecordMapping;
     }
 }
 

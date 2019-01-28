@@ -21,6 +21,17 @@ namespace Topx.Importer
         public StringBuilder ErrorsImportDossiers = new StringBuilder();
         public StringBuilder ErrorsImportRecords = new StringBuilder();
         public bool Error;
+        public int NrOfDossiers = 0;
+        public int NrOfRecords = 0;
+        private readonly string[] _fieldsThatMaybeEmpty =
+        {
+            "Bestand_Formaat_BestandsOmvang",
+            "Bestand_Formaat_BestandsFormaat",
+            "Bestand_Formaat_FysiekeIntegriteit_Algoritme",
+            "Bestand_Formaat_FysiekeIntegriteit_Waarde",
+            "Bestand_Formaat_FysiekeIntegriteit_DatumEnTijd",
+            "Bestand_Formaat_IdentificatieKenmerk"
+        };
 
         public Importer(IDataService globalsService)
         {
@@ -73,6 +84,7 @@ namespace Topx.Importer
                             propertyInfo.SetValue(dossier, fieldsSource[index], null);
                     }
                     _dataservice.SaveDossier(dossier);
+                    NrOfDossiers++;
                 }
                 catch (Exception e)
                 {
@@ -125,6 +137,8 @@ namespace Topx.Importer
                     }
                     if (!_dataservice.SaveRecord(record))
                         ErrorsImportRecords.AppendLine(_dataservice.ErrorMessage);
+                    else
+                        NrOfRecords++;
                 }
                 catch (Exception e)
                 {
@@ -136,8 +150,12 @@ namespace Topx.Importer
 
         public bool CheckHealthyFieldmappings(List<FieldMapping> fieldmappings)
         {
-            return fieldmappings.Where(t => !string.IsNullOrEmpty(t.DatabaseFieldName)).All(fieldmapping
-                => !string.IsNullOrEmpty(fieldmapping.MappedFieldName));
+           foreach (var fieldmapping in fieldmappings)
+            {
+                if (!string.IsNullOrEmpty(fieldmapping.DatabaseFieldName) && string.IsNullOrEmpty(fieldmapping.MappedFieldName) && !_fieldsThatMaybeEmpty.Contains(fieldmapping.DatabaseFieldName))
+                    return false;
+            }
+            return true;
         }
     }
 }

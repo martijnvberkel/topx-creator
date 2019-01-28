@@ -127,7 +127,7 @@ namespace TOPX.UI.Forms
             txtRecordBestandLocation.Text = _globals?.LastRecordsFileName;
             if (File.Exists(recordFile))
             {
-                LoadRecordFile(recordFile, loadfromCache: true);
+                LoadRecordFile(recordFile);
             }
 
             txtBronArchief.Text = _globals?.BronArchief;
@@ -139,7 +139,7 @@ namespace TOPX.UI.Forms
             txtOmschrijvingArchief.Text = _globals?.OmschrijvingArchief;
             lblVersion.Text = $"v {System.Windows.Forms.Application.ProductVersion}";
             //_lastSelectedDirToScanForMetadata = @"D:\TopX_Data\TestFiles";
-           btSaveTopxXml.Enabled = false;
+            btSaveTopxXml.Enabled = false;
         }
 
         private void btImportFilesInDb_Click(object sender, EventArgs e)
@@ -188,7 +188,7 @@ namespace TOPX.UI.Forms
             txtErrorsDossiers.Text = importer.ErrorsImportDossiers.ToString();
             Cursor.Current = Cursors.Default;
 
-            MessageBox.Show(importer.Error ? "De import is afgerond met errors." : "De dossiers- en records/bestanden-metadata zijn succesvol geïmporteerd.");
+            MessageBox.Show(importer.Error ? $"De import is afgerond met errors." : $"Import is succesvol. Dossiers: {importer.NrOfDossiers}, records: {importer.NrOfRecords}");
         }
 
         private void btGenerateTopX_Click(object sender, EventArgs e)
@@ -209,7 +209,7 @@ namespace TOPX.UI.Forms
                 {
                     btSaveTopxXml.Enabled = true;
                     txtResultXml.Text = XmlHelper.GetXmlStringFromObject(_resultRecordInforamtionPackage, 10000);
-                    
+
                     if (MessageBox.Show("Save xml?", "xml", MessageBoxButtons.YesNo) == DialogResult.Yes)
                     {
                         SaveAsXml(_resultRecordInforamtionPackage);
@@ -352,7 +352,7 @@ namespace TOPX.UI.Forms
                 MessageBox.Show($"Het bestand kon niet worden ingelezen. Foutmelding: {e.Message}");
             }
         }
-        private void LoadRecordFile(string fileName, bool loadfromCache = false)
+        private void LoadRecordFile(string fileName, bool useCachedMappings = true)
         {
             try
             {
@@ -362,7 +362,7 @@ namespace TOPX.UI.Forms
                 }
 
                 _fieldmappingsRecords = _dataservice.GetMappingsRecords(_headersRecords);
-                if (_fieldmappingsRecords == null)
+                if (_fieldmappingsRecords == null || !useCachedMappings)
                 {
                     _fieldmappingsRecords = _headers.GetHeaderMappingRecordsBestanden(_headersRecords);
                     _dataservice.SaveMappings(_fieldmappingsRecords, FieldMappingType.RECORD);
@@ -470,9 +470,9 @@ namespace TOPX.UI.Forms
 
         private void picSelectDirToScan_Click(object sender, EventArgs e)
         {
-          using (var folderBrowserDialog = new FolderBrowserDialog())
-          {
-              folderBrowserDialog.SelectedPath = _lastSelectedDirToScanForMetadata;
+            using (var folderBrowserDialog = new FolderBrowserDialog())
+            {
+                folderBrowserDialog.SelectedPath = _lastSelectedDirToScanForMetadata;
                 var result = folderBrowserDialog.ShowDialog();
                 if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(folderBrowserDialog.SelectedPath))
                 {
@@ -505,7 +505,7 @@ namespace TOPX.UI.Forms
         private void InitBackgroundWorker()
         {
             bgworker = new BackgroundWorker();
-            bgworker.DoWork += new DoWorkEventHandler(backgroundWorker_DoWork); 
+            bgworker.DoWork += new DoWorkEventHandler(backgroundWorker_DoWork);
             bgworker.RunWorkerCompleted += backgroundWorker_Completed;
             bgworker.ProgressChanged += Bgworker_ProgressChanged;
             bgworker.WorkerReportsProgress = true;
@@ -547,7 +547,7 @@ namespace TOPX.UI.Forms
 
         private void IncreaseProgress(object sender, EventArgs eventArgs)
         {
-            var x = (MetadataEventargs) eventArgs;
+            var x = (MetadataEventargs)eventArgs;
             bgworker.ReportProgress(x.GetProgress());
         }
 
@@ -561,25 +561,130 @@ namespace TOPX.UI.Forms
         {
             if (e.Button == MouseButtons.Right)
             {
-                this.BackColor = Color.Aqua;
-                int currentRow = gridFieldMappingDossiers.HitTest(e.X, e.Y).RowIndex;
-                gridFieldMappingDossiers.Rows[currentRow].Cells[1].Selected = true;
+                var currentRow = gridFieldMappingDossiers.HitTest(e.X, e.Y).RowIndex;
 
-                Point ScreenPoint =  ((Control)sender).PointToScreen(e.Location);
-                Point FormPoint = this.PointToClient(ScreenPoint); //this is the Form object
+                gridFieldMappingDossiers.ClearSelection();
+                gridFieldMappingDossiers.Rows[currentRow].Selected = true;
+
+                var screenPoint = ((Control)sender).PointToScreen(e.Location);
+                var formPoint = PointToClient(screenPoint); //this is the Form object
                 var formSelectDossierMapper =
-                    new FormSelectDossierMapper(_fieldmappingsDossiers, gridFieldMappingDossiers.Rows[currentRow].Cells[1].Value.ToString())
+                    new FormSelectMapper(_fieldmappingsDossiers, gridFieldMappingDossiers.Rows[currentRow].Cells[0].Value.ToString())
                     {
-                Location = new Point(Location.X +  FormPoint.X + 50, Location.Y + FormPoint.Y - 30)
+                        Location = new Point(Location.X + formPoint.X + 50, Location.Y + formPoint.Y - 30)
                     };
                 formSelectDossierMapper.ShowDialog();
                 gridFieldMappingDossiers.DataSource = _fieldmappingsDossiers.ToList();
             }
         }
 
+
+        private void gridFieldMappingRecords_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                var currentRow = gridFieldMappingDossiers.HitTest(e.X, e.Y).RowIndex;
+
+                gridFieldMappingRecords.ClearSelection();
+                gridFieldMappingRecords.Rows[currentRow].Selected = true;
+
+                var screenPoint = ((Control)sender).PointToScreen(e.Location);
+                var formPoint = PointToClient(screenPoint); //this is the Form object
+                var formSelectMapper =
+                    new FormSelectMapper(_fieldmappingsRecords, gridFieldMappingRecords.Rows[currentRow].Cells[0].Value.ToString())
+                    {
+                        Location = new Point(Location.X + formPoint.X + 50, Location.Y + formPoint.Y - 30)
+                    };
+                formSelectMapper.ShowDialog();
+                gridFieldMappingRecords.DataSource = _fieldmappingsRecords.ToList();
+            }
+        }
         private void btClearMappingsDossiers_Click(object sender, EventArgs e)
         {
             LoadDossierFile(txtDossierLocation.Text, useCachedMappings: false);
+        }
+
+        private void btClearMappingsRecords_Click(object sender, EventArgs e)
+        {
+            LoadRecordFile(txtRecordBestandLocation.Text, useCachedMappings: false);
+        }
+
+        private void gridFieldMappingDossiers_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+
+        }
+
+        private void btSaveDossierMapping_Click(object sender, EventArgs e)
+        {
+            SaveFieldMappingsToFile(_fieldmappingsDossiers, "Save dossiers");
+        }
+        private void btSaveRecordMapping_Click(object sender, EventArgs e)
+        {
+            SaveFieldMappingsToFile(_fieldmappingsRecords, "Save records");
+        }
+
+        private void btLoadRecordMapping_Click(object sender, EventArgs e)
+        {
+            LoadMappingFromFile(FieldMappingType.RECORD, _fieldmappingsRecords);
+            gridFieldMappingRecords.DataSource = _fieldmappingsRecords;
+        }
+        private void btLoadDossierMapping_Click(object sender, EventArgs e)
+        {
+            LoadMappingFromFile(FieldMappingType.DOSSIER, _fieldmappingsDossiers);
+            gridFieldMappingDossiers.DataSource = _fieldmappingsDossiers;
+        }
+
+        private void SaveFieldMappingsToFile(List<FieldMapping> mappings, string title)
+        {
+            var savedial = new SaveFileDialog { Filter = "XML-File | *.xml", Title = title };
+            savedial.ShowDialog();
+            if (string.IsNullOrEmpty(savedial.FileName))
+                return;
+            try
+            {
+                using (var writer = savedial.OpenFile())
+                {
+                    var serializer = new XmlSerializer(typeof(List<FieldMapping>));
+                    serializer.Serialize(writer, mappings);
+                    writer.Flush();
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($"Fout bij opslaan gegevens: {e.Message}");
+            }
+        }
+
+        private void LoadMappingFromFile(FieldMappingType fieldMappingType, List<FieldMapping> mapping)
+        {
+            var openFiledialog = new OpenFileDialog() { Filter = "XML-File | *.xml" };
+            openFiledialog.ShowDialog();
+            if (string.IsNullOrEmpty(openFiledialog.FileName))
+                return;
+
+            try
+            {
+                using (var stream = File.OpenRead(openFiledialog.FileName))
+                {
+                    var serializer = new XmlSerializer(typeof(List<FieldMapping>));
+                    var tempDossierMappings = (List<FieldMapping>)serializer.Deserialize(stream);
+                    mapping.Clear();
+                    foreach (var tempDossierMapping in tempDossierMappings)
+                    {
+                        mapping.Add(new FieldMapping()
+                        {
+                            MappedFieldName = tempDossierMapping.MappedFieldName,
+                            DatabaseFieldName = tempDossierMapping.DatabaseFieldName,
+                            TMLO = tempDossierMapping.TMLO
+                        });
+                    }
+                    _dataservice.SaveMappings(mapping, fieldMappingType);
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($"Fout bij inlezen gegevens: {e.Message}");
+            }
         }
     }
 }

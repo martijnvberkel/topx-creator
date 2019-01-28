@@ -18,5 +18,8 @@ namespace Topx.Data
 
         [StringLength(50)]
         public string Type { get; set; }
+
+        [StringLength(20)]
+        public string TMLO { get; set; }
     }
 }
