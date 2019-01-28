@@ -19,12 +19,14 @@ namespace Topx.Interface
         private List<FieldMapping> _headersRecords;
         private readonly List<FieldMapping> _headersBestanden;
         private List<FieldMapping> _headerMappingRecordsBestanden;
+        private List<TopX_TMLO> _topX_Tmlos;
 
         public List<FieldMapping> HeadersRecordsBestanden => _headersRecords.Concat(_headersBestanden).ToList();
 
         public Headers()
         {
-            //_entities = entities;
+            var resourceHelper = new ResourceHelper();
+            _topX_Tmlos = resourceHelper.GetTopX_TMLO();
         }
 
         private void CreateListOfAvailableColumnsOfDossiers()
@@ -34,6 +36,13 @@ namespace Topx.Interface
                                                                               BindingFlags.Instance);
 
             _headersDossiers = GetPropertyInfoNames(propertyInfosDossiers, FieldMappingType.DOSSIER);
+
+            
+            foreach (var headersDossier in _headersDossiers)
+            {
+                headersDossier.TMLO = (from t in _topX_Tmlos where t.TopX == headersDossier.DatabaseFieldName select t.TMLO).FirstOrDefault();
+            }
+            
         }
 
         private void CreateListOfAvailableColumnsOfRecords()
@@ -43,6 +52,10 @@ namespace Topx.Interface
                                                                             BindingFlags.Instance);
 
             _headersRecords = GetPropertyInfoNames(propertyInfosRecords, FieldMappingType.RECORD);
+            foreach (var headersRecord in _headersRecords)
+            {
+                headersRecord.TMLO = (from t in _topX_Tmlos where t.TopX == headersRecord.DatabaseFieldName select t.TMLO).FirstOrDefault();
+            }
         }
 
 
@@ -54,16 +67,7 @@ namespace Topx.Interface
                 propertyInfo =>
                     propertyInfo.Name != "Id" && propertyInfo.Name !="Dossiers" && propertyInfo.Name != "Records" && propertyInfo.Name != "Bestanden"
                     && !HeaderClassification.OptionalHeaders.Contains(propertyInfo.Name)
-                    && propertyInfo.PropertyType != typeof(ICollection<>)
-
-
-            //&& (
-            //    propertyInfo.PropertyType == typeof(string) 
-            //    || propertyInfo.PropertyType == typeof(int) 
-            //    || propertyInfo.PropertyType == typeof(Int64) 
-            //    || propertyInfo.PropertyType == typeof(DateTime)
-            //    )  // prevent navigation properties
-            )
+                    && propertyInfo.PropertyType != typeof(ICollection<>))
             .Select(propertyInfo => propertyInfo.Name);
             return listOfFields.Select(listOfField => new FieldMapping() { DatabaseFieldName = listOfField, Type = type.ToString() }).ToList();
         }

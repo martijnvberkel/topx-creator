@@ -7,14 +7,17 @@ namespace Topx.Data
     public partial class ModelTopX : DbContext
     {
         public ModelTopX()
-            : base(@"data source = (LocalDb)\MSSQLLocalDB; initial catalog = Topx.Data.ModelTopX; integrated security = True; MultipleActiveResultSets=True;")
+            : base(@"data source = (LocalDb)\MSSQLLocalDB; initial catalog = ModelTopX; integrated security = True; MultipleActiveResultSets=True;")
         {
-            Database.SetInitializer(new CreateDatabaseIfNotExists<ModelTopX>());
+            // Database.SetInitializer(new CreateDatabaseIfNotExists<ModelTopX>());
         }
         public ModelTopX(string connectionString)
             : base(connectionString)
         {
-            Database.SetInitializer(new CreateDatabaseIfNotExists<ModelTopX>());
+           // Database.SetInitializer(new CreateDatabaseIfNotExists<ModelTopX>());
+           // Database.SetInitializer(new MigrateDatabaseToLatestVersion<ModelTopX,  Migrations.Configuration>());
+           // Database.SetInitializer(new DropCreateDatabaseIfModelChanges<ModelTopX>());
+
         }
 
         public virtual DbSet<Bestand> Bestanden { get; set; }
@@ -27,10 +30,15 @@ namespace Topx.Data
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            // Database.SetInitializer(new CreateDatabaseIfNotExists<ModelTopX>());
+           // Database.SetInitializer(new MigrateDatabaseToLatestVersion<ModelTopX, Migrations.Configuration>());
+            // Database.SetInitializer<ModelTopX>(null);
+            // base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<Dossier>()
-                .HasMany(e => e.Bestanden)
-                .WithOptional(e => e.Dossiers)
-                .HasForeignKey(e => e.Dossier_IdentificatieKenmerk);
+               .HasMany(e => e.Bestanden)
+               .WithOptional(e => e.Dossiers)
+               .HasForeignKey(e => e.Dossier_IdentificatieKenmerk);
 
             modelBuilder.Entity<Dossier>()
                 .HasMany(e => e.Records)

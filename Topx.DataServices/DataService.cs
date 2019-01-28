@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Net.Http.Headers;
 using System.Text;
+using System.Threading;
 using Topx.Data;
 
 
@@ -53,13 +54,26 @@ namespace Topx.DataServices
             {
                 using (var entities = new ModelTopX(Conectionstring))
                 {
-                    var test = (from i in entities.sysdiagrams select i).FirstOrDefault();
+                    //var test = (from i in entities.Dossiers select i).FirstOrDefault();
                     return true;
                 }
             }
             catch (Exception e)
             {
-                return false;
+                try   // second try, the database might not be initialized
+                {
+                    Thread.Sleep(2000);
+                    using (var entities = new ModelTopX(Conectionstring))
+                    {
+                        var test = (from i in entities.Dossiers select i).FirstOrDefault();
+                        return true;
+                    }
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
+               
             }
         }
 

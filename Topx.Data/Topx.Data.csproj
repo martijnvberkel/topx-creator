@@ -65,6 +65,18 @@
     <Compile Include="Migrations\201901092121410_datetime_allow_null.Designer.cs">
       <DependentUpon>201901092121410_datetime_allow_null.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201901221608418_TMLO.cs" />
+    <Compile Include="Migrations\201901221608418_TMLO.Designer.cs">
+      <DependentUpon>201901221608418_TMLO.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901221627455_TMLO_2.cs" />
+    <Compile Include="Migrations\201901221627455_TMLO_2.Designer.cs">
+      <DependentUpon>201901221627455_TMLO_2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901271108194_tmlo_3.cs" />
+    <Compile Include="Migrations\201901271108194_tmlo_3.Designer.cs">
+      <DependentUpon>201901271108194_tmlo_3.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ModelTopX.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -81,6 +93,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201901092121410_datetime_allow_null.resx">
       <DependentUpon>201901092121410_datetime_allow_null.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901221608418_TMLO.resx">
+      <DependentUpon>201901221608418_TMLO.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901221627455_TMLO_2.resx">
+      <DependentUpon>201901221627455_TMLO_2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901271108194_tmlo_3.resx">
+      <DependentUpon>201901271108194_tmlo_3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
