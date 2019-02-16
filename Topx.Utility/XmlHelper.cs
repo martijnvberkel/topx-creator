@@ -18,8 +18,10 @@ namespace Topx.Utility
                 writer.Flush();
                 xmlstreamActual = writer.ToString();
             }
-            return maxSize == 0 ? xmlstreamActual : xmlstreamActual.Substring(0, maxSize);
-
+          
+            return maxSize == 0 
+                ? xmlstreamActual 
+                : xmlstreamActual.Substring(0, Math.Min(xmlstreamActual.Length, maxSize));
         }
     }
 }

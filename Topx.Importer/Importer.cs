@@ -1,26 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Text;
-using System.Threading.Tasks;
-
 using Topx.Data;
 using Topx.DataServices;
-using Topx.Interface;
 
 namespace Topx.Importer
 {
     public class Importer
     {
         private readonly IDataService _dataservice;
+        private readonly bool _enableValidation;
         public string ErrorMessage;
         public StringBuilder ErrorsImportDossiers = new StringBuilder();
         public StringBuilder ErrorsImportRecords = new StringBuilder();
-        public bool Error;
+      
         public int NrOfDossiers = 0;
         public int NrOfRecords = 0;
         private readonly string[] _fieldsThatMaybeEmpty =
@@ -33,10 +28,12 @@ namespace Topx.Importer
             "Bestand_Formaat_IdentificatieKenmerk"
         };
 
-        public Importer(IDataService globalsService)
+        public bool Error => ErrorsImportDossiers.Length > 0 || ErrorsImportRecords.Length > 0 || !string.IsNullOrEmpty(ErrorMessage);
+
+        public Importer(IDataService globalsService, bool enableValidation = true)
         {
             _dataservice = globalsService;
-
+            _enableValidation = enableValidation;
         }
 
         public void SaveDossiers(List<FieldMapping> mappingsDossiers, StreamReader dossierStream)
@@ -44,8 +41,7 @@ namespace Topx.Importer
             var readLineAsHeader = dossierStream.ReadLine();
             if (readLineAsHeader == null)
             {
-                Error = true;
-                ErrorMessage = "File is leeg";
+               ErrorMessage = "File is leeg";
                 return;
             };
             var headersSource = readLineAsHeader.Split(';');
@@ -59,7 +55,6 @@ namespace Topx.Importer
                 {
                     if (fieldsSource == null)
                     {
-                        Error = true;
                         ErrorMessage = "Unexpected end of stream";
                         return;
                     }
@@ -68,7 +63,6 @@ namespace Topx.Importer
 
                     if (headersSource.Length != fieldsSource.Length)
                     {
-                        Error = true;
                         ErrorsImportDossiers.AppendLine($"ERROR: Dossier {fieldsSource?[0]} kon niet worden ingelezen, aantal kolommen is onjuist");
                         continue;
                     }
@@ -83,13 +77,29 @@ namespace Topx.Importer
                         if (propertyInfo != null)
                             propertyInfo.SetValue(dossier, fieldsSource[index], null);
                     }
-                    _dataservice.SaveDossier(dossier);
-                    NrOfDossiers++;
+
+                    if (_enableValidation)
+                    {
+                        var dossiervalidator = new DossierValidator(dossier);
+                        var isValidated = dossiervalidator.Validate();
+                        if (isValidated)
+                        {
+
+                            _dataservice.SaveDossier(dossier);
+                            NrOfDossiers++;
+                        }
+                        else
+                        {
+                            foreach (var validatorValidationError in dossiervalidator.ValidationErrors)
+                            {
+                                ErrorsImportDossiers.AppendLine(validatorValidationError);
+                            }
+                        }
+                    }
                 }
                 catch (Exception e)
                 {
                     ErrorsImportDossiers.AppendLine($"Dossier {fieldsSource?[0]} kon niet worden geïmporteerd: {e.Message}");
-                    Error = true;
                 }
             }
         }
@@ -98,8 +108,7 @@ namespace Topx.Importer
             var readLineAsHeader = recordsStream.ReadLine();
             if (readLineAsHeader == null)
             {
-                Error = true;
-                ErrorMessage = "File is leeg";
+               ErrorMessage = "File is leeg";
                 return;
             };
             var headersSource = readLineAsHeader.Split(';');
@@ -113,7 +122,6 @@ namespace Topx.Importer
 
                     if (fieldsSource == null)
                     {
-                        Error = true;
                         ErrorMessage = "Unexpected end of stream";
                         return;
                     }
@@ -135,19 +143,35 @@ namespace Topx.Importer
 
                         }
                     }
-                    if (!_dataservice.SaveRecord(record))
-                        ErrorsImportRecords.AppendLine(_dataservice.ErrorMessage);
-                    else
-                        NrOfRecords++;
+                    var recordvalidator = new RecordValidator(record);
+
+                    if (_enableValidation)
+                    {
+                        var isValidated = recordvalidator.Validate();
+                        if (isValidated)
+                        {
+
+                            if (!_dataservice.SaveRecord(record))
+                                ErrorsImportRecords.AppendLine(_dataservice.ErrorMessage);
+                            else
+                                NrOfRecords++;
+                        }
+                        else
+                        {
+                            foreach (var validatorValidationError in recordvalidator.ValidationErrors)
+                            {
+                                ErrorsImportRecords.AppendLine(validatorValidationError);
+                            }
+                        }
+                    }
                 }
                 catch (Exception e)
                 {
                     ErrorsImportRecords.AppendLine($"Record {fieldsSource?[0]} kon niet worden geïmporteerd: {e.Message}");
-                    Error = true;
                 }
             }
         }
-
+        
         public bool CheckHealthyFieldmappings(List<FieldMapping> fieldmappings)
         {
            foreach (var fieldmapping in fieldmappings)

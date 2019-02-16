@@ -7,6 +7,7 @@ using Moq;
 using NUnit.Framework;
 using Topx.Data;
 using Topx.DataServices;
+using Topx.Importer;
 
 
 namespace Topx.UnitTests
@@ -22,7 +23,7 @@ namespace Topx.UnitTests
             //Arrange
             var mockDataservice = new Mock<IDataService>(MockBehavior.Strict);
            
-            var importer = new Importer.Importer(mockDataservice.Object);
+            var importer = new Importer.Importer(mockDataservice.Object, enableValidation:false);
             var mappings = new List<FieldMapping>()
             {
                 new FieldMapping(){DatabaseFieldName = "Naam", MappedFieldName = "A"},
@@ -44,13 +45,13 @@ namespace Topx.UnitTests
         {
             //Arrange
             var mockDataservice = new Mock<IDataService>(MockBehavior.Strict);
-            var importer = new Importer.Importer(mockDataservice.Object);
+            var importer = new Importer.Importer(mockDataservice.Object, enableValidation: false);
             var mappings = new List<FieldMapping>()
             {
                 new FieldMapping(){DatabaseFieldName = "Naam", MappedFieldName = "A"},
             };
             var streamreader = CreateReader($"A;B{Environment.NewLine}TestA;TestB{Environment.NewLine}this_is_not_a_good_csv");
-            // Act
+           
             mockDataservice.Setup(t => t.SaveDossier(It.Is<Dossier>(y => y.Naam == "TestA" && y.Relatie_Id ==null && y.IdentificatieKenmerk == null)));
 
             // Act
@@ -65,6 +66,7 @@ namespace Topx.UnitTests
         public void TopxConversion()
         {
            
+            // Arrange
             var record = new Record()
             {
                 Naam = "tekening (technisch) - bouwen landbouwerswoning Hoofdstraat 13 5121JA Rijen 17-05-1905",
@@ -131,13 +133,62 @@ namespace Topx.UnitTests
           
             var xmlstreamActual = Utility.XmlHelper. GetXmlStringFromObject(recordinformationPackage);
 
+            // Act
             var xmlCompare = File.ReadAllText(Path.Combine(Statics. AppPath(), @"TestResources\ExpectedOutput1.xml"));
 
+            // Assert
             XmlAssert.Equal(xmlCompare, xmlstreamActual);
 
         }
 
-       
+        [Test]
+        public void Test_DossierValidator_Dates_Fail()
+        {
+            var dossier = new Dossier()
+            {
+                Dekking_InTijd_Begin = "this_is_not_a_date",
+                Dekking_InTijd_Eind = "this_is_not_a_date",
+                Classificatie_DatumOfPeriode = "this_is_not_a_date",
+                Gebruiksrechten_DatumOfPeriode = "this_is_not_a_date",
+                Vertrouwelijkheid_DatumOfPeriode = "this_is_not_a_date",
+                Openbaarheid_DatumOfPeriode = "this_is_not_a_date",
+                Eventgeschiedenis_DatumOfPeriode = "this_is_not_a_date",
+                Relatie_DatumOfPeriode = "this_is_not_a_date"
+            };
+            var dossierValidator = new DossierValidator(dossier);
+
+            var result = dossierValidator.Validate();
+            Assert.That(result, Is.False);
+            Assert.That(dossierValidator.ValidationErrors.Count, Is.EqualTo(12));
+        }
+
+        [Test]
+        public void Test_DossierValidator_Dates_Success()
+        {
+            var date = "22-1-2000";
+            var dossier = new Dossier()
+            {
+                Dekking_InTijd_Begin = date,
+                Dekking_InTijd_Eind = date,
+                Classificatie_DatumOfPeriode = date,
+                Gebruiksrechten_DatumOfPeriode = date,
+                Vertrouwelijkheid_DatumOfPeriode = date,
+                Openbaarheid_DatumOfPeriode = date,
+                Eventgeschiedenis_DatumOfPeriode = date,
+                Relatie_DatumOfPeriode = date,
+                Eventgeschiedenis_Type = "x",
+                Taal = "dut",
+                Vertrouwelijkheid_ClassificatieNiveau = "x",
+                Openbaarheid_OmschrijvingBeperkingen = "x"
+
+            };
+            var dossierValidator = new DossierValidator(dossier);
+
+            var result = dossierValidator.Validate();
+            Assert.That(result, Is.True);
+            Assert.That(dossierValidator.ValidationErrors.Count, Is.EqualTo(0));
+        }
+
 
 
         private StreamReader CreateReader(string testString)

@@ -65,7 +65,7 @@ public class Metadata
         foreach (var dossier in _dossiers)
         {
             counter++;
-            if (counter % steps == 0)
+            if (steps > 0 && counter % steps == 0)
             {
                 var progress = counter * 100 / _dossiers.Count;
                 DossierHandled?.Invoke(this, new MetadataEventargs(progress));

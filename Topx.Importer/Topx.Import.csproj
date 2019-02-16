@@ -48,15 +48,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DossierValidator.cs" />
     <Compile Include="Importer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TopXDataTable.cs" />
+    <Compile Include="RecordValidator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Topx.Data.DTO\Topx.Data.DTO.csproj">
+      <Project>{6C2CF74E-2518-4DE6-85B7-436007B94A1E}</Project>
+      <Name>Topx.Data.DTO</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Topx.DataServices\Topx.DataServices.csproj">
       <Project>{1A82E7D8-4AB0-499E-BEE9-7D1569AD2F12}</Project>
       <Name>Topx.DataServices</Name>

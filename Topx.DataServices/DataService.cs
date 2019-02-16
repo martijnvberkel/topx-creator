@@ -246,7 +246,7 @@ namespace Topx.DataServices
         {
             using (var entities = new ModelTopX(Conectionstring))
             {
-                entities.Log.Add(new Log() { Identifier = dossier, Description = message, DateTime = DateTime.Now });
+                entities.Log.Add(new Log() {Id = Guid.NewGuid(), Identifier = dossier, Description = message, DateTime = DateTime.Now });
                 entities.SaveChanges();
             }
         }
