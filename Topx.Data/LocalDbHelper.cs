@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
@@ -13,10 +14,15 @@ namespace Topx.Data
     {
         public static string GetConnectionString()
         {
-            var instance = GetInstanceName();
-            return instance == string.Empty 
-                ? string.Empty 
-                : $"data source = (LocalDb)\\{instance}; initial catalog = ModelTopX; integrated security = True; MultipleActiveResultSets = True";
+            var useCustomConnectionString = Convert.ToBoolean(ConfigurationManager.AppSettings["UseCustomConnectionString"]);
+            if (!useCustomConnectionString)
+            {
+                var instance = GetInstanceName();
+                return instance == string.Empty
+                    ? string.Empty
+                    : $"data source = (LocalDb)\\{instance}; initial catalog = ModelTopX; integrated security = True; MultipleActiveResultSets = True";
+            }
+            return ConfigurationManager.ConnectionStrings["CustomConnectionString"].ConnectionString;
         }
 
         private static string GetInstanceName()

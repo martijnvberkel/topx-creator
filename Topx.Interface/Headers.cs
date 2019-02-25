@@ -21,7 +21,7 @@ namespace Topx.Interface
         private List<FieldMapping> _headerMappingRecordsBestanden;
         private List<TopX_TMLO> _topX_Tmlos;
 
-        public List<FieldMapping> HeadersRecordsBestanden => _headersRecords.Concat(_headersBestanden).ToList();
+        //public List<FieldMapping> HeadersRecordsBestanden => _headersRecords.Concat(_headersBestanden).ToList();
 
         public Headers()
         {
@@ -29,7 +29,7 @@ namespace Topx.Interface
             _topX_Tmlos = resourceHelper.GetTopX_TMLO();
         }
 
-        private void CreateListOfAvailableColumnsOfDossiers()
+        public void CreateListOfAvailableColumnsOfDossiers()
         {
             var propertyInfosDossiers = new Dossier().GetType().GetProperties(BindingFlags.DeclaredOnly |
                                                                               BindingFlags.Public |
@@ -45,7 +45,7 @@ namespace Topx.Interface
             
         }
 
-        private void CreateListOfAvailableColumnsOfRecords()
+        public void CreateListOfAvailableColumnsOfRecords()
         {
             var propertyInfosRecords = new Record().GetType().GetProperties(BindingFlags.DeclaredOnly |
                                                                             BindingFlags.Public |
@@ -58,6 +58,7 @@ namespace Topx.Interface
             }
         }
 
+        
 
         private List<FieldMapping> GetPropertyInfoNames(PropertyInfo[] propertyInfos, FieldMappingType type)
         {

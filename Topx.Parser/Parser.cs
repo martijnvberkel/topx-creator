@@ -61,12 +61,12 @@ namespace Topx.Creator
                 {
                     if (!dossier.Records.Any())
                     {
-                        _dataservice.Log(dossier.IdentificatieKenmerk, "Geen records gevonden");
+                        ErrorMessage.AppendLine($"Dossier {dossier.IdentificatieKenmerk}: Geen records gevonden");
                     }
 
                     if (string.IsNullOrEmpty(dossier.Naam))
                     {
-                        _dataservice.Log(dossier.IdentificatieKenmerk, "Veld Naam is leeg");
+                        ErrorMessage.AppendLine($"Dossier {dossier.IdentificatieKenmerk}: Veld Naam is leeg");
                     }
 
                     ValidateDossier(dossier);
@@ -82,6 +82,7 @@ namespace Topx.Creator
                 catch (Exception ex)
                 {
                     _dataservice.Log(dossier.IdentificatieKenmerk, $"ERROR: {ex.Message}");
+                    ErrorMessage.AppendLine($"Dossier {dossier.IdentificatieKenmerk}: ERROR: { ex.Message}");
                 }
 
                 recordCounter++;
@@ -499,7 +500,7 @@ namespace Topx.Creator
                 },
 
                 naam = new[] { new nonEmptyStringTypeAttribuut() { Value = dossier.Naam } },
-                taal = new taalTypeAttribuut[] { new taalTypeAttribuut() { Value = (taalType)Enum.Parse(typeof(taalType), dossier.Taal) } },
+                taal = new taalTypeAttribuut[] { new taalTypeAttribuut() { Value = (taalType)Enum.Parse(typeof(taalType), dossier.Taal.ToLower()) } },
                 relatie = new[] {new relatieType()
                 {
                     relatieID = new nonEmptyStringTypeAttribuut() {Value = _identificatieArchief },
