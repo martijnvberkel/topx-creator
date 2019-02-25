@@ -625,13 +625,19 @@ namespace TOPX.UI.Forms
 
         private void btLoadRecordMapping_Click(object sender, EventArgs e)
         {
-            LoadMappingFromFile(FieldMappingType.RECORD, _fieldmappingsRecords);
-            gridFieldMappingRecords.DataSource = _fieldmappingsRecords;
+            if (LoadMappingFromFile(FieldMappingType.RECORD, _fieldmappingsRecords))
+            {
+                gridFieldMappingRecords.DataSource = null; // fix to force grid updating
+                gridFieldMappingRecords.DataSource = _fieldmappingsRecords;
+            }
         }
         private void btLoadDossierMapping_Click(object sender, EventArgs e)
         {
-            LoadMappingFromFile(FieldMappingType.DOSSIER, _fieldmappingsDossiers);
-            gridFieldMappingDossiers.DataSource = _fieldmappingsDossiers;
+            if (LoadMappingFromFile(FieldMappingType.DOSSIER, _fieldmappingsDossiers))
+            {
+                gridFieldMappingDossiers.DataSource = null; // fix to force grid updating
+                gridFieldMappingDossiers.DataSource = _fieldmappingsDossiers;
+            }
         }
 
         private void SaveFieldMappingsToFile(List<FieldMapping> mappings, string title)
@@ -655,22 +661,52 @@ namespace TOPX.UI.Forms
             }
         }
 
-        private void LoadMappingFromFile(FieldMappingType fieldMappingType, List<FieldMapping> mapping)
+        private bool LoadMappingFromFile(FieldMappingType fieldMappingType, List<FieldMapping> mapping)
         {
             var openFiledialog = new OpenFileDialog() { Filter = "XML-File | *.xml" };
             openFiledialog.ShowDialog();
             if (string.IsNullOrEmpty(openFiledialog.FileName))
-                return;
+                return false;
 
             try
             {
                 using (var stream = File.OpenRead(openFiledialog.FileName))
                 {
                     var serializer = new XmlSerializer(typeof(List<FieldMapping>));
-                    var tempDossierMappings = (List<FieldMapping>)serializer.Deserialize(stream);
+                    var tempMappings = (List<FieldMapping>)serializer.Deserialize(stream);
                     mapping.Clear();
-                    foreach (var tempDossierMapping in tempDossierMappings)
+
+                    if (fieldMappingType == FieldMappingType.DOSSIER)
                     {
+                        foreach (var tempDossierMapping in tempMappings)
+                        {
+                            if (string.IsNullOrEmpty(tempDossierMapping.DatabaseFieldName))
+                                continue;
+                            if (!_headersDossiers.Contains(tempDossierMapping.DatabaseFieldName, StringComparer.OrdinalIgnoreCase))
+                            {
+                                MessageBox.Show($"Er is een fout gevonden in het mappingbestand: Het veld {tempDossierMapping.DatabaseFieldName} is niet toegestaan in dossiermappings");
+                                return false;
+                            }
+                        }
+                    }
+
+                    if (fieldMappingType == FieldMappingType.RECORD)
+                    {
+                        foreach (var tempRecordMapping in tempMappings)
+                        {
+                            if (string.IsNullOrEmpty(tempRecordMapping.DatabaseFieldName))
+                                continue;
+                            if (!_headersRecords.Contains(tempRecordMapping.DatabaseFieldName, StringComparer.OrdinalIgnoreCase))
+                            {
+                                MessageBox.Show($"Er is een fout gevonden in het mappingbestand: Het veld {tempRecordMapping.DatabaseFieldName} is niet toegestaan in recordmappings");
+                                return false;
+                            }
+                        }
+                    }
+
+                    foreach (var tempDossierMapping in tempMappings)
+                    {
+                        if (!string.IsNullOrEmpty(tempDossierMapping.MappedFieldName) || !string.IsNullOrEmpty(tempDossierMapping.DatabaseFieldName))
                         mapping.Add(new FieldMapping()
                         {
                             MappedFieldName = tempDossierMapping.MappedFieldName,
@@ -680,10 +716,13 @@ namespace TOPX.UI.Forms
                     }
                     _dataservice.SaveMappings(mapping, fieldMappingType);
                 }
+                return true;
             }
+           
             catch (Exception e)
             {
                 MessageBox.Show($"Fout bij inlezen gegevens: {e.Message}");
+                return false;
             }
         }
     }
