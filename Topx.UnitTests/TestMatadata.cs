@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Moq;
 using NUnit.Framework;
 using Topx.Data;
+using Topx.DataServices;
 using Topx.FileAnalysis;
 
 namespace Topx.UnitTests
@@ -28,7 +30,9 @@ namespace Topx.UnitTests
                 }
             };
 
-            var metadata = new Metadata(true, true, true, false, path, dossiers, null);
+            var mockDataservice = new Mock<IDataService>();
+
+            var metadata = new Metadata(true, true, true, false, path, dossiers, mockDataservice.Object);
 
             // When
             metadata.Collect();
