@@ -78,6 +78,10 @@
     <Compile Include="Migrations\201901271108194_tmlo_3.Designer.cs">
       <DependentUpon>201901271108194_tmlo_3.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201903050855087_veldlengte.cs" />
+    <Compile Include="Migrations\201903050855087_veldlengte.Designer.cs">
+      <DependentUpon>201903050855087_veldlengte.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ModelTopX.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -103,6 +107,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201901271108194_tmlo_3.resx">
       <DependentUpon>201901271108194_tmlo_3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903050855087_veldlengte.resx">
+      <DependentUpon>201903050855087_veldlengte.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

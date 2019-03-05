@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Net.Http.Headers;
@@ -22,7 +23,7 @@ namespace Topx.DataServices
         List<Dossier> GetAllDossiers();
         Globals GetGlobals();
         void SaveGlobals(Globals globals);
-        void SaveDossier(Dossier dossier);
+        bool SaveDossier(Dossier dossier);
         bool SaveRecord(Record record);
         void SaveRecordChanges(Record record);
         void ClearDossiersAndRecords();
@@ -30,6 +31,7 @@ namespace Topx.DataServices
         List<FieldMapping> GetMappingsRecords(List<string> headersList);
         void SaveMappings(List<FieldMapping> fieldmappingdossiers, FieldMappingType type);
         string ErrorMessage { get; set; }
+        bool Error { get; set; }
         void Log(string dossier, string message);
         void ClearLog();
         string GetLog();
@@ -40,8 +42,18 @@ namespace Topx.DataServices
 
     public class DataService : IDataService
     {
+        private string _errorMessage;
         public string Conectionstring { get; set; }
-        public string ErrorMessage { get; set; }
+        public bool Error { get; set; }
+        public string ErrorMessage
+        {
+            get => _errorMessage;
+            set
+            {
+                _errorMessage = value;
+                Error = true;
+            }
+        }
 
         public DataService(string conectionstring)
         {
@@ -164,12 +176,32 @@ namespace Topx.DataServices
             }
         }
 
-        public void SaveDossier(Dossier dossier)
+        public bool SaveDossier(Dossier dossier)
         {
+            ErrorMessage = string.Empty;
             using (var entities = new ModelTopX(Conectionstring))
             {
-                entities.Dossiers.Add(dossier);
-                entities.SaveChanges();
+                try
+                {
+                    entities.Dossiers.Add(dossier);
+                    entities.SaveChanges();
+                }
+                catch (DbEntityValidationException e)
+                {
+                    foreach (var eve in e.EntityValidationErrors)
+                    {
+                        //Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                        //    eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                        var error = new StringBuilder();
+                        foreach (var ve in eve.ValidationErrors)
+                        {
+                            error.AppendLine($"Veld: \"{ve.PropertyName}\", Error: \"{ve.ErrorMessage}\"");
+                        }
+                        ErrorMessage = error.ToString();
+                    }
+                    return false;
+                }
+                return true;
             }
         }
         public bool SaveRecord(Record record)
@@ -183,8 +215,26 @@ namespace Topx.DataServices
                     ErrorMessage = $"ERROR: Record met bestandsnaam {record.Naam} is niet geïmporteerd, verwijst naar niet-bestaande DossierId {record.DossierId} ";
                     return false;
                 }
-                entities.Records.Add(record);
-                entities.SaveChanges();
+                try
+                {
+                    entities.Records.Add(record);
+                    entities.SaveChanges();
+                }
+                catch (DbEntityValidationException e)
+                {
+                    foreach (var eve in e.EntityValidationErrors)
+                    {
+                        //Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                        //    eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                        var error = new StringBuilder();
+                        foreach (var ve in eve.ValidationErrors)
+                        {
+                            error.AppendLine($"Veld: \"{ve.PropertyName}\", Error: \"{ve.ErrorMessage}\"");
+                        }
+                        ErrorMessage = error.ToString();
+                        return false;
+                    }
+                }
             }
             return true;
         }
