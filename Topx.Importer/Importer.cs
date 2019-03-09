@@ -63,7 +63,7 @@ namespace Topx.Importer
 
                     if (headersSource.Length != fieldsSource.Length)
                     {
-                        ErrorsImportDossiers.AppendLine($"ERROR: Dossier {fieldsSource?[0]} kon niet worden ingelezen, aantal kolommen is onjuist");
+                        ErrorsImportDossiers.AppendLine($"ERROR: Dossier {fieldsSource?[0]} kon niet worden ingelezen, aantal kolommen is onjuist. Dit kan ontstaan door gebruik van puntkomma's in tekstvelden");
                         continue;
                     }
 
@@ -84,8 +84,11 @@ namespace Topx.Importer
                         var isValidated = dossiervalidator.Validate();
                         if (isValidated)
                         {
-
-                            _dataservice.SaveDossier(dossier);
+                        
+                            if(!_dataservice.SaveDossier(dossier))
+                            {
+                                ErrorsImportDossiers.AppendLine(_dataservice.ErrorMessage);
+                            }
                             NrOfDossiers++;
                         }
                         else
@@ -113,12 +116,18 @@ namespace Topx.Importer
             };
             var headersSource = readLineAsHeader.Split(';');
 
+
             while (recordsStream.Peek() > 0)
             {
                 var record = new Record();
                 var fieldsSource = recordsStream.ReadLine()?.Split(';');
                 try
                 {
+                    if (headersSource.Length != fieldsSource.Length)
+                    {
+                        ErrorsImportRecords.AppendLine($"ERROR: Records {fieldsSource?[0]} kon niet worden ingelezen, aantal kolommen is onjuist. Dit kan ontstaan door gebruik van puntkomma's in tekstvelden.");
+                        continue;
+                    }
 
                     if (fieldsSource == null)
                     {
@@ -140,6 +149,9 @@ namespace Topx.Importer
                                 propertyInfo.SetValue(record, fieldsSource[index], null);
                             if (propertyInfo.PropertyType == typeof(Int64))
                                 propertyInfo.SetValue(record, Convert.ToInt64(fieldsSource[index]), null);
+
+                            if (propertyInfo.PropertyType == typeof(DateTime?))
+                                propertyInfo.SetValue(record, Convert.ToDateTime(fieldsSource[index]), null);
 
                         }
                     }
