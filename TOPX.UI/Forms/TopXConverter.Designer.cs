@@ -50,6 +50,11 @@ namespace TOPX.UI.Forms
             this.materialTabSelector1 = new MaterialSkin.Controls.MaterialTabSelector();
             this.materialTabControl1 = new MaterialSkin.Controls.MaterialTabControl();
             this.tabGlobals = new System.Windows.Forms.TabPage();
+            this.materialLabel21 = new MaterialSkin.Controls.MaterialLabel();
+            this.materialLabel20 = new MaterialSkin.Controls.MaterialLabel();
+            this.materialLabel19 = new MaterialSkin.Controls.MaterialLabel();
+            this.materialLabel18 = new MaterialSkin.Controls.MaterialLabel();
+            this.materialLabel17 = new MaterialSkin.Controls.MaterialLabel();
             this.txtIdentificatieArchief = new TOPX.UI.Controls.PlaceHolderTextBox();
             this.materialLabel12 = new MaterialSkin.Controls.MaterialLabel();
             this.btFillDatumArchief = new System.Windows.Forms.Button();
@@ -117,11 +122,6 @@ namespace TOPX.UI.Forms
             this.btGenerateTopX = new System.Windows.Forms.Button();
             this.txtLogTopXCreate = new System.Windows.Forms.TextBox();
             this.lblVersion = new System.Windows.Forms.Label();
-            this.materialLabel17 = new MaterialSkin.Controls.MaterialLabel();
-            this.materialLabel18 = new MaterialSkin.Controls.MaterialLabel();
-            this.materialLabel19 = new MaterialSkin.Controls.MaterialLabel();
-            this.materialLabel20 = new MaterialSkin.Controls.MaterialLabel();
-            this.materialLabel21 = new MaterialSkin.Controls.MaterialLabel();
             this.materialContextMenuStrip2.SuspendLayout();
             this.materialContextMenuStrip3.SuspendLayout();
             this.materialTabControl1.SuspendLayout();
@@ -266,6 +266,77 @@ namespace TOPX.UI.Forms
             this.tabGlobals.TabIndex = 0;
             this.tabGlobals.Text = "Gegevens";
             this.tabGlobals.UseVisualStyleBackColor = true;
+            // 
+            // materialLabel21
+            // 
+            this.materialLabel21.AutoSize = true;
+            this.materialLabel21.Depth = 0;
+            this.materialLabel21.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel21.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialLabel21.Location = new System.Drawing.Point(74, 163);
+            this.materialLabel21.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.materialLabel21.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel21.Name = "materialLabel21";
+            this.materialLabel21.Size = new System.Drawing.Size(417, 19);
+            this.materialLabel21.TabIndex = 75;
+            this.materialLabel21.Text = "Zie ook de handleiding (in Word) voor functionele toelichting.";
+            // 
+            // materialLabel20
+            // 
+            this.materialLabel20.AutoSize = true;
+            this.materialLabel20.Depth = 0;
+            this.materialLabel20.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel20.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialLabel20.Location = new System.Drawing.Point(74, 122);
+            this.materialLabel20.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.materialLabel20.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel20.Name = "materialLabel20";
+            this.materialLabel20.Size = new System.Drawing.Size(678, 19);
+            this.materialLabel20.TabIndex = 74;
+            this.materialLabel20.Text = "- Optioneel: de koppeling naar de fysieke bestanden voor metadata-analyse (Tab Ge" +
+    "nereer Metadata)";
+            // 
+            // materialLabel19
+            // 
+            this.materialLabel19.AutoSize = true;
+            this.materialLabel19.Depth = 0;
+            this.materialLabel19.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel19.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialLabel19.Location = new System.Drawing.Point(74, 94);
+            this.materialLabel19.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.materialLabel19.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel19.Name = "materialLabel19";
+            this.materialLabel19.Size = new System.Drawing.Size(516, 19);
+            this.materialLabel19.TabIndex = 73;
+            this.materialLabel19.Text = "- Csv met de records-metadata, = de documenten-metadata (Tab Bestanden)";
+            // 
+            // materialLabel18
+            // 
+            this.materialLabel18.AutoSize = true;
+            this.materialLabel18.Depth = 0;
+            this.materialLabel18.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel18.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialLabel18.Location = new System.Drawing.Point(74, 66);
+            this.materialLabel18.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.materialLabel18.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel18.Name = "materialLabel18";
+            this.materialLabel18.Size = new System.Drawing.Size(322, 19);
+            this.materialLabel18.TabIndex = 72;
+            this.materialLabel18.Text = "- Csv met de dossiergegevens (Tab Bestanden)";
+            // 
+            // materialLabel17
+            // 
+            this.materialLabel17.AutoSize = true;
+            this.materialLabel17.Depth = 0;
+            this.materialLabel17.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel17.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialLabel17.Location = new System.Drawing.Point(74, 38);
+            this.materialLabel17.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.materialLabel17.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel17.Name = "materialLabel17";
+            this.materialLabel17.Size = new System.Drawing.Size(562, 19);
+            this.materialLabel17.TabIndex = 71;
+            this.materialLabel17.Text = "Voor een succesvolle data-import en TopX-conversie zijn de volgende zaken nodig:";
             // 
             // txtIdentificatieArchief
             // 
@@ -527,11 +598,12 @@ namespace TOPX.UI.Forms
             // 
             // picRecordsSelector
             // 
+            this.picRecordsSelector.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.picRecordsSelector.Image = ((System.Drawing.Image)(resources.GetObject("picRecordsSelector.Image")));
-            this.picRecordsSelector.Location = new System.Drawing.Point(884, 34);
+            this.picRecordsSelector.Location = new System.Drawing.Point(879, 40);
             this.picRecordsSelector.Margin = new System.Windows.Forms.Padding(2);
             this.picRecordsSelector.Name = "picRecordsSelector";
-            this.picRecordsSelector.Size = new System.Drawing.Size(31, 33);
+            this.picRecordsSelector.Size = new System.Drawing.Size(23, 23);
             this.picRecordsSelector.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picRecordsSelector.TabIndex = 22;
             this.picRecordsSelector.TabStop = false;
@@ -539,11 +611,12 @@ namespace TOPX.UI.Forms
             // 
             // picDossierSelector
             // 
+            this.picDossierSelector.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.picDossierSelector.Image = ((System.Drawing.Image)(resources.GetObject("picDossierSelector.Image")));
-            this.picDossierSelector.Location = new System.Drawing.Point(294, 32);
+            this.picDossierSelector.Location = new System.Drawing.Point(295, 37);
             this.picDossierSelector.Margin = new System.Windows.Forms.Padding(2);
             this.picDossierSelector.Name = "picDossierSelector";
-            this.picDossierSelector.Size = new System.Drawing.Size(31, 33);
+            this.picDossierSelector.Size = new System.Drawing.Size(23, 23);
             this.picDossierSelector.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picDossierSelector.TabIndex = 21;
             this.picDossierSelector.TabStop = false;
@@ -1090,77 +1163,6 @@ namespace TOPX.UI.Forms
             this.lblVersion.Size = new System.Drawing.Size(52, 15);
             this.lblVersion.TabIndex = 71;
             this.lblVersion.Text = "v 1.0.0.0";
-            // 
-            // materialLabel17
-            // 
-            this.materialLabel17.AutoSize = true;
-            this.materialLabel17.Depth = 0;
-            this.materialLabel17.Font = new System.Drawing.Font("Roboto", 11F);
-            this.materialLabel17.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel17.Location = new System.Drawing.Point(74, 38);
-            this.materialLabel17.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.materialLabel17.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel17.Name = "materialLabel17";
-            this.materialLabel17.Size = new System.Drawing.Size(562, 19);
-            this.materialLabel17.TabIndex = 71;
-            this.materialLabel17.Text = "Voor een succesvolle data-import en TopX-conversie zijn de volgende zaken nodig:";
-            // 
-            // materialLabel18
-            // 
-            this.materialLabel18.AutoSize = true;
-            this.materialLabel18.Depth = 0;
-            this.materialLabel18.Font = new System.Drawing.Font("Roboto", 11F);
-            this.materialLabel18.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel18.Location = new System.Drawing.Point(74, 66);
-            this.materialLabel18.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.materialLabel18.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel18.Name = "materialLabel18";
-            this.materialLabel18.Size = new System.Drawing.Size(322, 19);
-            this.materialLabel18.TabIndex = 72;
-            this.materialLabel18.Text = "- Csv met de dossiergegevens (Tab Bestanden)";
-            // 
-            // materialLabel19
-            // 
-            this.materialLabel19.AutoSize = true;
-            this.materialLabel19.Depth = 0;
-            this.materialLabel19.Font = new System.Drawing.Font("Roboto", 11F);
-            this.materialLabel19.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel19.Location = new System.Drawing.Point(74, 94);
-            this.materialLabel19.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.materialLabel19.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel19.Name = "materialLabel19";
-            this.materialLabel19.Size = new System.Drawing.Size(516, 19);
-            this.materialLabel19.TabIndex = 73;
-            this.materialLabel19.Text = "- Csv met de records-metadata, = de documenten-metadata (Tab Bestanden)";
-            // 
-            // materialLabel20
-            // 
-            this.materialLabel20.AutoSize = true;
-            this.materialLabel20.Depth = 0;
-            this.materialLabel20.Font = new System.Drawing.Font("Roboto", 11F);
-            this.materialLabel20.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel20.Location = new System.Drawing.Point(74, 122);
-            this.materialLabel20.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.materialLabel20.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel20.Name = "materialLabel20";
-            this.materialLabel20.Size = new System.Drawing.Size(678, 19);
-            this.materialLabel20.TabIndex = 74;
-            this.materialLabel20.Text = "- Optioneel: de koppeling naar de fysieke bestanden voor metadata-analyse (Tab Ge" +
-    "nereer Metadata)";
-            // 
-            // materialLabel21
-            // 
-            this.materialLabel21.AutoSize = true;
-            this.materialLabel21.Depth = 0;
-            this.materialLabel21.Font = new System.Drawing.Font("Roboto", 11F);
-            this.materialLabel21.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel21.Location = new System.Drawing.Point(74, 163);
-            this.materialLabel21.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.materialLabel21.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel21.Name = "materialLabel21";
-            this.materialLabel21.Size = new System.Drawing.Size(417, 19);
-            this.materialLabel21.TabIndex = 75;
-            this.materialLabel21.Text = "Zie ook de handleiding (in Word) voor functionele toelichting.";
             // 
             // TopXConverter
             // 

@@ -27,6 +27,9 @@ namespace Topx.Data
         public string Openbaarheid_OmschrijvingBeperkingen { get; set; }
 
         [StringLength(50)]
+        public string Openbaarheid_DatumOfPeriode { get; set; }
+
+        [StringLength(50)]
         public string Bestand_Vorm_Redactiegenre { get; set; }
 
         [StringLength(50)]
