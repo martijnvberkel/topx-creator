@@ -7,7 +7,7 @@ namespace Topx.Data
     public partial class ModelTopX : DbContext
     {
         public ModelTopX()
-            : base(@"data source = (LocalDb)\MSSQLLocalDB; initial catalog = ModelTopX; integrated security = True; MultipleActiveResultSets=True;")
+            : base(LocalDbHelper.GetConnectionString())
         {
             // Database.SetInitializer(new CreateDatabaseIfNotExists<ModelTopX>());
         }
@@ -31,8 +31,8 @@ namespace Topx.Data
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             // Database.SetInitializer(new CreateDatabaseIfNotExists<ModelTopX>());
-           // Database.SetInitializer(new MigrateDatabaseToLatestVersion<ModelTopX, Migrations.Configuration>());
-            // Database.SetInitializer<ModelTopX>(null);
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<ModelTopX, Migrations.Configuration>());
+           // Database.SetInitializer<ModelTopX>(null);
             // base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<Dossier>()

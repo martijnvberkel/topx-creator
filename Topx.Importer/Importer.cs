@@ -150,6 +150,9 @@ namespace Topx.Importer
                             if (propertyInfo.PropertyType == typeof(Int64))
                                 propertyInfo.SetValue(record, Convert.ToInt64(fieldsSource[index]), null);
 
+                            if (propertyInfo.PropertyType == typeof(DateTime?))
+                                propertyInfo.SetValue(record, Convert.ToDateTime(fieldsSource[index]), null);
+
                         }
                     }
                     var recordvalidator = new RecordValidator(record);

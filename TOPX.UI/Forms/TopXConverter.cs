@@ -137,7 +137,8 @@ namespace TOPX.UI.Forms
             txtIdentificatieArchief.Text = _globals?.IdentificatieArchief;
             txtNaamArchief.Text = _globals?.NaamArchief;
             txtOmschrijvingArchief.Text = _globals?.OmschrijvingArchief;
-            lblVersion.Text = $"v {System.Windows.Forms.Application.ProductVersion}";
+            lblVersion.Text = $"v {Application.ProductVersion}";
+
             //_lastSelectedDirToScanForMetadata = @"D:\TopX_Data\TestFiles";
             btSaveTopxXml.Enabled = false;
         }
@@ -171,7 +172,7 @@ namespace TOPX.UI.Forms
                 importer.SaveDossiers(_fieldmappingsDossiers, dossiers);
                 if (importer.Error)
                 {
-                    txtErrorsDossiers.Text = importer.ErrorMessage;
+                    txtErrorsDossiers.Text = importer.ErrorMessage + Environment.NewLine + importer.ErrorsImportDossiers;
                 }
             }
 
@@ -180,7 +181,7 @@ namespace TOPX.UI.Forms
                 importer.SaveRecords(_fieldmappingsRecords, records);
                 if (importer.Error)
                 {
-                    txtErrorRecords.Text = importer.ErrorMessage;
+                    txtErrorRecords.Text = importer.ErrorMessage + Environment.NewLine + importer.ErrorsImportRecords;
                 }
             }
 

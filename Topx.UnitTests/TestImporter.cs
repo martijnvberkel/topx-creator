@@ -83,6 +83,7 @@ namespace Topx.UnitTests
                 Bestand_Formaat_FysiekeIntegriteit_Waarde = "6024baa32d6a7f8ef10239d43c9dfd8b25a64b1fc8c9d34da7523ec5dbed9ac6",
                 Bestand_Formaat_FysiekeIntegriteit_DatumEnTijd = Convert.ToDateTime("30-7-2015 12:50"),
                 Bestand_Formaat_DatumAanmaak = Convert.ToDateTime("20-8-2012"),
+                Openbaarheid_DatumOfPeriode = "17-05-1905",
                 DossierId = "NL-0000-10000-1"
             };
             var dossiers = new List<Dossier>() { new Dossier()
@@ -106,7 +107,7 @@ namespace Topx.UnitTests
                 IdentificatieKenmerk = "NL-0000-10000-1",
                 Integriteit = "Integer",
                 Naam = "bouwvergunning - bouwen landbouwerswoning Hoofdstraat 13 5121JA Rijen 17-05-1905",
-                Openbaarheid_DatumOfPeriode = "17-05-1905",
+                Openbaarheid_DatumOfPeriode = "17-05-1910",
                 Openbaarheid_OmschrijvingBeperkingen = "Openbaar",
                 Relatie_Id = null,
                 Relatie_DatumOfPeriode = null,
@@ -158,7 +159,7 @@ namespace Topx.UnitTests
             var dossierValidator = new DossierValidator(dossier);
 
             var result = dossierValidator.Validate();
-            Assert.That(result, Is.False);
+            Assert.That(result, Is.EqualTo(false));
             Assert.That(dossierValidator.ValidationErrors.Count, Is.EqualTo(12));
         }
 
