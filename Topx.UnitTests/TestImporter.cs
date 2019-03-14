@@ -8,6 +8,7 @@ using NUnit.Framework;
 using Topx.Data;
 using Topx.DataServices;
 using Topx.Importer;
+using Topx.UnitTests.TestResources;
 
 
 namespace Topx.UnitTests
@@ -130,9 +131,9 @@ namespace Topx.UnitTests
             var mockDataservice = new Mock<IDataService>();
 
             var converter = new Creator.Parser(globals, mockDataservice.Object);
-            var recordinformationPackage = converter.ParseDataToTopx(dossiers);
-          
-            var xmlstreamActual = Utility.XmlHelper. GetXmlStringFromObject(recordinformationPackage);
+            var recordinformationPackage = converter.ParseDataToTopx(dossiers)[0];
+            var xmlHelper = new Utility.XmlHelper();
+            var xmlstreamActual = xmlHelper.GetXmlStringFromObject(recordinformationPackage);
 
             // Act
             var xmlCompare = File.ReadAllText(Path.Combine(Statics. AppPath(), @"TestResources\ExpectedOutput1.xml"));
@@ -190,6 +191,35 @@ namespace Topx.UnitTests
             Assert.That(dossierValidator.ValidationErrors.Count, Is.EqualTo(0));
         }
 
+        [Test]
+
+        public void TestBatch()
+        {
+            var dossiers = Dossiers_Test1.GetDossiers();
+            var globals = new Globals()
+            {
+                BronArchief = "a",
+                DatumArchief = Convert.ToDateTime("2018-12-13"),
+                DoelArchief = "b",
+                IdentificatieArchief = "c",
+                NaamArchief = "d",
+                OmschrijvingArchief = "e"
+            };
+
+            var mockDataservice = new Mock<IDataService>();
+
+            var converter = new Creator.Parser(globals, mockDataservice.Object);
+            var recordinformationPackage = converter.ParseDataToTopx(dossiers, 50);
+            var xmlHelper = new Utility.XmlHelper();
+            var xmlstreamActual = xmlHelper.GetXmlStringFromObject(recordinformationPackage[0]);
+
+            // Act
+            var xmlCompare = File.ReadAllText(Path.Combine(Statics.AppPath(), @"TestResources\ExpectedOutput1.xml"));
+
+            // Assert
+            XmlAssert.Equal(xmlCompare, xmlstreamActual);
+
+        }
 
 
         private StreamReader CreateReader(string testString)

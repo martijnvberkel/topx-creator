@@ -14,7 +14,12 @@ using static  Topx.Data.DTO.TopX;
 
 namespace Topx.Creator
 {
-    public class Parser
+    public interface IParser
+    {
+        List<RIP.recordInformationPackage> ParseDataToTopx(List<Dossier> listOfDossiers, long maxBatchSize_bytes = 0);
+    }
+
+    public class Parser : IParser
     {
         private readonly Globals _globals;
 
@@ -32,8 +37,9 @@ namespace Topx.Creator
             _dataservice = dataservice;
             _dataservice.ClearLog();
         }
-        public RIP.recordInformationPackage ParseDataToTopx(List<Dossier> listOfDossiers, int nrOfRecords = 0)
+        public List<RIP.recordInformationPackage> ParseDataToTopx(List<Dossier> listOfDossiers, long maxBatchSize_bytes = 0)
         {
+            var resultRecordInformationPackages = new List<RIP.recordInformationPackage>();
             if (!TestHealthyGlobals())
             {
                 return null;
@@ -52,7 +58,7 @@ namespace Topx.Creator
                 record = RipArchief(_identificatieArchief, naamArchief)
             };
 
-            var recordCounter = 0;
+            long totalSize = 0;
             foreach (var dossier in listOfDossiers)
             {
                 try
@@ -67,7 +73,8 @@ namespace Topx.Creator
                         ErrorMessage.AppendLine($"Dossier {dossier.IdentificatieKenmerk}: Veld Naam is leeg");
                     }
 
-                    ValidateDossier(dossier);
+                   if (! ValidateDossier(dossier))
+                        continue;
 
                     Rip.record.Add(RipBeschikkingAsDossier(dossier));
 
@@ -83,13 +90,18 @@ namespace Topx.Creator
                     ErrorMessage.AppendLine($"Dossier {dossier.IdentificatieKenmerk}: ERROR: { ex.Message}");
                 }
 
-                recordCounter++;
-                if (nrOfRecords > 0)
-                    if (recordCounter >= nrOfRecords)
-                        return Rip;
+                var sizeOfDossier = dossier.Records.Sum(record => record.Bestand_Formaat_BestandsOmvang ?? 0);
+                totalSize += sizeOfDossier;
+
+                if (maxBatchSize_bytes > 0 && totalSize + sizeOfDossier > maxBatchSize_bytes)  // Maxsize batch is bereikt
+                {
+                    resultRecordInformationPackages.Add(Rip);
+                    totalSize = 0;
+                }
             }
 
-            return Rip;
+            resultRecordInformationPackages.Add(Rip);
+            return resultRecordInformationPackages;
         }
 
         private bool TestHealthyGlobals()
@@ -124,10 +136,28 @@ namespace Topx.Creator
 
         }
 
-        private void ValidateDossier(Dossier dossier)
+        private bool ValidateDossier(Dossier dossier)
         {
-            //if (string.IsNullOrEmpty(dossier.Relatie_DatumOfPeriode))
-            //    Logger.Log(dossier.IdentificatieKenmerk, "Relatie_DatumOfPeriode is leeg");
+            var localErrormessage = new StringBuilder();
+            foreach (var record in dossier.Records)
+            {
+                if (string.IsNullOrEmpty(record.Bestand_Formaat_BestandsFormaat))
+                    localErrormessage.AppendLine($"Dossier: {dossier.IdentificatieKenmerk}: Bestand_Formaat_BestandsFormaat is leeg");
+                if (string.IsNullOrEmpty(record.Bestand_Formaat_Bestandsnaam))
+                    localErrormessage.AppendLine($"Dossier: {dossier.IdentificatieKenmerk}: Bestand_Formaat_Bestandsnaam is leeg");
+                if (string.IsNullOrEmpty(record.Bestand_Formaat_FysiekeIntegriteit_Algoritme))
+                    localErrormessage.AppendLine($"Dossier: {dossier.IdentificatieKenmerk}: Bestand_Formaat_FysiekeIntegriteit_Algoritme is leeg");
+                if (string.IsNullOrEmpty(record.Bestand_Formaat_FysiekeIntegriteit_Waarde))
+                    localErrormessage.AppendLine($"Dossier: {dossier.IdentificatieKenmerk}: Bestand_Formaat_FysiekeIntegriteit_Waarde is leeg");
+                if (string.IsNullOrEmpty(record.Bestand_Vorm_Redactiegenre))
+                    localErrormessage.AppendLine($"Dossier: {dossier.IdentificatieKenmerk}: Bestand_Vorm_Redactiegenre is leeg");
+                if (record.Bestand_Formaat_BestandsOmvang == null || record.Bestand_Formaat_BestandsOmvang == 0)
+                   localErrormessage.AppendLine($"Dossier: {dossier.IdentificatieKenmerk}: Bestand_Formaat_BestandsOmvang is leeg of 0. Mogelijk moet de metadata nog worden aangevuld met een scan van de fysieke bestanden");
+            }
+            if (localErrormessage.Length == 0)
+                return true;
+            ErrorMessage.AppendLine(localErrormessage.ToString());
+            return false;
         }
 
 
