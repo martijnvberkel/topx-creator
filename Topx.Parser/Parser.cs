@@ -9,8 +9,8 @@ using System.Xml;
 using Topx.Data;
 using Topx.Data.DTO;
 using Topx.DataServices;
-using static  Topx.Data.DTO.RIP;
-using static  Topx.Data.DTO.TopX;
+using static Topx.Data.DTO.RIP;
+using static Topx.Data.DTO.TopX;
 
 namespace Topx.Creator
 {
@@ -25,7 +25,7 @@ namespace Topx.Creator
 
         private readonly IDataService _dataservice;
 
-        public RIP.recordInformationPackage Rip;
+
         public List<string> ZaaknummerMarkForDelivered = new List<string>();
         public StringBuilder ErrorMessage = new StringBuilder();
         private string _identificatieArchief;
@@ -51,16 +51,17 @@ namespace Topx.Creator
             var doelArchief = _globals.DoelArchief;
             var naamArchief = _globals.NaamArchief;
 
-            Rip = new RIP.recordInformationPackage()
+
+
+            long totalSize = 0;
+            var rip = new recordInformationPackage()
             {
-                packageHeader =
-                    RipHeader(_identificatieArchief, (DateTime) datumArchief, omschrijvingArchief, bronArchief, doelArchief),
                 record = RipArchief(_identificatieArchief, naamArchief)
             };
 
-            long totalSize = 0;
             foreach (var dossier in listOfDossiers)
             {
+
                 try
                 {
                     if (!dossier.Records.Any())
@@ -73,15 +74,15 @@ namespace Topx.Creator
                         ErrorMessage.AppendLine($"Dossier {dossier.IdentificatieKenmerk}: Veld Naam is leeg");
                     }
 
-                   if (! ValidateDossier(dossier))
+                    if (!ValidateDossier(dossier))
                         continue;
 
-                    Rip.record.Add(RipBeschikkingAsDossier(dossier));
+                    rip.record.Add(RipBeschikkingAsDossier(dossier));
 
                     foreach (var record in dossier.Records)
                     {
-                        Rip.record.Add(RipOobjectAsRecord(dossier, record, $"{dossier.IdentificatieKenmerk}_{Path.GetFileNameWithoutExtension(record.Bestand_Formaat_Bestandsnaam)}"));
-                        Rip.record.Add(RipObjectAsBestand(record));
+                        rip.record.Add(RipOobjectAsRecord(dossier, record, $"{dossier.IdentificatieKenmerk}_{Path.GetFileNameWithoutExtension(record.Bestand_Formaat_Bestandsnaam)}"));
+                        rip.record.Add(RipObjectAsBestand(record));
                     }
                 }
                 catch (Exception ex)
@@ -95,12 +96,26 @@ namespace Topx.Creator
 
                 if (maxBatchSize_bytes > 0 && totalSize + sizeOfDossier > maxBatchSize_bytes)  // Maxsize batch is bereikt
                 {
-                    resultRecordInformationPackages.Add(Rip);
+                    // Clone rip 
+
+                    resultRecordInformationPackages.Add(new recordInformationPackage()
+                    {
+                        packageHeader = RipHeader(_identificatieArchief, (DateTime)datumArchief, omschrijvingArchief, bronArchief, doelArchief),
+                       record = rip.record
+                    });
+
                     totalSize = 0;
+
+                    // Clear rip voor de volgende batch
+                    rip = new RIP.recordInformationPackage() { record = RipArchief(_identificatieArchief, naamArchief) };
                 }
             }
 
-            resultRecordInformationPackages.Add(Rip);
+            resultRecordInformationPackages.Add(new recordInformationPackage()
+            {
+                packageHeader = RipHeader(_identificatieArchief, (DateTime)datumArchief, omschrijvingArchief, bronArchief, doelArchief),
+                record = rip.record
+            });
             return resultRecordInformationPackages;
         }
 
@@ -152,7 +167,7 @@ namespace Topx.Creator
                 if (string.IsNullOrEmpty(record.Bestand_Vorm_Redactiegenre))
                     localErrormessage.AppendLine($"Dossier: {dossier.IdentificatieKenmerk}: Bestand_Vorm_Redactiegenre is leeg");
                 if (record.Bestand_Formaat_BestandsOmvang == null || record.Bestand_Formaat_BestandsOmvang == 0)
-                   localErrormessage.AppendLine($"Dossier: {dossier.IdentificatieKenmerk}: Bestand_Formaat_BestandsOmvang is leeg of 0. Mogelijk moet de metadata nog worden aangevuld met een scan van de fysieke bestanden");
+                    localErrormessage.AppendLine($"Dossier: {dossier.IdentificatieKenmerk}: Bestand_Formaat_BestandsOmvang is leeg of 0. Mogelijk moet de metadata nog worden aangevuld met een scan van de fysieke bestanden");
             }
             if (localErrormessage.Length == 0)
                 return true;
@@ -181,10 +196,10 @@ namespace Topx.Creator
 
         private TopX.topxType GetRecordAsTopx(Dossier dossier, Record record, string identificatieKenmerk)
         {
-           
+
             var eventgeschiedenis_DatumOfPeriode = DateTime.ParseExact(dossier.Eventgeschiedenis_DatumOfPeriode, DateParsing, CultureInfo.InvariantCulture).ToString("yyyy-MM-dd");
 
-            var relatie_DatumOfPeriode =  dossier.Relatie_DatumOfPeriode ?? record.Bestand_Formaat_DatumAanmaak?.ToString("yyyy-MM-dd"); ;
+            var relatie_DatumOfPeriode = dossier.Relatie_DatumOfPeriode ?? record.Bestand_Formaat_DatumAanmaak?.ToString("yyyy-MM-dd"); ;
 
             var vertrouwelijkheid_DatumOfPeriode = DateTime.ParseExact(record.Vertrouwelijkheid_DatumOfPeriode, DateParsing, CultureInfo.InvariantCulture).ToString("yyyy-MM-dd");
 
@@ -256,7 +271,7 @@ namespace Topx.Creator
             return topx;
         }
 
-       
+
 
         private openbaarheidType[] GetOpenbaarheid(Record record)
         {
@@ -286,7 +301,7 @@ namespace Topx.Creator
                 };
             }
 
-            _dataservice.Log(record.DossierId, "Openbaarheid_OmschrijvingBeperkingen mag niet leeg zijn" );
+            _dataservice.Log(record.DossierId, "Openbaarheid_OmschrijvingBeperkingen mag niet leeg zijn");
             return new[] {new openbaarheidType()
             {
                 omschrijvingBeperkingen = new[]
@@ -318,14 +333,14 @@ namespace Topx.Creator
 
         private topxType GetBestandAsTopx(Record record)
         {
-            
+
             DateTime gemaaktOp;
             var identificatieKenmerkBestand = Path.GetFileNameWithoutExtension(record.Bestand_Formaat_Bestandsnaam);
             var relatieKenmerkBestand = $"{record.DossierId}_{identificatieKenmerkBestand}";
 
             var openbaarheid_DatumOfPeriode = DateTime.ParseExact(record.Openbaarheid_DatumOfPeriode,
                 DateParsing, CultureInfo.InvariantCulture).ToString("yyyy-MM-dd");
-            
+
             var topx = new topxType
             {
                 Item = new bestandType()
@@ -403,7 +418,7 @@ namespace Topx.Creator
 
         private RIP.ripRecordType RipBeschikkingAsDossier(Dossier dossier)
         {
-            
+
             var riprecordType = new RIP.ripRecordType()
             {
                 recordHeader = new RIP.ripRecordHeaderType()
@@ -483,7 +498,7 @@ namespace Topx.Creator
 
         private topxType GetDossierAsTopx(Dossier dossier)
         {
-           
+
 
             var topx = new topxType();
             //var identificatiekenmerkTemp = source.C2_dn_Bestand.Split("-"[0]);
@@ -523,7 +538,7 @@ namespace Topx.Creator
                 gebruiksrechten_DatumOfPeriode = DateTime.ParseExact(dossier.Gebruiksrechten_DatumOfPeriode, DateParsing, CultureInfo.InvariantCulture).ToString("yyyy-MM-dd");
 
 
-            var vertrouwelijkheid_DatumOfPeriode = DateTime.ParseExact(dossier.Vertrouwelijkheid_DatumOfPeriode, DateParsing, CultureInfo.InvariantCulture).ToString("yyyy-MM-dd"); 
+            var vertrouwelijkheid_DatumOfPeriode = DateTime.ParseExact(dossier.Vertrouwelijkheid_DatumOfPeriode, DateParsing, CultureInfo.InvariantCulture).ToString("yyyy-MM-dd");
 
             topx.Item = new aggregatieType()
             {
