@@ -6,6 +6,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Xml.Serialization;
 using MaterialSkin;
@@ -39,7 +40,7 @@ namespace TOPX.UI.Forms
         private Headers _headers;
         private Globals _globals;
 
-        private RIP.recordInformationPackage _resultRecordInforamtionPackage;
+        private List<RIP.recordInformationPackage> _resultRecordInformationPackage;
         private WaitForm _waitForm;
 
         private string _lastSelectedDirToScanForMetadata;
@@ -196,42 +197,52 @@ namespace TOPX.UI.Forms
         {
             try
             {
-                _resultRecordInforamtionPackage = null;
+                _resultRecordInformationPackage = null;
+                txtLogTopXCreate.Text = string.Empty;
+                txtResultXml.Text = string.Empty;
+
                 Cursor.Current = Cursors.WaitCursor;
                 var parser = new Parser(_globals, _dataservice);
 
                 var listofdossiers = _dataservice.GetAllDossiers();
-                _resultRecordInforamtionPackage = parser.ParseDataToTopx(listofdossiers);
+                var batchSize = (long) Convert.ToInt32(txtBatchSize.Text) * (long)1073741824; // GB naar bytes
+
+                _resultRecordInformationPackage = chkUseBatchSize.Checked 
+                    ? parser.ParseDataToTopx(listofdossiers, batchSize) 
+                    : parser.ParseDataToTopx(listofdossiers);
+
                 txtLogTopXCreate.Text = parser.ErrorMessage.ToString();
 
                 Cursor.Current = Cursors.Default;
 
-                if (_resultRecordInforamtionPackage != null && parser.ErrorMessage.Length == 0)
+                if (_resultRecordInformationPackage != null && parser.ErrorMessage.Length == 0)
                 {
                     btSaveTopxXml.Enabled = true;
-                    txtResultXml.Text = XmlHelper.GetXmlStringFromObject(_resultRecordInforamtionPackage, 10000);
+                    var xmlhelper = new XmlHelper();
+                    var topXResult = xmlhelper.GetXmlStringFromObject(_resultRecordInformationPackage[0]);
+                    txtResultXml.Text = topXResult;
+                    txtLogTopXCreate.Text = xmlhelper.ValidationErrors.ToString();
 
-                    if (MessageBox.Show("Save xml?", "xml", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    if (string.IsNullOrEmpty(topXResult) && xmlhelper.ValidationErrors.Length > 0)
                     {
-                        SaveAsXml(_resultRecordInforamtionPackage);
+                        MessageBox.Show("Er zijn geen dossiers zonder validatiefouten om te exporteren.");
+                        return;
+                    }
+
+                    var message = _resultRecordInformationPackage.Count > 1 
+                        ? $"Er zijn {_resultRecordInformationPackage.Count} TopX-files gegenereerd om de grootte per file te limiteren tot maximaal {txtBatchSize.Text} GB. Wilt u deze opslaan?" 
+                        : "Save TopX xml?";
+
+                    if (MessageBox.Show(message, "xml", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    {
+                        SaveAsXml(_resultRecordInformationPackage);
                     }
                 }
+
                 else
                 {
-
-                    if (parser.ErrorMessage.Length > 0 && _resultRecordInforamtionPackage == null)
-                    {
-                        btSaveTopxXml.Enabled = false;
-                        MessageBox.Show("Er zijn fouten opgetreden tijdens de conversie, TopX xml kan niet worden gegenereerd", "xml", MessageBoxButtons.OK);
-                    }
-                    else
-                    {
-                        btSaveTopxXml.Enabled = true;
-                        if (MessageBox.Show("Er zijn fouten opgetreden tijdens de conversie. Wilt u de gegenereerde TopX xml toch opslaan?", "xml", MessageBoxButtons.YesNo) == DialogResult.Yes)
-                        {
-                            SaveAsXml(_resultRecordInforamtionPackage);
-                        }
-                    }
+                    btSaveTopxXml.Enabled = false;
+                    MessageBox.Show("Er zijn fouten opgetreden tijdens de conversie, TopX xml kan niet worden gegenereerd", "xml", MessageBoxButtons.OK);
                 }
 
             }
@@ -243,18 +254,29 @@ namespace TOPX.UI.Forms
             }
         }
 
-        private void SaveAsXml(RIP.recordInformationPackage result)
+        private void SaveAsXml( List <RIP.recordInformationPackage> recordInformationPackages)
         {
             var savefile = new SaveFileDialog { FileName = $"{_globals.NaamArchief}.xml" };
 
-            if (savefile.ShowDialog() == DialogResult.OK)
+            if (savefile.ShowDialog() == DialogResult.OK && !string.IsNullOrEmpty(savefile.FileName))
             {
-                var encoding = Encoding.UTF8;
-                using (var writer = new StreamWriter(savefile.FileName, false, encoding))
+                var counter = 0;
+                foreach (var recordInformationPackage in recordInformationPackages)
                 {
-                    var serializer = new XmlSerializer(typeof(RIP.recordInformationPackage));
-                    serializer.Serialize(writer, result);
-                    writer.Flush();
+                    var fileNameWithoutExtension = Path.GetFileNameWithoutExtension(savefile.FileName) + "_" + counter;
+
+                    // Wanneer collectie maar 1 xml bevat, is het niet nodig om een getal toe te voegen aan de naam.
+                    var newFullPath = _resultRecordInformationPackage.Count > 1
+                        ? Path.Combine(Path.GetDirectoryName(savefile.FileName) ?? string.Empty, fileNameWithoutExtension + ".xml")
+                        : savefile.FileName;
+
+                    using (var writer = new StreamWriter(newFullPath, false, Encoding.UTF8))
+                    {
+                        var serializer = new XmlSerializer(typeof(RIP.recordInformationPackage));
+                        serializer.Serialize(writer, recordInformationPackage);
+                        writer.Flush();
+                    }
+                    counter++;
                 }
             }
         }
@@ -459,8 +481,8 @@ namespace TOPX.UI.Forms
 
         private void btSaveTopxXml_Click(object sender, EventArgs e)
         {
-            if (_resultRecordInforamtionPackage != null)
-                SaveAsXml(_resultRecordInforamtionPackage);
+            if (_resultRecordInformationPackage != null)
+                SaveAsXml(_resultRecordInformationPackage);
             else
             {
                 MessageBox.Show("Er is geen data aanwezig om op te slaan.");
@@ -724,6 +746,24 @@ namespace TOPX.UI.Forms
             {
                 MessageBox.Show($"Fout bij inlezen gegevens: {e.Message}");
                 return false;
+            }
+        }
+
+        private void txtBatchSize_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Verify that the pressed key isn't CTRL or any non-numeric digit
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtBatchSize_Leave(object sender, EventArgs e)
+        {
+            txtBatchSize.Text = Regex.Replace(txtBatchSize.Text, "[^0-9.]", "");
+            if (string.IsNullOrEmpty(txtBatchSize.Text))
+            {
+                txtBatchSize.Text = "0";
             }
         }
     }

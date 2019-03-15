@@ -55,16 +55,11 @@ namespace TOPX.UI.Forms
             this.materialLabel19 = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel18 = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel17 = new MaterialSkin.Controls.MaterialLabel();
-            this.txtIdentificatieArchief = new TOPX.UI.Controls.PlaceHolderTextBox();
             this.materialLabel12 = new MaterialSkin.Controls.MaterialLabel();
             this.btFillDatumArchief = new System.Windows.Forms.Button();
-            this.txtNaamArchief = new TOPX.UI.Controls.PlaceHolderTextBox();
             this.materialLabel9 = new MaterialSkin.Controls.MaterialLabel();
-            this.txtDoelArchief = new TOPX.UI.Controls.PlaceHolderTextBox();
             this.materialLabel11 = new MaterialSkin.Controls.MaterialLabel();
-            this.txtBronArchief = new TOPX.UI.Controls.PlaceHolderTextBox();
             this.materialLabel8 = new MaterialSkin.Controls.MaterialLabel();
-            this.txtOmschrijvingArchief = new TOPX.UI.Controls.PlaceHolderTextBox();
             this.materialLabel7 = new MaterialSkin.Controls.MaterialLabel();
             this.txtDatumArchief = new System.Windows.Forms.MaskedTextBox();
             this.materialLabel10 = new MaterialSkin.Controls.MaterialLabel();
@@ -83,14 +78,6 @@ namespace TOPX.UI.Forms
             this.materialLabel6 = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel5 = new MaterialSkin.Controls.MaterialLabel();
             this.txtDossierLocation = new System.Windows.Forms.TextBox();
-            this.gridFieldMappingRecords = new TOPX.UI.Controls.DragDropGridView();
-            this.DatabaseFieldNameRecords = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MappedFieldNameRecords = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TMLO_Records = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.gridFieldMappingDossiers = new TOPX.UI.Controls.DragDropGridView();
-            this.MappedFieldName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DatabaseFieldName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TMLO = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabImportFiles = new System.Windows.Forms.TabPage();
             this.linkCopyErrorsRecords = new System.Windows.Forms.LinkLabel();
             this.linkCopyErrorsDossiers = new System.Windows.Forms.LinkLabel();
@@ -122,6 +109,22 @@ namespace TOPX.UI.Forms
             this.btGenerateTopX = new System.Windows.Forms.Button();
             this.txtLogTopXCreate = new System.Windows.Forms.TextBox();
             this.lblVersion = new System.Windows.Forms.Label();
+            this.chkUseBatchSize = new System.Windows.Forms.CheckBox();
+            this.txtBatchSize = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtIdentificatieArchief = new TOPX.UI.Controls.PlaceHolderTextBox();
+            this.txtNaamArchief = new TOPX.UI.Controls.PlaceHolderTextBox();
+            this.txtDoelArchief = new TOPX.UI.Controls.PlaceHolderTextBox();
+            this.txtBronArchief = new TOPX.UI.Controls.PlaceHolderTextBox();
+            this.txtOmschrijvingArchief = new TOPX.UI.Controls.PlaceHolderTextBox();
+            this.gridFieldMappingRecords = new TOPX.UI.Controls.DragDropGridView();
+            this.DatabaseFieldNameRecords = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MappedFieldNameRecords = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TMLO_Records = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.gridFieldMappingDossiers = new TOPX.UI.Controls.DragDropGridView();
+            this.MappedFieldName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DatabaseFieldName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TMLO = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.materialContextMenuStrip2.SuspendLayout();
             this.materialContextMenuStrip3.SuspendLayout();
             this.materialTabControl1.SuspendLayout();
@@ -129,12 +132,12 @@ namespace TOPX.UI.Forms
             this.tabLoadFiles.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picRecordsSelector)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picDossierSelector)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridFieldMappingRecords)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridFieldMappingDossiers)).BeginInit();
             this.tabImportFiles.SuspendLayout();
             this.tabMetadata.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picSelectDirToScan)).BeginInit();
             this.tabGenerateTopX.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridFieldMappingRecords)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridFieldMappingDossiers)).BeginInit();
             this.SuspendLayout();
             // 
             // materialContextMenuStrip1
@@ -271,13 +274,13 @@ namespace TOPX.UI.Forms
             // 
             this.materialLabel21.AutoSize = true;
             this.materialLabel21.Depth = 0;
-            this.materialLabel21.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel21.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.materialLabel21.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialLabel21.Location = new System.Drawing.Point(74, 163);
             this.materialLabel21.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.materialLabel21.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel21.Name = "materialLabel21";
-            this.materialLabel21.Size = new System.Drawing.Size(417, 19);
+            this.materialLabel21.Size = new System.Drawing.Size(404, 18);
             this.materialLabel21.TabIndex = 75;
             this.materialLabel21.Text = "Zie ook de handleiding (in Word) voor functionele toelichting.";
             // 
@@ -285,13 +288,13 @@ namespace TOPX.UI.Forms
             // 
             this.materialLabel20.AutoSize = true;
             this.materialLabel20.Depth = 0;
-            this.materialLabel20.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel20.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.materialLabel20.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialLabel20.Location = new System.Drawing.Point(74, 122);
             this.materialLabel20.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.materialLabel20.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel20.Name = "materialLabel20";
-            this.materialLabel20.Size = new System.Drawing.Size(678, 19);
+            this.materialLabel20.Size = new System.Drawing.Size(670, 18);
             this.materialLabel20.TabIndex = 74;
             this.materialLabel20.Text = "- Optioneel: de koppeling naar de fysieke bestanden voor metadata-analyse (Tab Ge" +
     "nereer Metadata)";
@@ -300,13 +303,13 @@ namespace TOPX.UI.Forms
             // 
             this.materialLabel19.AutoSize = true;
             this.materialLabel19.Depth = 0;
-            this.materialLabel19.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel19.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.materialLabel19.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialLabel19.Location = new System.Drawing.Point(74, 94);
             this.materialLabel19.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.materialLabel19.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel19.Name = "materialLabel19";
-            this.materialLabel19.Size = new System.Drawing.Size(516, 19);
+            this.materialLabel19.Size = new System.Drawing.Size(515, 18);
             this.materialLabel19.TabIndex = 73;
             this.materialLabel19.Text = "- Csv met de records-metadata, = de documenten-metadata (Tab Bestanden)";
             // 
@@ -314,13 +317,13 @@ namespace TOPX.UI.Forms
             // 
             this.materialLabel18.AutoSize = true;
             this.materialLabel18.Depth = 0;
-            this.materialLabel18.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel18.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.materialLabel18.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialLabel18.Location = new System.Drawing.Point(74, 66);
             this.materialLabel18.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.materialLabel18.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel18.Name = "materialLabel18";
-            this.materialLabel18.Size = new System.Drawing.Size(322, 19);
+            this.materialLabel18.Size = new System.Drawing.Size(321, 18);
             this.materialLabel18.TabIndex = 72;
             this.materialLabel18.Text = "- Csv met de dossiergegevens (Tab Bestanden)";
             // 
@@ -328,40 +331,27 @@ namespace TOPX.UI.Forms
             // 
             this.materialLabel17.AutoSize = true;
             this.materialLabel17.Depth = 0;
-            this.materialLabel17.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel17.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.materialLabel17.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialLabel17.Location = new System.Drawing.Point(74, 38);
             this.materialLabel17.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.materialLabel17.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel17.Name = "materialLabel17";
-            this.materialLabel17.Size = new System.Drawing.Size(562, 19);
+            this.materialLabel17.Size = new System.Drawing.Size(555, 18);
             this.materialLabel17.TabIndex = 71;
             this.materialLabel17.Text = "Voor een succesvolle data-import en TopX-conversie zijn de volgende zaken nodig:";
-            // 
-            // txtIdentificatieArchief
-            // 
-            this.txtIdentificatieArchief.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Italic);
-            this.txtIdentificatieArchief.ForeColor = System.Drawing.Color.Gray;
-            this.txtIdentificatieArchief.Location = new System.Drawing.Point(256, 265);
-            this.txtIdentificatieArchief.Margin = new System.Windows.Forms.Padding(2);
-            this.txtIdentificatieArchief.Name = "txtIdentificatieArchief";
-            this.txtIdentificatieArchief.PlaceHolderText = "Bijv: NL-0784-10009";
-            this.txtIdentificatieArchief.Size = new System.Drawing.Size(194, 20);
-            this.txtIdentificatieArchief.TabIndex = 20;
-            this.txtIdentificatieArchief.Text = "Bijv: NL-0784-10009";
-            this.txtIdentificatieArchief.Leave += new System.EventHandler(this.SaveGlobals);
             // 
             // materialLabel12
             // 
             this.materialLabel12.AutoSize = true;
             this.materialLabel12.Depth = 0;
-            this.materialLabel12.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel12.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.materialLabel12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialLabel12.Location = new System.Drawing.Point(74, 265);
             this.materialLabel12.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.materialLabel12.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel12.Name = "materialLabel12";
-            this.materialLabel12.Size = new System.Drawing.Size(140, 19);
+            this.materialLabel12.Size = new System.Drawing.Size(129, 18);
             this.materialLabel12.TabIndex = 12;
             this.materialLabel12.Text = "Identificatie Archief";
             // 
@@ -376,111 +366,59 @@ namespace TOPX.UI.Forms
             this.btFillDatumArchief.UseVisualStyleBackColor = true;
             this.btFillDatumArchief.Click += new System.EventHandler(this.btFillDatumArchief_Click);
             // 
-            // txtNaamArchief
-            // 
-            this.txtNaamArchief.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Italic);
-            this.txtNaamArchief.ForeColor = System.Drawing.Color.Gray;
-            this.txtNaamArchief.Location = new System.Drawing.Point(256, 235);
-            this.txtNaamArchief.Margin = new System.Windows.Forms.Padding(2);
-            this.txtNaamArchief.Name = "txtNaamArchief";
-            this.txtNaamArchief.PlaceHolderText = "Bijv: Bouwvergunningen Gemeente Raamsdonk 1993 - 1996";
-            this.txtNaamArchief.Size = new System.Drawing.Size(480, 20);
-            this.txtNaamArchief.TabIndex = 10;
-            this.txtNaamArchief.Text = "Bijv: Bouwvergunningen Gemeente Raamsdonk 1993 - 1996";
-            this.txtNaamArchief.Leave += new System.EventHandler(this.SaveGlobals);
-            // 
             // materialLabel9
             // 
             this.materialLabel9.AutoSize = true;
             this.materialLabel9.Depth = 0;
-            this.materialLabel9.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel9.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.materialLabel9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialLabel9.Location = new System.Drawing.Point(74, 235);
             this.materialLabel9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.materialLabel9.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel9.Name = "materialLabel9";
-            this.materialLabel9.Size = new System.Drawing.Size(101, 19);
+            this.materialLabel9.Size = new System.Drawing.Size(97, 18);
             this.materialLabel9.TabIndex = 8;
             this.materialLabel9.Text = "Naam Archief";
-            // 
-            // txtDoelArchief
-            // 
-            this.txtDoelArchief.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Italic);
-            this.txtDoelArchief.ForeColor = System.Drawing.Color.Gray;
-            this.txtDoelArchief.Location = new System.Drawing.Point(256, 390);
-            this.txtDoelArchief.Margin = new System.Windows.Forms.Padding(2);
-            this.txtDoelArchief.Name = "txtDoelArchief";
-            this.txtDoelArchief.PlaceHolderText = "Bijv: Bouwvergunningen om op te nemen in e-Depot";
-            this.txtDoelArchief.Size = new System.Drawing.Size(480, 20);
-            this.txtDoelArchief.TabIndex = 70;
-            this.txtDoelArchief.Text = "Bijv: Bouwvergunningen om op te nemen in e-Depot";
-            this.txtDoelArchief.Leave += new System.EventHandler(this.SaveGlobals);
             // 
             // materialLabel11
             // 
             this.materialLabel11.AutoSize = true;
             this.materialLabel11.Depth = 0;
-            this.materialLabel11.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel11.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.materialLabel11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialLabel11.Location = new System.Drawing.Point(74, 390);
             this.materialLabel11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.materialLabel11.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel11.Name = "materialLabel11";
-            this.materialLabel11.Size = new System.Drawing.Size(92, 19);
+            this.materialLabel11.Size = new System.Drawing.Size(88, 18);
             this.materialLabel11.TabIndex = 6;
             this.materialLabel11.Text = "Doel Archief";
-            // 
-            // txtBronArchief
-            // 
-            this.txtBronArchief.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Italic);
-            this.txtBronArchief.ForeColor = System.Drawing.Color.Gray;
-            this.txtBronArchief.Location = new System.Drawing.Point(256, 360);
-            this.txtBronArchief.Margin = new System.Windows.Forms.Padding(2);
-            this.txtBronArchief.Name = "txtBronArchief";
-            this.txtBronArchief.PlaceHolderText = "Bijv: Digitale bouwvergunningen";
-            this.txtBronArchief.Size = new System.Drawing.Size(480, 20);
-            this.txtBronArchief.TabIndex = 60;
-            this.txtBronArchief.Text = "Bijv: Digitale bouwvergunningen";
-            this.txtBronArchief.Leave += new System.EventHandler(this.SaveGlobals);
             // 
             // materialLabel8
             // 
             this.materialLabel8.AutoSize = true;
             this.materialLabel8.Depth = 0;
-            this.materialLabel8.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel8.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.materialLabel8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialLabel8.Location = new System.Drawing.Point(74, 360);
             this.materialLabel8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.materialLabel8.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel8.Name = "materialLabel8";
-            this.materialLabel8.Size = new System.Drawing.Size(92, 19);
+            this.materialLabel8.Size = new System.Drawing.Size(89, 18);
             this.materialLabel8.TabIndex = 4;
             this.materialLabel8.Text = "Bron Archief";
-            // 
-            // txtOmschrijvingArchief
-            // 
-            this.txtOmschrijvingArchief.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Italic);
-            this.txtOmschrijvingArchief.ForeColor = System.Drawing.Color.Gray;
-            this.txtOmschrijvingArchief.Location = new System.Drawing.Point(256, 330);
-            this.txtOmschrijvingArchief.Margin = new System.Windows.Forms.Padding(2);
-            this.txtOmschrijvingArchief.Name = "txtOmschrijvingArchief";
-            this.txtOmschrijvingArchief.PlaceHolderText = "Bijv: Bouwvergunningen Gemeente Raamsdonk 1993 - 1996";
-            this.txtOmschrijvingArchief.Size = new System.Drawing.Size(480, 20);
-            this.txtOmschrijvingArchief.TabIndex = 50;
-            this.txtOmschrijvingArchief.Text = "Bijv: Bouwvergunningen Gemeente Raamsdonk 1993 - 1996";
-            this.txtOmschrijvingArchief.Leave += new System.EventHandler(this.SaveGlobals);
             // 
             // materialLabel7
             // 
             this.materialLabel7.AutoSize = true;
             this.materialLabel7.Depth = 0;
-            this.materialLabel7.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel7.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.materialLabel7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialLabel7.Location = new System.Drawing.Point(74, 330);
             this.materialLabel7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.materialLabel7.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel7.Name = "materialLabel7";
-            this.materialLabel7.Size = new System.Drawing.Size(148, 19);
+            this.materialLabel7.Size = new System.Drawing.Size(143, 18);
             this.materialLabel7.TabIndex = 2;
             this.materialLabel7.Text = "Omschrijving Archief";
             // 
@@ -499,13 +437,13 @@ namespace TOPX.UI.Forms
             // 
             this.materialLabel10.AutoSize = true;
             this.materialLabel10.Depth = 0;
-            this.materialLabel10.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel10.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.materialLabel10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialLabel10.Location = new System.Drawing.Point(74, 300);
             this.materialLabel10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.materialLabel10.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel10.Name = "materialLabel10";
-            this.materialLabel10.Size = new System.Drawing.Size(105, 19);
+            this.materialLabel10.Size = new System.Drawing.Size(101, 18);
             this.materialLabel10.TabIndex = 0;
             this.materialLabel10.Text = "Datum Archief";
             // 
@@ -626,12 +564,12 @@ namespace TOPX.UI.Forms
             // 
             this.materialLabel2.AutoSize = true;
             this.materialLabel2.Depth = 0;
-            this.materialLabel2.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.materialLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialLabel2.Location = new System.Drawing.Point(618, 79);
             this.materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel2.Name = "materialLabel2";
-            this.materialLabel2.Size = new System.Drawing.Size(249, 19);
+            this.materialLabel2.Size = new System.Drawing.Size(247, 18);
             this.materialLabel2.TabIndex = 20;
             this.materialLabel2.Text = "Veldmapping Records en Bestanden";
             // 
@@ -640,12 +578,12 @@ namespace TOPX.UI.Forms
             this.materialLabel1.AutoSize = true;
             this.materialLabel1.BackColor = System.Drawing.Color.White;
             this.materialLabel1.Depth = 0;
-            this.materialLabel1.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.materialLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialLabel1.Location = new System.Drawing.Point(34, 78);
             this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel1.Name = "materialLabel1";
-            this.materialLabel1.Size = new System.Drawing.Size(160, 19);
+            this.materialLabel1.Size = new System.Drawing.Size(156, 18);
             this.materialLabel1.TabIndex = 19;
             this.materialLabel1.Text = "Veldmapping Dossiers";
             // 
@@ -661,12 +599,12 @@ namespace TOPX.UI.Forms
             // 
             this.materialLabel6.AutoSize = true;
             this.materialLabel6.Depth = 0;
-            this.materialLabel6.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel6.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.materialLabel6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialLabel6.Location = new System.Drawing.Point(619, 14);
             this.materialLabel6.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel6.Name = "materialLabel6";
-            this.materialLabel6.Size = new System.Drawing.Size(313, 19);
+            this.materialLabel6.Size = new System.Drawing.Size(309, 18);
             this.materialLabel6.TabIndex = 17;
             this.materialLabel6.Text = "Selecteer Records en Bestanden-Metadatafile";
             // 
@@ -674,12 +612,12 @@ namespace TOPX.UI.Forms
             // 
             this.materialLabel5.AutoSize = true;
             this.materialLabel5.Depth = 0;
-            this.materialLabel5.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel5.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.materialLabel5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialLabel5.Location = new System.Drawing.Point(34, 13);
             this.materialLabel5.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel5.Name = "materialLabel5";
-            this.materialLabel5.Size = new System.Drawing.Size(216, 19);
+            this.materialLabel5.Size = new System.Drawing.Size(210, 18);
             this.materialLabel5.TabIndex = 16;
             this.materialLabel5.Text = "Selecteer Dossier-Metadatafile";
             // 
@@ -690,6 +628,463 @@ namespace TOPX.UI.Forms
             this.txtDossierLocation.ReadOnly = true;
             this.txtDossierLocation.Size = new System.Drawing.Size(250, 20);
             this.txtDossierLocation.TabIndex = 10;
+            // 
+            // tabImportFiles
+            // 
+            this.tabImportFiles.Controls.Add(this.linkCopyErrorsRecords);
+            this.tabImportFiles.Controls.Add(this.linkCopyErrorsDossiers);
+            this.tabImportFiles.Controls.Add(this.btImportFilesInDb);
+            this.tabImportFiles.Controls.Add(this.materialLabel4);
+            this.tabImportFiles.Controls.Add(this.materialLabel3);
+            this.tabImportFiles.Controls.Add(this.txtErrorRecords);
+            this.tabImportFiles.Controls.Add(this.txtErrorsDossiers);
+            this.tabImportFiles.Location = new System.Drawing.Point(4, 22);
+            this.tabImportFiles.Margin = new System.Windows.Forms.Padding(2);
+            this.tabImportFiles.Name = "tabImportFiles";
+            this.tabImportFiles.Size = new System.Drawing.Size(1218, 660);
+            this.tabImportFiles.TabIndex = 2;
+            this.tabImportFiles.Text = "Import";
+            this.tabImportFiles.UseVisualStyleBackColor = true;
+            // 
+            // linkCopyErrorsRecords
+            // 
+            this.linkCopyErrorsRecords.AutoSize = true;
+            this.linkCopyErrorsRecords.Location = new System.Drawing.Point(1145, 66);
+            this.linkCopyErrorsRecords.Name = "linkCopyErrorsRecords";
+            this.linkCopyErrorsRecords.Size = new System.Drawing.Size(49, 13);
+            this.linkCopyErrorsRecords.TabIndex = 12;
+            this.linkCopyErrorsRecords.TabStop = true;
+            this.linkCopyErrorsRecords.Text = "Kopiëren";
+            this.linkCopyErrorsRecords.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkCopyErrorsRecords_LinkClicked);
+            // 
+            // linkCopyErrorsDossiers
+            // 
+            this.linkCopyErrorsDossiers.AutoSize = true;
+            this.linkCopyErrorsDossiers.Location = new System.Drawing.Point(533, 64);
+            this.linkCopyErrorsDossiers.Name = "linkCopyErrorsDossiers";
+            this.linkCopyErrorsDossiers.Size = new System.Drawing.Size(49, 13);
+            this.linkCopyErrorsDossiers.TabIndex = 11;
+            this.linkCopyErrorsDossiers.TabStop = true;
+            this.linkCopyErrorsDossiers.Text = "Kopiëren";
+            this.linkCopyErrorsDossiers.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkCopyErrorsDossiers_LinkClicked);
+            // 
+            // btImportFilesInDb
+            // 
+            this.btImportFilesInDb.Location = new System.Drawing.Point(42, 19);
+            this.btImportFilesInDb.Name = "btImportFilesInDb";
+            this.btImportFilesInDb.Size = new System.Drawing.Size(113, 26);
+            this.btImportFilesInDb.TabIndex = 1;
+            this.btImportFilesInDb.Text = "Import bestanden";
+            this.btImportFilesInDb.Click += new System.EventHandler(this.btImportFilesInDb_Click);
+            // 
+            // materialLabel4
+            // 
+            this.materialLabel4.AutoSize = true;
+            this.materialLabel4.Depth = 0;
+            this.materialLabel4.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.materialLabel4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialLabel4.Location = new System.Drawing.Point(655, 62);
+            this.materialLabel4.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel4.Name = "materialLabel4";
+            this.materialLabel4.Size = new System.Drawing.Size(111, 18);
+            this.materialLabel4.TabIndex = 9;
+            this.materialLabel4.Text = "Errors Records";
+            // 
+            // materialLabel3
+            // 
+            this.materialLabel3.AutoSize = true;
+            this.materialLabel3.Depth = 0;
+            this.materialLabel3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.materialLabel3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialLabel3.Location = new System.Drawing.Point(39, 60);
+            this.materialLabel3.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel3.Name = "materialLabel3";
+            this.materialLabel3.Size = new System.Drawing.Size(114, 18);
+            this.materialLabel3.TabIndex = 8;
+            this.materialLabel3.Text = "Errors Dossiers";
+            // 
+            // txtErrorRecords
+            // 
+            this.txtErrorRecords.Location = new System.Drawing.Point(649, 86);
+            this.txtErrorRecords.Multiline = true;
+            this.txtErrorRecords.Name = "txtErrorRecords";
+            this.txtErrorRecords.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.txtErrorRecords.Size = new System.Drawing.Size(543, 554);
+            this.txtErrorRecords.TabIndex = 7;
+            this.txtErrorRecords.WordWrap = false;
+            // 
+            // txtErrorsDossiers
+            // 
+            this.txtErrorsDossiers.Location = new System.Drawing.Point(41, 84);
+            this.txtErrorsDossiers.Multiline = true;
+            this.txtErrorsDossiers.Name = "txtErrorsDossiers";
+            this.txtErrorsDossiers.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.txtErrorsDossiers.Size = new System.Drawing.Size(543, 556);
+            this.txtErrorsDossiers.TabIndex = 6;
+            this.txtErrorsDossiers.WordWrap = false;
+            // 
+            // tabMetadata
+            // 
+            this.tabMetadata.Controls.Add(this.linkCopyMetadataErrors);
+            this.tabMetadata.Controls.Add(this.btMetadataCancel);
+            this.tabMetadata.Controls.Add(this.progressBar1);
+            this.tabMetadata.Controls.Add(this.btGenerateMetadata);
+            this.tabMetadata.Controls.Add(this.materialLabel16);
+            this.tabMetadata.Controls.Add(this.txtMetadataErrors);
+            this.tabMetadata.Controls.Add(this.chkGetFileSignature);
+            this.tabMetadata.Controls.Add(this.chkGetFileSize);
+            this.tabMetadata.Controls.Add(this.checkGetCreationDate);
+            this.tabMetadata.Controls.Add(this.chkGetHash);
+            this.tabMetadata.Controls.Add(this.materialLabel15);
+            this.tabMetadata.Controls.Add(this.picSelectDirToScan);
+            this.tabMetadata.Controls.Add(this.txtFilesDirToScan);
+            this.tabMetadata.Location = new System.Drawing.Point(4, 22);
+            this.tabMetadata.Name = "tabMetadata";
+            this.tabMetadata.Padding = new System.Windows.Forms.Padding(3);
+            this.tabMetadata.Size = new System.Drawing.Size(1218, 660);
+            this.tabMetadata.TabIndex = 5;
+            this.tabMetadata.Text = "Genereer Metadata";
+            this.tabMetadata.UseVisualStyleBackColor = true;
+            // 
+            // linkCopyMetadataErrors
+            // 
+            this.linkCopyMetadataErrors.AutoSize = true;
+            this.linkCopyMetadataErrors.Location = new System.Drawing.Point(1147, 33);
+            this.linkCopyMetadataErrors.Name = "linkCopyMetadataErrors";
+            this.linkCopyMetadataErrors.Size = new System.Drawing.Size(49, 13);
+            this.linkCopyMetadataErrors.TabIndex = 34;
+            this.linkCopyMetadataErrors.TabStop = true;
+            this.linkCopyMetadataErrors.Text = "Kopiëren";
+            this.linkCopyMetadataErrors.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkCopyMetadataErrors_LinkClicked);
+            // 
+            // btMetadataCancel
+            // 
+            this.btMetadataCancel.Location = new System.Drawing.Point(235, 296);
+            this.btMetadataCancel.Name = "btMetadataCancel";
+            this.btMetadataCancel.Size = new System.Drawing.Size(92, 23);
+            this.btMetadataCancel.TabIndex = 33;
+            this.btMetadataCancel.Text = "Cancel scan";
+            this.btMetadataCancel.UseVisualStyleBackColor = true;
+            this.btMetadataCancel.Click += new System.EventHandler(this.btMetadataCancel_Click);
+            // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(75, 343);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(252, 23);
+            this.progressBar1.TabIndex = 32;
+            // 
+            // btGenerateMetadata
+            // 
+            this.btGenerateMetadata.Location = new System.Drawing.Point(75, 296);
+            this.btGenerateMetadata.Name = "btGenerateMetadata";
+            this.btGenerateMetadata.Size = new System.Drawing.Size(95, 23);
+            this.btGenerateMetadata.TabIndex = 31;
+            this.btGenerateMetadata.Text = "Start scan";
+            this.btGenerateMetadata.UseVisualStyleBackColor = true;
+            this.btGenerateMetadata.Click += new System.EventHandler(this.btGenerateMetadata_Click);
+            // 
+            // materialLabel16
+            // 
+            this.materialLabel16.AutoSize = true;
+            this.materialLabel16.Depth = 0;
+            this.materialLabel16.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.materialLabel16.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialLabel16.Location = new System.Drawing.Point(569, 27);
+            this.materialLabel16.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel16.Name = "materialLabel16";
+            this.materialLabel16.Size = new System.Drawing.Size(50, 18);
+            this.materialLabel16.TabIndex = 30;
+            this.materialLabel16.Text = "Errors";
+            // 
+            // txtMetadataErrors
+            // 
+            this.txtMetadataErrors.Location = new System.Drawing.Point(564, 59);
+            this.txtMetadataErrors.Multiline = true;
+            this.txtMetadataErrors.Name = "txtMetadataErrors";
+            this.txtMetadataErrors.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.txtMetadataErrors.Size = new System.Drawing.Size(632, 544);
+            this.txtMetadataErrors.TabIndex = 29;
+            this.txtMetadataErrors.WordWrap = false;
+            // 
+            // chkGetFileSignature
+            // 
+            this.chkGetFileSignature.AutoSize = true;
+            this.chkGetFileSignature.Enabled = false;
+            this.chkGetFileSignature.Location = new System.Drawing.Point(75, 218);
+            this.chkGetFileSignature.Name = "chkGetFileSignature";
+            this.chkGetFileSignature.Size = new System.Drawing.Size(176, 17);
+            this.chkGetFileSignature.TabIndex = 28;
+            this.chkGetFileSignature.Text = "Bestandsformaat (File signature)";
+            this.chkGetFileSignature.UseVisualStyleBackColor = true;
+            // 
+            // chkGetFileSize
+            // 
+            this.chkGetFileSize.AutoSize = true;
+            this.chkGetFileSize.Location = new System.Drawing.Point(75, 184);
+            this.chkGetFileSize.Name = "chkGetFileSize";
+            this.chkGetFileSize.Size = new System.Drawing.Size(148, 17);
+            this.chkGetFileSize.TabIndex = 27;
+            this.chkGetFileSize.Text = "Bestandsgrootte (FileSize)";
+            this.chkGetFileSize.UseVisualStyleBackColor = true;
+            // 
+            // checkGetCreationDate
+            // 
+            this.checkGetCreationDate.AutoSize = true;
+            this.checkGetCreationDate.Location = new System.Drawing.Point(75, 147);
+            this.checkGetCreationDate.Name = "checkGetCreationDate";
+            this.checkGetCreationDate.Size = new System.Drawing.Size(171, 17);
+            this.checkGetCreationDate.TabIndex = 26;
+            this.checkGetCreationDate.Text = "Aanmaakdatum (CreationDate)";
+            this.checkGetCreationDate.UseVisualStyleBackColor = true;
+            // 
+            // chkGetHash
+            // 
+            this.chkGetHash.AutoSize = true;
+            this.chkGetHash.Location = new System.Drawing.Point(75, 113);
+            this.chkGetHash.Name = "chkGetHash";
+            this.chkGetHash.Size = new System.Drawing.Size(134, 17);
+            this.chkGetHash.TabIndex = 25;
+            this.chkGetHash.Text = "Genereer sha256-hash";
+            this.chkGetHash.UseVisualStyleBackColor = true;
+            // 
+            // materialLabel15
+            // 
+            this.materialLabel15.AutoSize = true;
+            this.materialLabel15.Depth = 0;
+            this.materialLabel15.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.materialLabel15.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialLabel15.Location = new System.Drawing.Point(71, 24);
+            this.materialLabel15.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel15.Name = "materialLabel15";
+            this.materialLabel15.Size = new System.Drawing.Size(237, 18);
+            this.materialLabel15.TabIndex = 24;
+            this.materialLabel15.Text = "Selecteer directory te scannen files";
+            // 
+            // picSelectDirToScan
+            // 
+            this.picSelectDirToScan.Image = ((System.Drawing.Image)(resources.GetObject("picSelectDirToScan.Image")));
+            this.picSelectDirToScan.Location = new System.Drawing.Point(446, 49);
+            this.picSelectDirToScan.Margin = new System.Windows.Forms.Padding(2);
+            this.picSelectDirToScan.Name = "picSelectDirToScan";
+            this.picSelectDirToScan.Size = new System.Drawing.Size(31, 33);
+            this.picSelectDirToScan.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picSelectDirToScan.TabIndex = 23;
+            this.picSelectDirToScan.TabStop = false;
+            this.picSelectDirToScan.Click += new System.EventHandler(this.picSelectDirToScan_Click);
+            // 
+            // txtFilesDirToScan
+            // 
+            this.txtFilesDirToScan.Location = new System.Drawing.Point(75, 59);
+            this.txtFilesDirToScan.Name = "txtFilesDirToScan";
+            this.txtFilesDirToScan.ReadOnly = true;
+            this.txtFilesDirToScan.Size = new System.Drawing.Size(366, 20);
+            this.txtFilesDirToScan.TabIndex = 22;
+            // 
+            // tabGenerateTopX
+            // 
+            this.tabGenerateTopX.Controls.Add(this.label1);
+            this.tabGenerateTopX.Controls.Add(this.txtBatchSize);
+            this.tabGenerateTopX.Controls.Add(this.chkUseBatchSize);
+            this.tabGenerateTopX.Controls.Add(this.btSaveTopxXml);
+            this.tabGenerateTopX.Controls.Add(this.materialLabel14);
+            this.tabGenerateTopX.Controls.Add(this.txtResultXml);
+            this.tabGenerateTopX.Controls.Add(this.linkCopyTopXCreateError);
+            this.tabGenerateTopX.Controls.Add(this.materialLabel13);
+            this.tabGenerateTopX.Controls.Add(this.btGenerateTopX);
+            this.tabGenerateTopX.Controls.Add(this.txtLogTopXCreate);
+            this.tabGenerateTopX.Location = new System.Drawing.Point(4, 22);
+            this.tabGenerateTopX.Margin = new System.Windows.Forms.Padding(2);
+            this.tabGenerateTopX.Name = "tabGenerateTopX";
+            this.tabGenerateTopX.Size = new System.Drawing.Size(1218, 660);
+            this.tabGenerateTopX.TabIndex = 4;
+            this.tabGenerateTopX.Text = "Genereer TopX";
+            this.tabGenerateTopX.UseVisualStyleBackColor = true;
+            // 
+            // btSaveTopxXml
+            // 
+            this.btSaveTopxXml.Location = new System.Drawing.Point(184, 15);
+            this.btSaveTopxXml.Name = "btSaveTopxXml";
+            this.btSaveTopxXml.Size = new System.Drawing.Size(122, 23);
+            this.btSaveTopxXml.TabIndex = 2;
+            this.btSaveTopxXml.Text = "Save TopX xml";
+            this.btSaveTopxXml.UseVisualStyleBackColor = true;
+            this.btSaveTopxXml.Click += new System.EventHandler(this.btSaveTopxXml_Click);
+            // 
+            // materialLabel14
+            // 
+            this.materialLabel14.AutoSize = true;
+            this.materialLabel14.Depth = 0;
+            this.materialLabel14.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.materialLabel14.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialLabel14.Location = new System.Drawing.Point(660, 66);
+            this.materialLabel14.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel14.Name = "materialLabel14";
+            this.materialLabel14.Size = new System.Drawing.Size(248, 18);
+            this.materialLabel14.TabIndex = 14;
+            this.materialLabel14.Text = "TopX XML (eerste 10.000 karakters)";
+            // 
+            // txtResultXml
+            // 
+            this.txtResultXml.Location = new System.Drawing.Point(649, 89);
+            this.txtResultXml.Multiline = true;
+            this.txtResultXml.Name = "txtResultXml";
+            this.txtResultXml.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.txtResultXml.Size = new System.Drawing.Size(543, 544);
+            this.txtResultXml.TabIndex = 13;
+            this.txtResultXml.WordWrap = false;
+            // 
+            // linkCopyTopXCreateError
+            // 
+            this.linkCopyTopXCreateError.AutoSize = true;
+            this.linkCopyTopXCreateError.Location = new System.Drawing.Point(520, 70);
+            this.linkCopyTopXCreateError.Name = "linkCopyTopXCreateError";
+            this.linkCopyTopXCreateError.Size = new System.Drawing.Size(49, 13);
+            this.linkCopyTopXCreateError.TabIndex = 12;
+            this.linkCopyTopXCreateError.TabStop = true;
+            this.linkCopyTopXCreateError.Text = "Kopiëren";
+            this.linkCopyTopXCreateError.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkCopyTopXCreateError_LinkClicked);
+            // 
+            // materialLabel13
+            // 
+            this.materialLabel13.AutoSize = true;
+            this.materialLabel13.Depth = 0;
+            this.materialLabel13.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.materialLabel13.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialLabel13.Location = new System.Drawing.Point(51, 67);
+            this.materialLabel13.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel13.Name = "materialLabel13";
+            this.materialLabel13.Size = new System.Drawing.Size(71, 18);
+            this.materialLabel13.TabIndex = 9;
+            this.materialLabel13.Text = "Error Log";
+            // 
+            // btGenerateTopX
+            // 
+            this.btGenerateTopX.Location = new System.Drawing.Point(43, 15);
+            this.btGenerateTopX.Name = "btGenerateTopX";
+            this.btGenerateTopX.Size = new System.Drawing.Size(122, 23);
+            this.btGenerateTopX.TabIndex = 1;
+            this.btGenerateTopX.Text = "Genereer TopX";
+            this.btGenerateTopX.UseVisualStyleBackColor = true;
+            this.btGenerateTopX.Click += new System.EventHandler(this.btGenerateTopX_Click);
+            // 
+            // txtLogTopXCreate
+            // 
+            this.txtLogTopXCreate.Location = new System.Drawing.Point(41, 89);
+            this.txtLogTopXCreate.Multiline = true;
+            this.txtLogTopXCreate.Name = "txtLogTopXCreate";
+            this.txtLogTopXCreate.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.txtLogTopXCreate.Size = new System.Drawing.Size(543, 544);
+            this.txtLogTopXCreate.TabIndex = 10;
+            this.txtLogTopXCreate.WordWrap = false;
+            // 
+            // lblVersion
+            // 
+            this.lblVersion.AutoSize = true;
+            this.lblVersion.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(125)))), ((int)(((byte)(139)))));
+            this.lblVersion.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.lblVersion.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.lblVersion.Location = new System.Drawing.Point(1195, 34);
+            this.lblVersion.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblVersion.Name = "lblVersion";
+            this.lblVersion.Size = new System.Drawing.Size(52, 15);
+            this.lblVersion.TabIndex = 71;
+            this.lblVersion.Text = "v 1.0.0.0";
+            // 
+            // chkUseBatchSize
+            // 
+            this.chkUseBatchSize.AutoSize = true;
+            this.chkUseBatchSize.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chkUseBatchSize.Location = new System.Drawing.Point(347, 18);
+            this.chkUseBatchSize.Name = "chkUseBatchSize";
+            this.chkUseBatchSize.Size = new System.Drawing.Size(94, 17);
+            this.chkUseBatchSize.TabIndex = 3;
+            this.chkUseBatchSize.Text = "Maak batches";
+            this.chkUseBatchSize.UseVisualStyleBackColor = true;
+            // 
+            // txtBatchSize
+            // 
+            this.txtBatchSize.Location = new System.Drawing.Point(553, 15);
+            this.txtBatchSize.Name = "txtBatchSize";
+            this.txtBatchSize.Size = new System.Drawing.Size(34, 20);
+            this.txtBatchSize.TabIndex = 4;
+            this.txtBatchSize.Text = "30";
+            this.txtBatchSize.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBatchSize_KeyPress);
+            this.txtBatchSize.Leave += new System.EventHandler(this.txtBatchSize_Leave);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(457, 19);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(92, 13);
+            this.label1.TabIndex = 18;
+            this.label1.Text = "Batchgrootte (GB)";
+            // 
+            // txtIdentificatieArchief
+            // 
+            this.txtIdentificatieArchief.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Italic);
+            this.txtIdentificatieArchief.ForeColor = System.Drawing.Color.Gray;
+            this.txtIdentificatieArchief.Location = new System.Drawing.Point(256, 265);
+            this.txtIdentificatieArchief.Margin = new System.Windows.Forms.Padding(2);
+            this.txtIdentificatieArchief.Name = "txtIdentificatieArchief";
+            this.txtIdentificatieArchief.PlaceHolderText = "Bijv: NL-0784-10009";
+            this.txtIdentificatieArchief.Size = new System.Drawing.Size(194, 20);
+            this.txtIdentificatieArchief.TabIndex = 20;
+            this.txtIdentificatieArchief.Text = "Bijv: NL-0784-10009";
+            this.txtIdentificatieArchief.Leave += new System.EventHandler(this.SaveGlobals);
+            // 
+            // txtNaamArchief
+            // 
+            this.txtNaamArchief.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Italic);
+            this.txtNaamArchief.ForeColor = System.Drawing.Color.Gray;
+            this.txtNaamArchief.Location = new System.Drawing.Point(256, 235);
+            this.txtNaamArchief.Margin = new System.Windows.Forms.Padding(2);
+            this.txtNaamArchief.Name = "txtNaamArchief";
+            this.txtNaamArchief.PlaceHolderText = "Bijv: Bouwvergunningen Gemeente Raamsdonk 1993 - 1996";
+            this.txtNaamArchief.Size = new System.Drawing.Size(480, 20);
+            this.txtNaamArchief.TabIndex = 10;
+            this.txtNaamArchief.Text = "Bijv: Bouwvergunningen Gemeente Raamsdonk 1993 - 1996";
+            this.txtNaamArchief.Leave += new System.EventHandler(this.SaveGlobals);
+            // 
+            // txtDoelArchief
+            // 
+            this.txtDoelArchief.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Italic);
+            this.txtDoelArchief.ForeColor = System.Drawing.Color.Gray;
+            this.txtDoelArchief.Location = new System.Drawing.Point(256, 390);
+            this.txtDoelArchief.Margin = new System.Windows.Forms.Padding(2);
+            this.txtDoelArchief.Name = "txtDoelArchief";
+            this.txtDoelArchief.PlaceHolderText = "Bijv: Bouwvergunningen om op te nemen in e-Depot";
+            this.txtDoelArchief.Size = new System.Drawing.Size(480, 20);
+            this.txtDoelArchief.TabIndex = 70;
+            this.txtDoelArchief.Text = "Bijv: Bouwvergunningen om op te nemen in e-Depot";
+            this.txtDoelArchief.Leave += new System.EventHandler(this.SaveGlobals);
+            // 
+            // txtBronArchief
+            // 
+            this.txtBronArchief.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Italic);
+            this.txtBronArchief.ForeColor = System.Drawing.Color.Gray;
+            this.txtBronArchief.Location = new System.Drawing.Point(256, 360);
+            this.txtBronArchief.Margin = new System.Windows.Forms.Padding(2);
+            this.txtBronArchief.Name = "txtBronArchief";
+            this.txtBronArchief.PlaceHolderText = "Bijv: Digitale bouwvergunningen";
+            this.txtBronArchief.Size = new System.Drawing.Size(480, 20);
+            this.txtBronArchief.TabIndex = 60;
+            this.txtBronArchief.Text = "Bijv: Digitale bouwvergunningen";
+            this.txtBronArchief.Leave += new System.EventHandler(this.SaveGlobals);
+            // 
+            // txtOmschrijvingArchief
+            // 
+            this.txtOmschrijvingArchief.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Italic);
+            this.txtOmschrijvingArchief.ForeColor = System.Drawing.Color.Gray;
+            this.txtOmschrijvingArchief.Location = new System.Drawing.Point(256, 330);
+            this.txtOmschrijvingArchief.Margin = new System.Windows.Forms.Padding(2);
+            this.txtOmschrijvingArchief.Name = "txtOmschrijvingArchief";
+            this.txtOmschrijvingArchief.PlaceHolderText = "Bijv: Bouwvergunningen Gemeente Raamsdonk 1993 - 1996";
+            this.txtOmschrijvingArchief.Size = new System.Drawing.Size(480, 20);
+            this.txtOmschrijvingArchief.TabIndex = 50;
+            this.txtOmschrijvingArchief.Text = "Bijv: Bouwvergunningen Gemeente Raamsdonk 1993 - 1996";
+            this.txtOmschrijvingArchief.Leave += new System.EventHandler(this.SaveGlobals);
             // 
             // gridFieldMappingRecords
             // 
@@ -805,365 +1200,6 @@ namespace TOPX.UI.Forms
             this.TMLO.ReadOnly = true;
             this.TMLO.Width = 60;
             // 
-            // tabImportFiles
-            // 
-            this.tabImportFiles.Controls.Add(this.linkCopyErrorsRecords);
-            this.tabImportFiles.Controls.Add(this.linkCopyErrorsDossiers);
-            this.tabImportFiles.Controls.Add(this.btImportFilesInDb);
-            this.tabImportFiles.Controls.Add(this.materialLabel4);
-            this.tabImportFiles.Controls.Add(this.materialLabel3);
-            this.tabImportFiles.Controls.Add(this.txtErrorRecords);
-            this.tabImportFiles.Controls.Add(this.txtErrorsDossiers);
-            this.tabImportFiles.Location = new System.Drawing.Point(4, 22);
-            this.tabImportFiles.Margin = new System.Windows.Forms.Padding(2);
-            this.tabImportFiles.Name = "tabImportFiles";
-            this.tabImportFiles.Size = new System.Drawing.Size(1218, 660);
-            this.tabImportFiles.TabIndex = 2;
-            this.tabImportFiles.Text = "Import";
-            this.tabImportFiles.UseVisualStyleBackColor = true;
-            // 
-            // linkCopyErrorsRecords
-            // 
-            this.linkCopyErrorsRecords.AutoSize = true;
-            this.linkCopyErrorsRecords.Location = new System.Drawing.Point(1145, 66);
-            this.linkCopyErrorsRecords.Name = "linkCopyErrorsRecords";
-            this.linkCopyErrorsRecords.Size = new System.Drawing.Size(49, 13);
-            this.linkCopyErrorsRecords.TabIndex = 12;
-            this.linkCopyErrorsRecords.TabStop = true;
-            this.linkCopyErrorsRecords.Text = "Kopiëren";
-            this.linkCopyErrorsRecords.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkCopyErrorsRecords_LinkClicked);
-            // 
-            // linkCopyErrorsDossiers
-            // 
-            this.linkCopyErrorsDossiers.AutoSize = true;
-            this.linkCopyErrorsDossiers.Location = new System.Drawing.Point(533, 64);
-            this.linkCopyErrorsDossiers.Name = "linkCopyErrorsDossiers";
-            this.linkCopyErrorsDossiers.Size = new System.Drawing.Size(49, 13);
-            this.linkCopyErrorsDossiers.TabIndex = 11;
-            this.linkCopyErrorsDossiers.TabStop = true;
-            this.linkCopyErrorsDossiers.Text = "Kopiëren";
-            this.linkCopyErrorsDossiers.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkCopyErrorsDossiers_LinkClicked);
-            // 
-            // btImportFilesInDb
-            // 
-            this.btImportFilesInDb.Location = new System.Drawing.Point(42, 19);
-            this.btImportFilesInDb.Name = "btImportFilesInDb";
-            this.btImportFilesInDb.Size = new System.Drawing.Size(113, 26);
-            this.btImportFilesInDb.TabIndex = 1;
-            this.btImportFilesInDb.Text = "Import bestanden";
-            this.btImportFilesInDb.Click += new System.EventHandler(this.btImportFilesInDb_Click);
-            // 
-            // materialLabel4
-            // 
-            this.materialLabel4.AutoSize = true;
-            this.materialLabel4.Depth = 0;
-            this.materialLabel4.Font = new System.Drawing.Font("Roboto", 11F);
-            this.materialLabel4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel4.Location = new System.Drawing.Point(655, 62);
-            this.materialLabel4.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel4.Name = "materialLabel4";
-            this.materialLabel4.Size = new System.Drawing.Size(109, 19);
-            this.materialLabel4.TabIndex = 9;
-            this.materialLabel4.Text = "Errors Records";
-            // 
-            // materialLabel3
-            // 
-            this.materialLabel3.AutoSize = true;
-            this.materialLabel3.Depth = 0;
-            this.materialLabel3.Font = new System.Drawing.Font("Roboto", 11F);
-            this.materialLabel3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel3.Location = new System.Drawing.Point(39, 60);
-            this.materialLabel3.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel3.Name = "materialLabel3";
-            this.materialLabel3.Size = new System.Drawing.Size(114, 19);
-            this.materialLabel3.TabIndex = 8;
-            this.materialLabel3.Text = "Errors Dossiers";
-            // 
-            // txtErrorRecords
-            // 
-            this.txtErrorRecords.Location = new System.Drawing.Point(649, 86);
-            this.txtErrorRecords.Multiline = true;
-            this.txtErrorRecords.Name = "txtErrorRecords";
-            this.txtErrorRecords.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtErrorRecords.Size = new System.Drawing.Size(543, 554);
-            this.txtErrorRecords.TabIndex = 7;
-            this.txtErrorRecords.WordWrap = false;
-            // 
-            // txtErrorsDossiers
-            // 
-            this.txtErrorsDossiers.Location = new System.Drawing.Point(41, 84);
-            this.txtErrorsDossiers.Multiline = true;
-            this.txtErrorsDossiers.Name = "txtErrorsDossiers";
-            this.txtErrorsDossiers.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtErrorsDossiers.Size = new System.Drawing.Size(543, 556);
-            this.txtErrorsDossiers.TabIndex = 6;
-            this.txtErrorsDossiers.WordWrap = false;
-            // 
-            // tabMetadata
-            // 
-            this.tabMetadata.Controls.Add(this.linkCopyMetadataErrors);
-            this.tabMetadata.Controls.Add(this.btMetadataCancel);
-            this.tabMetadata.Controls.Add(this.progressBar1);
-            this.tabMetadata.Controls.Add(this.btGenerateMetadata);
-            this.tabMetadata.Controls.Add(this.materialLabel16);
-            this.tabMetadata.Controls.Add(this.txtMetadataErrors);
-            this.tabMetadata.Controls.Add(this.chkGetFileSignature);
-            this.tabMetadata.Controls.Add(this.chkGetFileSize);
-            this.tabMetadata.Controls.Add(this.checkGetCreationDate);
-            this.tabMetadata.Controls.Add(this.chkGetHash);
-            this.tabMetadata.Controls.Add(this.materialLabel15);
-            this.tabMetadata.Controls.Add(this.picSelectDirToScan);
-            this.tabMetadata.Controls.Add(this.txtFilesDirToScan);
-            this.tabMetadata.Location = new System.Drawing.Point(4, 22);
-            this.tabMetadata.Name = "tabMetadata";
-            this.tabMetadata.Padding = new System.Windows.Forms.Padding(3);
-            this.tabMetadata.Size = new System.Drawing.Size(1218, 660);
-            this.tabMetadata.TabIndex = 5;
-            this.tabMetadata.Text = "Genereer Metadata";
-            this.tabMetadata.UseVisualStyleBackColor = true;
-            // 
-            // linkCopyMetadataErrors
-            // 
-            this.linkCopyMetadataErrors.AutoSize = true;
-            this.linkCopyMetadataErrors.Location = new System.Drawing.Point(1147, 33);
-            this.linkCopyMetadataErrors.Name = "linkCopyMetadataErrors";
-            this.linkCopyMetadataErrors.Size = new System.Drawing.Size(49, 13);
-            this.linkCopyMetadataErrors.TabIndex = 34;
-            this.linkCopyMetadataErrors.TabStop = true;
-            this.linkCopyMetadataErrors.Text = "Kopiëren";
-            this.linkCopyMetadataErrors.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkCopyMetadataErrors_LinkClicked);
-            // 
-            // btMetadataCancel
-            // 
-            this.btMetadataCancel.Location = new System.Drawing.Point(235, 296);
-            this.btMetadataCancel.Name = "btMetadataCancel";
-            this.btMetadataCancel.Size = new System.Drawing.Size(92, 23);
-            this.btMetadataCancel.TabIndex = 33;
-            this.btMetadataCancel.Text = "Cancel scan";
-            this.btMetadataCancel.UseVisualStyleBackColor = true;
-            this.btMetadataCancel.Click += new System.EventHandler(this.btMetadataCancel_Click);
-            // 
-            // progressBar1
-            // 
-            this.progressBar1.Location = new System.Drawing.Point(75, 343);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(252, 23);
-            this.progressBar1.TabIndex = 32;
-            // 
-            // btGenerateMetadata
-            // 
-            this.btGenerateMetadata.Location = new System.Drawing.Point(75, 296);
-            this.btGenerateMetadata.Name = "btGenerateMetadata";
-            this.btGenerateMetadata.Size = new System.Drawing.Size(95, 23);
-            this.btGenerateMetadata.TabIndex = 31;
-            this.btGenerateMetadata.Text = "Start scan";
-            this.btGenerateMetadata.UseVisualStyleBackColor = true;
-            this.btGenerateMetadata.Click += new System.EventHandler(this.btGenerateMetadata_Click);
-            // 
-            // materialLabel16
-            // 
-            this.materialLabel16.AutoSize = true;
-            this.materialLabel16.Depth = 0;
-            this.materialLabel16.Font = new System.Drawing.Font("Roboto", 11F);
-            this.materialLabel16.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel16.Location = new System.Drawing.Point(569, 27);
-            this.materialLabel16.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel16.Name = "materialLabel16";
-            this.materialLabel16.Size = new System.Drawing.Size(50, 19);
-            this.materialLabel16.TabIndex = 30;
-            this.materialLabel16.Text = "Errors";
-            // 
-            // txtMetadataErrors
-            // 
-            this.txtMetadataErrors.Location = new System.Drawing.Point(564, 59);
-            this.txtMetadataErrors.Multiline = true;
-            this.txtMetadataErrors.Name = "txtMetadataErrors";
-            this.txtMetadataErrors.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtMetadataErrors.Size = new System.Drawing.Size(632, 544);
-            this.txtMetadataErrors.TabIndex = 29;
-            this.txtMetadataErrors.WordWrap = false;
-            // 
-            // chkGetFileSignature
-            // 
-            this.chkGetFileSignature.AutoSize = true;
-            this.chkGetFileSignature.Enabled = false;
-            this.chkGetFileSignature.Location = new System.Drawing.Point(75, 218);
-            this.chkGetFileSignature.Name = "chkGetFileSignature";
-            this.chkGetFileSignature.Size = new System.Drawing.Size(176, 17);
-            this.chkGetFileSignature.TabIndex = 28;
-            this.chkGetFileSignature.Text = "Bestandsformaat (File signature)";
-            this.chkGetFileSignature.UseVisualStyleBackColor = true;
-            // 
-            // chkGetFileSize
-            // 
-            this.chkGetFileSize.AutoSize = true;
-            this.chkGetFileSize.Location = new System.Drawing.Point(75, 184);
-            this.chkGetFileSize.Name = "chkGetFileSize";
-            this.chkGetFileSize.Size = new System.Drawing.Size(148, 17);
-            this.chkGetFileSize.TabIndex = 27;
-            this.chkGetFileSize.Text = "Bestandsgrootte (FileSize)";
-            this.chkGetFileSize.UseVisualStyleBackColor = true;
-            // 
-            // checkGetCreationDate
-            // 
-            this.checkGetCreationDate.AutoSize = true;
-            this.checkGetCreationDate.Location = new System.Drawing.Point(75, 147);
-            this.checkGetCreationDate.Name = "checkGetCreationDate";
-            this.checkGetCreationDate.Size = new System.Drawing.Size(171, 17);
-            this.checkGetCreationDate.TabIndex = 26;
-            this.checkGetCreationDate.Text = "Aanmaakdatum (CreationDate)";
-            this.checkGetCreationDate.UseVisualStyleBackColor = true;
-            // 
-            // chkGetHash
-            // 
-            this.chkGetHash.AutoSize = true;
-            this.chkGetHash.Location = new System.Drawing.Point(75, 113);
-            this.chkGetHash.Name = "chkGetHash";
-            this.chkGetHash.Size = new System.Drawing.Size(134, 17);
-            this.chkGetHash.TabIndex = 25;
-            this.chkGetHash.Text = "Genereer sha256-hash";
-            this.chkGetHash.UseVisualStyleBackColor = true;
-            // 
-            // materialLabel15
-            // 
-            this.materialLabel15.AutoSize = true;
-            this.materialLabel15.Depth = 0;
-            this.materialLabel15.Font = new System.Drawing.Font("Roboto", 11F);
-            this.materialLabel15.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel15.Location = new System.Drawing.Point(71, 24);
-            this.materialLabel15.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel15.Name = "materialLabel15";
-            this.materialLabel15.Size = new System.Drawing.Size(245, 19);
-            this.materialLabel15.TabIndex = 24;
-            this.materialLabel15.Text = "Selecteer directory te scannen files";
-            // 
-            // picSelectDirToScan
-            // 
-            this.picSelectDirToScan.Image = ((System.Drawing.Image)(resources.GetObject("picSelectDirToScan.Image")));
-            this.picSelectDirToScan.Location = new System.Drawing.Point(446, 49);
-            this.picSelectDirToScan.Margin = new System.Windows.Forms.Padding(2);
-            this.picSelectDirToScan.Name = "picSelectDirToScan";
-            this.picSelectDirToScan.Size = new System.Drawing.Size(31, 33);
-            this.picSelectDirToScan.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.picSelectDirToScan.TabIndex = 23;
-            this.picSelectDirToScan.TabStop = false;
-            this.picSelectDirToScan.Click += new System.EventHandler(this.picSelectDirToScan_Click);
-            // 
-            // txtFilesDirToScan
-            // 
-            this.txtFilesDirToScan.Location = new System.Drawing.Point(75, 59);
-            this.txtFilesDirToScan.Name = "txtFilesDirToScan";
-            this.txtFilesDirToScan.ReadOnly = true;
-            this.txtFilesDirToScan.Size = new System.Drawing.Size(366, 20);
-            this.txtFilesDirToScan.TabIndex = 22;
-            // 
-            // tabGenerateTopX
-            // 
-            this.tabGenerateTopX.Controls.Add(this.btSaveTopxXml);
-            this.tabGenerateTopX.Controls.Add(this.materialLabel14);
-            this.tabGenerateTopX.Controls.Add(this.txtResultXml);
-            this.tabGenerateTopX.Controls.Add(this.linkCopyTopXCreateError);
-            this.tabGenerateTopX.Controls.Add(this.materialLabel13);
-            this.tabGenerateTopX.Controls.Add(this.btGenerateTopX);
-            this.tabGenerateTopX.Controls.Add(this.txtLogTopXCreate);
-            this.tabGenerateTopX.Location = new System.Drawing.Point(4, 22);
-            this.tabGenerateTopX.Margin = new System.Windows.Forms.Padding(2);
-            this.tabGenerateTopX.Name = "tabGenerateTopX";
-            this.tabGenerateTopX.Size = new System.Drawing.Size(1218, 660);
-            this.tabGenerateTopX.TabIndex = 4;
-            this.tabGenerateTopX.Text = "Genereer TopX";
-            this.tabGenerateTopX.UseVisualStyleBackColor = true;
-            // 
-            // btSaveTopxXml
-            // 
-            this.btSaveTopxXml.Location = new System.Drawing.Point(246, 27);
-            this.btSaveTopxXml.Name = "btSaveTopxXml";
-            this.btSaveTopxXml.Size = new System.Drawing.Size(122, 23);
-            this.btSaveTopxXml.TabIndex = 15;
-            this.btSaveTopxXml.Text = "Save TopX xml";
-            this.btSaveTopxXml.UseVisualStyleBackColor = true;
-            this.btSaveTopxXml.Click += new System.EventHandler(this.btSaveTopxXml_Click);
-            // 
-            // materialLabel14
-            // 
-            this.materialLabel14.AutoSize = true;
-            this.materialLabel14.Depth = 0;
-            this.materialLabel14.Font = new System.Drawing.Font("Roboto", 11F);
-            this.materialLabel14.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel14.Location = new System.Drawing.Point(660, 66);
-            this.materialLabel14.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel14.Name = "materialLabel14";
-            this.materialLabel14.Size = new System.Drawing.Size(249, 19);
-            this.materialLabel14.TabIndex = 14;
-            this.materialLabel14.Text = "TopX XML (eerste 10.000 karakters)";
-            // 
-            // txtResultXml
-            // 
-            this.txtResultXml.Location = new System.Drawing.Point(649, 89);
-            this.txtResultXml.Multiline = true;
-            this.txtResultXml.Name = "txtResultXml";
-            this.txtResultXml.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtResultXml.Size = new System.Drawing.Size(543, 544);
-            this.txtResultXml.TabIndex = 13;
-            this.txtResultXml.WordWrap = false;
-            // 
-            // linkCopyTopXCreateError
-            // 
-            this.linkCopyTopXCreateError.AutoSize = true;
-            this.linkCopyTopXCreateError.Location = new System.Drawing.Point(520, 70);
-            this.linkCopyTopXCreateError.Name = "linkCopyTopXCreateError";
-            this.linkCopyTopXCreateError.Size = new System.Drawing.Size(49, 13);
-            this.linkCopyTopXCreateError.TabIndex = 12;
-            this.linkCopyTopXCreateError.TabStop = true;
-            this.linkCopyTopXCreateError.Text = "Kopiëren";
-            this.linkCopyTopXCreateError.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkCopyTopXCreateError_LinkClicked);
-            // 
-            // materialLabel13
-            // 
-            this.materialLabel13.AutoSize = true;
-            this.materialLabel13.Depth = 0;
-            this.materialLabel13.Font = new System.Drawing.Font("Roboto", 11F);
-            this.materialLabel13.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel13.Location = new System.Drawing.Point(51, 67);
-            this.materialLabel13.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel13.Name = "materialLabel13";
-            this.materialLabel13.Size = new System.Drawing.Size(71, 19);
-            this.materialLabel13.TabIndex = 9;
-            this.materialLabel13.Text = "Error Log";
-            // 
-            // btGenerateTopX
-            // 
-            this.btGenerateTopX.Location = new System.Drawing.Point(100, 27);
-            this.btGenerateTopX.Name = "btGenerateTopX";
-            this.btGenerateTopX.Size = new System.Drawing.Size(122, 23);
-            this.btGenerateTopX.TabIndex = 1;
-            this.btGenerateTopX.Text = "Genereer TopX";
-            this.btGenerateTopX.UseVisualStyleBackColor = true;
-            this.btGenerateTopX.Click += new System.EventHandler(this.btGenerateTopX_Click);
-            // 
-            // txtLogTopXCreate
-            // 
-            this.txtLogTopXCreate.Location = new System.Drawing.Point(41, 89);
-            this.txtLogTopXCreate.Multiline = true;
-            this.txtLogTopXCreate.Name = "txtLogTopXCreate";
-            this.txtLogTopXCreate.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtLogTopXCreate.Size = new System.Drawing.Size(543, 544);
-            this.txtLogTopXCreate.TabIndex = 3;
-            this.txtLogTopXCreate.WordWrap = false;
-            // 
-            // lblVersion
-            // 
-            this.lblVersion.AutoSize = true;
-            this.lblVersion.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(125)))), ((int)(((byte)(139)))));
-            this.lblVersion.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.lblVersion.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lblVersion.Location = new System.Drawing.Point(1195, 34);
-            this.lblVersion.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblVersion.Name = "lblVersion";
-            this.lblVersion.Size = new System.Drawing.Size(52, 15);
-            this.lblVersion.TabIndex = 71;
-            this.lblVersion.Text = "v 1.0.0.0";
-            // 
             // TopXConverter
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1187,8 +1223,6 @@ namespace TOPX.UI.Forms
             this.tabLoadFiles.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picRecordsSelector)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picDossierSelector)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridFieldMappingRecords)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridFieldMappingDossiers)).EndInit();
             this.tabImportFiles.ResumeLayout(false);
             this.tabImportFiles.PerformLayout();
             this.tabMetadata.ResumeLayout(false);
@@ -1196,6 +1230,8 @@ namespace TOPX.UI.Forms
             ((System.ComponentModel.ISupportInitialize)(this.picSelectDirToScan)).EndInit();
             this.tabGenerateTopX.ResumeLayout(false);
             this.tabGenerateTopX.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridFieldMappingRecords)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridFieldMappingDossiers)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1289,6 +1325,9 @@ namespace TOPX.UI.Forms
         private MaterialSkin.Controls.MaterialLabel materialLabel19;
         private MaterialSkin.Controls.MaterialLabel materialLabel18;
         private MaterialSkin.Controls.MaterialLabel materialLabel17;
+        private Label label1;
+        private TextBox txtBatchSize;
+        private CheckBox chkUseBatchSize;
     }
 }
 
