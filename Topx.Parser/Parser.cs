@@ -517,6 +517,19 @@ namespace Topx.Creator
             var openbaarheid_DatumOfPeriode = DateTime.ParseExact(dossier.Openbaarheid_DatumOfPeriode,
                 DateParsing, CultureInfo.InvariantCulture).ToString("yyyy-MM-dd");
 
+            
+
+            string gebruiksrechten_DatumOfPeriode = string.Empty;
+            if (string.IsNullOrEmpty(dossier.Gebruiksrechten_DatumOfPeriode))
+            {
+                ErrorMessage.Append($"{dossier.IdentificatieKenmerk}: Gebruiksrechten_DatumOfPeriode mag niet leeg zijn");
+            }
+            else
+                gebruiksrechten_DatumOfPeriode = DateTime.ParseExact(dossier.Gebruiksrechten_DatumOfPeriode, DateParsing, CultureInfo.InvariantCulture).ToString("yyyy-MM-dd");
+
+
+            var vertrouwelijkheid_DatumOfPeriode = DateTime.ParseExact(dossier.Vertrouwelijkheid_DatumOfPeriode, DateParsing, CultureInfo.InvariantCulture).ToString("yyyy-MM-dd");
+
             var dekking_InTijd_Begin = new datumOfJaarTypeDatum()
             {
                 Value = Convert.ToDateTime(DateTime.ParseExact(dossier.Dekking_InTijd_Begin,
@@ -529,16 +542,7 @@ namespace Topx.Creator
                     DateParsing, CultureInfo.InvariantCulture).ToString("yyyy-MM-dd"))
             };
 
-            string gebruiksrechten_DatumOfPeriode = string.Empty;
-            if (string.IsNullOrEmpty(dossier.Gebruiksrechten_DatumOfPeriode))
-            {
-                ErrorMessage.Append($"{dossier.IdentificatieKenmerk}: Gebruiksrechten_DatumOfPeriode mag niet leeg zijn");
-            }
-            else
-                gebruiksrechten_DatumOfPeriode = DateTime.ParseExact(dossier.Gebruiksrechten_DatumOfPeriode, DateParsing, CultureInfo.InvariantCulture).ToString("yyyy-MM-dd");
-
-
-            var vertrouwelijkheid_DatumOfPeriode = DateTime.ParseExact(dossier.Vertrouwelijkheid_DatumOfPeriode, DateParsing, CultureInfo.InvariantCulture).ToString("yyyy-MM-dd");
+            var dekking_geografischgebied = dossier.Dekking_GeografischGebied.Split(',').Select(dekking => new @string() {Value = dekking}).ToArray();
 
             topx.Item = new aggregatieType()
             {
@@ -622,13 +626,7 @@ namespace Topx.Creator
                             }
 
                         },
-                        geografischGebied = new[]
-                        {
-                            new @string()
-                            {
-                                Value = dossier.Dekking_GeografischGebied
-                            }
-                        },
+                        geografischGebied = dekking_geografischgebied,
 
                     }
                 },
