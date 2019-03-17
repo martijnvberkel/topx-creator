@@ -45,11 +45,7 @@ namespace Topx.Importer
             if (!ValidateHelper.TestForValidDate(_dossier.Vertrouwelijkheid_DatumOfPeriode))
                 ValidationErrors.Add($"ERROR validatie: Dossier {_dossier.IdentificatieKenmerk}: Vertrouwelijkheid_DatumOfPeriode is niet herkend als geldige datum (verwacht format: {ValidateHelper.DateParsing})");
 
-            // if (!TestForValidDate(_dossier.Relatie_DatumOfPeriode))
-            //     ValidationErrors.Add($"ERROR validatie: Dossier {_dossier.Relatie_DatumOfPeriode}: Relatie_DatumOfPeriode is niet herkend als geldige datum (verwacht format: {DateParsing}");
-
            
-
             if (!string.IsNullOrEmpty(_dossier.Eventplan_DatumOfPeriode) && !ValidateHelper.TestForValidDate(_dossier.Eventplan_DatumOfPeriode))
                 ValidationErrors.Add($"ERROR validatie: Dossier {_dossier.IdentificatieKenmerk}: Eventplan_DatumOfPeriode is niet herkend als geldige datum (verwacht format: {ValidateHelper.DateParsing})");
 
@@ -62,7 +58,22 @@ namespace Topx.Importer
             if (string.IsNullOrEmpty(_dossier.Openbaarheid_OmschrijvingBeperkingen))
                 ValidationErrors.Add($"ERROR validatie: Dossier {_dossier.IdentificatieKenmerk}: verplicht veld Openbaarheid_OmschrijvingBeperkingen is leeg of afwezig");
 
-            
+            if (string.IsNullOrEmpty(_dossier.Eventgeschiedenis_VerantwoordelijkeFunctionaris))
+                ValidationErrors.Add($"ERROR validatie: Dossier {_dossier.IdentificatieKenmerk}: verplicht veld Eventgeschiedenis_VerantwoordelijkeFunctionaris is leeg of afwezig");
+
+            if (string.IsNullOrEmpty(_dossier.Context_Actor_IdentificatieKenmerk))
+                ValidationErrors.Add($"ERROR validatie: Dossier {_dossier.IdentificatieKenmerk}: verplicht veld Context_Actor_IdentificatieKenmerk is leeg of afwezig");
+
+            if (string.IsNullOrEmpty(_dossier.Context_Activiteit_Naam))
+                ValidationErrors.Add($"ERROR validatie: Dossier {_dossier.IdentificatieKenmerk}: verplicht veld Context_Activiteit_Naam is leeg of afwezig");
+
+            if (string.IsNullOrEmpty(_dossier.Context_Actor_AggregatieNiveau))
+                ValidationErrors.Add($"ERROR validatie: Dossier {_dossier.IdentificatieKenmerk}: verplicht veld Context_Actor_AggregatieNiveau is leeg of afwezig");
+
+            if (string.IsNullOrEmpty(_dossier.Context_Actor_GeautoriseerdeNaam))
+                ValidationErrors.Add($"ERROR validatie: Dossier {_dossier.IdentificatieKenmerk}: verplicht veld Context_Actor_GeautoriseerdeNaam is leeg of afwezig");
+
+
             if (string.IsNullOrEmpty(_dossier.Taal) || !Enum.TryParse(_dossier.Taal.ToLower(), true, out taalType taaltype))
             {
                 ValidationErrors.Add($"ERROR validatie: Dossier {_dossier.IdentificatieKenmerk}: verplicht veld TaalType is leeg of wordt niet herkend");

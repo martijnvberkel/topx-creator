@@ -67,6 +67,8 @@
     <Compile Include="Statics.cs" />
     <Compile Include="TestImporter.cs" />
     <Compile Include="TestMatadata.cs" />
+    <Compile Include="TestResources\Dossiers_Test1.cs" />
+    <Compile Include="TestXmlValidation.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -108,7 +110,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="TestResources\TopXOutput_NotValid.xml" />
     <Content Include="TestResources\ExpectedOutput1.xml" />
+    <Content Include="TestResources\ExpectedOutputBatch1.xml">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

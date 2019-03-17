@@ -143,11 +143,11 @@ namespace Topx.Importer
                             continue;
                         var propertyInfo = record.GetType().GetProperty(mappedfield);
 
-                        if (propertyInfo != null)
+                        if (propertyInfo != null && !string.IsNullOrEmpty(fieldsSource[index]))
                         {
                             if (propertyInfo.PropertyType == typeof(string))
                                 propertyInfo.SetValue(record, fieldsSource[index], null);
-                            if (propertyInfo.PropertyType == typeof(Int64))
+                            if (propertyInfo.PropertyType == typeof(Int64?))
                                 propertyInfo.SetValue(record, Convert.ToInt64(fieldsSource[index]), null);
 
                             if (propertyInfo.PropertyType == typeof(DateTime?))

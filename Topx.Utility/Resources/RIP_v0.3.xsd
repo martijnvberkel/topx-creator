@@ -1,0 +1,106 @@
+<?xml version="1.0"?>
+<xs:schema 
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	xmlns:rip="http://www.nationaalarchief.nl/RIP/v0.3" 
+	targetNamespace="http://www.nationaalarchief.nl/RIP/v0.3" 
+	elementFormDefault="qualified" 
+	attributeFormDefault="unqualified" 
+	version="v0.3">
+
+	<xs:element name="recordInformationPackage">
+		<xs:annotation>
+			<xs:documentation>Dit schema beschrijft de structuur van de meta data informatie die bij de specifieke content, in het e-depot, wordt opgeslagen.</xs:documentation>
+			<xs:documentation>Bij de specifieke content wordt minimaal 1 header en verschillende records opgeslagen.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="packageHeader" type="rip:packageHeaderType" minOccurs="1" maxOccurs="1"/>
+				<xs:element name="record" type="rip:ripRecordType" minOccurs="1" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:complexType name="packageHeaderType">
+		<xs:annotation>
+			<xs:documentation>Dit is de beschrijving van de header behorende bij de content.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="identificatie" type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Unieke identificatie van de aanlevering.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="datum" type="xs:date" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Datum van de aanlevering.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="omschrijving" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Omschrijving van de aanlevering.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="bron" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Omschrijving van de bron van de aanlevering.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="doel" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Omschrijving van het doel van de aanlevering.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="ripRecordType">
+		<xs:annotation>
+			<xs:documentation>Dit is de beschrijving van het record. Een record bestaat uit een header en meta data.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="recordHeader" type="rip:ripRecordHeaderType" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="metadata" type="rip:ripMetadataType" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="ripRecordHeaderType">
+		<xs:annotation>
+			<xs:documentation>Dit beschrijft de informatie in de header die bij het record opgeslagen moet worden.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="identificatie" type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Unieke identificatie van het record.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="omschrijving" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Omschrijving van het record.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="status" type="rip:ripRecordStatusType" minOccurs="0" maxOccurs="1" default="nieuw"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="ripMetadataType">
+		<xs:annotation>
+			<xs:documentation>Dit element kan ieder xml meta data document bevatten aangegeven door een organisatie.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:any namespace="##any" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="schemaURI" type="xs:string" use="required"/>
+	</xs:complexType>
+
+	<xs:simpleType name="ripRecordStatusType">
+		<xs:annotation>
+			<xs:documentation>Dit element geeft de status aan van een specifiek record</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="nieuw"/>
+			<xs:enumeration value="gewijzigd"/>
+			<xs:enumeration value="verwijderd"/>
+
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>
