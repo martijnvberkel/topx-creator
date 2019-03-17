@@ -542,7 +542,7 @@ namespace Topx.Creator
                     DateParsing, CultureInfo.InvariantCulture).ToString("yyyy-MM-dd"))
             };
 
-            var dekking_geografischgebied = dossier.Dekking_GeografischGebied.Split(',').Select(dekking => new @string() {Value = dekking}).ToArray();
+            var dekking_geografischgebied = dossier.Dekking_GeografischGebied.Split(',').Select(dekking => new @string() {Value = dekking.Trim()}).ToArray();
 
             topx.Item = new aggregatieType()
             {
