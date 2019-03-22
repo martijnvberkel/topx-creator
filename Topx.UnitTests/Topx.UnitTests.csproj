@@ -68,6 +68,7 @@
     <Compile Include="TestImporter.cs" />
     <Compile Include="TestMatadata.cs" />
     <Compile Include="TestResources\Dossiers_Test1.cs" />
+    <Compile Include="TestSanitizer.cs" />
     <Compile Include="TestXmlValidation.cs" />
   </ItemGroup>
   <ItemGroup>
