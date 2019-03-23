@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -37,6 +38,8 @@ namespace Topx.Interface
 
             _headersDossiers = GetPropertyInfoNames(propertyInfosDossiers, FieldMappingType.DOSSIER);
 
+            if (Convert.ToBoolean(ConfigurationManager.AppSettings["UseComplexLinkNummer"]))
+                _headersDossiers.Add(new FieldMapping(){DatabaseFieldName = "ComplexlinkNummer (optioneel)"});
             
             foreach (var headersDossier in _headersDossiers)
             {

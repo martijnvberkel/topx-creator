@@ -38,12 +38,15 @@ namespace Topx.DataServices
         bool CanConnect();
         string Conectionstring { get; set; }
 
+        void SaveComplexLink(ComplexLink complexLink);
     }
 
     public class DataService : IDataService
     {
         private string _errorMessage;
         public string Conectionstring { get; set; }
+       
+
         public bool Error { get; set; }
         public string ErrorMessage
         {
@@ -95,7 +98,9 @@ namespace Topx.DataServices
             {
                 entities.Database.ExecuteSqlCommand("truncate table Records");
                 entities.Database.ExecuteSqlCommand("truncate table Bestanden");
+                entities.Database.ExecuteSqlCommand("truncate table ComplexLinks");
                 entities.Database.ExecuteSqlCommand("delete from Dossiers");
+               
             }
         }
 
@@ -288,6 +293,15 @@ namespace Topx.DataServices
                     if (!string.IsNullOrEmpty(fieldmapping.DatabaseFieldName) || !string.IsNullOrEmpty(fieldmapping.MappedFieldName))
                         entities.FieldMappings.Add(fieldmapping);
                 }
+                entities.SaveChanges();
+            }
+        }
+
+        public void SaveComplexLink(ComplexLink complexLink)
+        {
+            using (var entities = new ModelTopX(Conectionstring))
+            {
+                entities.ComplexLinks.Add(complexLink);
                 entities.SaveChanges();
             }
         }

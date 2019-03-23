@@ -174,6 +174,16 @@ namespace TOPX.UI.Forms
                 if (importer.Error)
                 {
                     txtErrorsDossiers.Text = importer.ErrorMessage + Environment.NewLine + importer.ErrorsImportDossiers;
+                    return;
+                }
+
+                if (importer.ComplexLinksFound)
+                {
+                    if (MessageBox.Show("Eer zijn dossiers met ComplexLinks gevonden. Klik op OK om door te gaan met het kopieren van records naar dossiers met een overeenkomende ComplexLink",
+                            "ComplexLinks", MessageBoxButtons.OKCancel) == DialogResult.OK)
+                    {
+                        //ToDo
+                    }
                 }
             }
 

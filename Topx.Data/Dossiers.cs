@@ -13,6 +13,7 @@ namespace Topx.Data
         {
             Bestanden = new HashSet<Bestand>();
             Records = new HashSet<Record>();
+            ComplexLinks = new HashSet<ComplexLink>();
         }
 
         [Key]
@@ -110,5 +111,8 @@ namespace Topx.Data
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Record> Records { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ComplexLink> ComplexLinks { get; set; }
     }
 }

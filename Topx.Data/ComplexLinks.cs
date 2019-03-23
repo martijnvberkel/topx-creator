@@ -11,12 +11,12 @@ namespace Topx.Data
     [Table("ComplexLinks")]
     public class ComplexLink
     {
+        [Key]
+        public long Id { get; set; }
+        public virtual Dossier Dossiers { get; set; }
+
         [StringLength(20)]
         public string ComplexLinkNummer { get; set; }
-
-        [StringLength(50)]
-        public string Dossier_IdentificatieKenmerk { get; set; }
-
-        public virtual Dossier Dossiers { get; set; }
+      
     }
 }
