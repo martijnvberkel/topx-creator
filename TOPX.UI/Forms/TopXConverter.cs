@@ -12,6 +12,7 @@ using System.Xml.Serialization;
 using MaterialSkin;
 using MaterialSkin.Controls;
 using NLog;
+using Topx.ComplexLinks;
 using Topx.Creator;
 using Topx.Data;
 using Topx.DataServices;
@@ -177,14 +178,7 @@ namespace TOPX.UI.Forms
                     return;
                 }
 
-                if (importer.ComplexLinksFound)
-                {
-                    if (MessageBox.Show("Eer zijn dossiers met ComplexLinks gevonden. Klik op OK om door te gaan met het kopieren van records naar dossiers met een overeenkomende ComplexLink",
-                            "ComplexLinks", MessageBoxButtons.OKCancel) == DialogResult.OK)
-                    {
-                        //ToDo
-                    }
-                }
+                
             }
 
             using (var records = new StreamReader(new FileStream(txtRecordBestandLocation.Text, FileMode.Open, FileAccess.Read, FileShare.ReadWrite)))
@@ -200,7 +194,29 @@ namespace TOPX.UI.Forms
             txtErrorsDossiers.Text = importer.ErrorsImportDossiers.ToString();
             Cursor.Current = Cursors.Default;
 
-            MessageBox.Show(importer.Error ? $"De import is afgerond met errors." : $"Import is succesvol. Dossiers: {importer.NrOfDossiers}, records: {importer.NrOfRecords}");
+            var msg = string.Empty;
+            if (importer.Error)
+            {
+                MessageBox.Show($"De import is afgerond met errors.");
+            }
+            else
+            {
+                MessageBox.Show($"Import is succesvol. Dossiers: {importer.NrOfDossiers}, records: {importer.NrOfRecords}");
+                if (importer.ComplexLinksFound)
+                {
+                    if (MessageBox.Show("Eer zijn dossiers met ComplexLinks gevonden. Klik op OK om door te gaan met het kopieren van records naar dossiers met een overeenkomende ComplexLink",
+                            "ComplexLinks", MessageBoxButtons.OKCancel) == DialogResult.OK)
+                    {
+                        var complexLinkProcessor = new ComplexLinkProcessor(_dataservice);
+                        complexLinkProcessor.Process();
+                        if (complexLinkProcessor.Error)
+                            txtErrorsDossiers.Text += complexLinkProcessor.ErrorMessages.ToString();
+                    }
+                }
+            }
+           
+
+           
         }
 
         private void btGenerateTopX_Click(object sender, EventArgs e)

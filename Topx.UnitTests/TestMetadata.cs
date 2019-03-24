@@ -10,7 +10,7 @@ using Topx.FileAnalysis;
 namespace Topx.UnitTests
 {
     [TestFixture]
-    public class TestMatadata
+    public class TestMetadata
     {
         [Test]
         public void Test_Hash_FileSize()

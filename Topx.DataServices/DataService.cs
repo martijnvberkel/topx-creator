@@ -39,6 +39,9 @@ namespace Topx.DataServices
         string Conectionstring { get; set; }
 
         void SaveComplexLink(ComplexLink complexLink);
+        List<ComplexLink> GetAllComplexLinks();
+        List<string> GetComplexLinksWithMoreThanOneOccurence();
+        void AttachRecordsToDossier(Dossier dossierWithoutRecords, ICollection<Record> recordsToCopy);
     }
 
     public class DataService : IDataService
@@ -144,7 +147,7 @@ namespace Topx.DataServices
         {
             using (var entities = new ModelTopX(Conectionstring))
             {
-                return (from d in entities.Dossiers select d). Include("Records"). ToList();
+                return (from d in entities.Dossiers select d). Include("Records"). Include("ComplexLinks"). ToList();
             }
         }
 
@@ -306,7 +309,37 @@ namespace Topx.DataServices
             }
         }
 
-        public  void Log(string dossier, string message)
+        public List<ComplexLink> GetAllComplexLinks()
+        {
+            using (var entities = new ModelTopX(Conectionstring))
+            {
+                return (from a in entities.ComplexLinks select a).ToList();
+            }
+        }
+
+        public List<string> GetComplexLinksWithMoreThanOneOccurence()
+        {
+            using (var entities = new ModelTopX(Conectionstring))
+            {
+                return (from a in entities.ComplexLinks select a).GroupBy(x => x.ComplexLinkNummer)
+                    .Where(g => g.Count() > 1)
+                    .Select(y => y.Key)
+                    .ToList();
+            }
+        }
+
+        public void AttachRecordsToDossier(Dossier dossierWithoutRecords, ICollection<Record> recordsToCopy)
+        {
+            using (var entities = new ModelTopX(Conectionstring))
+            {
+                //var dossier = entities.Dossiers.Attach(dossierWithoutRecords);
+                dossierWithoutRecords.Records = recordsToCopy.Clone();
+                
+                entities.SaveChanges();
+            }
+        }
+
+        public void Log(string dossier, string message)
         {
             using (var entities = new ModelTopX(Conectionstring))
             {

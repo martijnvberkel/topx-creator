@@ -44,6 +44,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topx.UnitTests.PdfCreator",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topx.Console", "Topx.Console\Topx.Console.csproj", "{2E102F5E-B27A-470E-90DB-C14AE9AE9B60}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topx.ComplexLinks", "Topx.ComplexLinks\Topx.ComplexLinks.csproj", "{79C14AC5-1035-449B-AE7D-A2E71EBFDF5A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -108,12 +110,16 @@ Global
 		{2E102F5E-B27A-470E-90DB-C14AE9AE9B60}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2E102F5E-B27A-470E-90DB-C14AE9AE9B60}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2E102F5E-B27A-470E-90DB-C14AE9AE9B60}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79C14AC5-1035-449B-AE7D-A2E71EBFDF5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79C14AC5-1035-449B-AE7D-A2E71EBFDF5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79C14AC5-1035-449B-AE7D-A2E71EBFDF5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79C14AC5-1035-449B-AE7D-A2E71EBFDF5A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		VisualSVNWorkingCopyRoot = .
 		SolutionGuid = {AD535C3E-945A-4562-BAA7-F55B7E855B40}
+		VisualSVNWorkingCopyRoot = .
 	EndGlobalSection
 EndGlobal
