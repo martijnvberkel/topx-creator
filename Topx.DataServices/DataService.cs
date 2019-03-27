@@ -41,6 +41,7 @@ namespace Topx.DataServices
         void SaveComplexLink(ComplexLink complexLink);
         List<ComplexLink> GetAllComplexLinks();
         List<string> GetComplexLinksWithMoreThanOneOccurence();
+        List<Dossier> GetDossiersByComplexLink(string complexLink);
         void AttachRecordsToDossier(Dossier dossierWithoutRecords, ICollection<Record> recordsToCopy);
     }
 
@@ -328,13 +329,28 @@ namespace Topx.DataServices
             }
         }
 
+        public List<Dossier> GetDossiersByComplexLink(string complexLink)
+        {
+            using (var entities = new ModelTopX(Conectionstring))
+            {
+                return (from d in entities.Dossiers where d.ComplexLinks.FirstOrDefault().ComplexLinkNummer == complexLink select d)
+                    .Include("ComplexLinks") .Include("Records") .ToList();
+            }
+        }
+
         public void AttachRecordsToDossier(Dossier dossierWithoutRecords, ICollection<Record> recordsToCopy)
         {
             using (var entities = new ModelTopX(Conectionstring))
             {
-                //var dossier = entities.Dossiers.Attach(dossierWithoutRecords);
-                dossierWithoutRecords.Records = recordsToCopy.Clone();
-                
+                var dossier = (from d in entities.Dossiers where d.IdentificatieKenmerk == dossierWithoutRecords.IdentificatieKenmerk select d) .FirstOrDefault();
+
+                dossier.Records.Clear();
+                dossier.Records = new List<Record>();
+                foreach (var record in recordsToCopy)
+                {
+                    dossier.Records.Add(record.Clone());
+                }
+               
                 entities.SaveChanges();
             }
         }

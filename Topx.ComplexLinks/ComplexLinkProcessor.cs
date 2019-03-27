@@ -23,7 +23,8 @@ namespace Topx.ComplexLinks
         public void Process()
         {
             var dossiers = _dataservice.GetAllDossiers();
-            var dossiersWithNoRecords = (from a in dossiers where a.Records != null select a).ToList();
+            var dossiersWithNoRecords = (from a in dossiers where a.Records == null || a.Records.Count == 0 select a).ToList();
+            var complexLinks_records = new Dictionary<string, List<Record>>();
             foreach (var dossier in dossiersWithNoRecords)
             {
                 // Clean check
@@ -35,36 +36,46 @@ namespace Topx.ComplexLinks
                 }
 
                 if (dossier.ComplexLinks.Count > 1)
-                    HandleMoreThanOneComplexlinkToOneDossier(dossier);
-            }
-
-
-            foreach (var complexLink in _dataservice.GetComplexLinksWithMoreThanOneOccurence())
-            {
-                var dossiersWithSameComplexLinknr = (from a in dossiers where a.ComplexLinks.Any(t => t.ComplexLinkNummer == complexLink) select a) .ToList();
-
-                // Er mag maar maximaal 1 dossier records bevatten
-                var dossierWithRecords = (from a in dossiersWithSameComplexLinknr where a.Records != null && a.Records.Any() select a) .ToList();
-                if (dossierWithRecords.Count() > 1)
-                    HandleErrorMultipleRecords(dossierWithRecords, complexLink);
-
-                // Er moet 1 dossier zijn met records
-                if (!dossierWithRecords.Any())
-                    HandleErrorNoRecords(dossiersWithSameComplexLinknr, complexLink);
-
-                else  // Clean: 1 dossier met records
                 {
-                    var recordsToCopy = dossierWithRecords.FirstOrDefault()?.Records;
-                    var dossiersWithoutRecords = (from a in dossiersWithSameComplexLinknr where a.Records != null select a).ToList();
-                    foreach (var dossierWithoutRecords in dossiersWithoutRecords)
-                    {
-                        _dataservice.AttachRecordsToDossier(dossierWithoutRecords, recordsToCopy);
-                    }
+                    HandleMoreThanOneComplexlinkToOneDossier(dossier);
+                    continue;
                 }
 
+                var complexLink = dossier.ComplexLinks.FirstOrDefault().ComplexLinkNummer;
+                var dossiersWithComplexLinks = _dataservice.GetDossiersByComplexLink(complexLink);
+
+                // Uitval wanneer meerdere dossiers met hetzelfde complexlinknummer records hebben (er mag maar 1 dossier records bevatten)
+                var dossiersWithComplexLinksWithRecords = dossiersWithComplexLinks.Where(t => t.Records.Any()) .ToList();
+                if (dossiersWithComplexLinksWithRecords.Count(t => t.Records != null) > 1)
+                {
+                    HandleErrorMultipleDossiersWithRecordsWithSameComplexLink(dossiersWithComplexLinksWithRecords);
+                    continue;
+                }
+                if (!complexLinks_records.ContainsKey(complexLink))
+                    complexLinks_records.Add(complexLink, dossiersWithComplexLinksWithRecords.FirstOrDefault()?.Records.ToList());
+
             }
+            // complexLinks_records collectie bevat nu alle complexlinknummers en bijhorende list<records>
+
+            foreach (var complexLinksRecord in complexLinks_records)
+            {
+                var dossiersbyComplexlink = _dataservice.GetDossiersByComplexLink(complexLinksRecord.Key);
+                foreach (var dossier in dossiersbyComplexlink)
+                {
+                    if (dossier.Records.Any())
+                        continue;  // Skip het ene dossier wat al is voorzien van de recordset
+
+                    _dataservice.AttachRecordsToDossier(dossier, complexLinksRecord.Value);
+                }
+            }
+            
             if (ErrorMessages.Length > 0)
                 Error = true;
+        }
+
+        private void HandleErrorMultipleDossiersWithRecordsWithSameComplexLink(List<Dossier> dossiers)
+        {
+            ErrorMessages.AppendLine($"Er zijn meerdere dossiers gevonden bij een complexLinkNummer met records. Er mag maar één dossier records bevatten. Het betreft dossiers {DossiersAsString(dossiers)}");
         }
 
         private void HandleMoreThanOneComplexlinkToOneDossier(Dossier dossier)
