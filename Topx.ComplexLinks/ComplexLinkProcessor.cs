@@ -23,7 +23,22 @@ namespace Topx.ComplexLinks
         public void Process()
         {
             var dossiers = _dataservice.GetAllDossiers();
-            
+            var dossiersWithNoRecords = (from a in dossiers where a.Records != null select a).ToList();
+            foreach (var dossier in dossiersWithNoRecords)
+            {
+                // Clean check
+
+                if (dossier.ComplexLinks == null || !dossier.ComplexLinks.Any())
+                {
+                    HandleErrorNoRecordNoComplexLink(dossier);
+                    continue;
+                }
+
+                if (dossier.ComplexLinks.Count > 1)
+                    HandleMoreThanOneComplexlinkToOneDossier(dossier);
+            }
+
+
             foreach (var complexLink in _dataservice.GetComplexLinksWithMoreThanOneOccurence())
             {
                 var dossiersWithSameComplexLinknr = (from a in dossiers where a.ComplexLinks.Any(t => t.ComplexLinkNummer == complexLink) select a) .ToList();
@@ -52,6 +67,16 @@ namespace Topx.ComplexLinks
                 Error = true;
         }
 
+        private void HandleMoreThanOneComplexlinkToOneDossier(Dossier dossier)
+        {
+            ErrorMessages.AppendLine($"Dossier {dossier.IdentificatieKenmerk} heeft meer dan één complexlinknummer gekoppeld: {ComplexlinkNummersAsString(dossier.ComplexLinks)}");
+        }
+
+        private void HandleErrorNoRecordNoComplexLink(Dossier dossier)
+        {
+            ErrorMessages.AppendLine($"Dossier {dossier.IdentificatieKenmerk} heeft geen records en geen complexlinknummer. Deze kan niet worden verwerkt.");
+        }
+
         private void HandleErrorNoRecords(List<Dossier> dossiersWithSameComplexLinknr, string complexLink)
         {
             ErrorMessages.AppendLine(
@@ -74,6 +99,18 @@ namespace Topx.ComplexLinks
             if (dossiersText.EndsWith(", "))
                 dossiersText = dossiersText.Substring(0, dossiersText.Length - 2);
             return dossiersText;
+        }
+
+        private string ComplexlinkNummersAsString(IEnumerable<ComplexLink> complexLinks)
+        {
+            var text = string.Empty;
+            foreach (var complexlink in complexLinks)
+            {
+                text += complexlink.ComplexLinkNummer + ", ";
+            }
+            if (text.EndsWith(", "))
+                text = text.Substring(0, text.Length - 2);
+            return text;
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -200,7 +201,7 @@ namespace Topx.Importer
         
         public bool CheckHealthyFieldmappings(List<FieldMapping> fieldmappings)
         {
-           foreach (var fieldmapping in fieldmappings)
+           foreach (var fieldmapping in fieldmappings.Where(t => !t.DatabaseFieldName.StartsWith("ComplexLink", true, CultureInfo.InvariantCulture)))
             {
                 if (!string.IsNullOrEmpty(fieldmapping.DatabaseFieldName) && string.IsNullOrEmpty(fieldmapping.MappedFieldName) && !_fieldsThatMaybeEmpty.Contains(fieldmapping.DatabaseFieldName))
                     return false;
