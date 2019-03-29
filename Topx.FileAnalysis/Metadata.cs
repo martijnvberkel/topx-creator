@@ -75,7 +75,9 @@ public class Metadata
                 try
                 {
                     var fileFullpath = Path.Combine(_path, record.Bestand_Formaat_Bestandsnaam);
-                    if (File.Exists(fileFullpath) && _allPresentFiles.Contains(fileFullpath))
+                    var fileExists = File.Exists(fileFullpath);
+                   
+                    if (fileExists && _allPresentFiles.Contains(fileFullpath))
                     {
 
                         if (_setCreationDate)
@@ -96,7 +98,9 @@ public class Metadata
                     }
                     else
                     {
-                        ErrorMessages.AppendLine($"File {fileFullpath} horende bij dossier {record.DossierId} is niet gevonden");
+                        ErrorMessages.AppendLine(fileExists
+                            ? $"File {fileFullpath} horende bij dossier {record.DossierId} is niet gescand, er is een verschil in hoofd/kleine letters wat niet is toegestaan."
+                            : $"File {fileFullpath} horende bij dossier {record.DossierId} is niet gevonden");
                     }
                 }
                 catch (Exception e)

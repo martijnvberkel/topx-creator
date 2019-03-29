@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Topx.Data;
+using Topx.Utility;
 
 namespace TOPX.UI.Controls
 {
@@ -69,6 +70,7 @@ namespace TOPX.UI.Controls
 
                     // cleanup empty rows
                     listFieldMappings.RemoveAll(t => string.IsNullOrEmpty(t.MappedFieldName) && string.IsNullOrEmpty(t.DatabaseFieldName));
+                    Sanitizer.CheckAndFixSanityOfFieldMappings(listFieldMappings);
                     DataSource = listFieldMappings.ToList();
                 }
             }

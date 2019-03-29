@@ -49,7 +49,7 @@ namespace Topx.Importer
                 ValidationErrors.Add($"{errorPrefix} Openbaarheid_OmschrijvingBeperkingen is leeg, dit veld is verplicht.");
 
             if (!ValidateHelper.TestForValidDate(_record.Openbaarheid_DatumOfPeriode))
-                ValidationErrors.Add($"{errorPrefix} Openbaarheid_DatumOfPeriode is niet herkend als geldige datum (verwacht format: {ValidateHelper.DateParsing})");
+                ValidationErrors.Add($"{errorPrefix} Openbaarheid_DatumOfPeriode waarde: {_record.Openbaarheid_DatumOfPeriode} is niet herkend als geldige datum (verwacht format: {ValidateHelper.DateParsing})");
 
             if (string.IsNullOrEmpty(_record.Bestand_Vorm_Redactiegenre))
                 ValidationErrors.Add($"{errorPrefix} Bestand_Vorm_Redactiegenre is leeg, dit veld is verplicht.");

@@ -167,6 +167,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Topx.ComplexLinks\Topx.ComplexLinks.csproj">
+      <Project>{79c14ac5-1035-449b-ae7d-a2e71ebfdf5a}</Project>
+      <Name>Topx.ComplexLinks</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Topx.Data.DTO\Topx.Data.DTO.csproj">
       <Project>{6c2cf74e-2518-4de6-85b7-436007b94a1e}</Project>
       <Name>Topx.Data.DTO</Name>

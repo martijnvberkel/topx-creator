@@ -11,7 +11,7 @@ namespace Topx.Data.Migrations
         {
             AutomaticMigrationsEnabled = true;
             ContextKey = "ModelTopX";
-            
+            AutomaticMigrationDataLossAllowed = true;
         }
     }
 }

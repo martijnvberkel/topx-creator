@@ -136,7 +136,7 @@ namespace Topx.UnitTests
             var xmlstreamActual = xmlHelper.GetXmlStringFromObject(recordinformationPackage);
 
             // Act
-            var xmlCompare = File.ReadAllText(Path.Combine(Statics. AppPath(), @"TestResources\ExpectedOutput1.xml"));
+            var xmlCompare = File.ReadAllText(Path.Combine(Statics. AppPath(), @"TestResources\ExpectedOutput2.xml"));
 
             // Assert
             XmlAssert.Equal(xmlCompare, xmlstreamActual);
@@ -161,7 +161,7 @@ namespace Topx.UnitTests
 
             var result = dossierValidator.Validate();
             Assert.That(result, Is.EqualTo(false));
-            Assert.That(dossierValidator.ValidationErrors.Count, Is.EqualTo(12));
+            Assert.That(dossierValidator.ValidationErrors.Count, Is.EqualTo(16));
         }
 
         [Test]
@@ -181,8 +181,14 @@ namespace Topx.UnitTests
                 Eventgeschiedenis_Type = "x",
                 Taal = "dut",
                 Vertrouwelijkheid_ClassificatieNiveau = "x",
-                Openbaarheid_OmschrijvingBeperkingen = "x"
-
+                Openbaarheid_OmschrijvingBeperkingen = "x",
+                Naam = "x",
+                Eventgeschiedenis_VerantwoordelijkeFunctionaris = "x",
+                IdentificatieKenmerk = "x",
+                Context_Activiteit_Naam = "x",
+                Context_Actor_AggregatieNiveau = "x",
+                Context_Actor_GeautoriseerdeNaam = "x",
+                Context_Actor_IdentificatieKenmerk = "x"
             };
             var dossierValidator = new DossierValidator(dossier);
 

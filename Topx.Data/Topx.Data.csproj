@@ -52,7 +52,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bestanden.cs" />
+    <Compile Include="ComplexLinks.cs" />
     <Compile Include="Dossiers.cs" />
+    <Compile Include="Extensions.cs" />
     <Compile Include="FieldMappings.cs" />
     <Compile Include="FieldMappingType.cs" />
     <Compile Include="Globals.cs" />
@@ -86,6 +88,18 @@
     <Compile Include="Migrations\201903051711264_record_openbaarheid.Designer.cs">
       <DependentUpon>201903051711264_record_openbaarheid.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201903230926406_complexlinks.cs" />
+    <Compile Include="Migrations\201903230926406_complexlinks.Designer.cs">
+      <DependentUpon>201903230926406_complexlinks.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903230933022_complexlinks2.cs" />
+    <Compile Include="Migrations\201903230933022_complexlinks2.Designer.cs">
+      <DependentUpon>201903230933022_complexlinks2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903231110506_complexlinks3.cs" />
+    <Compile Include="Migrations\201903231110506_complexlinks3.Designer.cs">
+      <DependentUpon>201903231110506_complexlinks3.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ModelTopX.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -117,6 +131,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201903051711264_record_openbaarheid.resx">
       <DependentUpon>201903051711264_record_openbaarheid.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903230926406_complexlinks.resx">
+      <DependentUpon>201903230926406_complexlinks.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903230933022_complexlinks2.resx">
+      <DependentUpon>201903230933022_complexlinks2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903231110506_complexlinks3.resx">
+      <DependentUpon>201903231110506_complexlinks3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
