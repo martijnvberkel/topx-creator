@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using Topx.Data;
 
 
@@ -13,7 +11,7 @@ namespace Topx.Interface
     public class Headers
     {
         //private readonly ModelTopX _entities;
-        
+
 
         private List<FieldMapping> _headersDossiers;
         private List<FieldMapping> _headersRecords;
@@ -37,12 +35,14 @@ namespace Topx.Interface
 
             _headersDossiers = GetPropertyInfoNames(propertyInfosDossiers, FieldMappingType.DOSSIER);
 
-            
+            if (Convert.ToBoolean(ConfigurationManager.AppSettings["UseComplexLinkNummer"]))
+                _headersDossiers.Add(new FieldMapping() { DatabaseFieldName = "ComplexlinkNummer (optioneel)" });
+
             foreach (var headersDossier in _headersDossiers)
             {
                 headersDossier.TMLO = (from t in _topX_Tmlos where t.TopX == headersDossier.DatabaseFieldName select t.TMLO).FirstOrDefault();
             }
-            
+
         }
 
         public void CreateListOfAvailableColumnsOfRecords()
@@ -58,15 +58,19 @@ namespace Topx.Interface
             }
         }
 
-        
+
 
         private List<FieldMapping> GetPropertyInfoNames(PropertyInfo[] propertyInfos, FieldMappingType type)
         {
             // if (typeof(IEnumerable).IsAssignableFrom(pi.PropertyType))
             var listOfFields = propertyInfos.Where
             (
-                propertyInfo =>
-                    propertyInfo.Name != "Id" && propertyInfo.Name !="Dossiers" && propertyInfo.Name != "Records" && propertyInfo.Name != "Bestanden"
+                propertyInfo => 
+                (
+                propertyInfo.PropertyType == typeof(string) || 
+                propertyInfo.PropertyType == typeof(Int64?) || 
+                propertyInfo.PropertyType == typeof(DateTime?)
+                )
                     && !HeaderClassification.OptionalHeaders.Contains(propertyInfo.Name)
                     && propertyInfo.PropertyType != typeof(ICollection<>))
             .Select(propertyInfo => propertyInfo.Name);
@@ -86,7 +90,7 @@ namespace Topx.Interface
                 }
                 else
                 {
-                    _headersDossiers.Add(new FieldMapping() {MappedFieldName = sourceHeader, Type = FieldMappingType.RECORD.ToString() });
+                    _headersDossiers.Add(new FieldMapping() { MappedFieldName = sourceHeader, Type = FieldMappingType.RECORD.ToString() });
                 }
 
             }
@@ -95,8 +99,8 @@ namespace Topx.Interface
 
         public List<FieldMapping> GetHeaderMappingRecordsBestanden(List<string> sourceHeaders)
         {
-           CreateListOfAvailableColumnsOfRecords();
-           foreach (var sourceHeader in sourceHeaders)
+            CreateListOfAvailableColumnsOfRecords();
+            foreach (var sourceHeader in sourceHeaders)
             {
                 var headerRecords = _headersRecords.FirstOrDefault(t => t.DatabaseFieldName == sourceHeader);
                 if (headerRecords != null)

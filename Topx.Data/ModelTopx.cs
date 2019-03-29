@@ -26,6 +26,7 @@ namespace Topx.Data
         public virtual DbSet<Log> Log { get; set; }
         public virtual DbSet<Record> Records { get; set; }
         public virtual DbSet<Globals> Globals { get; set; }
+        public virtual DbSet<ComplexLink> ComplexLinks { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

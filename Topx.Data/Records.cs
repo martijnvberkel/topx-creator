@@ -1,3 +1,5 @@
+using System.Runtime.Serialization;
+
 namespace Topx.Data
 {
     using System;
@@ -66,5 +68,6 @@ namespace Topx.Data
         public string Bestand_Formaat_IdentificatieKenmerk { get; set; }
 
         public virtual Dossier Dossiers { get; set; }
+      
     }
 }

@@ -38,12 +38,19 @@ namespace Topx.DataServices
         bool CanConnect();
         string Conectionstring { get; set; }
 
+        void SaveComplexLink(ComplexLink complexLink);
+        List<ComplexLink> GetAllComplexLinks();
+        List<string> GetComplexLinksWithMoreThanOneOccurence();
+        List<Dossier> GetDossiersByComplexLink(string complexLink);
+        void AttachRecordsToDossier(Dossier dossierWithoutRecords, ICollection<Record> recordsToCopy);
     }
 
     public class DataService : IDataService
     {
         private string _errorMessage;
         public string Conectionstring { get; set; }
+       
+
         public bool Error { get; set; }
         public string ErrorMessage
         {
@@ -95,7 +102,9 @@ namespace Topx.DataServices
             {
                 entities.Database.ExecuteSqlCommand("truncate table Records");
                 entities.Database.ExecuteSqlCommand("truncate table Bestanden");
+                entities.Database.ExecuteSqlCommand("truncate table ComplexLinks");
                 entities.Database.ExecuteSqlCommand("delete from Dossiers");
+               
             }
         }
 
@@ -139,7 +148,7 @@ namespace Topx.DataServices
         {
             using (var entities = new ModelTopX(Conectionstring))
             {
-                return (from d in entities.Dossiers select d). Include("Records"). ToList();
+                return (from d in entities.Dossiers select d). Include("Records"). Include("ComplexLinks"). ToList();
             }
         }
 
@@ -292,7 +301,61 @@ namespace Topx.DataServices
             }
         }
 
-        public  void Log(string dossier, string message)
+        public void SaveComplexLink(ComplexLink complexLink)
+        {
+            using (var entities = new ModelTopX(Conectionstring))
+            {
+                entities.ComplexLinks.Add(complexLink);
+                entities.SaveChanges();
+            }
+        }
+
+        public List<ComplexLink> GetAllComplexLinks()
+        {
+            using (var entities = new ModelTopX(Conectionstring))
+            {
+                return (from a in entities.ComplexLinks select a).ToList();
+            }
+        }
+
+        public List<string> GetComplexLinksWithMoreThanOneOccurence()
+        {
+            using (var entities = new ModelTopX(Conectionstring))
+            {
+                return (from a in entities.ComplexLinks select a).GroupBy(x => x.ComplexLinkNummer)
+                    .Where(g => g.Count() > 1)
+                    .Select(y => y.Key)
+                    .ToList();
+            }
+        }
+
+        public List<Dossier> GetDossiersByComplexLink(string complexLink)
+        {
+            using (var entities = new ModelTopX(Conectionstring))
+            {
+                return (from d in entities.Dossiers where d.ComplexLinks.FirstOrDefault().ComplexLinkNummer == complexLink select d)
+                    .Include("ComplexLinks") .Include("Records") .ToList();
+            }
+        }
+
+        public void AttachRecordsToDossier(Dossier dossierWithoutRecords, ICollection<Record> recordsToCopy)
+        {
+            using (var entities = new ModelTopX(Conectionstring))
+            {
+                var dossier = (from d in entities.Dossiers where d.IdentificatieKenmerk == dossierWithoutRecords.IdentificatieKenmerk select d) .FirstOrDefault();
+
+                dossier.Records.Clear();
+                dossier.Records = new List<Record>();
+                foreach (var record in recordsToCopy)
+                {
+                    dossier.Records.Add(record.Clone());
+                }
+               
+                entities.SaveChanges();
+            }
+        }
+
+        public void Log(string dossier, string message)
         {
             using (var entities = new ModelTopX(Conectionstring))
             {

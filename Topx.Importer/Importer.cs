@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,7 @@ namespace Topx.Importer
         public string ErrorMessage;
         public StringBuilder ErrorsImportDossiers = new StringBuilder();
         public StringBuilder ErrorsImportRecords = new StringBuilder();
+        public bool ComplexLinksFound;
       
         public int NrOfDossiers = 0;
         public int NrOfRecords = 0;
@@ -25,7 +27,8 @@ namespace Topx.Importer
             "Bestand_Formaat_FysiekeIntegriteit_Algoritme",
             "Bestand_Formaat_FysiekeIntegriteit_Waarde",
             "Bestand_Formaat_FysiekeIntegriteit_DatumEnTijd",
-            "Bestand_Formaat_IdentificatieKenmerk"
+            "Bestand_Formaat_IdentificatieKenmerk",
+            "ComplexlinkNummer (optioneel)"
         };
 
         public bool Error => ErrorsImportDossiers.Length > 0 || ErrorsImportRecords.Length > 0 || !string.IsNullOrEmpty(ErrorMessage);
@@ -67,16 +70,23 @@ namespace Topx.Importer
                         continue;
                     }
 
+                    ComplexLink complexLink = null;
                     for (var index = 0; index <= headersSource.Length - 1; index++)
                     {
                         var mappedfield = (from f in mappingsDossiers where f.MappedFieldName == headersSource[index] select f.DatabaseFieldName).FirstOrDefault();
                         if (mappedfield == null)
                             continue;
+
+                        if (mappedfield.StartsWith("ComplexlinkNummer"))
+                            complexLink = new ComplexLink() {ComplexLinkNummer = fieldsSource[index]};
+
                         var propertyInfo = dossier.GetType().GetProperty(mappedfield);
 
                         if (propertyInfo != null)
                             propertyInfo.SetValue(dossier, fieldsSource[index], null);
                     }
+
+                   
 
                     if (_enableValidation)
                     {
@@ -84,8 +94,13 @@ namespace Topx.Importer
                         var isValidated = dossiervalidator.Validate();
                         if (isValidated)
                         {
-                        
-                            if(!_dataservice.SaveDossier(dossier))
+                            if (complexLink != null)
+                            {
+                                ComplexLinksFound = true;
+                                dossier.ComplexLinks.Add(complexLink);
+                            }
+
+                            if (!_dataservice.SaveDossier(dossier))
                             {
                                 ErrorsImportDossiers.AppendLine(_dataservice.ErrorMessage);
                             }
@@ -186,7 +201,7 @@ namespace Topx.Importer
         
         public bool CheckHealthyFieldmappings(List<FieldMapping> fieldmappings)
         {
-           foreach (var fieldmapping in fieldmappings)
+           foreach (var fieldmapping in fieldmappings.Where(t => t.DatabaseFieldName != null && !t.DatabaseFieldName.StartsWith("ComplexLink", true, CultureInfo.InvariantCulture)))
             {
                 if (!string.IsNullOrEmpty(fieldmapping.DatabaseFieldName) && string.IsNullOrEmpty(fieldmapping.MappedFieldName) && !_fieldsThatMaybeEmpty.Contains(fieldmapping.DatabaseFieldName))
                     return false;
