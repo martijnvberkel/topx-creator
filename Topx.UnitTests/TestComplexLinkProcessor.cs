@@ -83,11 +83,17 @@ namespace Topx.UnitTests
         [Test]
         public void TestCloneDossiers()
         {
+            // given
             var records = new List<Record>() {new Record() {Naam = "a"}};
             var dossier = new Dossier() {IdentificatieKenmerk = "1", Records = records};
 
-            var newDossier1 = new Dossier() {IdentificatieKenmerk = "2", Records = records.Clone()};
-            var newDossier2 = new Dossier() { IdentificatieKenmerk = "3", Records = records.Clone()};
+            var recordsClone = records.Select(record => record.Clone()).ToList();
+
+            // when
+            var newDossier = new Dossier() { IdentificatieKenmerk = "3", Records = recordsClone};
+             
+            // then
+            Assert.That(newDossier.Records.FirstOrDefault().Naam, Is.EqualTo(dossier.Records.FirstOrDefault().Naam));
 
         }
     }

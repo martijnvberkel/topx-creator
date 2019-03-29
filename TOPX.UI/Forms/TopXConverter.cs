@@ -210,13 +210,17 @@ namespace TOPX.UI.Forms
                         var complexLinkProcessor = new ComplexLinkProcessor(_dataservice);
                         complexLinkProcessor.Process();
                         if (complexLinkProcessor.Error)
+                        {
                             txtErrorsDossiers.Text += complexLinkProcessor.ErrorMessages.ToString();
+                            MessageBox.Show("Het kopiëren van de records naar dossiers met overeenkomstige ComplexLinknummers is afgerond met errors. ");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Het kopiëren van records naar dossiers met overeenkomstige ComplexLinknummers is succesvol afgerond.");
+                        }
                     }
                 }
             }
-           
-
-           
         }
 
         private void btGenerateTopX_Click(object sender, EventArgs e)
