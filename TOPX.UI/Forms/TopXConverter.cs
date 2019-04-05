@@ -169,7 +169,7 @@ namespace TOPX.UI.Forms
             }
 
             Cursor.Current = Cursors.WaitCursor;
-            using (var dossiers = new StreamReader(new FileStream(txtDossierLocation.Text, FileMode.Open, FileAccess.Read, FileShare.ReadWrite)))
+            using (var dossiers = new StreamReader(new FileStream(txtDossierLocation.Text, FileMode.Open, FileAccess.Read, FileShare.ReadWrite), Encoding.UTF7))
             {
                 importer.SaveDossiers(_fieldmappingsDossiers, dossiers);
                 if (importer.Error)
@@ -181,7 +181,7 @@ namespace TOPX.UI.Forms
                 
             }
 
-            using (var records = new StreamReader(new FileStream(txtRecordBestandLocation.Text, FileMode.Open, FileAccess.Read, FileShare.ReadWrite)))
+            using (var records = new StreamReader(new FileStream(txtRecordBestandLocation.Text, FileMode.Open, FileAccess.Read, FileShare.ReadWrite), Encoding.UTF7))
             {
                 importer.SaveRecords(_fieldmappingsRecords, records);
                 if (importer.Error)
