@@ -46,6 +46,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topx.Console", "Topx.Consol
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topx.ComplexLinks", "Topx.ComplexLinks\Topx.ComplexLinks.csproj", "{79C14AC5-1035-449B-AE7D-A2E71EBFDF5A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topx.BatchService", "Topx.BatchService\Topx.BatchService.csproj", "{5EAC4103-5B31-4D97-9A54-1D9843012973}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -114,12 +116,16 @@ Global
 		{79C14AC5-1035-449B-AE7D-A2E71EBFDF5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{79C14AC5-1035-449B-AE7D-A2E71EBFDF5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{79C14AC5-1035-449B-AE7D-A2E71EBFDF5A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5EAC4103-5B31-4D97-9A54-1D9843012973}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5EAC4103-5B31-4D97-9A54-1D9843012973}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5EAC4103-5B31-4D97-9A54-1D9843012973}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5EAC4103-5B31-4D97-9A54-1D9843012973}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {AD535C3E-945A-4562-BAA7-F55B7E855B40}
 		VisualSVNWorkingCopyRoot = .
+		SolutionGuid = {AD535C3E-945A-4562-BAA7-F55B7E855B40}
 	EndGlobalSection
 EndGlobal

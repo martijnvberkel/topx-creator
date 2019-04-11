@@ -41,6 +41,9 @@
     <Reference Include="AutoUpdater.NET, Version=1.4.11.0, Culture=neutral, PublicKeyToken=501435c91b35f4bc, processorArchitecture=MSIL">
       <HintPath>..\packages\Autoupdater.NET.Official.1.4.11\lib\net40\AutoUpdater.NET.dll</HintPath>
     </Reference>
+    <Reference Include="ByteSize, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ByteSize.1.3.0\lib\net45\ByteSize.dll</HintPath>
+    </Reference>
     <Reference Include="ComponentFactory.Krypton.Design, Version=4.62.0.0, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e, processorArchitecture=MSIL">
       <HintPath>..\packages\KryptonToolkitSuite462.4.62.554\lib\ComponentFactory.Krypton.Design.dll</HintPath>
     </Reference>
@@ -167,6 +170,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Topx.BatchService\Topx.BatchService.csproj">
+      <Project>{5EAC4103-5B31-4D97-9A54-1D9843012973}</Project>
+      <Name>Topx.BatchService</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Topx.ComplexLinks\Topx.ComplexLinks.csproj">
       <Project>{79c14ac5-1035-449b-ae7d-a2e71ebfdf5a}</Project>
       <Name>Topx.ComplexLinks</Name>

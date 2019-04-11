@@ -43,6 +43,7 @@ namespace Topx.DataServices
         List<string> GetComplexLinksWithMoreThanOneOccurence();
         List<Dossier> GetDossiersByComplexLink(string complexLink);
         void AttachRecordsToDossier(Dossier dossierWithoutRecords, ICollection<Record> recordsToCopy);
+        ulong GetTotalSizeNeededBytes();
     }
 
     public class DataService : IDataService
@@ -353,6 +354,17 @@ namespace Topx.DataServices
                
                 entities.SaveChanges();
             }
+        }
+
+        public ulong GetTotalSizeNeededBytes()
+        {
+            using (var entities = new ModelTopX(Conectionstring))
+            {
+                var sum = (from r in entities.Records select r.Bestand_Formaat_BestandsOmvang).Sum();
+                if (sum != null)
+                    return (ulong) sum;
+            }
+            return 0;
         }
 
         public void Log(string dossier, string message)

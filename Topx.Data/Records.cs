@@ -34,7 +34,7 @@ namespace Topx.Data
         [StringLength(50)]
         public string Bestand_Vorm_Redactiegenre { get; set; }
 
-        [StringLength(50)]
+        [StringLength(100)]
         public string Bestand_Formaat_Bestandsnaam { get; set; }
 
         public long? Bestand_Formaat_BestandsOmvang { get; set; }
