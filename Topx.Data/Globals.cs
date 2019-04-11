@@ -25,5 +25,7 @@ namespace Topx.Data
         public string NaamArchief { get; set; }
         public string LastDossierFileName { get; set; }
         public string LastRecordsFileName { get; set; }
+        public string BatchSourceDirectory { get; set; }
+        public string BatchTargetDirectory { get; set; }
     }
 }

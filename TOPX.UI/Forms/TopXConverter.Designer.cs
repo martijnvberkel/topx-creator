@@ -114,6 +114,13 @@ namespace TOPX.UI.Forms
             this.picSelectDirToScan = new System.Windows.Forms.PictureBox();
             this.txtFilesDirToScan = new System.Windows.Forms.TextBox();
             this.tabGenerateTopX = new System.Windows.Forms.TabPage();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtBatchSourceDirectory = new System.Windows.Forms.TextBox();
+            this.picSelectBatchSourceDir = new System.Windows.Forms.PictureBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txtBatchTargetDirectory = new System.Windows.Forms.TextBox();
+            this.picSelectBatchTargetDir = new System.Windows.Forms.PictureBox();
+            this.chkCreateBatchesSubdir = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.txtBatchSize = new System.Windows.Forms.TextBox();
             this.chkUseBatchSize = new System.Windows.Forms.CheckBox();
@@ -138,6 +145,8 @@ namespace TOPX.UI.Forms
             this.tabMetadata.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picSelectDirToScan)).BeginInit();
             this.tabGenerateTopX.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picSelectBatchSourceDir)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picSelectBatchTargetDir)).BeginInit();
             this.SuspendLayout();
             // 
             // materialContextMenuStrip1
@@ -1042,11 +1051,12 @@ namespace TOPX.UI.Forms
             // 
             // picSelectDirToScan
             // 
+            this.picSelectDirToScan.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.picSelectDirToScan.Image = ((System.Drawing.Image)(resources.GetObject("picSelectDirToScan.Image")));
-            this.picSelectDirToScan.Location = new System.Drawing.Point(446, 49);
+            this.picSelectDirToScan.Location = new System.Drawing.Point(446, 53);
             this.picSelectDirToScan.Margin = new System.Windows.Forms.Padding(2);
             this.picSelectDirToScan.Name = "picSelectDirToScan";
-            this.picSelectDirToScan.Size = new System.Drawing.Size(31, 33);
+            this.picSelectDirToScan.Size = new System.Drawing.Size(22, 29);
             this.picSelectDirToScan.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picSelectDirToScan.TabIndex = 23;
             this.picSelectDirToScan.TabStop = false;
@@ -1061,6 +1071,13 @@ namespace TOPX.UI.Forms
             // 
             // tabGenerateTopX
             // 
+            this.tabGenerateTopX.Controls.Add(this.label3);
+            this.tabGenerateTopX.Controls.Add(this.txtBatchSourceDirectory);
+            this.tabGenerateTopX.Controls.Add(this.picSelectBatchSourceDir);
+            this.tabGenerateTopX.Controls.Add(this.label2);
+            this.tabGenerateTopX.Controls.Add(this.txtBatchTargetDirectory);
+            this.tabGenerateTopX.Controls.Add(this.picSelectBatchTargetDir);
+            this.tabGenerateTopX.Controls.Add(this.chkCreateBatchesSubdir);
             this.tabGenerateTopX.Controls.Add(this.label1);
             this.tabGenerateTopX.Controls.Add(this.txtBatchSize);
             this.tabGenerateTopX.Controls.Add(this.chkUseBatchSize);
@@ -1078,6 +1095,76 @@ namespace TOPX.UI.Forms
             this.tabGenerateTopX.TabIndex = 4;
             this.tabGenerateTopX.Text = "Genereer TopX";
             this.tabGenerateTopX.UseVisualStyleBackColor = true;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(472, 51);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(72, 13);
+            this.label3.TabIndex = 25;
+            this.label3.Text = "Bron-directory";
+            // 
+            // txtBatchSourceDirectory
+            // 
+            this.txtBatchSourceDirectory.Enabled = false;
+            this.txtBatchSourceDirectory.Location = new System.Drawing.Point(553, 48);
+            this.txtBatchSourceDirectory.Name = "txtBatchSourceDirectory";
+            this.txtBatchSourceDirectory.Size = new System.Drawing.Size(312, 20);
+            this.txtBatchSourceDirectory.TabIndex = 24;
+            // 
+            // picSelectBatchSourceDir
+            // 
+            this.picSelectBatchSourceDir.Enabled = false;
+            this.picSelectBatchSourceDir.Image = ((System.Drawing.Image)(resources.GetObject("picSelectBatchSourceDir.Image")));
+            this.picSelectBatchSourceDir.Location = new System.Drawing.Point(870, 44);
+            this.picSelectBatchSourceDir.Name = "picSelectBatchSourceDir";
+            this.picSelectBatchSourceDir.Size = new System.Drawing.Size(23, 29);
+            this.picSelectBatchSourceDir.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picSelectBatchSourceDir.TabIndex = 23;
+            this.picSelectBatchSourceDir.TabStop = false;
+            this.picSelectBatchSourceDir.Click += new System.EventHandler(this.picSelectBatchSourceDir_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(472, 77);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(72, 13);
+            this.label2.TabIndex = 22;
+            this.label2.Text = "Doel-directory";
+            // 
+            // txtBatchTargetDirectory
+            // 
+            this.txtBatchTargetDirectory.Enabled = false;
+            this.txtBatchTargetDirectory.Location = new System.Drawing.Point(553, 74);
+            this.txtBatchTargetDirectory.Name = "txtBatchTargetDirectory";
+            this.txtBatchTargetDirectory.Size = new System.Drawing.Size(312, 20);
+            this.txtBatchTargetDirectory.TabIndex = 21;
+            // 
+            // picSelectBatchTargetDir
+            // 
+            this.picSelectBatchTargetDir.Enabled = false;
+            this.picSelectBatchTargetDir.Image = ((System.Drawing.Image)(resources.GetObject("picSelectBatchTargetDir.Image")));
+            this.picSelectBatchTargetDir.Location = new System.Drawing.Point(870, 70);
+            this.picSelectBatchTargetDir.Name = "picSelectBatchTargetDir";
+            this.picSelectBatchTargetDir.Size = new System.Drawing.Size(23, 29);
+            this.picSelectBatchTargetDir.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picSelectBatchTargetDir.TabIndex = 20;
+            this.picSelectBatchTargetDir.TabStop = false;
+            this.picSelectBatchTargetDir.Click += new System.EventHandler(this.picSelectBatchTargetDir_Click);
+            // 
+            // chkCreateBatchesSubdir
+            // 
+            this.chkCreateBatchesSubdir.AutoSize = true;
+            this.chkCreateBatchesSubdir.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chkCreateBatchesSubdir.Location = new System.Drawing.Point(264, 51);
+            this.chkCreateBatchesSubdir.Name = "chkCreateBatchesSubdir";
+            this.chkCreateBatchesSubdir.Size = new System.Drawing.Size(177, 17);
+            this.chkCreateBatchesSubdir.TabIndex = 19;
+            this.chkCreateBatchesSubdir.Text = "Kopieer alle files naar directories";
+            this.chkCreateBatchesSubdir.UseVisualStyleBackColor = true;
+            this.chkCreateBatchesSubdir.CheckedChanged += new System.EventHandler(this.chkCreateBatchesSubdir_CheckedChanged);
             // 
             // label1
             // 
@@ -1125,7 +1212,7 @@ namespace TOPX.UI.Forms
             this.materialLabel14.Depth = 0;
             this.materialLabel14.Font = new System.Drawing.Font("Roboto", 11F);
             this.materialLabel14.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel14.Location = new System.Drawing.Point(660, 66);
+            this.materialLabel14.Location = new System.Drawing.Point(656, 159);
             this.materialLabel14.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel14.Name = "materialLabel14";
             this.materialLabel14.Size = new System.Drawing.Size(249, 19);
@@ -1134,18 +1221,18 @@ namespace TOPX.UI.Forms
             // 
             // txtResultXml
             // 
-            this.txtResultXml.Location = new System.Drawing.Point(649, 89);
+            this.txtResultXml.Location = new System.Drawing.Point(645, 182);
             this.txtResultXml.Multiline = true;
             this.txtResultXml.Name = "txtResultXml";
             this.txtResultXml.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtResultXml.Size = new System.Drawing.Size(543, 544);
+            this.txtResultXml.Size = new System.Drawing.Size(543, 465);
             this.txtResultXml.TabIndex = 13;
             this.txtResultXml.WordWrap = false;
             // 
             // linkCopyTopXCreateError
             // 
             this.linkCopyTopXCreateError.AutoSize = true;
-            this.linkCopyTopXCreateError.Location = new System.Drawing.Point(520, 70);
+            this.linkCopyTopXCreateError.Location = new System.Drawing.Point(516, 163);
             this.linkCopyTopXCreateError.Name = "linkCopyTopXCreateError";
             this.linkCopyTopXCreateError.Size = new System.Drawing.Size(49, 13);
             this.linkCopyTopXCreateError.TabIndex = 12;
@@ -1159,12 +1246,12 @@ namespace TOPX.UI.Forms
             this.materialLabel13.Depth = 0;
             this.materialLabel13.Font = new System.Drawing.Font("Roboto", 11F);
             this.materialLabel13.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel13.Location = new System.Drawing.Point(51, 67);
+            this.materialLabel13.Location = new System.Drawing.Point(47, 160);
             this.materialLabel13.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel13.Name = "materialLabel13";
-            this.materialLabel13.Size = new System.Drawing.Size(71, 19);
+            this.materialLabel13.Size = new System.Drawing.Size(34, 19);
             this.materialLabel13.TabIndex = 9;
-            this.materialLabel13.Text = "Error Log";
+            this.materialLabel13.Text = "Log";
             // 
             // btGenerateTopX
             // 
@@ -1178,11 +1265,11 @@ namespace TOPX.UI.Forms
             // 
             // txtLogTopXCreate
             // 
-            this.txtLogTopXCreate.Location = new System.Drawing.Point(41, 89);
+            this.txtLogTopXCreate.Location = new System.Drawing.Point(37, 182);
             this.txtLogTopXCreate.Multiline = true;
             this.txtLogTopXCreate.Name = "txtLogTopXCreate";
             this.txtLogTopXCreate.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtLogTopXCreate.Size = new System.Drawing.Size(543, 544);
+            this.txtLogTopXCreate.Size = new System.Drawing.Size(543, 465);
             this.txtLogTopXCreate.TabIndex = 10;
             this.txtLogTopXCreate.WordWrap = false;
             // 
@@ -1231,6 +1318,8 @@ namespace TOPX.UI.Forms
             ((System.ComponentModel.ISupportInitialize)(this.picSelectDirToScan)).EndInit();
             this.tabGenerateTopX.ResumeLayout(false);
             this.tabGenerateTopX.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picSelectBatchSourceDir)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picSelectBatchTargetDir)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1327,6 +1416,13 @@ namespace TOPX.UI.Forms
         private Label label1;
         private TextBox txtBatchSize;
         private CheckBox chkUseBatchSize;
+        private CheckBox chkCreateBatchesSubdir;
+        private Label label2;
+        private TextBox txtBatchTargetDirectory;
+        private PictureBox picSelectBatchTargetDir;
+        private Label label3;
+        private TextBox txtBatchSourceDirectory;
+        private PictureBox picSelectBatchSourceDir;
     }
 }
 
