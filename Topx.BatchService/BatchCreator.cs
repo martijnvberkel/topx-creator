@@ -27,6 +27,7 @@ namespace Topx.BatchService
     public class BatchCreator
     {
         public StringBuilder Logs = new StringBuilder();
+        public bool Error = false;
         private XNamespace nameSpace = "http://www.nationaalarchief.nl/ToPX/v2.3";
 
         public void Create(string targetrootdirectory, string sourceDirectory, List<RIP.recordInformationPackage> listRecordInformationPackage, string topxBaseFileName, ulong totalSizeBytesNeeded)
@@ -35,31 +36,31 @@ namespace Topx.BatchService
             {
                 if (totalSizeBytesNeeded > IOUtilities.DiskspaceBytes(targetrootdirectory))
                 {
-                    Logs.AppendLine($"Er is onvoldoende schijfruimte beschikbaar op {targetrootdirectory}. Benodigd: {Math.Round(ByteSize.FromBytes(totalSizeBytesNeeded) .MegaBytes)} MB");
+                    ErrorLog($"Er is onvoldoende schijfruimte beschikbaar op {targetrootdirectory}. Benodigd: {Math.Round(ByteSize.FromBytes(totalSizeBytesNeeded) .MegaBytes)} MB");
                     return;
                 }
             }
             catch (Exception ex)
             {
-                Logs.AppendLine($"ERROR: Kon de beschikbare diskruimte niet vaststellen: {ex.Message}");
+                ErrorLog($"ERROR: Kon de beschikbare diskruimte niet vaststellen: {ex.Message}");
                 return;
             }
 
             if (!Directory.Exists(sourceDirectory))
             {
-                Logs.AppendLine($"Brondirectory {sourceDirectory} kon niet worden gevonden. Deze bestaat niet, is onbereikbaar of de toegang is geweigerd.");
+                ErrorLog($"Brondirectory {sourceDirectory} kon niet worden gevonden. Deze bestaat niet, is onbereikbaar of de toegang is geweigerd.");
                 return;
             }
 
             if (!Directory.Exists(targetrootdirectory))
             {
-                Logs.AppendLine($"Doeldirectory {targetrootdirectory} kon niet worden gevonden. Deze bestaat niet, is onbereikbaar of de toegang is geweigerd.");
+                ErrorLog($"Doeldirectory {targetrootdirectory} kon niet worden gevonden. Deze bestaat niet, is onbereikbaar of de toegang is geweigerd.");
                 return;
             }
 
             if (!hasWriteAccessToFolder(targetrootdirectory))
             {
-                Logs.AppendLine($"Je hebt geen schrijfrechten op de doeldirectory {targetrootdirectory} ");
+                ErrorLog($"Je hebt geen schrijfrechten op de doeldirectory {targetrootdirectory} ");
                 return;
             }
 
@@ -89,7 +90,7 @@ namespace Topx.BatchService
 
                     if (string.IsNullOrEmpty(file))
                     {
-                        Logs.AppendLine("Ëlement 'naam' onder 'bestandsnaam' mag niet leeg zijn");
+                        ErrorLog("Ëlement 'naam' onder 'bestandsnaam' mag niet leeg zijn");
                         continue;
                     }
 
@@ -101,14 +102,20 @@ namespace Topx.BatchService
                     }
                     catch (Exception e)
                     {
-                        Logs.AppendLine($"ERROR: Kan file ${file} niet kopiëren naar doeldirectory: {e.Message}");
+                        ErrorLog($"ERROR: Kan file ${file} niet kopiëren naar doeldirectory: {e.Message}");
                     }
                 }
                 subdirIndex++;
             }
             Logs.AppendLine();
-            Logs.AppendLine($"INFO: Aantal batches: {subdirIndex + 1}");
+            Logs.AppendLine($"INFO: Aantal batches: {subdirIndex}");
 
+        }
+
+        private void ErrorLog(string msg)
+        {
+            Error = true;
+            Logs.AppendLine(msg);
         }
 
         private bool hasWriteAccessToFolder(string folderPath)

@@ -10,6 +10,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Xml.Serialization;
+using ByteSizeLib;
 using MaterialSkin;
 using MaterialSkin.Controls;
 using NLog;
@@ -260,9 +261,8 @@ namespace TOPX.UI.Forms
                 var parser = new Parser(_globals, _dataservice);
 
                 var listofdossiers = _dataservice.GetAllDossiers();
-                var batchSize = (long)Convert.ToInt32(txtBatchSize.Text) * (long)1073741824; // GB naar bytes
-
-                batchSize = batchSize / 1000; // test
+                
+                var batchSize = (long) ByteSize.FromGigaBytes(Convert.ToDouble(txtBatchSize.Text)).Bytes;
 
                 _resultRecordInformationPackage = chkUseBatchSize.Checked
                     ? parser.ParseDataToTopx(listofdossiers, batchSize)
@@ -325,7 +325,7 @@ namespace TOPX.UI.Forms
                                 Cursor.Current = Cursors.Default;
 
                                 txtLogTopXCreate.Text = batches.Logs.ToString();
-                                MessageBox.Show(batches.Logs.Length > 0
+                                MessageBox.Show(batches.Error
                                     ? "Er zijn fouten opgetreden bij het samenstellen van de batches. Zie de error-log."
                                     : "De batches zijn succesvol samengesteld.");
                             }
