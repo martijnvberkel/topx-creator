@@ -31,8 +31,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ByteSize, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ByteSize.1.3.0\lib\net45\ByteSize.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -49,6 +53,13 @@
       <Project>{6C2CF74E-2518-4DE6-85B7-436007B94A1E}</Project>
       <Name>Topx.Data.DTO</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Topx.Utility\Topx.Utility.csproj">
+      <Project>{5862F3AF-2B57-4EE0-8E94-3A3D211737F1}</Project>
+      <Name>Topx.Utility</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

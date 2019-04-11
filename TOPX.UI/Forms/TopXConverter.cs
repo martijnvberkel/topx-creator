@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data.Odbc;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
@@ -261,6 +262,8 @@ namespace TOPX.UI.Forms
                 var listofdossiers = _dataservice.GetAllDossiers();
                 var batchSize = (long)Convert.ToInt32(txtBatchSize.Text) * (long)1073741824; // GB naar bytes
 
+                batchSize = batchSize / 1000; // test
+
                 _resultRecordInformationPackage = chkUseBatchSize.Checked
                     ? parser.ParseDataToTopx(listofdossiers, batchSize)
                     : parser.ParseDataToTopx(listofdossiers);
@@ -269,7 +272,12 @@ namespace TOPX.UI.Forms
 
                 Cursor.Current = Cursors.Default;
 
-                if (_resultRecordInformationPackage != null && parser.ErrorMessage.Length == 0)
+                if (_resultRecordInformationPackage == null || parser.ErrorMessage.Length != 0)
+                {
+                    btSaveTopxXml.Enabled = false;
+                    MessageBox.Show("Er zijn fouten opgetreden tijdens de conversie, TopX xml kan niet worden gegenereerd", "xml", MessageBoxButtons.OK);
+                }
+                else
                 {
                     btSaveTopxXml.Enabled = true;
                     var xmlhelper = new XmlHelper();
@@ -283,7 +291,7 @@ namespace TOPX.UI.Forms
                         return;
                     }
 
-                    if (_resultRecordInformationPackage.Count > 1 && chkUseBatchSize.Checked && !chkCreateBatchesSubdir.Enabled)
+                    if (_resultRecordInformationPackage.Count > 1 && chkUseBatchSize.Checked && !chkCreateBatchesSubdir.Checked)
                     {
                         var message =
                             $"Er zijn {_resultRecordInformationPackage.Count} TopX-files gegenereerd om de grootte per file te limiteren tot maximaal {txtBatchSize.Text} GB. Wilt u deze opslaan?";
@@ -292,7 +300,7 @@ namespace TOPX.UI.Forms
                             SaveAsXml(_resultRecordInformationPackage);
                         }
                     }
-                    else if (_resultRecordInformationPackage.Count == 1 && !chkCreateBatchesSubdir.Enabled)
+                    else if (_resultRecordInformationPackage.Count == 1 && !chkCreateBatchesSubdir.Checked)
                     {
                         var message = "Save TopX xml?";
                         if (MessageBox.Show(message, "xml", MessageBoxButtons.YesNo) == DialogResult.Yes)
@@ -300,26 +308,31 @@ namespace TOPX.UI.Forms
                             SaveAsXml(_resultRecordInformationPackage);
                         }
                     }
-                    else if (chkCreateBatchesSubdir.Enabled)
+                    else if (chkCreateBatchesSubdir.Checked)
                     {
-                        var message = $"De batches worden opgeslagen in subdirectories onder {txtBatchTargetDirectory.Text}. Alle reeds aanwezige subdirectories worden GEWIST om het resultaat zuiver te houden. Doorgaan?";
+                        var message =
+                            $"De batches worden opgeslagen in subdirectories onder {txtBatchTargetDirectory.Text}. Alle reeds aanwezige subdirectories worden GEWIST " + 
+                            $"om het resultaat zuiver te houden. {Environment.NewLine}Het kopiëren van alle bestanden kan enige tijd kosten, met name wanneer dit over een netwerk gaat. Doorgaan?";
                         if (MessageBox.Show(message, "batches", MessageBoxButtons.YesNo) == DialogResult.Yes)
                         {
+                            Cursor.Current = Cursors.WaitCursor;
                             if (DeleteSubDirs(txtBatchTargetDirectory.Text))
                             {
+                                ulong totalDiskSizeNeeded = _dataservice.GetTotalSizeNeededBytes();
                                 var batches = new BatchCreator();
-                                batches.Create(txtBatchTargetDirectory.Text, txtBatchSourceDirectory.Text, _resultRecordInformationPackage, _globals.NaamArchief);
+
+                                batches.Create(txtBatchTargetDirectory.Text, txtBatchSourceDirectory.Text, _resultRecordInformationPackage, _globals.NaamArchief, totalDiskSizeNeeded);
+                                Cursor.Current = Cursors.Default;
+
+                                txtLogTopXCreate.Text = batches.Logs.ToString();
+                                MessageBox.Show(batches.Logs.Length > 0
+                                    ? "Er zijn fouten opgetreden bij het samenstellen van de batches. Zie de error-log."
+                                    : "De batches zijn succesvol samengesteld.");
                             }
+                            Cursor.Current = Cursors.Default;
                         }
                     }
                 }
-
-                else
-                {
-                    btSaveTopxXml.Enabled = false;
-                    MessageBox.Show("Er zijn fouten opgetreden tijdens de conversie, TopX xml kan niet worden gegenereerd", "xml", MessageBoxButtons.OK);
-                }
-
             }
             catch (Exception exception)
             {

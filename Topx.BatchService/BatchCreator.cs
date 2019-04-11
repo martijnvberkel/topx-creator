@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text;
+using System.Xml.Linq;
 using System.Xml.Serialization;
+using ByteSizeLib;
 using Topx.Data.DTO;
+using Topx.Utility;
 
 namespace Topx.BatchService
 {
@@ -24,59 +26,88 @@ namespace Topx.BatchService
     }
     public class BatchCreator
     {
-        public StringBuilder Errors = new StringBuilder();
-        public void Create(string targetdirectory, string sourceDirectory, List<RIP.recordInformationPackage> listRecordInformationPackage, string topxBaseFileName)
+        public StringBuilder Logs = new StringBuilder();
+        private XNamespace nameSpace = "http://www.nationaalarchief.nl/ToPX/v2.3";
+
+        public void Create(string targetrootdirectory, string sourceDirectory, List<RIP.recordInformationPackage> listRecordInformationPackage, string topxBaseFileName, ulong totalSizeBytesNeeded)
         {
-            if (! Directory.Exists(sourceDirectory))
+            try
             {
-                Errors.AppendLine($"Brondirectory {sourceDirectory} kon niet worden gevonden. Deze bestaat niet, is onbereikbaar of de toegang is geweigerd.");
-                return;
-            }
-
-            if (!Directory.Exists(targetdirectory))
-            {
-                Errors.AppendLine($"Doeldirectory {targetdirectory} kon niet worden gevonden. Deze bestaat niet, is onbereikbaar of de toegang is geweigerd.");
-                return;
-            }
-
-            if (!hasWriteAccessToFolder(targetdirectory))
-            {
-                Errors.AppendLine($"Je hebt geen schrijfrechten op de doeldirectory {targetdirectory} ");
-                return;
-            }
-
-            var records = listRecordInformationPackage[0];
-
-
-            var counter = 0;
-            foreach (var recordInformationPackage in listRecordInformationPackage)
-            {
-                var batchDirectoryPath = Path.Combine(targetdirectory, $"Batch_{counter}");
-
-                try
+                if (totalSizeBytesNeeded > IOUtilities.DiskspaceBytes(targetrootdirectory))
                 {
-                    Directory.CreateDirectory(batchDirectoryPath);
-                }
-                catch (Exception ex)
-                {
-                    Errors.AppendLine($"FATAL: Subdirectory {batchDirectoryPath} kon niet worden aangemaakt: {ex.Message}");
+                    Logs.AppendLine($"Er is onvoldoende schijfruimte beschikbaar op {targetrootdirectory}. Benodigd: {Math.Round(ByteSize.FromBytes(totalSizeBytesNeeded) .MegaBytes)} MB");
                     return;
                 }
-                 // Write TopX eerst
-                var fileName = Path.GetFileNameWithoutExtension(topxBaseFileName) + "_" + counter + ".xml";
-                
-                using (var writer = new StreamWriter(Path.Combine(batchDirectoryPath, fileName) , false, Encoding.UTF8))
-                {
-                    var serializer = new XmlSerializer(typeof(RIP.recordInformationPackage));
-                    serializer.Serialize(writer, recordInformationPackage);
-                    writer.Flush();
-                }
-
-               // CopyFilesThatBelongToCollectionToTarget(recordInformationPackage, batchDirectoryPath);
-
-                counter++;
+            }
+            catch (Exception ex)
+            {
+                Logs.AppendLine($"ERROR: Kon de beschikbare diskruimte niet vaststellen: {ex.Message}");
+                return;
             }
 
+            if (!Directory.Exists(sourceDirectory))
+            {
+                Logs.AppendLine($"Brondirectory {sourceDirectory} kon niet worden gevonden. Deze bestaat niet, is onbereikbaar of de toegang is geweigerd.");
+                return;
+            }
+
+            if (!Directory.Exists(targetrootdirectory))
+            {
+                Logs.AppendLine($"Doeldirectory {targetrootdirectory} kon niet worden gevonden. Deze bestaat niet, is onbereikbaar of de toegang is geweigerd.");
+                return;
+            }
+
+            if (!hasWriteAccessToFolder(targetrootdirectory))
+            {
+                Logs.AppendLine($"Je hebt geen schrijfrechten op de doeldirectory {targetrootdirectory} ");
+                return;
+            }
+
+            var subdirIndex = 0;
+            foreach (var recordInformationPackage in listRecordInformationPackage)
+            {
+                var targetdirectory = Path.Combine(targetrootdirectory, $"batch_{subdirIndex}");
+                Directory.CreateDirectory(targetdirectory);
+
+                XDocument topx = new XDocument();
+                using (var writer = topx.CreateWriter())
+                {
+                    var serializer = new XmlSerializer(recordInformationPackage.GetType());
+                    serializer.Serialize(writer, recordInformationPackage);
+                }
+
+                var topxFilename = Path.GetFileNameWithoutExtension(topxBaseFileName) + "_" + subdirIndex + ".xml";
+
+                topx.Save(Path.Combine(targetdirectory, topxFilename));
+
+                foreach (var element in topx.Descendants(nameSpace + "bestandsnaam"))
+                {
+                    var file = element.Element(nameSpace + "naam")?.Value;
+                    var extension = element.Element(nameSpace + "extensie")?.Value;
+                    if (!string.IsNullOrEmpty(extension))
+                        file += "." + extension;
+
+                    if (string.IsNullOrEmpty(file))
+                    {
+                        Logs.AppendLine("Ëlement 'naam' onder 'bestandsnaam' mag niet leeg zijn");
+                        continue;
+                    }
+
+                    var fullpathSource = Path.Combine(sourceDirectory, file);
+                    var fullpathDestination = Path.Combine(targetdirectory, file);
+                    try
+                    {
+                        File.Copy(fullpathSource, fullpathDestination);
+                    }
+                    catch (Exception e)
+                    {
+                        Logs.AppendLine($"ERROR: Kan file ${file} niet kopiëren naar doeldirectory: {e.Message}");
+                    }
+                }
+                subdirIndex++;
+            }
+            Logs.AppendLine();
+            Logs.AppendLine($"INFO: Aantal batches: {subdirIndex + 1}");
 
         }
 
