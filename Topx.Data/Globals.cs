@@ -27,5 +27,7 @@ namespace Topx.Data
         public string LastRecordsFileName { get; set; }
         public string BatchSourceDirectory { get; set; }
         public string BatchTargetDirectory { get; set; }
+        public string DroidInstallDirectory { get; set; }
+        public string DirectoryFilesToScanForMetadata { get; set; }
     }
 }

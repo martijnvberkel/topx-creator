@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.nationalarchives.gov.uk/pronom/SignatureFile" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="FFSignatureFile">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="InternalSignatureCollection">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element maxOccurs="unbounded" name="InternalSignature">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element maxOccurs="unbounded" name="ByteSequence">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element maxOccurs="unbounded" name="SubSequence">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:choice maxOccurs="unbounded">
+																	<xs:element name="Sequence" type="xs:string" />
+																	<xs:element name="DefaultShift" type="xs:short" />
+																	<xs:element maxOccurs="unbounded" name="Shift">
+																		<xs:complexType>
+																			<xs:simpleContent>
+																				<xs:extension base="xs:short">
+																					<xs:attribute name="Byte" type="xs:string" use="required" />
+																				</xs:extension>
+																			</xs:simpleContent>
+																		</xs:complexType>
+																	</xs:element>
+																	<xs:element maxOccurs="unbounded" name="RightFragment">
+																		<xs:complexType>
+																			<xs:simpleContent>
+																				<xs:extension base="xs:string">
+																					<xs:attribute name="MaxOffset" type="xs:unsignedInt" use="required" />
+																					<xs:attribute name="MinOffset" type="xs:unsignedShort" use="required" />
+																					<xs:attribute name="Position" type="xs:unsignedByte" use="required" />
+																				</xs:extension>
+																			</xs:simpleContent>
+																		</xs:complexType>
+																	</xs:element>
+																	<xs:element maxOccurs="unbounded" name="LeftFragment">
+																		<xs:complexType>
+																			<xs:simpleContent>
+																				<xs:extension base="xs:string">
+																					<xs:attribute name="MaxOffset" type="xs:unsignedInt" use="required" />
+																					<xs:attribute name="MinOffset" type="xs:unsignedShort" use="required" />
+																					<xs:attribute name="Position" type="xs:unsignedByte" use="required" />
+																				</xs:extension>
+																			</xs:simpleContent>
+																		</xs:complexType>
+																	</xs:element>
+																</xs:choice>
+															</xs:sequence>
+															<xs:attribute name="MinFragLength" type="xs:unsignedShort" use="required" />
+															<xs:attribute name="Position" type="xs:unsignedByte" use="required" />
+															<xs:attribute name="SubSeqMaxOffset" type="xs:unsignedInt" use="optional" />
+															<xs:attribute name="SubSeqMinOffset" type="xs:unsignedShort" use="optional" />
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+												<xs:attribute name="Reference" type="xs:string" use="optional" />
+												<xs:attribute name="Endianness" type="xs:string" use="optional" />
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+									<xs:attribute name="ID" type="xs:unsignedShort" use="required" />
+									<xs:attribute name="Specificity" type="xs:string" use="required" />
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="FileFormatCollection">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element maxOccurs="unbounded" name="FileFormat">
+								<xs:complexType>
+									<xs:sequence minOccurs="0">
+										<xs:element minOccurs="0" maxOccurs="unbounded" name="InternalSignatureID" type="xs:unsignedShort" />
+										<xs:element minOccurs="0" maxOccurs="unbounded" name="Extension" type="xs:string" />
+										<xs:element minOccurs="0" maxOccurs="unbounded" name="HasPriorityOverFileFormatID" type="xs:unsignedShort" />
+									</xs:sequence>
+									<xs:attribute name="ID" type="xs:unsignedShort" use="required" />
+									<xs:attribute name="MIMEType" type="xs:string" use="optional" />
+									<xs:attribute name="Name" type="xs:string" use="required" />
+									<xs:attribute name="PUID" type="xs:string" use="required" />
+									<xs:attribute name="Version" type="xs:string" use="optional" />
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute name="DateCreated" type="xs:dateTime" use="required" />
+			<xs:attribute name="Version" type="xs:unsignedByte" use="required" />
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

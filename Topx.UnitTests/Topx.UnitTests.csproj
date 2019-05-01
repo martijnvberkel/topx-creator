@@ -68,6 +68,7 @@
     <Compile Include="TestComplexLinkProcessor.cs" />
     <Compile Include="TestImporter.cs" />
     <Compile Include="TestMetadata.cs" />
+    <Compile Include="TestPronomIdentification.cs" />
     <Compile Include="TestResources\Dossiers_Test_ComplexLink1.cs" />
     <Compile Include="TestResources\Dossiers_Test1.cs" />
     <Compile Include="TestSanitizer.cs" />
