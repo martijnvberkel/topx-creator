@@ -205,7 +205,7 @@ namespace Topx.Creator
 
             var gebruiksrechten_DatumOfPeriode = DateTime.ParseExact(record.Gebruiksrechten_DatumOfPeriode, DateParsing, CultureInfo.InvariantCulture).ToString("yyyy-MM-dd");
 
-
+            
             var relatie = new[]
             {
                 new TopX.relatieType()
@@ -341,6 +341,9 @@ namespace Topx.Creator
             var openbaarheid_DatumOfPeriode = DateTime.ParseExact(record.Openbaarheid_DatumOfPeriode,
                 DateParsing, CultureInfo.InvariantCulture).ToString("yyyy-MM-dd");
 
+            //var omschrijving = new @string[0];
+            //omschrijving[0].Value = "";
+
             var topx = new topxType
             {
                 Item = new bestandType()
@@ -364,7 +367,7 @@ namespace Topx.Creator
                                 },
                             }
                         },
-
+                  omschrijving = new @string[0],
                     openbaarheid = new openbaarheidType[]
                     {
                         new openbaarheidType()

@@ -2,18 +2,26 @@
 
 namespace Topx.FileAnalysis
 {
+    public  class EventCounter
+    {
+        public int DossiersProgress;
+        public int DossiersCount;
+        public bool DroidStarted;
+        public int TotalRecordsIdentified;
+        public bool IsReady;
+    }
     public class MetadataEventargs : EventArgs
     {
-        public int Progress;
-
-        public MetadataEventargs(int progress)
+        public EventCounter Eventcounter = new EventCounter();
+      
+        public MetadataEventargs(bool droidStarted)
         {
-            Progress = progress;
+           Eventcounter.DroidStarted = droidStarted;
         }
-
-        public int GetProgress()
+       
+        public EventCounter GetProgress()
         {
-            return Progress;
+            return Eventcounter;
         }
     }
 }
