@@ -87,6 +87,7 @@ namespace TOPX.UI.Forms
             this.txtErrorRecords = new System.Windows.Forms.TextBox();
             this.txtErrorsDossiers = new System.Windows.Forms.TextBox();
             this.tabMetadata = new System.Windows.Forms.TabPage();
+            this.txtProgressMetaData = new System.Windows.Forms.TextBox();
             this.picSelectDroidLocation = new System.Windows.Forms.PictureBox();
             this.label4 = new System.Windows.Forms.Label();
             this.txtDroidLocation = new System.Windows.Forms.TextBox();
@@ -135,7 +136,9 @@ namespace TOPX.UI.Forms
             this.MappedFieldName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DatabaseFieldName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TMLO = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.txtProgressMetaData = new System.Windows.Forms.TextBox();
+            this.Optional = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.materialContextMenuStrip2.SuspendLayout();
             this.materialContextMenuStrip3.SuspendLayout();
             this.materialTabControl1.SuspendLayout();
@@ -490,7 +493,7 @@ namespace TOPX.UI.Forms
             // 
             // btLoadRecordMapping
             // 
-            this.btLoadRecordMapping.Location = new System.Drawing.Point(1065, 39);
+            this.btLoadRecordMapping.Location = new System.Drawing.Point(1084, 39);
             this.btLoadRecordMapping.Name = "btLoadRecordMapping";
             this.btLoadRecordMapping.Size = new System.Drawing.Size(43, 23);
             this.btLoadRecordMapping.TabIndex = 46;
@@ -500,7 +503,7 @@ namespace TOPX.UI.Forms
             // 
             // btSaveRecordMapping
             // 
-            this.btSaveRecordMapping.Location = new System.Drawing.Point(1016, 39);
+            this.btSaveRecordMapping.Location = new System.Drawing.Point(1035, 39);
             this.btSaveRecordMapping.Name = "btSaveRecordMapping";
             this.btSaveRecordMapping.Size = new System.Drawing.Size(43, 23);
             this.btSaveRecordMapping.TabIndex = 45;
@@ -530,7 +533,7 @@ namespace TOPX.UI.Forms
             // 
             // btClearMappingsRecords
             // 
-            this.btClearMappingsRecords.Location = new System.Drawing.Point(1143, 39);
+            this.btClearMappingsRecords.Location = new System.Drawing.Point(1162, 39);
             this.btClearMappingsRecords.Name = "btClearMappingsRecords";
             this.btClearMappingsRecords.Size = new System.Drawing.Size(48, 23);
             this.btClearMappingsRecords.TabIndex = 42;
@@ -552,7 +555,7 @@ namespace TOPX.UI.Forms
             // 
             this.picRecordsSelector.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.picRecordsSelector.Image = ((System.Drawing.Image)(resources.GetObject("picRecordsSelector.Image")));
-            this.picRecordsSelector.Location = new System.Drawing.Point(879, 40);
+            this.picRecordsSelector.Location = new System.Drawing.Point(898, 40);
             this.picRecordsSelector.Margin = new System.Windows.Forms.Padding(2);
             this.picRecordsSelector.Name = "picRecordsSelector";
             this.picRecordsSelector.Size = new System.Drawing.Size(23, 23);
@@ -565,7 +568,7 @@ namespace TOPX.UI.Forms
             // 
             this.picDossierSelector.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.picDossierSelector.Image = ((System.Drawing.Image)(resources.GetObject("picDossierSelector.Image")));
-            this.picDossierSelector.Location = new System.Drawing.Point(295, 37);
+            this.picDossierSelector.Location = new System.Drawing.Point(281, 37);
             this.picDossierSelector.Margin = new System.Windows.Forms.Padding(2);
             this.picDossierSelector.Name = "picDossierSelector";
             this.picDossierSelector.Size = new System.Drawing.Size(23, 23);
@@ -580,7 +583,7 @@ namespace TOPX.UI.Forms
             this.materialLabel2.Depth = 0;
             this.materialLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.materialLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel2.Location = new System.Drawing.Point(618, 79);
+            this.materialLabel2.Location = new System.Drawing.Point(636, 79);
             this.materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel2.Name = "materialLabel2";
             this.materialLabel2.Size = new System.Drawing.Size(247, 18);
@@ -594,7 +597,7 @@ namespace TOPX.UI.Forms
             this.materialLabel1.Depth = 0;
             this.materialLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.materialLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel1.Location = new System.Drawing.Point(34, 78);
+            this.materialLabel1.Location = new System.Drawing.Point(9, 78);
             this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel1.Name = "materialLabel1";
             this.materialLabel1.Size = new System.Drawing.Size(156, 18);
@@ -603,7 +606,7 @@ namespace TOPX.UI.Forms
             // 
             // txtRecordBestandLocation
             // 
-            this.txtRecordBestandLocation.Location = new System.Drawing.Point(623, 42);
+            this.txtRecordBestandLocation.Location = new System.Drawing.Point(642, 42);
             this.txtRecordBestandLocation.Name = "txtRecordBestandLocation";
             this.txtRecordBestandLocation.ReadOnly = true;
             this.txtRecordBestandLocation.Size = new System.Drawing.Size(250, 20);
@@ -615,7 +618,7 @@ namespace TOPX.UI.Forms
             this.materialLabel6.Depth = 0;
             this.materialLabel6.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.materialLabel6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel6.Location = new System.Drawing.Point(619, 14);
+            this.materialLabel6.Location = new System.Drawing.Point(638, 14);
             this.materialLabel6.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel6.Name = "materialLabel6";
             this.materialLabel6.Size = new System.Drawing.Size(309, 18);
@@ -628,7 +631,7 @@ namespace TOPX.UI.Forms
             this.materialLabel5.Depth = 0;
             this.materialLabel5.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.materialLabel5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel5.Location = new System.Drawing.Point(34, 13);
+            this.materialLabel5.Location = new System.Drawing.Point(20, 13);
             this.materialLabel5.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel5.Name = "materialLabel5";
             this.materialLabel5.Size = new System.Drawing.Size(210, 18);
@@ -637,7 +640,7 @@ namespace TOPX.UI.Forms
             // 
             // txtDossierLocation
             // 
-            this.txtDossierLocation.Location = new System.Drawing.Point(38, 39);
+            this.txtDossierLocation.Location = new System.Drawing.Point(24, 39);
             this.txtDossierLocation.Name = "txtDossierLocation";
             this.txtDossierLocation.ReadOnly = true;
             this.txtDossierLocation.Size = new System.Drawing.Size(250, 20);
@@ -739,6 +742,8 @@ namespace TOPX.UI.Forms
             // 
             // tabMetadata
             // 
+            this.tabMetadata.Controls.Add(this.label6);
+            this.tabMetadata.Controls.Add(this.label5);
             this.tabMetadata.Controls.Add(this.txtProgressMetaData);
             this.tabMetadata.Controls.Add(this.picSelectDroidLocation);
             this.tabMetadata.Controls.Add(this.label4);
@@ -764,11 +769,19 @@ namespace TOPX.UI.Forms
             this.tabMetadata.Text = "Genereer Metadata";
             this.tabMetadata.UseVisualStyleBackColor = true;
             // 
+            // txtProgressMetaData
+            // 
+            this.txtProgressMetaData.Location = new System.Drawing.Point(75, 447);
+            this.txtProgressMetaData.Multiline = true;
+            this.txtProgressMetaData.Name = "txtProgressMetaData";
+            this.txtProgressMetaData.Size = new System.Drawing.Size(261, 137);
+            this.txtProgressMetaData.TabIndex = 38;
+            // 
             // picSelectDroidLocation
             // 
             this.picSelectDroidLocation.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.picSelectDroidLocation.Image = ((System.Drawing.Image)(resources.GetObject("picSelectDroidLocation.Image")));
-            this.picSelectDroidLocation.Location = new System.Drawing.Point(446, 242);
+            this.picSelectDroidLocation.Location = new System.Drawing.Point(446, 285);
             this.picSelectDroidLocation.Margin = new System.Windows.Forms.Padding(2);
             this.picSelectDroidLocation.Name = "picSelectDroidLocation";
             this.picSelectDroidLocation.Size = new System.Drawing.Size(22, 29);
@@ -780,7 +793,7 @@ namespace TOPX.UI.Forms
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(92, 254);
+            this.label4.Location = new System.Drawing.Point(92, 297);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(82, 13);
             this.label4.TabIndex = 36;
@@ -788,7 +801,7 @@ namespace TOPX.UI.Forms
             // 
             // txtDroidLocation
             // 
-            this.txtDroidLocation.Location = new System.Drawing.Point(180, 251);
+            this.txtDroidLocation.Location = new System.Drawing.Point(180, 294);
             this.txtDroidLocation.Name = "txtDroidLocation";
             this.txtDroidLocation.Size = new System.Drawing.Size(261, 20);
             this.txtDroidLocation.TabIndex = 35;
@@ -1233,7 +1246,7 @@ namespace TOPX.UI.Forms
             this.TMLO_Records});
             this.gridFieldMappingRecords.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.gridFieldMappingRecords.EnableHeadersVisualStyles = false;
-            this.gridFieldMappingRecords.Location = new System.Drawing.Point(621, 100);
+            this.gridFieldMappingRecords.Location = new System.Drawing.Point(640, 100);
             this.gridFieldMappingRecords.Name = "gridFieldMappingRecords";
             this.gridFieldMappingRecords.RowHeadersVisible = false;
             this.gridFieldMappingRecords.ShowCellErrors = false;
@@ -1287,19 +1300,21 @@ namespace TOPX.UI.Forms
             this.gridFieldMappingDossiers.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.MappedFieldName,
             this.DatabaseFieldName,
-            this.TMLO});
+            this.TMLO,
+            this.Optional});
             this.gridFieldMappingDossiers.EnableHeadersVisualStyles = false;
-            this.gridFieldMappingDossiers.Location = new System.Drawing.Point(27, 100);
+            this.gridFieldMappingDossiers.Location = new System.Drawing.Point(5, 100);
             this.gridFieldMappingDossiers.Name = "gridFieldMappingDossiers";
             this.gridFieldMappingDossiers.RowHeadersVisible = false;
             this.gridFieldMappingDossiers.ShowCellErrors = false;
             this.gridFieldMappingDossiers.ShowCellToolTips = false;
             this.gridFieldMappingDossiers.ShowEditingIcon = false;
             this.gridFieldMappingDossiers.ShowRowErrors = false;
-            this.gridFieldMappingDossiers.Size = new System.Drawing.Size(567, 552);
+            this.gridFieldMappingDossiers.Size = new System.Drawing.Size(623, 552);
             this.gridFieldMappingDossiers.TabIndex = 30;
             this.gridFieldMappingDossiers.DataSourceChanged += new System.EventHandler(this.gridFieldMappingDossiers_DataSourceChanged);
             this.gridFieldMappingDossiers.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.gridFieldMappingDossiers_DataBindingComplete);
+            this.gridFieldMappingDossiers.DefaultValuesNeeded += new System.Windows.Forms.DataGridViewRowEventHandler(this.gridFieldMappingDossiers_DefaultValuesNeeded);
             this.gridFieldMappingDossiers.Leave += new System.EventHandler(this.gridFieldMappingDossiers_Leave);
             this.gridFieldMappingDossiers.MouseClick += new System.Windows.Forms.MouseEventHandler(this.gridFieldMappingDossiers_MouseClick);
             // 
@@ -1325,13 +1340,35 @@ namespace TOPX.UI.Forms
             this.TMLO.ReadOnly = true;
             this.TMLO.Width = 60;
             // 
-            // txtProgressMetaData
+            // Optional
             // 
-            this.txtProgressMetaData.Location = new System.Drawing.Point(75, 447);
-            this.txtProgressMetaData.Multiline = true;
-            this.txtProgressMetaData.Name = "txtProgressMetaData";
-            this.txtProgressMetaData.Size = new System.Drawing.Size(261, 137);
-            this.txtProgressMetaData.TabIndex = 38;
+            this.Optional.DataPropertyName = "Optional";
+            this.Optional.HeaderText = "Opt.";
+            this.Optional.Name = "Optional";
+            this.Optional.ReadOnly = true;
+            this.Optional.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Optional.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.Optional.ToolTipText = "Optioneel";
+            this.Optional.Width = 35;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(92, 245);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(395, 13);
+            this.label5.TabIndex = 39;
+            this.label5.Text = "Voor bepalen van de file signature, moet DROID op de computer zijn geinstalleerd." +
+    "";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(92, 265);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(349, 13);
+            this.label6.TabIndex = 40;
+            this.label6.Text = "Zorg dat DROID goed functioneert, en de laatste signature files gebruikt.";
             // 
             // TopXConverter
             // 
@@ -1449,9 +1486,6 @@ namespace TOPX.UI.Forms
         private DataGridViewTextBoxColumn DatabaseFieldNameRecords;
         private DataGridViewTextBoxColumn MappedFieldNameRecords;
         private DataGridViewTextBoxColumn TMLO_Records;
-        private DataGridViewTextBoxColumn MappedFieldName;
-        private DataGridViewTextBoxColumn DatabaseFieldName;
-        private DataGridViewTextBoxColumn TMLO;
         private Button btSaveDossierMapping;
         private Button btLoadDossierMapping;
         private Button btLoadRecordMapping;
@@ -1475,6 +1509,12 @@ namespace TOPX.UI.Forms
         private Label label4;
         private TextBox txtDroidLocation;
         private TextBox txtProgressMetaData;
+        private DataGridViewTextBoxColumn MappedFieldName;
+        private DataGridViewTextBoxColumn DatabaseFieldName;
+        private DataGridViewTextBoxColumn TMLO;
+        private DataGridViewCheckBoxColumn Optional;
+        private Label label6;
+        private Label label5;
     }
 }
 

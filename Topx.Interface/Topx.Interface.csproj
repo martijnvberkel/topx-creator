@@ -56,7 +56,7 @@
     <Compile Include="Headers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResourceHelper.cs" />
-    <Compile Include="TopX_TMLO.cs" />
+    <Compile Include="TopX_AdditionalParameters.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

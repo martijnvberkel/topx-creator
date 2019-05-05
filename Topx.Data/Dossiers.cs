@@ -22,6 +22,9 @@ namespace Topx.Data
 
         public string Naam { get; set; }
 
+        [MaxLength()]
+        public string Omschrijving { get; set; }
+
         [StringLength(50)]
         public string Classificatie_Code { get; set; }
 
