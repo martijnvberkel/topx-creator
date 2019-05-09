@@ -128,8 +128,8 @@ public class Metadata
                     else
                     {
                         ErrorMessages.AppendLine(fileExists
-                            ? $"File {fileFullpath} horende bij dossier {record.DossierId} is niet gescand, er is een verschil in hoofd/kleine letters wat niet is toegestaan."
-                            : $"File {fileFullpath} horende bij dossier {record.DossierId} is niet gevonden");
+                            ? $"File {fileFullpath} horende bij dossier {record.DossierId} is niet gescand, er is een verschil in hoofd/kleine letters wat niet is toegestaan (OOK in de bestandsextensie) ."
+                            : $"File {fileFullpath} horende bij dossier {record.DossierId} is niet gevonden, let op verschil hoofd/kleine letters, ook in de bestandsextensie");
                     }
                 }
                 catch (Exception e)

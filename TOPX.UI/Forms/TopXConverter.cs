@@ -973,5 +973,20 @@ namespace TOPX.UI.Forms
         {
             SaveGlobals(null, null);
         }
+
+        private void gridFieldMappingDossiers_CellValueNeeded(object sender, DataGridViewCellValueEventArgs e)
+        {
+
+        }
+
+        private void gridFieldMappingDossiers_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void gridFieldMappingDossiers_DefaultValuesNeeded(object sender, DataGridViewRowEventArgs e)
+        {
+
+        }
     }
 }
