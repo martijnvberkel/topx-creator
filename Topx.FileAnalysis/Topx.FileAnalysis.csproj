@@ -41,8 +41,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Identificator.cs" />
     <Compile Include="Metadata.cs" />
     <Compile Include="MetadataEventargs.cs" />
+    <Compile Include="Models\DROID_SignatureFile.cs" />
     <Compile Include="Pdf.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -55,6 +57,11 @@
       <Project>{982EDCDB-E044-43D5-8071-BB4728C6A173}</Project>
       <Name>Topx.Data</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\DROID_SignatureFile_V94.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

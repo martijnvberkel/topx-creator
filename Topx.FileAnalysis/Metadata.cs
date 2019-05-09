@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 using Topx.Data;
 using Topx.DataServices;
 using Topx.FileAnalysis;
@@ -20,10 +19,11 @@ public class Metadata
     private readonly bool _setCreationDate;
     private readonly bool _setFileFormatIdentification;
     private readonly string _path;
+    private readonly string _droidInstallDirectory;
     private readonly List<Dossier> _dossiers;
     private readonly IDataService _dataService;
 
-    public event EventHandler DossierHandled;
+    public event EventHandler MetadataEventHandler;
 
     public bool Error => ErrorMessages.Length > 0;
     public StringBuilder ErrorMessages = new StringBuilder();
@@ -32,29 +32,73 @@ public class Metadata
     private readonly List<string> _allPresentFiles;
 
 
-    public Metadata(bool setHash, bool setSize, bool setCreationDate, bool setFileFormatIdentification, string path, List<Dossier> dossiers, IDataService dataService)
+    public Metadata(bool setHash, bool setSize, bool setCreationDate, bool setFileFormatIdentification, string path, string droidInstallDirectory, List<Dossier> dossiers, IDataService dataService)
     {
         _setHash = setHash;
         _setSize = setSize;
         _setCreationDate = setCreationDate;
         _setFileFormatIdentification = setFileFormatIdentification;
         _path = path;
+        _droidInstallDirectory = droidInstallDirectory;
         _dossiers = dossiers;
         _dataService = dataService;
-        _allPresentFiles = Directory.GetFiles(path) .ToList();
+        _allPresentFiles = Directory.GetFiles(path).ToList();
     }
 
     public void Collect()
     {
+        var metadataEvent = new MetadataEventargs(true);
+        if (_setSize || _setCreationDate || _setHash)
+        {
+            GetMataData(metadataEvent);
+        }
+
+        if (_setFileFormatIdentification)
+        {
+            GetFileIdentification(metadataEvent);
+        }
+    }
+
+    private void GetFileIdentification(MetadataEventargs metadataEvent)
+    {
+       
+        MetadataEventHandler?.Invoke(this, metadataEvent);
+        var identificator = new Identificator(_droidInstallDirectory, _path);
+        var records = _dataService.GetAllRecords();
+        foreach (var record in records)
+        {
+            record.Bestand_Formaat_BestandsFormaat = string.Empty;
+        }
+
+        identificator.IdentifyFiles(records);
+        if (identificator.Error)
+            ErrorMessages.AppendLine(identificator.ErrorMessage);
+
+        var count = 0;
+        foreach (var record in records.Where(t => t.Bestand_Formaat_Bestandsnaam != string.Empty))
+        {
+            _dataService.SaveRecordChanges(record);
+            count++;
+        }
+        metadataEvent.Eventcounter.TotalRecordsIdentified = count;
+        metadataEvent.Eventcounter.IsReady = true;
+        MetadataEventHandler?.Invoke(this, metadataEvent);
+    }
+
+    private void GetMataData(MetadataEventargs metadataEventargs)
+    {
         var counter = 0;
         var steps = _dossiers.Count / 10;
+
         foreach (var dossier in _dossiers)
         {
             counter++;
             if (steps > 0 && counter % steps == 0)
             {
                 var progress = counter * 100 / _dossiers.Count;
-                DossierHandled?.Invoke(this, new MetadataEventargs(progress));
+                metadataEventargs.Eventcounter.DossiersProgress = progress;
+                metadataEventargs.Eventcounter.DossiersCount = counter;
+                MetadataEventHandler?.Invoke(this, metadataEventargs);
             }
             foreach (var record in dossier.Records)
             {
@@ -62,10 +106,9 @@ public class Metadata
                 {
                     var fileFullpath = Path.Combine(_path, record.Bestand_Formaat_Bestandsnaam);
                     var fileExists = File.Exists(fileFullpath);
-                   
+
                     if (fileExists && _allPresentFiles.Contains(fileFullpath))
                     {
-
                         if (_setCreationDate)
                             record.Bestand_Formaat_DatumAanmaak = File.GetCreationTime(fileFullpath);
 
@@ -85,8 +128,8 @@ public class Metadata
                     else
                     {
                         ErrorMessages.AppendLine(fileExists
-                            ? $"File {fileFullpath} horende bij dossier {record.DossierId} is niet gescand, er is een verschil in hoofd/kleine letters wat niet is toegestaan."
-                            : $"File {fileFullpath} horende bij dossier {record.DossierId} is niet gevonden");
+                            ? $"File {fileFullpath} horende bij dossier {record.DossierId} is niet gescand, er is een verschil in hoofd/kleine letters wat niet is toegestaan (OOK in de bestandsextensie) ."
+                            : $"File {fileFullpath} horende bij dossier {record.DossierId} is niet gevonden, let op verschil hoofd/kleine letters, ook in de bestandsextensie");
                     }
                 }
                 catch (Exception e)

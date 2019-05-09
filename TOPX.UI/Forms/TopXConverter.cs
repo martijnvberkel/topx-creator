@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -67,7 +68,7 @@ namespace TOPX.UI.Forms
                 ShowWaitForm("een moment geduld...");
                 if (!_dataservice.CanConnect())
                 {
-                    MessageBox.Show($"Kan de database niet vinden. {Environment.NewLine} Connectionstring: {_dataservice.Conectionstring}");
+                    MessageBox.Show($"Kan de database niet vinden. {Environment.NewLine} Connectionstring: {_dataservice.Connectionstring}");
                     Application.Exit();
                     return;
                 }
@@ -145,7 +146,15 @@ namespace TOPX.UI.Forms
             txtBatchTargetDirectory.Text = _globals?.BatchTargetDirectory;
             txtBatchSourceDirectory.Text = _globals?.BatchSourceDirectory;
             lblVersion.Text = $"v {Application.ProductVersion}";
-           
+
+            if (File.Exists(_globals?.DroidInstallDirectory))
+            {
+                txtDroidLocation.Text = _globals?.DroidInstallDirectory;
+            }
+            if (Directory.Exists(_globals?.DirectoryFilesToScanForMetadata))
+            {
+                txtFilesDirToScan.Text = _globals.DirectoryFilesToScanForMetadata;
+            }
 
             //_lastSelectedDirToScanForMetadata = @"D:\TopX_Data\TestFiles";
             btSaveTopxXml.Enabled = false;
@@ -428,7 +437,9 @@ namespace TOPX.UI.Forms
                 IdentificatieArchief = txtIdentificatieArchief.Text,
                 OmschrijvingArchief = txtOmschrijvingArchief.Text,
                 BatchSourceDirectory = txtBatchSourceDirectory.Text,
-                BatchTargetDirectory = txtBatchTargetDirectory.Text
+                BatchTargetDirectory = txtBatchTargetDirectory.Text,
+                DroidInstallDirectory = txtDroidLocation.Text,
+                DirectoryFilesToScanForMetadata = txtFilesDirToScan.Text
             };
 
             if (!string.IsNullOrEmpty(txtDatumArchief.Text))
@@ -615,6 +626,7 @@ namespace TOPX.UI.Forms
 
         private void btGenerateMetadata_Click(object sender, EventArgs e)
         {
+            txtProgressMetaData.Text = string.Empty;
             if (!Directory.Exists(txtFilesDirToScan.Text))
             {
                 MessageBox.Show($"De directory {txtFilesDirToScan.Text} kan niet worden gevonden.");
@@ -625,9 +637,12 @@ namespace TOPX.UI.Forms
                 MessageBox.Show("Er is geen bewerking geselecteerd");
                 return;
             }
+            Application.UseWaitCursor = true;
+            
             InitBackgroundWorker();
             if (!bgworker.IsBusy)
             {
+                
                 bgworker.RunWorkerAsync();
                 btGenerateMetadata.Enabled = false;
             }
@@ -649,13 +664,15 @@ namespace TOPX.UI.Forms
             btGenerateMetadata.Focus();
             btMetadataCancel.Enabled = false;
             MessageBox.Show("Analyse metadata gereed");
+            Application.UseWaitCursor = false;
         }
 
         private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             var path = txtFilesDirToScan.Text;
-            var fileAnalysis = new Metadata(chkGetHash.Checked, chkGetFileSize.Checked, checkGetCreationDate.Checked, chkGetFileSignature.Checked, path, _dataservice.GetAllDossiers(), _dataservice);
-            fileAnalysis.DossierHandled += IncreaseProgress;
+            var fileAnalysis = new Metadata(chkGetHash.Checked, chkGetFileSize.Checked, checkGetCreationDate.Checked, chkGetFileSignature.Checked, path, txtDroidLocation.Text, _dataservice.GetAllDossiers(), _dataservice);
+            fileAnalysis.MetadataEventHandler += IncreaseProgress;
+            
             fileAnalysis.Collect();
 
             Invoke(new Action(() =>
@@ -668,6 +685,16 @@ namespace TOPX.UI.Forms
         private void Bgworker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             progressBar1.Value = e.ProgressPercentage;
+            var values = (EventCounter) e.UserState;
+            txtProgressMetaData.Text = $"Aantal dossiers: {values.DossiersCount}";
+            if (values.DroidStarted)
+            {
+                txtProgressMetaData.Text += $"{Environment.NewLine}DROID bestandsanalyse gestart. Dit kan even duren...";
+            }
+            if (values.IsReady)
+            {
+                txtProgressMetaData.Text += $"{Environment.NewLine}Aantal door DROID geïdentificeerde bestanden: {values.TotalRecordsIdentified}";
+            }
         }
 
         private void btMetadataCancel_Click(object sender, EventArgs e)
@@ -679,7 +706,9 @@ namespace TOPX.UI.Forms
         private void IncreaseProgress(object sender, EventArgs eventArgs)
         {
             var x = (MetadataEventargs)eventArgs;
-            bgworker.ReportProgress(x.GetProgress());
+            var values = x.GetProgress();
+            bgworker.ReportProgress(values.DossiersProgress, values);
+            
         }
 
         private void linkCopyMetadataErrors_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -908,6 +937,55 @@ namespace TOPX.UI.Forms
             txtBatchTargetDirectory.Enabled = chkCreateBatchesSubdir.Checked;
             picSelectBatchSourceDir.Enabled = chkCreateBatchesSubdir.Checked;
             picSelectBatchTargetDir.Enabled = chkCreateBatchesSubdir.Checked;
+
+        }
+
+        private void picSelectDroidLocation_Click(object sender, EventArgs e)
+        {
+            {
+                var openfiledialog = new OpenFileDialog();
+                ;
+                if (openfiledialog.ShowDialog() == DialogResult.OK && !string.IsNullOrWhiteSpace(openfiledialog.FileName))
+                {
+                    txtDroidLocation.Text = openfiledialog.FileName;
+
+
+                    if (File.Exists(openfiledialog.FileName))
+                    {
+                        txtDroidLocation.BackColor = DefaultBackColor;
+                        SaveGlobals(null, null);
+                    }
+                    else
+                    {
+                        txtDroidLocation.BackColor = Color.DarkSalmon;
+                        MessageBox.Show("droid.bat is niet aanwezig in de aangegeven folder.");
+                    }
+                }
+            }
+        }
+
+        private void txtFilesDirToScan_Leave(object sender, EventArgs e)
+        {
+            SaveGlobals(null, null);
+        }
+
+        private void txtDroidLocation_Leave(object sender, EventArgs e)
+        {
+            SaveGlobals(null, null);
+        }
+
+        private void gridFieldMappingDossiers_CellValueNeeded(object sender, DataGridViewCellValueEventArgs e)
+        {
+
+        }
+
+        private void gridFieldMappingDossiers_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void gridFieldMappingDossiers_DefaultValuesNeeded(object sender, DataGridViewRowEventArgs e)
+        {
 
         }
     }

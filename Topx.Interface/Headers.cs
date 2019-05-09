@@ -17,7 +17,7 @@ namespace Topx.Interface
         private List<FieldMapping> _headersRecords;
         private readonly List<FieldMapping> _headersBestanden;
         private List<FieldMapping> _headerMappingRecordsBestanden;
-        private List<TopX_TMLO> _topX_Tmlos;
+        private List<TopX_AdditionalParameters> _topX_Tmlos;
 
         //public List<FieldMapping> HeadersRecordsBestanden => _headersRecords.Concat(_headersBestanden).ToList();
 
@@ -40,7 +40,13 @@ namespace Topx.Interface
 
             foreach (var headersDossier in _headersDossiers)
             {
-                headersDossier.TMLO = (from t in _topX_Tmlos where t.TopX == headersDossier.DatabaseFieldName select t.TMLO).FirstOrDefault();
+                var topx_AdditionalParameters = (from t in _topX_Tmlos where t.TopX == headersDossier.DatabaseFieldName select t).FirstOrDefault();
+
+                if (topx_AdditionalParameters != null)
+                {
+                    headersDossier.TMLO = topx_AdditionalParameters.TMLO;
+                    headersDossier.Optional = topx_AdditionalParameters.Optional;
+                }
             }
 
         }
@@ -54,7 +60,9 @@ namespace Topx.Interface
             _headersRecords = GetPropertyInfoNames(propertyInfosRecords, FieldMappingType.RECORD);
             foreach (var headersRecord in _headersRecords)
             {
-                headersRecord.TMLO = (from t in _topX_Tmlos where t.TopX == headersRecord.DatabaseFieldName select t.TMLO).FirstOrDefault();
+                var topx_AdditionalParameters = (from t in _topX_Tmlos where t.TopX == headersRecord.DatabaseFieldName select t).FirstOrDefault();
+                headersRecord.TMLO = topx_AdditionalParameters.TMLO;
+                headersRecord.Optional = topx_AdditionalParameters.Optional;
             }
         }
 

@@ -8,7 +8,7 @@ namespace Topx.Interface
 {
     public class ResourceHelper
     {
-        public List<TopX_TMLO> GetTopX_TMLO()
+        public List<TopX_AdditionalParameters> GetTopX_TMLO()
         {
              Assembly assembly = GetType().Assembly;
 
@@ -21,7 +21,7 @@ namespace Topx.Interface
                 resource = reader.ReadToEnd();
             }
 
-            return JsonConvert.DeserializeObject<List<TopX_TMLO>>(resource);
+            return JsonConvert.DeserializeObject<List<TopX_AdditionalParameters>>(resource);
         }
     }
 }

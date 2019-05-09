@@ -21,5 +21,6 @@ namespace Topx.Data
 
         [StringLength(20)]
         public string TMLO { get; set; }
+        public bool Optional { get; set; }
     }
 }

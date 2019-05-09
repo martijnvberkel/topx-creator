@@ -206,7 +206,7 @@ namespace Topx.Creator
             var gebruiksrechten_DatumOfPeriode = DateTime.ParseExact(record.Gebruiksrechten_DatumOfPeriode, DateParsing, CultureInfo.InvariantCulture).ToString("yyyy-MM-dd");
 
 
-            var relatie = new[]
+           var relatie = new[]
             {
                 new TopX.relatieType()
                 {
@@ -223,7 +223,7 @@ namespace Topx.Creator
                 Item = new aggregatieType()
                 {
                     identificatiekenmerk = new nonEmptyStringTypeAttribuut() { Value = identificatieKenmerk },
-
+                    
                     eventGeschiedenis = new eventGeschiedenisType[] { new eventGeschiedenisType() {datumOfPeriode = new datumOfPeriodeType()
                         { datum = eventgeschiedenis_DatumOfPeriode },
                         type = new nonEmptyStringTypeAttribuut() {Value = dossier.Eventgeschiedenis_Type} ,
@@ -234,7 +234,8 @@ namespace Topx.Creator
                         Value = aggregatieAggregatieniveauType.Record
                     },
                     naam = new[] { new nonEmptyStringTypeAttribuut() { Value = dossier.Naam } },
-                    taal = new[] { new taalTypeAttribuut() { Value = taalType.dut } },
+                    taal = new taalTypeAttribuut[] { new taalTypeAttribuut() { Value = (taalType)Enum.Parse(typeof(taalType), dossier.Taal.ToLower()) } },
+                  //  taal = new[] { new taalTypeAttribuut() { Value = taalType.dut } },
                     relatie = relatie,
                     vertrouwelijkheid = new vertrouwelijkheidType[]
                     {
@@ -340,7 +341,7 @@ namespace Topx.Creator
 
             var openbaarheid_DatumOfPeriode = DateTime.ParseExact(record.Openbaarheid_DatumOfPeriode,
                 DateParsing, CultureInfo.InvariantCulture).ToString("yyyy-MM-dd");
-
+            
             var topx = new topxType
             {
                 Item = new bestandType()
@@ -364,7 +365,7 @@ namespace Topx.Creator
                                 },
                             }
                         },
-
+                  
                     openbaarheid = new openbaarheidType[]
                     {
                         new openbaarheidType()
@@ -517,7 +518,8 @@ namespace Topx.Creator
             var openbaarheid_DatumOfPeriode = DateTime.ParseExact(dossier.Openbaarheid_DatumOfPeriode,
                 DateParsing, CultureInfo.InvariantCulture).ToString("yyyy-MM-dd");
 
-            
+            var omschrijving = new @string[] { new @string()};
+            omschrijving[0].Value = dossier.Omschrijving;
 
             string gebruiksrechten_DatumOfPeriode = string.Empty;
             if (string.IsNullOrEmpty(dossier.Gebruiksrechten_DatumOfPeriode))
@@ -547,6 +549,7 @@ namespace Topx.Creator
             topx.Item = new aggregatieType()
             {
                 identificatiekenmerk = new nonEmptyStringTypeAttribuut() { Value = identificatiekenmerk },
+                omschrijving = omschrijving,
                 aggregatieniveau = new aggregatieTypeAggregatieniveau()
                 {
                     Value = aggregatieAggregatieniveauType.Dossier
@@ -561,7 +564,7 @@ namespace Topx.Creator
                 },
 
                 naam = new[] { new nonEmptyStringTypeAttribuut() { Value = dossier.Naam } },
-                taal = new taalTypeAttribuut[] { new taalTypeAttribuut() { Value = (taalType)Enum.Parse(typeof(taalType), dossier.Taal.ToLower()) } },
+               // taal = new taalTypeAttribuut[] { new taalTypeAttribuut() { Value = (taalType)Enum.Parse(typeof(taalType), dossier.Taal.ToLower()) } },
                 relatie = new[] {new relatieType()
                 {
                     relatieID = new nonEmptyStringTypeAttribuut() {Value = _identificatieArchief },

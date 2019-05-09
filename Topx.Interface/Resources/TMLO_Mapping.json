@@ -24,6 +24,11 @@
         "TMLO": "5.4"
     },
     {
+        "TopX": "Omschrijving",
+        "TMLO": "6",
+        "Optional":  true 
+    },
+    {
         "TopX": "Dekking_InTijd_Begin",
         "TMLO": "9.1"
     },

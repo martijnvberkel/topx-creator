@@ -163,7 +163,7 @@ namespace Topx.Importer
                             if (propertyInfo.PropertyType == typeof(string))
                                 propertyInfo.SetValue(record, fieldsSource[index], null);
                             if (propertyInfo.PropertyType == typeof(Int64?))
-                                propertyInfo.SetValue(record, Convert.ToInt64(fieldsSource[index]), null);
+                                propertyInfo.SetValue(record, Convert.ToInt64(fieldsSource[index].Replace(".", string.Empty)), null);
 
                             if (propertyInfo.PropertyType == typeof(DateTime?))
                                 propertyInfo.SetValue(record, Convert.ToDateTime(fieldsSource[index]), null);
@@ -178,7 +178,7 @@ namespace Topx.Importer
                         if (isValidated)
                         {
 
-                            if (!_dataservice.SaveRecord(record))
+                            if (!_dataservice.SaveAddedRecord(record))
                                 ErrorsImportRecords.AppendLine(_dataservice.ErrorMessage);
                             else
                                 NrOfRecords++;
@@ -201,9 +201,9 @@ namespace Topx.Importer
         
         public bool CheckHealthyFieldmappings(List<FieldMapping> fieldmappings)
         {
-           foreach (var fieldmapping in fieldmappings.Where(t => t.DatabaseFieldName != null && !t.DatabaseFieldName.StartsWith("ComplexLink", true, CultureInfo.InvariantCulture)))
+           foreach (var fieldmapping in fieldmappings.Where(t => t.DatabaseFieldName != null && !t.DatabaseFieldName.StartsWith("ComplexLink", true, CultureInfo.InvariantCulture) && t.DatabaseFieldName != "Omschrijving"))
             {
-                if (!string.IsNullOrEmpty(fieldmapping.DatabaseFieldName) && string.IsNullOrEmpty(fieldmapping.MappedFieldName) && !_fieldsThatMaybeEmpty.Contains(fieldmapping.DatabaseFieldName))
+                if (!string.IsNullOrEmpty(fieldmapping.DatabaseFieldName) && string.IsNullOrEmpty(fieldmapping.MappedFieldName) && !_fieldsThatMaybeEmpty.Contains(fieldmapping.DatabaseFieldName) && !fieldmapping.Optional)
                     return false;
             }
             return true;

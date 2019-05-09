@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Validation;
-using System.Data.SqlClient;
 using System.Linq;
-using System.Net.Http.Headers;
 using System.Text;
 using System.Threading;
 using Topx.Data;
@@ -21,10 +19,11 @@ namespace Topx.DataServices
         string GetLastDossierFileName();
         string GetLastRecordsFileName();
         List<Dossier> GetAllDossiers();
+        List<Record> GetAllRecords();
         Globals GetGlobals();
         void SaveGlobals(Globals globals);
         bool SaveDossier(Dossier dossier);
-        bool SaveRecord(Record record);
+        bool SaveAddedRecord(Record record);
         void SaveRecordChanges(Record record);
         void ClearDossiersAndRecords();
         List<FieldMapping> GetMappingsDossiers(List<string> headersList);
@@ -36,7 +35,7 @@ namespace Topx.DataServices
         void ClearLog();
         string GetLog();
         bool CanConnect();
-        string Conectionstring { get; set; }
+        string Connectionstring { get; set; }
 
         void SaveComplexLink(ComplexLink complexLink);
         List<ComplexLink> GetAllComplexLinks();
@@ -49,8 +48,8 @@ namespace Topx.DataServices
     public class DataService : IDataService
     {
         private string _errorMessage;
-        public string Conectionstring { get; set; }
-       
+        public string Connectionstring { get; set; }
+
 
         public bool Error { get; set; }
         public string ErrorMessage
@@ -65,14 +64,14 @@ namespace Topx.DataServices
 
         public DataService(string conectionstring)
         {
-            Conectionstring = conectionstring;
+            Connectionstring = conectionstring;
         }
 
         public bool CanConnect()
         {
             try
             {
-                using (var entities = new ModelTopX(Conectionstring))
+                using (var entities = new ModelTopX(Connectionstring))
                 {
                     //var test = (from i in entities.Dossiers select i).FirstOrDefault();
                     return true;
@@ -83,7 +82,7 @@ namespace Topx.DataServices
                 try   // second try, the database might not be initialized
                 {
                     Thread.Sleep(2000);
-                    using (var entities = new ModelTopX(Conectionstring))
+                    using (var entities = new ModelTopX(Connectionstring))
                     {
                         var test = (from i in entities.Dossiers select i).FirstOrDefault();
                         return true;
@@ -93,25 +92,25 @@ namespace Topx.DataServices
                 {
                     return false;
                 }
-               
+
             }
         }
 
         public void ClearDossiersAndRecords()
         {
-            using (var entities = new ModelTopX(Conectionstring))
+            using (var entities = new ModelTopX(Connectionstring))
             {
                 entities.Database.ExecuteSqlCommand("truncate table Records");
                 entities.Database.ExecuteSqlCommand("truncate table Bestanden");
                 entities.Database.ExecuteSqlCommand("truncate table ComplexLinks");
                 entities.Database.ExecuteSqlCommand("delete from Dossiers");
-               
+
             }
         }
 
         public void SaveLastDossierFileName(string fileName)
         {
-            using (var entities = new ModelTopX(Conectionstring))
+            using (var entities = new ModelTopX(Connectionstring))
             {
                 var globals = (from g in entities.Globals select g).FirstOrDefault() ?? new Globals();
                 globals.LastDossierFileName = fileName;
@@ -121,7 +120,7 @@ namespace Topx.DataServices
 
         public void SaveLastRecordsFileName(string fileName)
         {
-            using (var entities = new ModelTopX(Conectionstring))
+            using (var entities = new ModelTopX(Connectionstring))
             {
                 var globals = (from g in entities.Globals select g).FirstOrDefault() ?? new Globals();
                 globals.LastRecordsFileName = fileName;
@@ -131,7 +130,7 @@ namespace Topx.DataServices
 
         public string GetLastDossierFileName()
         {
-            using (var entities = new ModelTopX(Conectionstring))
+            using (var entities = new ModelTopX(Connectionstring))
             {
                 return (from g in entities.Globals select g).FirstOrDefault()?.LastDossierFileName;
             }
@@ -139,7 +138,7 @@ namespace Topx.DataServices
 
         public string GetLastRecordsFileName()
         {
-            using (var entities = new ModelTopX(Conectionstring))
+            using (var entities = new ModelTopX(Connectionstring))
             {
                 return (from g in entities.Globals select g).FirstOrDefault()?.LastRecordsFileName;
             }
@@ -147,26 +146,34 @@ namespace Topx.DataServices
 
         public List<Dossier> GetAllDossiers()
         {
-            using (var entities = new ModelTopX(Conectionstring))
+            using (var entities = new ModelTopX(Connectionstring))
             {
-                return (from d in entities.Dossiers select d). Include("Records"). Include("ComplexLinks"). ToList();
+                return (from d in entities.Dossiers select d).Include("Records").Include("ComplexLinks").ToList();
+            }
+        }
+
+        public List<Record> GetAllRecords()
+        {
+            using (var entities = new ModelTopX(Connectionstring))
+            {
+                return (from d in entities.Records select d).ToList();
             }
         }
 
         public void SaveRecordChanges(Record record)
         {
-            using (var entities = new ModelTopX(Conectionstring))
+            using (var entities = new ModelTopX(Connectionstring))
             {
                 entities.Entry(record).State = EntityState.Modified;
                 //entities.Records.Attach(record);
-                
+
                 entities.SaveChanges();
             }
         }
 
         public Globals GetGlobals()
         {
-            using (var entities = new ModelTopX(Conectionstring))
+            using (var entities = new ModelTopX(Connectionstring))
             {
                 return (from g in entities.Globals select g).FirstOrDefault();
             }
@@ -174,7 +181,7 @@ namespace Topx.DataServices
 
         public void SaveGlobals(Globals globals)
         {
-            using (var entities = new ModelTopX(Conectionstring))
+            using (var entities = new ModelTopX(Connectionstring))
             {
                 var globalsFirstRecord = (from g in entities.Globals select g).FirstOrDefault();
                 if (globalsFirstRecord != null)
@@ -189,7 +196,7 @@ namespace Topx.DataServices
         public bool SaveDossier(Dossier dossier)
         {
             ErrorMessage = string.Empty;
-            using (var entities = new ModelTopX(Conectionstring))
+            using (var entities = new ModelTopX(Connectionstring))
             {
                 try
                 {
@@ -214,10 +221,20 @@ namespace Topx.DataServices
                 return true;
             }
         }
-        public bool SaveRecord(Record record)
+
+        public void SaveRecord(Record record)
+        {
+            using (var entities = new ModelTopX(Connectionstring))
+            {
+                entities.Records.Attach(record);
+                entities.SaveChanges();
+            }
+        }
+
+        public bool SaveAddedRecord(Record record)
         {
             ErrorMessage = string.Empty;
-            using (var entities = new ModelTopX(Conectionstring))
+            using (var entities = new ModelTopX(Connectionstring))
             {
                 var dossierId = record.DossierId;
                 if (!entities.Dossiers.Any(t => t.IdentificatieKenmerk == dossierId))
@@ -251,7 +268,7 @@ namespace Topx.DataServices
 
         public List<FieldMapping> GetMappingsDossiers(List<string> headersList)
         {
-            using (var entities = new ModelTopX(Conectionstring))
+            using (var entities = new ModelTopX(Connectionstring))
             {
                 var listFieldmappings = (from m in entities.FieldMappings where m.Type == "DOSSIER" select m).ToList();
 
@@ -268,7 +285,7 @@ namespace Topx.DataServices
         }
         public List<FieldMapping> GetMappingsRecords(List<string> headersList)
         {
-            using (var entities = new ModelTopX(Conectionstring))
+            using (var entities = new ModelTopX(Connectionstring))
             {
                 var listFieldmappings = (from m in entities.FieldMappings where m.Type == "RECORD" select m).ToList();
 
@@ -286,7 +303,7 @@ namespace Topx.DataServices
 
         public void SaveMappings(List<FieldMapping> fieldmappingsModified, FieldMappingType type)
         {
-            using (var entities = new ModelTopX(Conectionstring))
+            using (var entities = new ModelTopX(Connectionstring))
             {
                 var fieldmappings = from m in entities.FieldMappings where m.Type == type.ToString() select m;
                 entities.FieldMappings.RemoveRange(fieldmappings);
@@ -304,7 +321,7 @@ namespace Topx.DataServices
 
         public void SaveComplexLink(ComplexLink complexLink)
         {
-            using (var entities = new ModelTopX(Conectionstring))
+            using (var entities = new ModelTopX(Connectionstring))
             {
                 entities.ComplexLinks.Add(complexLink);
                 entities.SaveChanges();
@@ -313,7 +330,7 @@ namespace Topx.DataServices
 
         public List<ComplexLink> GetAllComplexLinks()
         {
-            using (var entities = new ModelTopX(Conectionstring))
+            using (var entities = new ModelTopX(Connectionstring))
             {
                 return (from a in entities.ComplexLinks select a).ToList();
             }
@@ -321,7 +338,7 @@ namespace Topx.DataServices
 
         public List<string> GetComplexLinksWithMoreThanOneOccurence()
         {
-            using (var entities = new ModelTopX(Conectionstring))
+            using (var entities = new ModelTopX(Connectionstring))
             {
                 return (from a in entities.ComplexLinks select a).GroupBy(x => x.ComplexLinkNummer)
                     .Where(g => g.Count() > 1)
@@ -332,18 +349,18 @@ namespace Topx.DataServices
 
         public List<Dossier> GetDossiersByComplexLink(string complexLink)
         {
-            using (var entities = new ModelTopX(Conectionstring))
+            using (var entities = new ModelTopX(Connectionstring))
             {
                 return (from d in entities.Dossiers where d.ComplexLinks.FirstOrDefault().ComplexLinkNummer == complexLink select d)
-                    .Include("ComplexLinks") .Include("Records") .ToList();
+                    .Include("ComplexLinks").Include("Records").ToList();
             }
         }
 
         public void AttachRecordsToDossier(Dossier dossierWithoutRecords, ICollection<Record> recordsToCopy)
         {
-            using (var entities = new ModelTopX(Conectionstring))
+            using (var entities = new ModelTopX(Connectionstring))
             {
-                var dossier = (from d in entities.Dossiers where d.IdentificatieKenmerk == dossierWithoutRecords.IdentificatieKenmerk select d) .FirstOrDefault();
+                var dossier = (from d in entities.Dossiers where d.IdentificatieKenmerk == dossierWithoutRecords.IdentificatieKenmerk select d).FirstOrDefault();
 
                 dossier.Records.Clear();
                 dossier.Records = new List<Record>();
@@ -351,42 +368,42 @@ namespace Topx.DataServices
                 {
                     dossier.Records.Add(record.Clone());
                 }
-               
+
                 entities.SaveChanges();
             }
         }
 
         public ulong GetTotalSizeNeededBytes()
         {
-            using (var entities = new ModelTopX(Conectionstring))
+            using (var entities = new ModelTopX(Connectionstring))
             {
                 var sum = (from r in entities.Records select r.Bestand_Formaat_BestandsOmvang).Sum();
                 if (sum != null)
-                    return (ulong) sum;
+                    return (ulong)sum;
             }
             return 0;
         }
 
         public void Log(string dossier, string message)
         {
-            using (var entities = new ModelTopX(Conectionstring))
+            using (var entities = new ModelTopX(Connectionstring))
             {
-                entities.Log.Add(new Log() {Id = Guid.NewGuid(), Identifier = dossier, Description = message, DateTime = DateTime.Now });
+                entities.Log.Add(new Log() { Id = Guid.NewGuid(), Identifier = dossier, Description = message, DateTime = DateTime.Now });
                 entities.SaveChanges();
             }
         }
 
-        public  void ClearLog()
+        public void ClearLog()
         {
-            using (var entities = new ModelTopX(Conectionstring))
+            using (var entities = new ModelTopX(Connectionstring))
             {
                 entities.Database.ExecuteSqlCommand("TRUNCATE TABLE log");
             }
         }
 
-        public  string GetLog()
+        public string GetLog()
         {
-            using (var entities = new ModelTopX(Conectionstring))
+            using (var entities = new ModelTopX(Connectionstring))
             {
                 var logEntries = from l in entities.Log select l;
                 var stringBuilder = new StringBuilder();
