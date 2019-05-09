@@ -637,6 +637,12 @@ namespace TOPX.UI.Forms
                 MessageBox.Show("Er is geen bewerking geselecteerd");
                 return;
             }
+            if (chkGetFileSignature.Checked && (!File.Exists(txtDroidLocation.Text)  || Path.GetFileName(txtDroidLocation.Text) != "droid.bat"))
+            {
+                MessageBox.Show("Voor vaststellen van de File Signature moet eerst de locatie van droid.bat worden aangegeven (DROID moet eerst door jezelf worden geïnstalleerd). Dat is nodig omdat TopX Creator van deze tool gebruik maakt.");
+                return;
+            }
+
             Application.UseWaitCursor = true;
             
             InitBackgroundWorker();
