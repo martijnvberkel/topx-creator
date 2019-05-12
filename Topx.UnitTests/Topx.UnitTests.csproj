@@ -76,6 +76,7 @@
     <Compile Include="TestComplexLinkProcessor.cs" />
     <Compile Include="TestImporter.cs" />
     <Compile Include="TestMetadata.cs" />
+    <Compile Include="TestPdfAnalysis.cs" />
     <Compile Include="TestPronomIdentification.cs" />
     <Compile Include="TestResources\Dossiers_Test_ComplexLink1.cs" />
     <Compile Include="TestResources\Dossiers_Test1.cs" />
@@ -86,6 +87,7 @@
     <None Include="App.config" />
     <None Include="packages.config" />
     <None Include="TestResources\MetadataFiles\dummy.pdf" />
+    <None Include="TestResources\ProtectDocument_output.pdf" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Topx.ComplexLinks\Topx.ComplexLinks.csproj">

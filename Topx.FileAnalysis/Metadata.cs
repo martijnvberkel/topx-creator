@@ -19,6 +19,7 @@ public class Metadata
     private readonly bool _setSize;
     private readonly bool _setCreationDate;
     private readonly bool _setFileFormatIdentification;
+    private readonly bool _testForPwProtection;
     private readonly string _path;
     private readonly string _droidInstallDirectory;
     private readonly List<Dossier> _dossiers;
@@ -34,12 +35,13 @@ public class Metadata
     private readonly List<string> _allPresentFiles;
 
 
-    public Metadata(bool setHash, bool setSize, bool setCreationDate, bool setFileFormatIdentification, string path, string droidInstallDirectory, List<Dossier> dossiers, IDataService dataService, Logger logger)
+    public Metadata(bool setHash, bool setSize, bool setCreationDate, bool setFileFormatIdentification, bool testForPwProtection, string path, string droidInstallDirectory, List<Dossier> dossiers, IDataService dataService)
     {
         _setHash = setHash;
         _setSize = setSize;
         _setCreationDate = setCreationDate;
         _setFileFormatIdentification = setFileFormatIdentification;
+        _testForPwProtection = testForPwProtection;
         _path = path;
         _droidInstallDirectory = droidInstallDirectory;
         _dossiers = dossiers;
@@ -134,12 +136,28 @@ public class Metadata
                                 record.Bestand_Formaat_FysiekeIntegriteit_Algoritme = "sha256";
                             }
                         }
+
+                        if (_testForPwProtection && Path.GetExtension(fileFullpath).ToLower() == ".pdf")
+                        {
+                            var checkPasswProtection = Pdf.IsPasswordProtected(fileFullpath);
+
+                            if (checkPasswProtection == null)
+                            {
+                                ErrorMessages.AppendLine($"Pdf password protection module kan bestand {Path.GetFileName(fileFullpath)} niet openen, mogelijk is deze niet benaderbaar");
+                            }
+                            if (checkPasswProtection == true)
+                            {
+                                ErrorMessages.AppendLine($"ERROR: password-protected document gevonden: {Path.GetFileName(fileFullpath)}");
+                            }
+                            
+                            
+                        }
                     }
                     else
                     {
                         ErrorMessages.AppendLine(fileExists
-                            ? $"File {fileFullpath} horende bij dossier {record.DossierId} is niet gescand, er is een verschil in hoofd/kleine letters wat niet is toegestaan (OOK in de bestandsextensie) ."
-                            : $"File {fileFullpath} horende bij dossier {record.DossierId} is niet gevonden, let op verschil hoofd/kleine letters, ook in de bestandsextensie");
+                            ? $"File {Path.GetFileName(fileFullpath)} horende bij dossier {record.DossierId} is niet gescand, er is een verschil in hoofd/kleine letters wat niet is toegestaan (OOK in de bestandsextensie) ."
+                            : $"File {Path.GetFileName(fileFullpath)} horende bij dossier {record.DossierId} is niet gevonden, let op verschil hoofd/kleine letters, ook in de bestandsextensie");
                     }
                 }
                 catch (Exception e)
@@ -156,35 +174,6 @@ public class Metadata
         var sha = new SHA256Managed();
         var hash = sha.ComputeHash(stream);
         return BitConverter.ToString(hash).Replace("-", string.Empty).ToLower();
-    }
-
-    private DateTime GetDateFromPdf(Stream stream)
-    {
-        var pdf = new Pdf();
-        var x = pdf.CreationDate(stream);
-        return Convert.ToDateTime("01-01-2001");
-        //var date = stream.BeginRead()
-    }
-    public static long FindPosition(Stream stream, byte[] byteSequence)
-    {
-        if (byteSequence.Length > stream.Length)
-            return -1;
-
-        byte[] buffer = new byte[byteSequence.Length];
-
-        using (BufferedStream bufStream = new BufferedStream(stream, byteSequence.Length))
-        {
-            int i;
-            while ((i = bufStream.Read(buffer, 0, byteSequence.Length)) == byteSequence.Length)
-            {
-                if (byteSequence.SequenceEqual(buffer))
-                    return bufStream.Position - byteSequence.Length;
-                else
-                    bufStream.Position -= byteSequence.Length - PadLeftSequence(buffer, byteSequence);
-            }
-        }
-
-        return -1;
     }
 
     private static int PadLeftSequence(byte[] bytes, byte[] seqBytes)

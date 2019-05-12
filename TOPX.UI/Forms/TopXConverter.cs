@@ -680,7 +680,7 @@ namespace TOPX.UI.Forms
         private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             var path = txtFilesDirToScan.Text;
-            var fileAnalysis = new Metadata(chkGetHash.Checked, chkGetFileSize.Checked, checkGetCreationDate.Checked, chkGetFileSignature.Checked, path, txtDroidLocation.Text, _dataservice.GetAllDossiers(), _dataservice, _logger);
+            var fileAnalysis = new Metadata(chkGetHash.Checked, chkGetFileSize.Checked, checkGetCreationDate.Checked, chkGetFileSignature.Checked, chkTestForPasswProtection.Checked, path, txtDroidLocation.Text, _dataservice.GetAllDossiers(), _dataservice);
             fileAnalysis.MetadataEventHandler += IncreaseProgress;
             
             fileAnalysis.Collect();
