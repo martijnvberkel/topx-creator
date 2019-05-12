@@ -10,7 +10,7 @@ using Topx.FileAnalysis;
 
 namespace Topx.UnitTests
 {
-    [TestFixture()]
+    [TestFixture]
     public class TestPdfAnalysis
     {
         [Test]

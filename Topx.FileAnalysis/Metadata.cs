@@ -52,22 +52,16 @@ public class Metadata
 
     public void Collect()
     {
-        try
+        var metadataEvent = new MetadataEventargs(false);
+        if (_setSize || _setCreationDate || _setHash)
         {
-            var metadataEvent = new MetadataEventargs(true);
-            if (_setSize || _setCreationDate || _setHash)
-            {
-                GetMataData(metadataEvent);
-            }
-
-            if (_setFileFormatIdentification)
-            {
-                GetFileIdentification(metadataEvent);
-            }
+            GetMataData(metadataEvent);
         }
-        catch (Exception e)
+
+        if (_setFileFormatIdentification)
         {
-            ErrorMessages.Append(e.StackTrace);
+            metadataEvent.Eventcounter.DroidStarted = true;
+            GetFileIdentification(metadataEvent);
         }
     }
 
@@ -134,6 +128,14 @@ public class Metadata
                                 record.Bestand_Formaat_FysiekeIntegriteit_Waarde = GetHash(stream);
                                 record.Bestand_Formaat_FysiekeIntegriteit_DatumEnTijd = DateTime.Now;
                                 record.Bestand_Formaat_FysiekeIntegriteit_Algoritme = "sha256";
+                            }
+
+                            if (_testForPwProtection && Path.GetExtension(fileFullpath).ToLower() != ".pdf") // alles behalve pdf
+                            {
+                                if (MsOffice.IsPasswordProtected(stream))
+                                {
+                                    ErrorMessages.AppendLine($"ERROR: password-protected document gevonden: {Path.GetFileName(fileFullpath)}");
+                                }
                             }
                         }
 
