@@ -10,7 +10,7 @@ namespace Topx.Console
             //using (var con = new SqlConnection(connectionstring))
             //{
             //    con.Open();
-            //    var sqlCommandText = @"USE master 
+            //    var sqlCommandText = @"USE master þ
             //             DECLARE @kill varchar(8000) = ''; 
             //             SELECT @kill = @kill + 'kill ' + CONVERT(varchar(5), spid) + ';' 
             //             FROM master..sysprocesses  
