@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.InteropServices;
+using Microsoft.Win32;
 
 namespace Topx.Utility
 {
@@ -18,6 +19,27 @@ namespace Topx.Utility
                 throw new System.ComponentModel.Win32Exception();
             return freeBytes;
 
+        }
+
+        public static string GetJavaInstallationPath()
+        {
+            var environmentPath = Environment.GetEnvironmentVariable("JAVA_HOME");
+            if (!string.IsNullOrEmpty(environmentPath))
+            {
+                return environmentPath;
+            }
+
+            var javaKey = "SOFTWARE\\JavaSoft\\Java Runtime Environment\\";
+           
+            using (var hklm = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64))
+            using (var rk = hklm.OpenSubKey(javaKey))
+            {
+                string currentVersion = rk.GetValue("CurrentVersion").ToString();
+                using (Microsoft.Win32.RegistryKey key = rk.OpenSubKey(currentVersion))
+                {
+                    return key.GetValue("JavaHome").ToString();
+                }
+            }
         }
     }
 }

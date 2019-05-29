@@ -57,6 +57,10 @@
       <Project>{982EDCDB-E044-43D5-8071-BB4728C6A173}</Project>
       <Name>Topx.Data</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Topx.Utility\Topx.Utility.csproj">
+      <Project>{5862F3AF-2B57-4EE0-8E94-3A3D211737F1}</Project>
+      <Name>Topx.Utility</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\DROID_SignatureFile_V94.xml">

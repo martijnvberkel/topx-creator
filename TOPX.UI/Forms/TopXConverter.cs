@@ -240,22 +240,25 @@ namespace TOPX.UI.Forms
 
         private void btGenerateTopX_Click(object sender, EventArgs e)
         {
-            if (chkCreateBatchesSubdir.Enabled)
+            if (chkCreateBatchesSubdir.Checked)
             {
+                
                 if (!Directory.Exists(txtBatchSourceDirectory.Text))
                 {
-                    MessageBox.Show(
-                        "Wanneer 'Maak directories' is aangevinkt, moet de directory worden aangegeven waar de "
-                        + " bronbestanden staan.");
+                    var msgText = string.IsNullOrEmpty(txtBatchSourceDirectory.Text)
+                        ? "Wanneer 'Maak directories' is aangevinkt, moet de directory worden aangegeven waar de bronbestanden staan."
+                        : $"Bron-directory {txtBatchSourceDirectory.Text} kan niet worden gevonden.";
 
+                    MessageBox.Show(msgText);
                     return;
                 }
                 if (!Directory.Exists(txtBatchTargetDirectory.Text))
                 {
-                    MessageBox.Show(
-                        "Wanneer 'Maak directories' is aangevinkt, moet de doel-directory worden aangegeven waar de "
-                        + " bronbestanden naartoe moeten worden gekopieerd.");
+                    var msgText = string.IsNullOrEmpty(txtBatchSourceDirectory.Text)
+                        ? "Wanneer 'Maak directories' is aangevinkt, moet de directory worden aangegeven waar de doelbestanden naartoe gekopieerd moeten worden."
+                        : $"Doel-directory {txtBatchTargetDirectory.Text} kan niet worden gevonden.";
 
+                    MessageBox.Show(msgText);
                     return;
                 }
             }

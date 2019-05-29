@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Text;
+using System.Threading;
 using Topx.Data;
+using Topx.Utility;
 
 namespace Topx.FileAnalysis
 {
@@ -44,7 +48,7 @@ namespace Topx.FileAnalysis
          
             _droidCommandlineLocation = droidCommandlineLocation;
 
-            _command = $@"droid -Nr {fileslocationToIdentify} -Ns ""{Path.Combine(signatureFileInfo.FullName)}""";
+            _command = $@"-Nr ""{fileslocationToIdentify}"" -Ns ""{Path.Combine(signatureFileInfo.FullName)}""";
         }
       
        
@@ -55,52 +59,67 @@ namespace Topx.FileAnalysis
                 ErrorMessage = "Er zijn geen records gevonden, mogelijk zijn die nog niet geïmporteerd.";
                 return;
             }
-
-            //Create process
-            System.Diagnostics.Process pProcess = new System.Diagnostics.Process
+            var output = new StringBuilder();
+            var error = new StringBuilder();
+            using (var process = new Process())
             {
-                StartInfo =
+                process.StartInfo.FileName = _droidCommandlineLocation;
+                process.StartInfo.Arguments = _command;
+              
+                if (process.StartInfo.EnvironmentVariables.ContainsKey("PATH"))
+                    process.StartInfo.EnvironmentVariables["PATH"] = Path.Combine(IOUtilities.GetJavaInstallationPath(), "bin");
+                else
                 {
-                    FileName = _droidCommandlineLocation,
-                    Arguments = _command,
-                    UseShellExecute = false,
-                    RedirectStandardOutput = true,
-                    CreateNoWindow = true
+                    process.StartInfo.EnvironmentVariables.Add("PATH", Path.Combine(IOUtilities.GetJavaInstallationPath(), "bin"));
                 }
-            };
-            try
-            {
-                pProcess.Start();
+                process.StartInfo.UseShellExecute = false;
+                process.StartInfo.RedirectStandardOutput = true;
+                process.StartInfo.RedirectStandardError = true;
+                
+
+                using (AutoResetEvent outputWaitHandle = new AutoResetEvent(false))
+                using (AutoResetEvent errorWaitHandle = new AutoResetEvent(false))
+                {
+                    process.OutputDataReceived += (sender, e) => {
+                        if (e.Data == null)
+                        {
+                            outputWaitHandle.Set();
+                        }
+                        else
+                        {
+                            output.AppendLine(e.Data);
+                        }
+                    };
+                    process.ErrorDataReceived += (sender, e) =>
+                    {
+                        if (e.Data == null)
+                        {
+                            errorWaitHandle.Set();
+                        }
+                        else
+                        {
+                            error.AppendLine(e.Data);
+                        }
+                    };
+
+                    process.Start();
+
+                    process.BeginOutputReadLine();
+                    process.BeginErrorReadLine();
+
+                    process.WaitForExit();
+                }
             }
-            catch (Exception e)
+
+            if (error.Length > 0)
             {
-                ErrorMessage = "DROID kon niet worden gestart. Mogelijk is de locatie niet juist aangegeven, "
-                               + "of DROID is onjuist geinstalleerd. Probeer DROID eerst met de hand te starten om het probleem op te lossen.";
+                _errorMessage = error.ToString();
+                Error = true;
+                return;
             }
             
-            //Get program output
-            var strOutput = pProcess.StandardOutput.ReadToEnd();
-
-            //Wait for process to finish
-            pProcess.WaitForExit();
-
-            var terminaloutput = new List<string>();
-            using (var reader = new StringReader(strOutput))
-            {
-                
-                var line = string.Empty;
-                do
-                {
-                    line = reader.ReadLine();
-                    if (line != null)
-                    {
-                        terminaloutput.Add(line);
-                    }
-
-                } while (line != null);
-            }
-
-            foreach (var line in terminaloutput)
+            string[] delim = { Environment.NewLine, "\n" };
+            foreach (var line in output.ToString().Split(delim, StringSplitOptions.None) .ToArray())
             {
                 var entry = line.Split(',');
                 if (entry.Length == 2)  // alleen dan hebben we een entry met een bestandsnaam en een identificatie
