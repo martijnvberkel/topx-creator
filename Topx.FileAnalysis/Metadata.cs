@@ -47,21 +47,28 @@ public class Metadata
 
     public void Collect()
     {
-        var metadataEvent = new MetadataEventargs(true);
-        if (_setSize || _setCreationDate || _setHash)
+        try
         {
-            GetMataData(metadataEvent);
-        }
+            var metadataEvent = new MetadataEventargs(true);
+            if (_setSize || _setCreationDate || _setHash)
+            {
+                GetMataData(metadataEvent);
+            }
 
-        if (_setFileFormatIdentification)
+            if (_setFileFormatIdentification)
+            {
+                GetFileIdentification(metadataEvent);
+            }
+        }
+        catch (Exception e)
         {
-            GetFileIdentification(metadataEvent);
+            ErrorMessages.Append(e.Message);
         }
     }
 
     private void GetFileIdentification(MetadataEventargs metadataEvent)
     {
-       
+
         MetadataEventHandler?.Invoke(this, metadataEvent);
         var identificator = new Identificator(_droidInstallDirectory, _path);
         var records = _dataService.GetAllRecords();
