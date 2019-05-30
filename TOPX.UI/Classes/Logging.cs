@@ -11,9 +11,20 @@ namespace TOPX.UI.Classes
         {
             var config = new LoggingConfiguration();
 
-            var logfile = new FileTarget() { FileName = "${specialfolder:folder=ApplicationData}/TopX/Logs/Log_${shortdate}.txt", ArchiveEvery = FileArchivePeriod.Day, MaxArchiveFiles = 3 };
+            var fileTarget = new FileTarget()
+            {
+                FileName = "${specialfolder:folder=ApplicationData}/TopX/Logs/Log_${shortdate}.txt",
+                ArchiveEvery = FileArchivePeriod.Day,
+                MaxArchiveFiles = 3,
+                Name = "Log",
+                NetworkWrites = true,
+                KeepFileOpen = false,
+                Layout = "${longdate} ${uppercase:${level}} ${message}"
 
-            config.AddTarget("logfile", logfile);
+            };
+
+            config.AddTarget("Log", fileTarget);
+            config.LoggingRules.Add(new LoggingRule("*", LogLevel.Trace, fileTarget));
             NLog.LogManager.Configuration = config;
         }
     }

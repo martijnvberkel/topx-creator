@@ -72,7 +72,7 @@
       <HintPath>..\packages\MaterialSkin.Updated.0.2.2\lib\MaterialSkin.dll</HintPath>
     </Reference>
     <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
-      <HintPath>..\packages\NLog.4.0.0\lib\net45\NLog.dll</HintPath>
+      <HintPath>..\packages\NLog.4.6.4\lib\net45\NLog.dll</HintPath>
     </Reference>
     <Reference Include="PaletteDesigner, Version=4.62.6000.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\KryptonToolkitSuite462.4.62.554\lib\PaletteDesigner.exe</HintPath>
@@ -82,7 +82,12 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />

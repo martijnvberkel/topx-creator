@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using NLog;
 using Topx.Data;
 using Topx.DataServices;
 using Topx.FileAnalysis;
@@ -22,6 +23,7 @@ public class Metadata
     private readonly string _droidInstallDirectory;
     private readonly List<Dossier> _dossiers;
     private readonly IDataService _dataService;
+    private readonly Logger _logger;
 
     public event EventHandler MetadataEventHandler;
 
@@ -32,7 +34,7 @@ public class Metadata
     private readonly List<string> _allPresentFiles;
 
 
-    public Metadata(bool setHash, bool setSize, bool setCreationDate, bool setFileFormatIdentification, string path, string droidInstallDirectory, List<Dossier> dossiers, IDataService dataService)
+    public Metadata(bool setHash, bool setSize, bool setCreationDate, bool setFileFormatIdentification, string path, string droidInstallDirectory, List<Dossier> dossiers, IDataService dataService, Logger logger)
     {
         _setHash = setHash;
         _setSize = setSize;
@@ -42,6 +44,7 @@ public class Metadata
         _droidInstallDirectory = droidInstallDirectory;
         _dossiers = dossiers;
         _dataService = dataService;
+        _logger = logger;
         _allPresentFiles = Directory.GetFiles(path).ToList();
     }
 
@@ -62,7 +65,7 @@ public class Metadata
         }
         catch (Exception e)
         {
-            ErrorMessages.Append(e.Message);
+            ErrorMessages.Append(e.StackTrace);
         }
     }
 
@@ -70,7 +73,7 @@ public class Metadata
     {
 
         MetadataEventHandler?.Invoke(this, metadataEvent);
-        var identificator = new Identificator(_droidInstallDirectory, _path);
+        var identificator = new Identificator(_droidInstallDirectory, _path, _logger);
         var records = _dataService.GetAllRecords();
         foreach (var record in records)
         {
