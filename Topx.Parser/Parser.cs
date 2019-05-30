@@ -35,7 +35,6 @@ namespace Topx.Creator
         {
             _globals = globals;
             _dataservice = dataservice;
-            _dataservice.ClearLog();
         }
         public List<RIP.recordInformationPackage> ParseDataToTopx(List<Dossier> listOfDossiers, long maxBatchSize_bytes = 0)
         {

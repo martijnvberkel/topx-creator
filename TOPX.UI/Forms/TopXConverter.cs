@@ -74,13 +74,14 @@ namespace TOPX.UI.Forms
                 }
                 Logging.Init();
                 _logger = LogManager.GetCurrentClassLogger();
-                _headers = new Headers();
+               _headers = new Headers();
 
                 gridFieldMappingDossiers.AutoGenerateColumns = false;
                 gridFieldMappingRecords.AutoGenerateColumns = false;
 
                 Initialize();
                 InitTooltips();
+                _logger.Info("TopX Converter initalized");
                 Updater.InitAutoUpdater();
             }
         }
@@ -679,7 +680,7 @@ namespace TOPX.UI.Forms
         private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             var path = txtFilesDirToScan.Text;
-            var fileAnalysis = new Metadata(chkGetHash.Checked, chkGetFileSize.Checked, checkGetCreationDate.Checked, chkGetFileSignature.Checked, path, txtDroidLocation.Text, _dataservice.GetAllDossiers(), _dataservice);
+            var fileAnalysis = new Metadata(chkGetHash.Checked, chkGetFileSize.Checked, checkGetCreationDate.Checked, chkGetFileSignature.Checked, path, txtDroidLocation.Text, _dataservice.GetAllDossiers(), _dataservice, _logger);
             fileAnalysis.MetadataEventHandler += IncreaseProgress;
             
             fileAnalysis.Collect();

@@ -30,7 +30,7 @@ namespace Topx.FileAnalysis
         private string _errorMessage;
 
 
-        public Identificator(string droidCommandlineLocation, string fileslocationToIdentify)
+        public Identificator(string droidCommandlineLocation, string fileslocationToIdentify, NLog.Logger logger)
         {
             FileInfo signatureFileInfo;
             try
@@ -47,8 +47,10 @@ namespace Topx.FileAnalysis
             }
          
             _droidCommandlineLocation = droidCommandlineLocation;
+            logger.Info($"droidCommandlineLocation: {_droidCommandlineLocation}");
 
             _command = $@"-Nr ""{fileslocationToIdentify}"" -Ns ""{Path.Combine(signatureFileInfo.FullName)}""";
+            logger.Info($"command: {_command}");
         }
       
        
@@ -65,13 +67,19 @@ namespace Topx.FileAnalysis
             {
                 process.StartInfo.FileName = _droidCommandlineLocation;
                 process.StartInfo.Arguments = _command;
-              
-                if (process.StartInfo.EnvironmentVariables.ContainsKey("PATH"))
-                    process.StartInfo.EnvironmentVariables["PATH"] = Path.Combine(IOUtilities.GetJavaInstallationPath(), "bin");
-                else
+
+                var javaPath = IOUtilities.GetJavaInstallationPath();
+                if (!string.IsNullOrEmpty(javaPath))
                 {
-                    process.StartInfo.EnvironmentVariables.Add("PATH", Path.Combine(IOUtilities.GetJavaInstallationPath(), "bin"));
+                    if (process.StartInfo.EnvironmentVariables.ContainsKey("PATH"))
+                        process.StartInfo.EnvironmentVariables["PATH"] = Path.Combine(javaPath, "bin");
+                    else
+                    {
+                        process.StartInfo.EnvironmentVariables.Add("PATH",
+                            Path.Combine(IOUtilities.GetJavaInstallationPath(), "bin"));
+                    }
                 }
+
                 process.StartInfo.UseShellExecute = false;
                 process.StartInfo.RedirectStandardOutput = true;
                 process.StartInfo.RedirectStandardError = true;
