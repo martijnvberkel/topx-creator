@@ -636,7 +636,7 @@ namespace TOPX.UI.Forms
                 MessageBox.Show($"De directory {txtFilesDirToScan.Text} kan niet worden gevonden.");
                 return;
             }
-            if (!checkGetCreationDate.Checked && !chkGetFileSignature.Checked && !chkGetFileSize.Checked && !chkGetHash.Checked)
+            if (!checkGetCreationDate.Checked && !chkGetFileSignature.Checked && !chkGetFileSize.Checked && !chkGetHash.Checked && !chkTestForPasswProtection.Checked)
             {
                 MessageBox.Show("Er is geen bewerking geselecteerd");
                 return;
@@ -680,7 +680,7 @@ namespace TOPX.UI.Forms
         private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             var path = txtFilesDirToScan.Text;
-            var fileAnalysis = new Metadata(chkGetHash.Checked, chkGetFileSize.Checked, checkGetCreationDate.Checked, chkGetFileSignature.Checked, chkTestForPasswProtection.Checked, path, txtDroidLocation.Text, _dataservice.GetAllDossiers(), _dataservice);
+            var fileAnalysis = new Metadata(chkGetHash.Checked, chkGetFileSize.Checked, checkGetCreationDate.Checked, chkGetFileSignature.Checked, chkTestForPasswProtection.Checked, path, txtDroidLocation.Text, _dataservice.GetAllDossiers(), _dataservice, _logger);
             fileAnalysis.MetadataEventHandler += IncreaseProgress;
             
             fileAnalysis.Collect();

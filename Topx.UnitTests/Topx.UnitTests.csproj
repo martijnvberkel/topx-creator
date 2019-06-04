@@ -82,6 +82,7 @@
     <Compile Include="TestResources\Dossiers_Test_ComplexLink1.cs" />
     <Compile Include="TestResources\Dossiers_Test1.cs" />
     <Compile Include="TestSanitizer.cs" />
+    <Compile Include="TestValidations.cs" />
     <Compile Include="TestXmlValidation.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -120,7 +121,7 @@
       <Name>Topx.Interface</Name>
     </ProjectReference>
     <ProjectReference Include="..\Topx.Parser\Topx.Creator.csproj">
-      <Project>{1E9B8660-0142-4818-AC8E-2B3FC0619783}</Project>
+      <Project>{1e9b8660-0142-4818-ac8e-2b3fc0619783}</Project>
       <Name>Topx.Creator</Name>
     </ProjectReference>
     <ProjectReference Include="..\Topx.Utility\Topx.Utility.csproj">
