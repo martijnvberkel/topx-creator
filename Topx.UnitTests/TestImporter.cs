@@ -177,7 +177,7 @@ namespace Topx.UnitTests
             var xmlstreamActual = xmlHelper.GetXmlStringFromObject(recordinformationPackage);
 
             // Act
-            var xmlCompare = File.ReadAllText(Path.Combine(Statics.AppPath(), @"TestResources\ExpectedOutput2.xml"));
+            var xmlCompare = File.ReadAllText(Path.Combine(Statics.AppPath(), @"TestResources\ExpectedOutput_Openbaarheid.xml"));
 
             var xmlhelper = new XmlHelper();
 

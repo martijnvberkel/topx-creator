@@ -131,6 +131,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="TestResources\ExpectedOutput2.xml" />
+    <Content Include="TestResources\ExpectedOutput_Openbaarheid.xml" />
     <Content Include="TestResources\TopXOutput_NotValid.xml" />
     <Content Include="TestResources\ExpectedOutput1.xml" />
     <Content Include="TestResources\ExpectedOutputBatch1.xml">
