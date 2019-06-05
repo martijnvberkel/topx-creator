@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Topx.Data;
+using Topx.Utility;
 using static Topx.Data.DTO.TopX;
 
 namespace Topx.Importer
@@ -23,31 +25,30 @@ namespace Topx.Importer
         public bool Validate()
         {
             ValidationErrors.Clear();
-            if (!ValidateHelper.TestForValidDate(_dossier.Dekking_InTijd_Begin))
-                ValidationErrors.Add($"ERROR validatie: Dossier {_dossier.IdentificatieKenmerk}: Dekking_InTijd_Begin is niet herkend als geldige datum (verwacht format: {ValidateHelper.DateParsing})");
+            if (!Validations.TestForValidDate(_dossier.Dekking_InTijd_Begin))
+                ValidationErrors.Add($"ERROR validatie: Dossier {_dossier.IdentificatieKenmerk}: Dekking_InTijd_Begin is niet herkend als geldige datum (verwacht format: {Validations.DateParsing})");
 
-            if (!ValidateHelper.TestForValidDate(_dossier.Dekking_InTijd_Eind))
-                ValidationErrors.Add($"ERROR validatie: Dossier {_dossier.IdentificatieKenmerk}: Dekking_InTijd_Eind is niet herkend als geldige datum (verwacht format: {ValidateHelper.DateParsing})");
+            if (!Validations.TestForValidDate(_dossier.Dekking_InTijd_Eind))
+                ValidationErrors.Add($"ERROR validatie: Dossier {_dossier.IdentificatieKenmerk}: Dekking_InTijd_Eind is niet herkend als geldige datum (verwacht format: {Validations.DateParsing})");
 
-            if (!ValidateHelper.TestForValidDate(_dossier.Classificatie_DatumOfPeriode))
-                if (string.IsNullOrEmpty(_dossier.Classificatie_DatumOfPeriode) || !ValidateHelper.TestForValidYear(_dossier.Classificatie_DatumOfPeriode))
-                    ValidationErrors.Add($"ERROR validatie: Dossier {_dossier.IdentificatieKenmerk}: Classificatie_DatumOfPeriode is niet herkend als geldig jaar (verwacht format: yyyy) of als geldige datum (verwacht format: {ValidateHelper.DateParsing})");
+            if (!Validations.TestForValidDate(_dossier.Classificatie_DatumOfPeriode))
+                if (string.IsNullOrEmpty(_dossier.Classificatie_DatumOfPeriode) || !Validations.TestForValidYear(_dossier.Classificatie_DatumOfPeriode))
+                    ValidationErrors.Add($"ERROR validatie: Dossier {_dossier.IdentificatieKenmerk}: Classificatie_DatumOfPeriode is niet herkend als geldig jaar (verwacht format: yyyy) of als geldige datum (verwacht format: {Validations.DateParsing})");
 
-            if (!ValidateHelper.TestForValidDate(_dossier.Eventgeschiedenis_DatumOfPeriode))
-                ValidationErrors.Add($"ERROR validatie: Dossier {_dossier.IdentificatieKenmerk}: Eventgeschiedenis_DatumOfPeriode is niet herkend als geldige datum (verwacht format: {ValidateHelper.DateParsing})");
+            if (!Validations.TestForValidDate(_dossier.Eventgeschiedenis_DatumOfPeriode))
+                ValidationErrors.Add($"ERROR validatie: Dossier {_dossier.IdentificatieKenmerk}: Eventgeschiedenis_DatumOfPeriode is niet herkend als geldige datum (verwacht format: {Validations.DateParsing})");
 
-            if (!ValidateHelper.TestForValidDate(_dossier.Openbaarheid_DatumOfPeriode))
-                ValidationErrors.Add($"ERROR validatie: Dossier {_dossier.IdentificatieKenmerk}: Openbaarheid_DatumOfPeriode is niet herkend als geldige datum (verwacht format: {ValidateHelper.DateParsing})");
+            if (!TestMultipleDates(_dossier.Openbaarheid_OmschrijvingBeperkingen, _dossier.Openbaarheid_DatumOfPeriode))
+                ValidationErrors.Add($"ERROR validatie: Dossier {_dossier.IdentificatieKenmerk}: De combinatie van Openbaarheid_OmschrijvingBeperkingen en Openbaarheid_DatumOfPeriode is niet valide. (verwacht format: {Validations.DateParsing}) De waardes zijn: {_dossier.Openbaarheid_OmschrijvingBeperkingen}, {_dossier.Openbaarheid_DatumOfPeriode}");
 
-            if (!ValidateHelper.TestForValidDate(_dossier.Gebruiksrechten_DatumOfPeriode))
-                ValidationErrors.Add($"ERROR validatie: Dossier {_dossier.IdentificatieKenmerk}: Gebruiksrechten_DatumOfPeriode is niet herkend als geldige datum (verwacht format: {ValidateHelper.DateParsing})");
+            if (!Validations.TestForValidDate(_dossier.Gebruiksrechten_DatumOfPeriode))
+                ValidationErrors.Add($"ERROR validatie: Dossier {_dossier.IdentificatieKenmerk}: Gebruiksrechten_DatumOfPeriode is niet herkend als geldige datum (verwacht format: {Validations.DateParsing})");
 
-            if (!ValidateHelper.TestForValidDate(_dossier.Vertrouwelijkheid_DatumOfPeriode))
-                ValidationErrors.Add($"ERROR validatie: Dossier {_dossier.IdentificatieKenmerk}: Vertrouwelijkheid_DatumOfPeriode is niet herkend als geldige datum (verwacht format: {ValidateHelper.DateParsing})");
-
-           
-            if (!string.IsNullOrEmpty(_dossier.Eventplan_DatumOfPeriode) && !ValidateHelper.TestForValidDate(_dossier.Eventplan_DatumOfPeriode))
-                ValidationErrors.Add($"ERROR validatie: Dossier {_dossier.IdentificatieKenmerk}: Eventplan_DatumOfPeriode is niet herkend als geldige datum (verwacht format: {ValidateHelper.DateParsing})");
+            if (!TestMultipleDates(_dossier.Vertrouwelijkheid_ClassificatieNiveau, _dossier.Vertrouwelijkheid_DatumOfPeriode))
+                ValidationErrors.Add($"ERROR validatie: Dossier {_dossier.IdentificatieKenmerk}: De combinatie van Vertrouwelijkheid_ClassificatieNiveau en Vertrouwelijkheid_DatumOfPeriode is niet valide. (verwacht format: {Validations.DateParsing}) De waardes zijn: {_dossier.Vertrouwelijkheid_ClassificatieNiveau}, {_dossier.Vertrouwelijkheid_DatumOfPeriode}");
+            
+            if (!string.IsNullOrEmpty(_dossier.Eventplan_DatumOfPeriode) && !Validations.TestForValidDate(_dossier.Eventplan_DatumOfPeriode))
+                ValidationErrors.Add($"ERROR validatie: Dossier {_dossier.IdentificatieKenmerk}: Eventplan_DatumOfPeriode is niet herkend als geldige datum (verwacht format: {Validations.DateParsing})");
 
             if (string.IsNullOrEmpty(_dossier.Eventgeschiedenis_Type))
                 ValidationErrors.Add($"ERROR validatie: Dossier {_dossier.IdentificatieKenmerk}: verplicht veld Eventgeschiedenis_Type is leeg of afwezig");
@@ -80,6 +81,28 @@ namespace Topx.Importer
             }
 
             return !ValidationErrors.Any();
+        }
+
+        private bool TestMultipleDates(string comments, string dates)
+        {
+            // valid is bijvoorbeeld
+            // comments = 'Geheim, Openbaar'
+            // dates = '1-1-2010, 20-12-2015'
+            if (string.IsNullOrEmpty(comments) || string.IsNullOrEmpty(dates))
+                return false;
+            var arrComments = comments.Split(',');
+            var arrDates = dates.RemoveSpaces() .Split(',');
+
+            // Check of de arrays gelijk zijn
+            if (arrComments.Length != arrDates.Length)
+                return false;
+
+            // check alle data of ze valide zijn
+            if (arrDates.Any(date => !Validations.TestForValidDate(date)))
+                return false;
+
+            return true;
+
         }
     }
 }
