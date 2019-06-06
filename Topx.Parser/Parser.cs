@@ -94,7 +94,7 @@ namespace Topx.Creator
                 var sizeOfDossier = dossier.Records.Sum(record => record.Bestand_Formaat_BestandsOmvang ?? 0);
                 totalSize += sizeOfDossier;
 
-                if (maxBatchSize_bytes > 0 && totalSize + sizeOfDossier > maxBatchSize_bytes)  // Maxsize batch is bereikt
+                if (maxBatchSize_bytes > 0 && totalSize * 1.2 > maxBatchSize_bytes)  // Maxsize batch is bereikt, hou marge van 20%
                 {
                     // Clone rip 
 
