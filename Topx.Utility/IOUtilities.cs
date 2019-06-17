@@ -29,15 +29,15 @@ namespace Topx.Utility
                 return environmentPath;
             }
 
-            var javaKey = "SOFTWARE\\JavaSoft\\Java Runtime Environment\\";
+            var javaKey = "SOFTWARE\\JavaSoft\\Java Runtime Environmentx\\";
            
             using (var hklm = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64))
             using (var rk = hklm.OpenSubKey(javaKey))
             {
-                string currentVersion = rk.GetValue("CurrentVersion").ToString();
-                using (Microsoft.Win32.RegistryKey key = rk.OpenSubKey(currentVersion))
+                string currentVersion = rk?.GetValue("CurrentVersion").ToString();
+                using (Microsoft.Win32.RegistryKey key = rk?.OpenSubKey(currentVersion))
                 {
-                    return key.GetValue("JavaHome").ToString();
+                    return key?.GetValue("JavaHome").ToString();
                 }
             }
         }

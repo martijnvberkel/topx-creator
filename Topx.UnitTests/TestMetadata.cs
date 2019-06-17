@@ -31,8 +31,9 @@ namespace Topx.UnitTests
             };
 
             var mockDataservice = new Mock<IDataService>();
+            var mockLogger = new Mock<NLog.Logger>();
 
-            var metadata = new Metadata(true, true, true, false, path, dossiers, mockDataservice.Object);
+            var metadata = new Metadata(true, true, true, false, false, path, null, dossiers, mockDataservice.Object, mockLogger.Object);
 
             // When
             metadata.Collect();

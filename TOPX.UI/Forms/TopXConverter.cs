@@ -74,13 +74,14 @@ namespace TOPX.UI.Forms
                 }
                 Logging.Init();
                 _logger = LogManager.GetCurrentClassLogger();
-                _headers = new Headers();
+               _headers = new Headers();
 
                 gridFieldMappingDossiers.AutoGenerateColumns = false;
                 gridFieldMappingRecords.AutoGenerateColumns = false;
 
                 Initialize();
                 InitTooltips();
+                _logger.Info("TopX Converter initalized");
                 Updater.InitAutoUpdater();
             }
         }
@@ -536,34 +537,6 @@ namespace TOPX.UI.Forms
             }
         }
 
-
-
-        private void btImportDossiers_Click(object sender, EventArgs e)
-        {
-            if (!File.Exists(txtDossierLocation.Text))
-            {
-                MessageBox.Show("Bestand niet gevonden.");
-            }
-            else
-            {
-                _dataservice.SaveLastDossierFileName(txtDossierLocation.Text);
-                LoadDossierFile(txtDossierLocation.Text);
-            }
-        }
-
-        private void btLoadRecords_Click(object sender, EventArgs e)
-        {
-            if (!File.Exists(txtRecordBestandLocation.Text))
-            {
-                MessageBox.Show("Bestand niet gevonden.");
-            }
-            else
-            {
-                LoadRecordFile(txtRecordBestandLocation.Text);
-                _dataservice.SaveLastRecordsFileName(txtRecordBestandLocation.Text);
-            }
-        }
-
         private void gridFieldMappingRecords_Leave(object sender, EventArgs e)
         {
             _dataservice.SaveMappings(_fieldmappingsRecords, FieldMappingType.RECORD);
@@ -635,7 +608,7 @@ namespace TOPX.UI.Forms
                 MessageBox.Show($"De directory {txtFilesDirToScan.Text} kan niet worden gevonden.");
                 return;
             }
-            if (!checkGetCreationDate.Checked && !chkGetFileSignature.Checked && !chkGetFileSize.Checked && !chkGetHash.Checked)
+            if (!checkGetCreationDate.Checked && !chkGetFileSignature.Checked && !chkGetFileSize.Checked && !chkGetHash.Checked && !chkTestForPasswProtection.Checked)
             {
                 MessageBox.Show("Er is geen bewerking geselecteerd");
                 return;
@@ -679,7 +652,7 @@ namespace TOPX.UI.Forms
         private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             var path = txtFilesDirToScan.Text;
-            var fileAnalysis = new Metadata(chkGetHash.Checked, chkGetFileSize.Checked, checkGetCreationDate.Checked, chkGetFileSignature.Checked, path, txtDroidLocation.Text, _dataservice.GetAllDossiers(), _dataservice);
+            var fileAnalysis = new Metadata(chkGetHash.Checked, chkGetFileSize.Checked, checkGetCreationDate.Checked, chkGetFileSignature.Checked, chkTestForPasswProtection.Checked, path, txtDroidLocation.Text, _dataservice.GetAllDossiers(), _dataservice, _logger);
             fileAnalysis.MetadataEventHandler += IncreaseProgress;
             
             fileAnalysis.Collect();

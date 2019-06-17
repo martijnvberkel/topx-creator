@@ -72,7 +72,7 @@
       <HintPath>..\packages\MaterialSkin.Updated.0.2.2\lib\MaterialSkin.dll</HintPath>
     </Reference>
     <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
-      <HintPath>..\packages\NLog.4.0.0\lib\net45\NLog.dll</HintPath>
+      <HintPath>..\packages\NLog.4.6.4\lib\net45\NLog.dll</HintPath>
     </Reference>
     <Reference Include="PaletteDesigner, Version=4.62.6000.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\KryptonToolkitSuite462.4.62.554\lib\PaletteDesigner.exe</HintPath>
@@ -82,7 +82,12 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -170,48 +175,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Topx.BatchService\Topx.BatchService.csproj">
-      <Project>{5EAC4103-5B31-4D97-9A54-1D9843012973}</Project>
-      <Name>Topx.BatchService</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Topx.ComplexLinks\Topx.ComplexLinks.csproj">
-      <Project>{79c14ac5-1035-449b-ae7d-a2e71ebfdf5a}</Project>
-      <Name>Topx.ComplexLinks</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Topx.Data.DTO\Topx.Data.DTO.csproj">
-      <Project>{6c2cf74e-2518-4de6-85b7-436007b94a1e}</Project>
-      <Name>Topx.Data.DTO</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Topx.DataServices\Topx.DataServices.csproj">
-      <Project>{1A82E7D8-4AB0-499E-BEE9-7D1569AD2F12}</Project>
-      <Name>Topx.DataServices</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Topx.Data\Topx.Data.csproj">
-      <Project>{982EDCDB-E044-43D5-8071-BB4728C6A173}</Project>
-      <Name>Topx.Data</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Topx.FileAnalysis\Topx.FileAnalysis.csproj">
-      <Project>{A9504EF0-E9EC-4308-9C9B-ACE575AAD67E}</Project>
-      <Name>Topx.FileAnalysis</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Topx.Importer\Topx.Import.csproj">
-      <Project>{13D3E7C0-AB77-4555-94B0-6EBFE2AA908D}</Project>
-      <Name>Topx.Import</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Topx.Interface\Topx.Interface.csproj">
-      <Project>{91592173-F613-4370-A362-0EF1AB0F3A65}</Project>
-      <Name>Topx.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Topx.Parser\Topx.Creator.csproj">
-      <Project>{1e9b8660-0142-4818-ac8e-2b3fc0619783}</Project>
-      <Name>Topx.Creator</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Topx.Utility\Topx.Utility.csproj">
-      <Project>{5862f3af-2b57-4ee0-8e94-3a3d211737f1}</Project>
-      <Name>Topx.Utility</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\spinner.gif" />
   </ItemGroup>
   <ItemGroup>
@@ -219,6 +182,60 @@
     <None Include="Resources\background1.png" />
     <Content Include="TC.ico" />
     <Content Include="TC2.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Topx.BatchService\Topx.BatchService.csproj">
+      <Project>{5eac4103-5b31-4d97-9a54-1d9843012973}</Project>
+      <Name>Topx.BatchService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Topx.ComplexLinks\Topx.ComplexLinks.csproj">
+      <Project>{79c14ac5-1035-449b-ae7d-a2e71ebfdf5a}</Project>
+      <Name>Topx.ComplexLinks</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Topx.Console\Topx.Console.csproj">
+      <Project>{2e102f5e-b27a-470e-90db-c14ae9ae9b60}</Project>
+      <Name>Topx.Console</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Topx.Data.DTO\Topx.Data.DTO.csproj">
+      <Project>{6c2cf74e-2518-4de6-85b7-436007b94a1e}</Project>
+      <Name>Topx.Data.DTO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Topx.DataServices\Topx.DataServices.csproj">
+      <Project>{1a82e7d8-4ab0-499e-bee9-7d1569ad2f12}</Project>
+      <Name>Topx.DataServices</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Topx.Data\Topx.Data.csproj">
+      <Project>{982edcdb-e044-43d5-8071-bb4728c6a173}</Project>
+      <Name>Topx.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Topx.FileAnalysis\Topx.FileAnalysis.csproj">
+      <Project>{a9504ef0-e9ec-4308-9c9b-ace575aad67e}</Project>
+      <Name>Topx.FileAnalysis</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Topx.Importer\Topx.Import.csproj">
+      <Project>{13d3e7c0-ab77-4555-94b0-6ebfe2aa908d}</Project>
+      <Name>Topx.Import</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Topx.Interface\Topx.Interface.csproj">
+      <Project>{91592173-f613-4370-a362-0ef1ab0f3a65}</Project>
+      <Name>Topx.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Topx.Parser\Topx.Creator.csproj">
+      <Project>{1e9b8660-0142-4818-ac8e-2b3fc0619783}</Project>
+      <Name>Topx.Creator</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Topx.UnitTests.PdfCreator\Topx.UnitTests.PdfCreator.csproj">
+      <Project>{1de4daee-6378-412d-9d5f-9197e1bce77b}</Project>
+      <Name>Topx.UnitTests.PdfCreator</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Topx.UnitTests\Topx.UnitTests.csproj">
+      <Project>{ce3af6ba-3cc6-4017-8c73-c9cca945642e}</Project>
+      <Name>Topx.UnitTests</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Topx.Utility\Topx.Utility.csproj">
+      <Project>{5862f3af-2b57-4ee0-8e94-3a3d211737f1}</Project>
+      <Name>Topx.Utility</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

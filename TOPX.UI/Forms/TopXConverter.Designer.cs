@@ -87,6 +87,8 @@ namespace TOPX.UI.Forms
             this.txtErrorRecords = new System.Windows.Forms.TextBox();
             this.txtErrorsDossiers = new System.Windows.Forms.TextBox();
             this.tabMetadata = new System.Windows.Forms.TabPage();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             this.txtProgressMetaData = new System.Windows.Forms.TextBox();
             this.picSelectDroidLocation = new System.Windows.Forms.PictureBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -123,6 +125,7 @@ namespace TOPX.UI.Forms
             this.btGenerateTopX = new System.Windows.Forms.Button();
             this.txtLogTopXCreate = new System.Windows.Forms.TextBox();
             this.lblVersion = new System.Windows.Forms.Label();
+            this.chkTestForPasswProtection = new System.Windows.Forms.CheckBox();
             this.txtIdentificatieArchief = new TOPX.UI.Controls.PlaceHolderTextBox();
             this.txtNaamArchief = new TOPX.UI.Controls.PlaceHolderTextBox();
             this.txtDoelArchief = new TOPX.UI.Controls.PlaceHolderTextBox();
@@ -137,8 +140,6 @@ namespace TOPX.UI.Forms
             this.DatabaseFieldName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TMLO = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Optional = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
             this.materialContextMenuStrip2.SuspendLayout();
             this.materialContextMenuStrip3.SuspendLayout();
             this.materialTabControl1.SuspendLayout();
@@ -742,6 +743,7 @@ namespace TOPX.UI.Forms
             // 
             // tabMetadata
             // 
+            this.tabMetadata.Controls.Add(this.chkTestForPasswProtection);
             this.tabMetadata.Controls.Add(this.label6);
             this.tabMetadata.Controls.Add(this.label5);
             this.tabMetadata.Controls.Add(this.txtProgressMetaData);
@@ -769,12 +771,31 @@ namespace TOPX.UI.Forms
             this.tabMetadata.Text = "Genereer Metadata";
             this.tabMetadata.UseVisualStyleBackColor = true;
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(92, 265);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(349, 13);
+            this.label6.TabIndex = 40;
+            this.label6.Text = "Zorg dat DROID goed functioneert, en de laatste signature files gebruikt.";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(92, 245);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(395, 13);
+            this.label5.TabIndex = 39;
+            this.label5.Text = "Voor bepalen van de file signature, moet DROID op de computer zijn geinstalleerd." +
+    "";
+            // 
             // txtProgressMetaData
             // 
             this.txtProgressMetaData.Location = new System.Drawing.Point(75, 447);
             this.txtProgressMetaData.Multiline = true;
             this.txtProgressMetaData.Name = "txtProgressMetaData";
-            this.txtProgressMetaData.Size = new System.Drawing.Size(261, 137);
+            this.txtProgressMetaData.Size = new System.Drawing.Size(393, 137);
             this.txtProgressMetaData.TabIndex = 38;
             // 
             // picSelectDroidLocation
@@ -881,7 +902,7 @@ namespace TOPX.UI.Forms
             // chkGetFileSize
             // 
             this.chkGetFileSize.AutoSize = true;
-            this.chkGetFileSize.Location = new System.Drawing.Point(75, 184);
+            this.chkGetFileSize.Location = new System.Drawing.Point(75, 163);
             this.chkGetFileSize.Name = "chkGetFileSize";
             this.chkGetFileSize.Size = new System.Drawing.Size(148, 17);
             this.chkGetFileSize.TabIndex = 27;
@@ -891,7 +912,7 @@ namespace TOPX.UI.Forms
             // checkGetCreationDate
             // 
             this.checkGetCreationDate.AutoSize = true;
-            this.checkGetCreationDate.Location = new System.Drawing.Point(75, 147);
+            this.checkGetCreationDate.Location = new System.Drawing.Point(75, 138);
             this.checkGetCreationDate.Name = "checkGetCreationDate";
             this.checkGetCreationDate.Size = new System.Drawing.Size(171, 17);
             this.checkGetCreationDate.TabIndex = 26;
@@ -1159,6 +1180,16 @@ namespace TOPX.UI.Forms
             this.lblVersion.TabIndex = 71;
             this.lblVersion.Text = "v 1.0.0.0";
             // 
+            // chkTestForPasswProtection
+            // 
+            this.chkTestForPasswProtection.AutoSize = true;
+            this.chkTestForPasswProtection.Location = new System.Drawing.Point(75, 189);
+            this.chkTestForPasswProtection.Name = "chkTestForPasswProtection";
+            this.chkTestForPasswProtection.Size = new System.Drawing.Size(313, 17);
+            this.chkTestForPasswProtection.TabIndex = 41;
+            this.chkTestForPasswProtection.Text = "Test pdf\'s en MSOffice-bestanden op wachtwoordbeveiliging";
+            this.chkTestForPasswProtection.UseVisualStyleBackColor = true;
+            // 
             // txtIdentificatieArchief
             // 
             this.txtIdentificatieArchief.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Italic);
@@ -1351,25 +1382,6 @@ namespace TOPX.UI.Forms
             this.Optional.ToolTipText = "Optioneel";
             this.Optional.Width = 35;
             // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(92, 245);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(395, 13);
-            this.label5.TabIndex = 39;
-            this.label5.Text = "Voor bepalen van de file signature, moet DROID op de computer zijn geinstalleerd." +
-    "";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(92, 265);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(349, 13);
-            this.label6.TabIndex = 40;
-            this.label6.Text = "Zorg dat DROID goed functioneert, en de laatste signature files gebruikt.";
-            // 
             // TopXConverter
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1515,6 +1527,7 @@ namespace TOPX.UI.Forms
         private DataGridViewCheckBoxColumn Optional;
         private Label label6;
         private Label label5;
+        private CheckBox chkTestForPasswProtection;
     }
 }
 

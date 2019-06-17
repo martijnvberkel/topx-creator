@@ -5,6 +5,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Topx.Data;
+using Topx.Utility;
 
 namespace Topx.Importer
 {
@@ -24,7 +25,7 @@ namespace Topx.Importer
 
             if (string.IsNullOrEmpty(_record.Bestand_Formaat_Bestandsnaam))
                 ValidationErrors.Add($"{errorPrefix} Bestand_Formaat_Bestandsnaam is leeg, dit veld is verplicht.");
-            if (!IsValidFilename(_record.Bestand_Formaat_Bestandsnaam))
+            if (!Validations.TestForValidFileName(_record.Bestand_Formaat_Bestandsnaam))
                 ValidationErrors.Add($"{errorPrefix} Bestand_Formaat_Bestandsnaam bevat ongeldige karakters: {_record.Bestand_Formaat_Bestandsnaam} ");
 
             if (string.IsNullOrEmpty(_record.DossierId))
@@ -36,11 +37,11 @@ namespace Topx.Importer
             if (string.IsNullOrEmpty(_record.Gebruiksrechten_OmschrijvingVoorwaarden))
                 ValidationErrors.Add($"{errorPrefix} Gebruiksrechten_OmschrijvingVoorwaarden is leeg, dit veld is verplicht.");
 
-            if (!ValidateHelper.TestForValidDate(_record.Gebruiksrechten_DatumOfPeriode))
-                ValidationErrors.Add($"{errorPrefix} Gebruiksrechten_DatumOfPeriode is niet herkend als geldige datum (verwacht format: {ValidateHelper.DateParsing})");
+            if (!Validations.TestForValidDate(_record.Gebruiksrechten_DatumOfPeriode))
+                ValidationErrors.Add($"{errorPrefix} Gebruiksrechten_DatumOfPeriode is niet herkend als geldige datum (verwacht format: {Validations.DateParsing})");
 
-            if (!ValidateHelper.TestForValidDate(_record.Vertrouwelijkheid_DatumOfPeriode))
-                ValidationErrors.Add($"{errorPrefix} Vertrouwelijkheid_DatumOfPeriode is niet herkend als geldige datum (verwacht format: {ValidateHelper.DateParsing})");
+            if (!Validations.TestForValidDate(_record.Vertrouwelijkheid_DatumOfPeriode))
+                ValidationErrors.Add($"{errorPrefix} Vertrouwelijkheid_DatumOfPeriode is niet herkend als geldige datum (verwacht format: {Validations.DateParsing})");
 
             if (string.IsNullOrEmpty(_record.Vertrouwelijkheid_ClassificatieNiveau))
                 ValidationErrors.Add($"{errorPrefix} Vertrouwelijkheid_ClassificatieNiveau is leeg, dit veld is verplicht.");
@@ -48,21 +49,12 @@ namespace Topx.Importer
             if (string.IsNullOrEmpty(_record.Openbaarheid_OmschrijvingBeperkingen))
                 ValidationErrors.Add($"{errorPrefix} Openbaarheid_OmschrijvingBeperkingen is leeg, dit veld is verplicht.");
 
-            if (!ValidateHelper.TestForValidDate(_record.Openbaarheid_DatumOfPeriode))
-                ValidationErrors.Add($"{errorPrefix} Openbaarheid_DatumOfPeriode waarde: {_record.Openbaarheid_DatumOfPeriode} is niet herkend als geldige datum (verwacht format: {ValidateHelper.DateParsing})");
+            if (!Validations.TestForValidDate(_record.Openbaarheid_DatumOfPeriode))
+                ValidationErrors.Add($"{errorPrefix} Openbaarheid_DatumOfPeriode waarde: {_record.Openbaarheid_DatumOfPeriode} is niet herkend als geldige datum (verwacht format: {Validations.DateParsing})");
 
             if (string.IsNullOrEmpty(_record.Bestand_Vorm_Redactiegenre))
                 ValidationErrors.Add($"{errorPrefix} Bestand_Vorm_Redactiegenre is leeg, dit veld is verplicht.");
-
             return !ValidationErrors.Any();
-        }
-        bool IsValidFilename(string testName)
-        {
-            Regex containsABadCharacter = new Regex($"[{Regex.Escape(new string(System.IO.Path.GetInvalidPathChars()))}]");
-            if (containsABadCharacter.IsMatch(testName)) { return false; };
-
-            // other checks for UNC, drive-path format, etc
-            return true;
         }
     }
 }
