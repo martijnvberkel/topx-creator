@@ -537,34 +537,6 @@ namespace TOPX.UI.Forms
             }
         }
 
-
-
-        private void btImportDossiers_Click(object sender, EventArgs e)
-        {
-            if (!File.Exists(txtDossierLocation.Text))
-            {
-                MessageBox.Show("Bestand niet gevonden.");
-            }
-            else
-            {
-                _dataservice.SaveLastDossierFileName(txtDossierLocation.Text);
-                LoadDossierFile(txtDossierLocation.Text);
-            }
-        }
-
-        private void btLoadRecords_Click(object sender, EventArgs e)
-        {
-            if (!File.Exists(txtRecordBestandLocation.Text))
-            {
-                MessageBox.Show("Bestand niet gevonden.");
-            }
-            else
-            {
-                LoadRecordFile(txtRecordBestandLocation.Text);
-                _dataservice.SaveLastRecordsFileName(txtRecordBestandLocation.Text);
-            }
-        }
-
         private void gridFieldMappingRecords_Leave(object sender, EventArgs e)
         {
             _dataservice.SaveMappings(_fieldmappingsRecords, FieldMappingType.RECORD);
