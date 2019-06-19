@@ -26,8 +26,6 @@ namespace Topx.Creator
 
         private readonly IDataService _dataservice;
 
-
-        public List<string> ZaaknummerMarkForDelivered = new List<string>();
         public StringBuilder ErrorMessage = new StringBuilder();
         private string _identificatieArchief;
         private const string DateParsing = "d-M-yyyy";
@@ -37,21 +35,25 @@ namespace Topx.Creator
             _globals = globals;
             _dataservice = dataservice;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="listOfDossiers"></param>
+        /// <param name="maxBatchSize_bytes"></param>
+        /// <returns> List recordInformationPackage: Is het complete TopX objectmodel, serializable naar xml</returns>
         public List<RIP.recordInformationPackage> ParseDataToTopx(List<Dossier> listOfDossiers, long maxBatchSize_bytes = 0)
         {
             var resultRecordInformationPackages = new List<RIP.recordInformationPackage>();
             if (!TestHealthyGlobals())
-            {
                 return null;
-            }
+
             _identificatieArchief = _globals.IdentificatieArchief;
             var datumArchief = _globals.DatumArchief;
             var omschrijvingArchief = _globals.OmschrijvingArchief;
             var bronArchief = _globals.BronArchief;
             var doelArchief = _globals.DoelArchief;
             var naamArchief = _globals.NaamArchief;
-
-
 
             long totalSize = 0;
             var rip = new recordInformationPackage()
@@ -61,18 +63,13 @@ namespace Topx.Creator
 
             foreach (var dossier in listOfDossiers)
             {
-
                 try
                 {
                     if (!dossier.Records.Any())
-                    {
                         ErrorMessage.AppendLine($"Dossier {dossier.IdentificatieKenmerk}: Geen records gevonden");
-                    }
 
                     if (string.IsNullOrEmpty(dossier.Naam))
-                    {
                         ErrorMessage.AppendLine($"Dossier {dossier.IdentificatieKenmerk}: Veld Naam is leeg");
-                    }
 
                     if (!ValidateDossier(dossier))
                         continue;
@@ -175,7 +172,13 @@ namespace Topx.Creator
             return false;
         }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dossier"></param>
+        /// <param name="record"></param>
+        /// <param name="identificatieKenmerk"></param>
+        /// <returns>(RIP) record-object voor xml-serialization</returns>
         private RIP.ripRecordType RipOobjectAsRecord(Dossier dossier, Record record, string identificatieKenmerk)
         {
             //var identificatie = dossierId + "_FILE_" + count;
@@ -194,6 +197,13 @@ namespace Topx.Creator
             return riprecordType;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dossier"></param>
+        /// <param name="record"></param>
+        /// <param name="identificatieKenmerk"></param>
+        /// <returns>Record-fragment voor xml-serialization</returns>
         private TopX.topxType GetRecordAsTopx(Dossier dossier, Record record, string identificatieKenmerk)
         {
 
@@ -202,6 +212,12 @@ namespace Topx.Creator
             var relatie_DatumOfPeriode = dossier.Relatie_DatumOfPeriode ?? record.Bestand_Formaat_DatumAanmaak?.ToString("yyyy-MM-dd"); ;
 
             var vertrouwelijkheid_DatumOfPeriode = DateTime.ParseExact(record.Vertrouwelijkheid_DatumOfPeriode, DateParsing, CultureInfo.InvariantCulture).ToString("yyyy-MM-dd");
+
+            if (!Enum.TryParse(record.Vertrouwelijkheid_ClassificatieNiveau.RemoveSpaces(), out classificatieNiveauType classificatieNiveauType))
+            {
+                ErrorMessage.AppendLine(
+                    $"ERROR: record naam: {record.Naam}: Het classificatieniveau {record.Vertrouwelijkheid_ClassificatieNiveau} is niet herkend als geldige waarde.");
+            }
 
             var gebruiksrechten_DatumOfPeriode = DateTime.ParseExact(record.Gebruiksrechten_DatumOfPeriode, DateParsing, CultureInfo.InvariantCulture).ToString("yyyy-MM-dd");
 
@@ -233,7 +249,7 @@ namespace Topx.Creator
                     {
                         Value = aggregatieAggregatieniveauType.Record
                     },
-                    naam = new[] { new nonEmptyStringTypeAttribuut() { Value = dossier.Naam } },
+                    naam = new[] { new nonEmptyStringTypeAttribuut() { Value = record.Naam } },
                     taal = new taalTypeAttribuut[] { new taalTypeAttribuut() { Value = (taalType)Enum.Parse(typeof(taalType), dossier.Taal.ToLower()) } },
                     //  taal = new[] { new taalTypeAttribuut() { Value = taalType.dut } },
                     relatie = relatie,
@@ -243,7 +259,7 @@ namespace Topx.Creator
                         {
                             classificatieNiveau = new vertrouwelijkheidTypeClassificatieNiveau()
                             {
-                                Value = classificatieNiveauType.Nietvertrouwelijk
+                                Value = classificatieNiveauType
                             },
                             datumOfPeriode = new datumOfPeriodeType()
                             {
@@ -281,8 +297,8 @@ namespace Topx.Creator
                 throw new Exception($"{id} Openbaarheid_OmschrijvingBeperkingen mag niet leeg zijn");
 
             var arrDatumsOfPeriodes = openbaarheid_datumofperiode.RemoveSpaces().Split(',');
-            var arrOmschrijvingBeperkingen = openbaarheid_omschrijvingbeperkingen.Split(',').Select(t => t.Trim()) .ToArray();
-            
+            var arrOmschrijvingBeperkingen = openbaarheid_omschrijvingbeperkingen.Split(',').Select(t => t.Trim()).ToArray();
+
 
             if (arrDatumsOfPeriodes.Length != arrOmschrijvingBeperkingen.Length)
                 throw new Exception($"{id}: Aantal Openbaarheid_DatumOfPeriode {openbaarheid_datumofperiode} en Openbaarheid_OmschrijvingBeperkingen {openbaarheid_omschrijvingbeperkingen} komen niet overeen");
@@ -312,7 +328,7 @@ namespace Topx.Creator
                             {
                                 begin = new datumOfJaarType()
                                 {
-                                    Item = new datumOfJaarTypeDatum() { Value = openbaarheid_DatumOfPeriode }, 
+                                    Item = new datumOfJaarTypeDatum() { Value = openbaarheid_DatumOfPeriode },
                                 },
                                 eind = new datumOfJaarType()
                                 {
@@ -359,12 +375,8 @@ namespace Topx.Creator
         private topxType GetBestandAsTopx(Record record)
         {
 
-            DateTime gemaaktOp;
             var identificatieKenmerkBestand = Path.GetFileNameWithoutExtension(record.Bestand_Formaat_Bestandsnaam);
             var relatieKenmerkBestand = $"{record.DossierId}_{identificatieKenmerkBestand}";
-
-            //var openbaarheid_DatumOfPeriode = DateTime.ParseExact(record.Openbaarheid_DatumOfPeriode,
-            //    DateParsing, CultureInfo.InvariantCulture).ToString("yyyy-MM-dd");
 
             var topx = new topxType
             {
@@ -376,7 +388,7 @@ namespace Topx.Creator
                         Value = bestandAggregatieniveauType.Bestand
                     },
                     naam = new[] { new nonEmptyStringTypeAttribuut() { Value = record.Naam } },
-                    //plaats = new @string() { Value = "storage location" },
+                    
                     relatie = new[]
                     {
                             new relatieType()
@@ -424,7 +436,6 @@ namespace Topx.Creator
                 }
             };
 
-
             return topx;
         }
 
@@ -437,8 +448,6 @@ namespace Topx.Creator
                 recordHeader = new RIP.ripRecordHeaderType()
                 {
                     identificatie = dossier.IdentificatieKenmerk
-                    //omschrijving = new[] { source.C19_1_DN_Tabnaam },
-                    //status = ripRecordStatusType.gewijzigd
                 },
                 metadata = new[] {new  RIP.ripMetadataType()
                 {
@@ -464,29 +473,29 @@ namespace Topx.Creator
 
         private List<RIP.ripRecordType> RipArchief(string archiefId, string naamArchief)
         {
-            var result = new List<RIP.ripRecordType>();
-            result.Add(
+            var result = new List<RIP.ripRecordType>
+            {
                 new RIP.ripRecordType()
                 {
-                    recordHeader = new RIP.ripRecordHeaderType()
+                    recordHeader = new RIP.ripRecordHeaderType() {identificatie = archiefId},
+                    metadata = new[]
                     {
-                        identificatie = archiefId
-                    },
-                    metadata = new[] {new  RIP.ripMetadataType()
-                    {
-                        schemaURI = "topx",
-                        Any = ConvertTopxToXmlElement( GetTopxArchiefNiveau(archiefId, naamArchief))
-                    }}
+                        new RIP.ripMetadataType()
+                        {
+                            schemaURI = "topx",
+                            Any = ConvertTopxToXmlElement(GetTopxArchiefNiveau(archiefId, naamArchief))
+                        }
+                    }
                 }
-            );
+            };
             return result;
         }
 
         private XmlElement[] ConvertTopxToXmlElement(topxType topx)
         {
-            XmlDocument doc = new XmlDocument();
+            var doc = new XmlDocument();
 
-            using (XmlWriter writer = doc.CreateNavigator().AppendChild())
+            using (var writer = doc.CreateNavigator().AppendChild())
             {
                 new System.Xml.Serialization.XmlSerializer(topx.GetType()).Serialize(writer, topx);
             }
@@ -512,7 +521,6 @@ namespace Topx.Creator
         private topxType GetDossierAsTopx(Dossier dossier)
         {
             var topx = new topxType();
-            //var identificatiekenmerkTemp = source.C2_dn_Bestand.Split("-"[0]);
             var identificatiekenmerk = dossier.IdentificatieKenmerk;
 
             var eventgeschiedenis_DatumOfPeriode = string.IsNullOrEmpty(dossier.Eventgeschiedenis_DatumOfPeriode)
