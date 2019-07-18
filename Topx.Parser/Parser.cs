@@ -227,7 +227,7 @@ namespace Topx.Creator
                 new TopX.relatieType()
                 {
                     relatieID = new TopX.nonEmptyStringTypeAttribuut() {Value = dossier.IdentificatieKenmerk},
-                    typeRelatie = new TopX.nonEmptyStringTypeAttribuut() {Value = dossier.Relatie_Type ?? "Hiërachisch" },
+                    typeRelatie = new TopX.nonEmptyStringTypeAttribuut() {Value = dossier.Relatie_Type ?? "Hiërarchisch" },
                     datumOfPeriode = new datumOfPeriodeType()
                     {
                         datum = relatie_DatumOfPeriode
@@ -402,7 +402,7 @@ namespace Topx.Creator
                             }
                         },
 
-                    openbaarheid = GetOpenbaarheid(record.Bestand_Formaat_Bestandsnaam, record.Openbaarheid_OmschrijvingBeperkingen, record.Openbaarheid_DatumOfPeriode),
+                   // openbaarheid = GetOpenbaarheid(record.Bestand_Formaat_Bestandsnaam, record.Openbaarheid_OmschrijvingBeperkingen, record.Openbaarheid_DatumOfPeriode),
 
                     vorm = new vormType()
                     {
