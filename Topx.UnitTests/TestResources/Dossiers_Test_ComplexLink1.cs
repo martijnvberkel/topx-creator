@@ -20,7 +20,7 @@ namespace Topx.UnitTests.TestResources
                 Gebruiksrechten_DatumOfPeriode = "17-05-1905",
                 Vertrouwelijkheid_ClassificatieNiveau = "Niet vertrouwelijk",
                 Vertrouwelijkheid_DatumOfPeriode = "17-05-1905",
-                Openbaarheid_OmschrijvingBeperkingen = "Openbaar",
+                //Openbaarheid_OmschrijvingBeperkingen = "Openbaar",
                 Bestand_Vorm_Redactiegenre = "Tekening (technisch)",
                 Bestand_Formaat_Bestandsnaam = "B0.pdf",
                 Bestand_Formaat_BestandsOmvang = 30 * mb,
@@ -29,7 +29,7 @@ namespace Topx.UnitTests.TestResources
                 Bestand_Formaat_FysiekeIntegriteit_Waarde = "6024baa32d6a7f8ef10239d43c9dfd8b25a64b1fc8c9d34da7523ec5dbed9ac6",
                 Bestand_Formaat_FysiekeIntegriteit_DatumEnTijd = Convert.ToDateTime("30-7-2015 12:50"),
                 Bestand_Formaat_DatumAanmaak = Convert.ToDateTime("20-8-2012"),
-                Openbaarheid_DatumOfPeriode = "17-05-1905",
+                //Openbaarheid_DatumOfPeriode = "17-05-1905",
                 DossierId = "NL-0000-10000-1"
             };
 
@@ -40,7 +40,7 @@ namespace Topx.UnitTests.TestResources
                 Gebruiksrechten_DatumOfPeriode = "20-09-1905",
                 Vertrouwelijkheid_ClassificatieNiveau = "Niet vertrouwelijk",
                 Vertrouwelijkheid_DatumOfPeriode = "16-05-1905",
-                Openbaarheid_OmschrijvingBeperkingen = "Openbaar",
+               // Openbaarheid_OmschrijvingBeperkingen = "Openbaar",
                 Bestand_Vorm_Redactiegenre = "Tekening (technisch)",
                 Bestand_Formaat_Bestandsnaam = "B1.pdf",
                 Bestand_Formaat_BestandsOmvang = 20 * mb,
@@ -49,7 +49,7 @@ namespace Topx.UnitTests.TestResources
                 Bestand_Formaat_FysiekeIntegriteit_Waarde = "6024baa32d6a7f8ef10239d43c9dfd8bda7523ec5dbed9ac625a64b1fc8c9d34",
                 Bestand_Formaat_FysiekeIntegriteit_DatumEnTijd = Convert.ToDateTime("31-8-2014 12:50"),
                 Bestand_Formaat_DatumAanmaak = Convert.ToDateTime("16-1-2010"),
-                Openbaarheid_DatumOfPeriode = "01-07-1909",
+               // Openbaarheid_DatumOfPeriode = "01-07-1909",
                 DossierId = "NL-0000-10000-1"
             };
 
@@ -60,7 +60,7 @@ namespace Topx.UnitTests.TestResources
                 Gebruiksrechten_DatumOfPeriode = "20-09-1907",
                 Vertrouwelijkheid_ClassificatieNiveau = "Niet vertrouwelijk",
                 Vertrouwelijkheid_DatumOfPeriode = "16-05-1908",
-                Openbaarheid_OmschrijvingBeperkingen = "Openbaar",
+               // Openbaarheid_OmschrijvingBeperkingen = "Openbaar",
                 Bestand_Vorm_Redactiegenre = "Tekening (technisch)",
                 Bestand_Formaat_Bestandsnaam = "B2.pdf",
                 Bestand_Formaat_BestandsOmvang = 90 * mb,
@@ -69,7 +69,7 @@ namespace Topx.UnitTests.TestResources
                 Bestand_Formaat_FysiekeIntegriteit_Waarde = "523ec5dbed6a7f8ef10239dbda7523ec5dbed9ac625a64b1fc8c9d3443c9dfd8",
                 Bestand_Formaat_FysiekeIntegriteit_DatumEnTijd = Convert.ToDateTime("21-8-2013 10:50"),
                 Bestand_Formaat_DatumAanmaak = Convert.ToDateTime("16-1-2011"),
-                Openbaarheid_DatumOfPeriode = "01-07-1911",
+               // Openbaarheid_DatumOfPeriode = "01-07-1911",
                 DossierId = "NL-0000-10000-2"
             };
 
@@ -80,7 +80,7 @@ namespace Topx.UnitTests.TestResources
                 Gebruiksrechten_DatumOfPeriode = "20-09-1907",
                 Vertrouwelijkheid_ClassificatieNiveau = "Niet vertrouwelijk",
                 Vertrouwelijkheid_DatumOfPeriode = "16-05-1908",
-                Openbaarheid_OmschrijvingBeperkingen = "Openbaar",
+               // Openbaarheid_OmschrijvingBeperkingen = "Openbaar",
                 Bestand_Vorm_Redactiegenre = "Tekening (technisch)",
                 Bestand_Formaat_Bestandsnaam = "B3.pdf",
                 Bestand_Formaat_BestandsOmvang = 300 * mb,
@@ -89,7 +89,7 @@ namespace Topx.UnitTests.TestResources
                 Bestand_Formaat_FysiekeIntegriteit_Waarde = "bda7523ec5dbed9ac625aac625a64b1fc8c9d3443c9dfd8f10239dbda7523ec5d",
                 Bestand_Formaat_FysiekeIntegriteit_DatumEnTijd = Convert.ToDateTime("21-8-2011 15:50"),
                 Bestand_Formaat_DatumAanmaak = Convert.ToDateTime("16-1-2013"),
-                Openbaarheid_DatumOfPeriode = "01-07-1914",
+               // Openbaarheid_DatumOfPeriode = "01-07-1914",
                 DossierId = "NL-0000-10000-3"
             };
             var record5 = new Record()
@@ -99,7 +99,7 @@ namespace Topx.UnitTests.TestResources
                 Gebruiksrechten_DatumOfPeriode = "20-09-1907",
                 Vertrouwelijkheid_ClassificatieNiveau = "Niet vertrouwelijk",
                 Vertrouwelijkheid_DatumOfPeriode = "16-05-1908",
-                Openbaarheid_OmschrijvingBeperkingen = "Openbaar",
+               // Openbaarheid_OmschrijvingBeperkingen = "Openbaar",
                 Bestand_Vorm_Redactiegenre = "Tekening (technisch)",
                 Bestand_Formaat_Bestandsnaam = "B3.pdf",
                 Bestand_Formaat_BestandsOmvang = 300 * mb,
@@ -108,7 +108,7 @@ namespace Topx.UnitTests.TestResources
                 Bestand_Formaat_FysiekeIntegriteit_Waarde = "bda7523ec5dbed9ac625aac625a64b1fc8c9d3443c9dfd8f10239dbda7523ec5d",
                 Bestand_Formaat_FysiekeIntegriteit_DatumEnTijd = Convert.ToDateTime("21-8-2011 15:50"),
                 Bestand_Formaat_DatumAanmaak = Convert.ToDateTime("16-1-2013"),
-                Openbaarheid_DatumOfPeriode = "01-07-1914",
+               // Openbaarheid_DatumOfPeriode = "01-07-1914",
                 DossierId = "NL-0000-10000-3"
             };
 
