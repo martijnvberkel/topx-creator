@@ -71,14 +71,14 @@ namespace Topx.UnitTests
                 Records = new List<Record>() { record }
             }};
         }
-        
+
         [Test]
         public void IgnoreExtraField_In_FileStream()
         {
             //Arrange
             var mockDataservice = new Mock<IDataService>(MockBehavior.Strict);
-           
-            var importer = new Importer.Importer(mockDataservice.Object, enableValidation:false);
+
+            var importer = new Importer.Importer(mockDataservice.Object, enableValidation: false);
             var mappings = new List<FieldMapping>()
             {
                 new FieldMapping(){DatabaseFieldName = "Naam", MappedFieldName = "A"},
@@ -106,8 +106,8 @@ namespace Topx.UnitTests
                 new FieldMapping(){DatabaseFieldName = "Naam", MappedFieldName = "A"},
             };
             var streamreader = CreateReader($"A;B{Environment.NewLine}TestA;TestB{Environment.NewLine}this_is_not_a_good_csv");
-           
-            mockDataservice.Setup(t => t.SaveDossier(It.Is<Dossier>(y => y.Naam == "TestA" && y.Relatie_Id ==null && y.IdentificatieKenmerk == null)));
+
+            mockDataservice.Setup(t => t.SaveDossier(It.Is<Dossier>(y => y.Naam == "TestA" && y.Relatie_Id == null && y.IdentificatieKenmerk == null)));
 
             // Act
             importer.SaveDossiers(mappings, streamreader);
@@ -120,7 +120,7 @@ namespace Topx.UnitTests
         [Test]
         public void TopxConversion()
         {
-           
+
             // Arrange
             var globals = new Globals()
             {
@@ -140,7 +140,7 @@ namespace Topx.UnitTests
             var xmlstreamActual = xmlHelper.GetXmlStringFromObject(recordinformationPackage);
 
             // Act
-            var xmlCompare = File.ReadAllText(Path.Combine(Statics. AppPath(), @"TestResources\ExpectedOutput2.xml"));
+            var xmlCompare = File.ReadAllText(Path.Combine(Statics.AppPath(), @"TestResources\ExpectedOutput2.xml"));
 
             // Assert
             XmlAssert.Equal(xmlCompare, xmlstreamActual);
@@ -155,8 +155,8 @@ namespace Topx.UnitTests
             var dossiers = GetDossier();
 
             // muteer de openbaarheid
-            dossiers[0].Openbaarheid_DatumOfPeriode = "1-1-2010, 1-1-2015";
-            dossiers[0].Openbaarheid_OmschrijvingBeperkingen = "Geheim, Openbaar";
+            dossiers[0].Openbaarheid_DatumOfPeriode = "1-1-2010| 1-1-2015";
+            dossiers[0].Openbaarheid_OmschrijvingBeperkingen = "Geheim| Openbaar";
 
 
             var globals = new Globals()
@@ -190,6 +190,48 @@ namespace Topx.UnitTests
 
         }
 
+        [Test]
+        public void TopXConversion_TestGeolocationMultipleRecords()
+        {
+            // Arrange
+            var dossiers = GetDossier();
+
+            // muteer de geolocation
+            dossiers[0].Dekking_GeografischGebied = "Test1| Test2 | Test3";
+          
+
+
+            var globals = new Globals()
+            {
+                BronArchief = "a",
+                DatumArchief = Convert.ToDateTime("2018-12-13"),
+                DoelArchief = "b",
+                IdentificatieArchief = "c",
+                NaamArchief = "d",
+                OmschrijvingArchief = "e"
+            };
+
+            var mockDataservice = new Mock<IDataService>();
+
+            var converter = new Creator.Parser(globals, mockDataservice.Object);
+            var recordinformationPackage = converter.ParseDataToTopx(dossiers)[0];
+            var xmlHelper = new Utility.XmlHelper();
+            var xmlstreamActual = xmlHelper.GetXmlStringFromObject(recordinformationPackage);
+
+            // Act
+            var xmlCompare = File.ReadAllText(Path.Combine(Statics.AppPath(), @"TestResources\ExpectedOutput_Geolocatie_array.xml"));
+
+            var xmlhelper = new XmlHelper();
+
+            // When
+            xmlhelper.ValidateXmlString(xmlstreamActual);
+
+            // Assert
+            Assert.That(xmlhelper.ValidationErrors.Length, Is.EqualTo(0));
+            XmlAssert.Equal(xmlCompare, xmlstreamActual);
+        }
+
+
 
         [Test]
         public void Test_DossierValidator_Dates_Fail()
@@ -203,7 +245,8 @@ namespace Topx.UnitTests
                 Vertrouwelijkheid_DatumOfPeriode = "this_is_not_a_date",
                 Openbaarheid_DatumOfPeriode = "this_is_not_a_date",
                 Eventgeschiedenis_DatumOfPeriode = "this_is_not_a_date",
-                Relatie_DatumOfPeriode = "this_is_not_a_date"
+                Relatie_DatumOfPeriode = "this_is_not_a_date",
+                Openbaarheid_OmschrijvingBeperkingen = string.Empty
             };
             var dossierValidator = new DossierValidator(dossier);
 
@@ -281,7 +324,7 @@ namespace Topx.UnitTests
             var encoding = new UTF8Encoding();
             var testArray = encoding.GetBytes(testString);
             var ms = new MemoryStream(testArray);
-            return  new StreamReader(ms);
+            return new StreamReader(ms);
         }
 
 
