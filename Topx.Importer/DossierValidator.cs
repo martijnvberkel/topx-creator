@@ -13,7 +13,7 @@ namespace Topx.Importer
     public class DossierValidator
     {
         private readonly Dossier _dossier;
-       
+
 
         public List<string> ValidationErrors = new List<string>();
 
@@ -38,6 +38,12 @@ namespace Topx.Importer
             if (!Validations.TestForValidDate(_dossier.Eventgeschiedenis_DatumOfPeriode))
                 ValidationErrors.Add($"ERROR validatie: Dossier {_dossier.IdentificatieKenmerk}: Eventgeschiedenis_DatumOfPeriode is niet herkend als geldige datum (verwacht format: {Validations.DateParsing})");
 
+            if (_dossier.Openbaarheid_OmschrijvingBeperkingen.Contains(","))
+                ValidationErrors.Add($"ERROR validatie: Dossier {_dossier.IdentificatieKenmerk}: Veld Openbaarheid_OmschrijvingBeperkingen bevat een komma, dit is niet toegestaan. Voor het opsplitsen van meerdere velden kan alleen een pipe-karakter | worden gebruikt.");
+
+            if (_dossier.Openbaarheid_DatumOfPeriode.Contains(","))
+                ValidationErrors.Add($"ERROR validatie: Dossier {_dossier.IdentificatieKenmerk}: Veld Openbaarheid_DatumOfPeriode bevat een komma, dit is niet toegestaan. Voor het opsplitsen van meerdere velden kan alleen een pipe-karakter | worden gebruikt.");
+
             if (!TestMultipleDates(_dossier.Openbaarheid_OmschrijvingBeperkingen, _dossier.Openbaarheid_DatumOfPeriode))
                 ValidationErrors.Add($"ERROR validatie: Dossier {_dossier.IdentificatieKenmerk}: De combinatie van Openbaarheid_OmschrijvingBeperkingen en Openbaarheid_DatumOfPeriode is niet valide. (verwacht format: {Validations.DateParsing}) De waardes zijn: {_dossier.Openbaarheid_OmschrijvingBeperkingen}, {_dossier.Openbaarheid_DatumOfPeriode}");
 
@@ -46,7 +52,7 @@ namespace Topx.Importer
 
             if (!TestMultipleDates(_dossier.Vertrouwelijkheid_ClassificatieNiveau, _dossier.Vertrouwelijkheid_DatumOfPeriode))
                 ValidationErrors.Add($"ERROR validatie: Dossier {_dossier.IdentificatieKenmerk}: De combinatie van Vertrouwelijkheid_ClassificatieNiveau en Vertrouwelijkheid_DatumOfPeriode is niet valide. (verwacht format: {Validations.DateParsing}) De waardes zijn: {_dossier.Vertrouwelijkheid_ClassificatieNiveau}, {_dossier.Vertrouwelijkheid_DatumOfPeriode}");
-            
+
             if (!string.IsNullOrEmpty(_dossier.Eventplan_DatumOfPeriode) && !Validations.TestForValidDate(_dossier.Eventplan_DatumOfPeriode))
                 ValidationErrors.Add($"ERROR validatie: Dossier {_dossier.IdentificatieKenmerk}: Eventplan_DatumOfPeriode is niet herkend als geldige datum (verwacht format: {Validations.DateParsing})");
 
@@ -83,6 +89,7 @@ namespace Topx.Importer
             return !ValidationErrors.Any();
         }
 
+
         private bool TestMultipleDates(string comments, string dates)
         {
             // valid is bijvoorbeeld
@@ -90,8 +97,8 @@ namespace Topx.Importer
             // dates = '1-1-2010, 20-12-2015'
             if (string.IsNullOrEmpty(comments) || string.IsNullOrEmpty(dates))
                 return false;
-            var arrComments = comments.Split(',');
-            var arrDates = dates.RemoveSpaces() .Split(',');
+            var arrComments = comments.Split('|');
+            var arrDates = dates.RemoveSpaces().Split('|');
 
             // Check of de arrays gelijk zijn
             if (arrComments.Length != arrDates.Length)

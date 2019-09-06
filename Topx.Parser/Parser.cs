@@ -296,8 +296,8 @@ namespace Topx.Creator
             if (string.IsNullOrEmpty(openbaarheid_omschrijvingbeperkingen))
                 throw new Exception($"{id} Openbaarheid_OmschrijvingBeperkingen mag niet leeg zijn");
 
-            var arrDatumsOfPeriodes = openbaarheid_datumofperiode.RemoveSpaces().Split(',');
-            var arrOmschrijvingBeperkingen = openbaarheid_omschrijvingbeperkingen.Split(',').Select(t => t.Trim()).ToArray();
+            var arrDatumsOfPeriodes = openbaarheid_datumofperiode.RemoveSpaces().Split('|');
+            var arrOmschrijvingBeperkingen = openbaarheid_omschrijvingbeperkingen.Split('|').Select(t => t.Trim()).ToArray();
 
 
             if (arrDatumsOfPeriodes.Length != arrOmschrijvingBeperkingen.Length)
@@ -402,7 +402,7 @@ namespace Topx.Creator
                             }
                         },
 
-                    openbaarheid = GetOpenbaarheid(record.Bestand_Formaat_Bestandsnaam, record.Openbaarheid_OmschrijvingBeperkingen, record.Openbaarheid_DatumOfPeriode),
+                    // openbaarheid = GetOpenbaarheid(record.Bestand_Formaat_Bestandsnaam, record.Openbaarheid_OmschrijvingBeperkingen, record.Openbaarheid_DatumOfPeriode),
 
                     vorm = new vormType()
                     {
@@ -562,7 +562,7 @@ namespace Topx.Creator
                     DateParsing, CultureInfo.InvariantCulture).ToString("yyyy-MM-dd"))
             };
 
-            var dekking_geografischgebied = dossier.Dekking_GeografischGebied.Split(',').Select(dekking => new @string() { Value = dekking.Trim() }).ToArray();
+            var dekking_geografischgebied = dossier.Dekking_GeografischGebied.Split('|').Select(dekking => new @string() { Value = dekking.Trim() }).ToArray();
 
             topx.Item = new aggregatieType()
             {

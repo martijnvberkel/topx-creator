@@ -163,6 +163,8 @@ namespace Topx.FileAnalysis
                         ErrorMessages.AppendLine(e.Message);
                     }
                     _dataService.SaveRecordChanges(record);
+                    metadataEventargs.Eventcounter.DossiersCount = counter;
+                    MetadataEventHandler?.Invoke(this, metadataEventargs);
                 }
             }
         }
