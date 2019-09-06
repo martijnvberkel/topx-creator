@@ -402,7 +402,7 @@ namespace Topx.Creator
                             }
                         },
 
-                    openbaarheid = GetOpenbaarheid(record.Bestand_Formaat_Bestandsnaam, record.Openbaarheid_OmschrijvingBeperkingen, record.Openbaarheid_DatumOfPeriode),
+                    // openbaarheid = GetOpenbaarheid(record.Bestand_Formaat_Bestandsnaam, record.Openbaarheid_OmschrijvingBeperkingen, record.Openbaarheid_DatumOfPeriode),
 
                     vorm = new vormType()
                     {
