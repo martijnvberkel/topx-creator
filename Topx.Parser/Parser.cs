@@ -289,10 +289,15 @@ namespace Topx.Creator
             return topx;
         }
 
-        private eventGeschiedenisType[] DirtyTransformTypes(eventGeschiedenisType[] eventGeschiedenisType)
+        private eventGeschiedenisType[] DirtyTransformTypes(eventGeschiedenisType[] eventGeschiedenisTypes)
         {
-            // Todo
-            return eventGeschiedenisType;
+            foreach (var type in eventGeschiedenisTypes)
+            {
+                if (type.type.Value.ToLower() == "afsluiting")
+                    type.type.Value = "Verzending";
+            }
+
+            return eventGeschiedenisTypes;
         }
 
         private openbaarheidType[] GetOpenbaarheid(string id, string openbaarheid_omschrijvingbeperkingen, string openbaarheid_datumofperiode)
