@@ -238,7 +238,7 @@ namespace Topx.UnitTests
             var dossiers = GetDossier();
 
             // muteer de geolocation
-            dossiers[0].Eventgeschiedenis_DatumOfPeriode = "01-01-2017| 01-01-2018  |01-01-2019";
+            dossiers[0].Eventgeschiedenis_DatumOfPeriode = "1-1-2017| 01-01-2018  |01-01-2019";
             dossiers[0].Eventgeschiedenis_Type = "Afsluiting|Wijziging|Whatever";
             dossiers[0].Eventgeschiedenis_VerantwoordelijkeFunctionaris = "A|B|C";
 
