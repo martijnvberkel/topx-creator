@@ -35,7 +35,7 @@ namespace TOPX.UI.Controls
 
         private void CellMouseMoveEvent(object sender, DataGridViewCellMouseEventArgs e)
         {
-            if (e.Button == System.Windows.Forms.MouseButtons.Left && this.CurrentCell.ColumnIndex == 0)
+            if (e.Button == System.Windows.Forms.MouseButtons.Left && this.CurrentCell.ColumnIndex == 0 && e.RowIndex >= 0 && this[e.ColumnIndex, e.RowIndex]?.FormattedValue != null)
             {
                 this.DoDragDrop(this[e.ColumnIndex, e.RowIndex].FormattedValue, DragDropEffects.Copy);
             }

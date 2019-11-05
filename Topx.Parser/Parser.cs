@@ -207,7 +207,7 @@ namespace Topx.Creator
         private TopX.topxType GetRecordAsTopx(Dossier dossier, Record record, string identificatieKenmerk)
         {
 
-            var eventgeschiedenis_DatumOfPeriode = DateTime.ParseExact(dossier.Eventgeschiedenis_DatumOfPeriode, DateParsing, CultureInfo.InvariantCulture).ToString("yyyy-MM-dd");
+            //var eventgeschiedenis_DatumOfPeriode = DateTime.ParseExact(dossier.Eventgeschiedenis_DatumOfPeriode, DateParsing, CultureInfo.InvariantCulture).ToString("yyyy-MM-dd");
 
             var relatie_DatumOfPeriode = dossier.Relatie_DatumOfPeriode ?? record.Bestand_Formaat_DatumAanmaak?.ToString("yyyy-MM-dd"); ;
 
@@ -240,10 +240,11 @@ namespace Topx.Creator
                 {
                     identificatiekenmerk = new nonEmptyStringTypeAttribuut() { Value = identificatieKenmerk },
 
-                    eventGeschiedenis = new eventGeschiedenisType[] { new eventGeschiedenisType() {datumOfPeriode = new datumOfPeriodeType()
-                        { datum = eventgeschiedenis_DatumOfPeriode },
-                        type = new nonEmptyStringTypeAttribuut() {Value = dossier.Eventgeschiedenis_Type} ,
-                        verantwoordelijkeFunctionaris = new nonEmptyStringTypeAttribuut() {Value = dossier.Eventgeschiedenis_VerantwoordelijkeFunctionaris}  } },
+                    eventGeschiedenis = DirtyTransformTypes(GetEventGeschiedenis(dossier)),
+                    //eventGeschiedenis = new eventGeschiedenisType[] { new eventGeschiedenisType() {datumOfPeriode = new datumOfPeriodeType()
+                    //    { datum = eventgeschiedenis_DatumOfPeriode },
+                    //    type = new nonEmptyStringTypeAttribuut() {Value = dossier.Eventgeschiedenis_Type} ,
+                    //    verantwoordelijkeFunctionaris = new nonEmptyStringTypeAttribuut() {Value = dossier.Eventgeschiedenis_VerantwoordelijkeFunctionaris}  } },
 
                     aggregatieniveau = new aggregatieTypeAggregatieniveau()
                     {
@@ -286,6 +287,17 @@ namespace Topx.Creator
                 }
             };
             return topx;
+        }
+
+        private eventGeschiedenisType[] DirtyTransformTypes(eventGeschiedenisType[] eventGeschiedenisTypes)
+        {
+            foreach (var type in eventGeschiedenisTypes)
+            {
+                if (type.type.Value.ToLower() == "afsluiting")
+                    type.type.Value = "Verzending";
+            }
+
+            return eventGeschiedenisTypes;
         }
 
         private openbaarheidType[] GetOpenbaarheid(string id, string openbaarheid_omschrijvingbeperkingen, string openbaarheid_datumofperiode)
@@ -388,7 +400,7 @@ namespace Topx.Creator
                         Value = bestandAggregatieniveauType.Bestand
                     },
                     naam = new[] { new nonEmptyStringTypeAttribuut() { Value = record.Naam } },
-                    
+
                     relatie = new[]
                     {
                             new relatieType()
@@ -523,15 +535,10 @@ namespace Topx.Creator
             var topx = new topxType();
             var identificatiekenmerk = dossier.IdentificatieKenmerk;
 
-            var eventgeschiedenis_DatumOfPeriode = string.IsNullOrEmpty(dossier.Eventgeschiedenis_DatumOfPeriode)
-                ? "ERROR - ONBEKEND"
-                : DateTime.ParseExact(dossier.Eventgeschiedenis_DatumOfPeriode,
-                    DateParsing, CultureInfo.InvariantCulture).ToString("yyyy-MM-dd");
-
             var relatie_DatumOfPeriode = dossier.Relatie_DatumOfPeriode != null
-                ? DateTime.ParseExact(dossier.Relatie_DatumOfPeriode,
-                    DateParsing, CultureInfo.InvariantCulture).ToString("yyyy-MM-dd")
-                : dossier.Records.FirstOrDefault()?.Bestand_Formaat_DatumAanmaak?.ToString("yyyy-MM-dd");
+                 ? DateTime.ParseExact(dossier.Relatie_DatumOfPeriode,
+                     DateParsing, CultureInfo.InvariantCulture).ToString("yyyy-MM-dd")
+                 : dossier.Records.FirstOrDefault()?.Bestand_Formaat_DatumAanmaak?.ToString("yyyy-MM-dd");
 
             var openbaarheid = GetOpenbaarheid(dossier.IdentificatieKenmerk,
                 dossier.Openbaarheid_OmschrijvingBeperkingen, dossier.Openbaarheid_DatumOfPeriode);
@@ -564,6 +571,8 @@ namespace Topx.Creator
 
             var dekking_geografischgebied = dossier.Dekking_GeografischGebied.Split('|').Select(dekking => new @string() { Value = dekking.Trim() }).ToArray();
 
+
+
             topx.Item = new aggregatieType()
             {
                 identificatiekenmerk = new nonEmptyStringTypeAttribuut() { Value = identificatiekenmerk },
@@ -573,13 +582,8 @@ namespace Topx.Creator
                     Value = aggregatieAggregatieniveauType.Dossier
 
                 },
-                eventGeschiedenis = new eventGeschiedenisType[] { new eventGeschiedenisType() {datumOfPeriode = new datumOfPeriodeType()
-                    {
-                        datum = eventgeschiedenis_DatumOfPeriode
-                    },
-                    type = new nonEmptyStringTypeAttribuut() {Value = dossier.Eventgeschiedenis_Type} ,
-                    verantwoordelijkeFunctionaris = new nonEmptyStringTypeAttribuut() {Value = dossier.Eventgeschiedenis_VerantwoordelijkeFunctionaris}  }
-                },
+                eventGeschiedenis = GetEventGeschiedenis(dossier),
+
 
                 naam = new[] { new nonEmptyStringTypeAttribuut() { Value = dossier.Naam } },
                 // taal = new taalTypeAttribuut[] { new taalTypeAttribuut() { Value = (taalType)Enum.Parse(typeof(taalType), dossier.Taal.ToLower()) } },
@@ -673,6 +677,40 @@ namespace Topx.Creator
             };
             return topx;
         }
+
+        private eventGeschiedenisType[] GetEventGeschiedenis(Dossier dossier)
+        {
+            var arrayOfEventgechiedenisDatumOfPeriode = dossier.Eventgeschiedenis_DatumOfPeriode.Split('|').Select(t => new @string() { Value = t.Trim() }).ToList();
+            var arrayOfEventgeschiedenisType = dossier.Eventgeschiedenis_Type.Split('|').Select(t => new @string() { Value = t.Trim() }).ToList();
+            var arrayOfEventgeschiedenisVerantwFunctionaris = dossier.Eventgeschiedenis_VerantwoordelijkeFunctionaris.Split('|').Select(t => new @string() { Value = t.Trim() }).ToList();
+
+            if (!Utility.Extensions.AllEqual(arrayOfEventgechiedenisDatumOfPeriode.Count,
+                arrayOfEventgeschiedenisType.Count, arrayOfEventgeschiedenisVerantwFunctionaris.Count))
+            {
+                throw new Exception($"Dossier: {dossier.IdentificatieKenmerk}: De velden Eventgeschiedenis_DatumOfPeriode, Eventgeschiedenis_Type en Eventgeschiedenis_VerantwoordelijkeFunctionaris moeten evenveel records bevatten, gescheiden met een pipe karakter.");
+            }
+
+            var eventgeschiedenis = new List<eventGeschiedenisType>();
+
+            for (var index = 0; index <= arrayOfEventgechiedenisDatumOfPeriode.Count -1; index++)
+            {
+                var parseSuccess = DateTime.TryParseExact(arrayOfEventgechiedenisDatumOfPeriode[index].Value, DateParsing, CultureInfo.InvariantCulture, DateTimeStyles.None, out var datum);
+                if (!parseSuccess)
+                {
+                    throw new Exception($"Dossier: {dossier.IdentificatieKenmerk}: De datum {arrayOfEventgechiedenisDatumOfPeriode[index].Value} is geen geldige datum. Verwacht format is {DateParsing}");
+                }
+
+                eventgeschiedenis.Add(new eventGeschiedenisType()
+                {
+                    datumOfPeriode = new datumOfPeriodeType() { datum = datum.ToString("yyyy-MM-dd") },
+                    type = new nonEmptyStringTypeAttribuut() { Value = arrayOfEventgeschiedenisType[index].Value },
+                    verantwoordelijkeFunctionaris = new nonEmptyStringTypeAttribuut() { Value = arrayOfEventgeschiedenisVerantwFunctionaris[index].Value }
+                });
+            }
+
+            return eventgeschiedenis.ToArray();
+        }
+
 
         private string GetYearFromDatumOfPeriode(string dossierClassificatieDatumOfPeriode)
         {
