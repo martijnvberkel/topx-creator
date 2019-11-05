@@ -231,6 +231,93 @@ namespace Topx.UnitTests
             XmlAssert.Equal(xmlCompare, xmlstreamActual);
         }
 
+        [Test]
+        public void TopXConversion_TestEventsMultipleRecords()
+        {
+            // Arrange
+            var dossiers = GetDossier();
+
+            // muteer de geolocation
+            dossiers[0].Eventgeschiedenis_DatumOfPeriode = "1-1-2017| 01-01-2018  |01-01-2019";
+            dossiers[0].Eventgeschiedenis_Type = "Afsluiting|Wijziging|Whatever";
+            dossiers[0].Eventgeschiedenis_VerantwoordelijkeFunctionaris = "A|B|C";
+
+
+
+            var globals = new Globals()
+            {
+                BronArchief = "a",
+                DatumArchief = Convert.ToDateTime("2018-12-13"),
+                DoelArchief = "b",
+                IdentificatieArchief = "c",
+                NaamArchief = "d",
+                OmschrijvingArchief = "e"
+            };
+
+            var mockDataservice = new Mock<IDataService>();
+
+            var converter = new Creator.Parser(globals, mockDataservice.Object);
+            var recordinformationPackage = converter.ParseDataToTopx(dossiers)[0];
+            var xmlHelper = new Utility.XmlHelper();
+            var xmlstreamActual = xmlHelper.GetXmlStringFromObject(recordinformationPackage);
+
+            // Act
+            var xmlCompare = File.ReadAllText(Path.Combine(Statics.AppPath(), @"TestResources\ExpectedOutput_Eventgeschiedenis_array.xml"));
+
+            var xmlhelper = new XmlHelper();
+
+            // When
+            xmlhelper.ValidateXmlString(xmlstreamActual);
+
+            // Assert
+            Assert.That(xmlhelper.ValidationErrors.Length, Is.EqualTo(0));
+            XmlAssert.Equal(xmlCompare, xmlstreamActual);
+        }
+
+        [Test]
+        public void TopXConversion_TestEventsMultipleRecords_Err_UnequalCollection()
+        {
+            // Arrange
+            var dossiers = GetDossier();
+
+            // muteer de geolocation
+            dossiers[0].Eventgeschiedenis_DatumOfPeriode = "01-01-2017| 01-01-2018  |01-01-2019";
+            dossiers[0].Eventgeschiedenis_Type = "Afsluiting|Wijziging|Whatever";
+            dossiers[0].Eventgeschiedenis_VerantwoordelijkeFunctionaris = "A|B";  // dus series hebben een ongelijk aantel elementen
+
+
+
+            var globals = new Globals()
+            {
+                BronArchief = "a",
+                DatumArchief = Convert.ToDateTime("2018-12-13"),
+                DoelArchief = "b",
+                IdentificatieArchief = "c",
+                NaamArchief = "d",
+                OmschrijvingArchief = "e"
+            };
+
+            var mockDataservice = new Mock<IDataService>();
+
+            var converter = new Creator.Parser(globals, mockDataservice.Object);
+            var recordinformationPackage = converter.ParseDataToTopx(dossiers)[0];
+            var xmlHelper = new Utility.XmlHelper();
+            var xmlstreamActual = xmlHelper.GetXmlStringFromObject(recordinformationPackage);
+
+            // Act
+            var xmlCompare = File.ReadAllText(Path.Combine(Statics.AppPath(), @"TestResources\ExpectedOutput_Eventgeschiedenis_array.xml"));
+
+            var xmlhelper = new XmlHelper();
+
+            // When
+            xmlhelper.ValidateXmlString(xmlstreamActual);
+
+            // Assert
+            var expectedError = "De velden Eventgeschiedenis_DatumOfPeriode, Eventgeschiedenis_Type en Eventgeschiedenis_VerantwoordelijkeFunctionaris moeten evenveel records bevatten, gescheiden met een pipe karakter.";
+
+            Assert.That(converter.ErrorMessage.ToString(), Is.SupersetOf(expectedError));
+        }
+
 
 
         [Test]

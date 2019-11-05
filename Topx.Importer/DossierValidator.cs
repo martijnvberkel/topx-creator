@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.Design;
-using System.Globalization;
 using System.Linq;
-using System.Text.RegularExpressions;
 using Topx.Data;
 using Topx.Utility;
 using static Topx.Data.DTO.TopX;
@@ -35,8 +32,9 @@ namespace Topx.Importer
                 if (string.IsNullOrEmpty(_dossier.Classificatie_DatumOfPeriode) || !Validations.TestForValidYear(_dossier.Classificatie_DatumOfPeriode))
                     ValidationErrors.Add($"ERROR validatie: Dossier {_dossier.IdentificatieKenmerk}: Classificatie_DatumOfPeriode is niet herkend als geldig jaar (verwacht format: yyyy) of als geldige datum (verwacht format: {Validations.DateParsing})");
 
-            if (!Validations.TestForValidDate(_dossier.Eventgeschiedenis_DatumOfPeriode))
-                ValidationErrors.Add($"ERROR validatie: Dossier {_dossier.IdentificatieKenmerk}: Eventgeschiedenis_DatumOfPeriode is niet herkend als geldige datum (verwacht format: {Validations.DateParsing})");
+            if (!_dossier.Eventgeschiedenis_DatumOfPeriode.Contains("|"))
+                if (!Validations.TestForValidDate(_dossier.Eventgeschiedenis_DatumOfPeriode))
+                    ValidationErrors.Add($"ERROR validatie: Dossier {_dossier.IdentificatieKenmerk}: Eventgeschiedenis_DatumOfPeriode {_dossier.Eventgeschiedenis_DatumOfPeriode} is niet herkend als geldige datum (verwacht format: {Validations.DateParsing})");
 
             if (_dossier.Openbaarheid_OmschrijvingBeperkingen.Contains(","))
                 ValidationErrors.Add($"ERROR validatie: Dossier {_dossier.IdentificatieKenmerk}: Veld Openbaarheid_OmschrijvingBeperkingen bevat een komma, dit is niet toegestaan. Voor het opsplitsen van meerdere velden kan alleen een pipe-karakter | worden gebruikt.");
@@ -89,6 +87,40 @@ namespace Topx.Importer
             return !ValidationErrors.Any();
         }
 
+        private bool TestMultipleDates(List<string> comments, string dates, string dossier)
+        {
+            // valid is bijvoorbeeld
+            // comments = 'Geheim, Openbaar'
+            // dates = '1-1-2010, 20-12-2015'
+            int nrOfIndexes = 0;
+            foreach (var comment in comments)
+            {
+                if (string.IsNullOrEmpty(comment) || string.IsNullOrEmpty(dates))
+                    return false;
+                var arrComments = comment.Split('|');
+                var arrDates = dates.RemoveSpaces().Split('|');
+                if (nrOfIndexes == 0)
+                {
+                    nrOfIndexes = arrDates.Length;
+                }
+                else
+                {
+                    if (nrOfIndexes != arrDates.Length)
+                    {
+                        ValidationErrors.Add($"Error validatie: Dossier {dossier} bevat velden die een gelijk aantal pipe-gescheiden records moeten hebben: {comments.ToString()}");
+                    }
+                }
+            }
+
+
+
+            // check alle data of ze valide zijn
+            // if (arrDates.Any(date => !Validations.TestForValidDate(date)))
+            return false;
+
+            return true;
+
+        }
 
         private bool TestMultipleDates(string comments, string dates)
         {
