@@ -339,7 +339,7 @@ namespace Topx.UnitTests
 
             var result = dossierValidator.Validate();
             Assert.That(result, Is.EqualTo(false));
-            Assert.That(dossierValidator.ValidationErrors.Count, Is.EqualTo(16));
+            Assert.That(dossierValidator.ValidationErrors.Count, Is.EqualTo(19));
         }
 
         [Test]
@@ -366,7 +366,10 @@ namespace Topx.UnitTests
                 Context_Activiteit_Naam = "x",
                 Context_Actor_AggregatieNiveau = "x",
                 Context_Actor_GeautoriseerdeNaam = "x",
-                Context_Actor_IdentificatieKenmerk = "x"
+                Context_Actor_IdentificatieKenmerk = "x",
+                Classificatie_Bron = "x",
+                Classificatie_Omschrijving = "x",
+                Classificatie_Code = "x"
             };
             var dossierValidator = new DossierValidator(dossier);
 
