@@ -78,48 +78,21 @@ namespace Topx.Importer
             if (string.IsNullOrEmpty(_dossier.Context_Actor_GeautoriseerdeNaam))
                 ValidationErrors.Add($"ERROR validatie: Dossier {_dossier.IdentificatieKenmerk}: verplicht veld Context_Actor_GeautoriseerdeNaam is leeg of afwezig");
 
-
             if (string.IsNullOrEmpty(_dossier.Taal) || !Enum.TryParse(_dossier.Taal.ToLower(), true, out taalType taaltype))
             {
                 ValidationErrors.Add($"ERROR validatie: Dossier {_dossier.IdentificatieKenmerk}: verplicht veld TaalType is leeg of wordt niet herkend");
             }
 
+            if (string.IsNullOrEmpty(_dossier.Classificatie_Code))
+                ValidationErrors.Add($"ERROR validatie: Dossier {_dossier.IdentificatieKenmerk}: verplicht veld Classificatie_Code is leeg of afwezig");
+
+            if (string.IsNullOrEmpty(_dossier.Classificatie_Omschrijving))
+                ValidationErrors.Add($"ERROR validatie: Dossier {_dossier.IdentificatieKenmerk}: verplicht veld Classificatie_Omschrijving is leeg of afwezig");
+
+            if (string.IsNullOrEmpty(_dossier.Classificatie_Bron))
+                ValidationErrors.Add($"ERROR validatie: Dossier {_dossier.IdentificatieKenmerk}: verplicht veld Classificatie_Bron is leeg of afwezig");
+
             return !ValidationErrors.Any();
-        }
-
-        private bool TestMultipleDates(List<string> comments, string dates, string dossier)
-        {
-            // valid is bijvoorbeeld
-            // comments = 'Geheim, Openbaar'
-            // dates = '1-1-2010, 20-12-2015'
-            int nrOfIndexes = 0;
-            foreach (var comment in comments)
-            {
-                if (string.IsNullOrEmpty(comment) || string.IsNullOrEmpty(dates))
-                    return false;
-                var arrComments = comment.Split('|');
-                var arrDates = dates.RemoveSpaces().Split('|');
-                if (nrOfIndexes == 0)
-                {
-                    nrOfIndexes = arrDates.Length;
-                }
-                else
-                {
-                    if (nrOfIndexes != arrDates.Length)
-                    {
-                        ValidationErrors.Add($"Error validatie: Dossier {dossier} bevat velden die een gelijk aantal pipe-gescheiden records moeten hebben: {comments.ToString()}");
-                    }
-                }
-            }
-
-
-
-            // check alle data of ze valide zijn
-            // if (arrDates.Any(date => !Validations.TestForValidDate(date)))
-            return false;
-
-            return true;
-
         }
 
         private bool TestMultipleDates(string comments, string dates)
