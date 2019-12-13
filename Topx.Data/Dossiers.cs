@@ -54,7 +54,7 @@ namespace Topx.Data
         [StringLength(50)]
         public string Eventgeschiedenis_Type { get; set; }
 
-        [StringLength(50)]
+        [StringLength(250)]
         public string Eventgeschiedenis_VerantwoordelijkeFunctionaris { get; set; }
 
         [StringLength(50)]
