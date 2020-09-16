@@ -33,13 +33,14 @@ namespace TOPX.UI.Forms
     public partial class TopXConverter : MaterialForm
     {
         private readonly IDataService _dataservice;
+        private readonly IExport _sideCarExport;
         private List<string> _headersDossiers = new List<string>();
         private List<string> _headersRecords = new List<string>();
 
         private List<FieldMapping> _fieldmappingsDossiers;
         private List<FieldMapping> _fieldmappingsRecords;
 
-        private static Logger _logger;
+        private static ILogger _logger;
         private FormLog _formLog = new FormLog();
 
         private Headers _headers;
@@ -52,9 +53,11 @@ namespace TOPX.UI.Forms
 
         private BackgroundWorker bgworker;
 
-        public TopXConverter(IDataService dataservice)
+        public TopXConverter(IDataService dataservice, IExport sideCarExport, ILogger logger)
         {
+            _logger = logger;
             _dataservice = dataservice;
+            _sideCarExport = sideCarExport;
             InitializeComponent();
             var materialSkinManager = MaterialSkinManager.Instance;
             materialSkinManager.AddFormToManage(this);
@@ -72,10 +75,8 @@ namespace TOPX.UI.Forms
                     Application.Exit();
                     return;
                 }
-                Logging.Init();
-                _logger = LogManager.GetCurrentClassLogger();
-               _headers = new Headers();
 
+                _headers = new Headers();
                 gridFieldMappingDossiers.AutoGenerateColumns = false;
                 gridFieldMappingRecords.AutoGenerateColumns = false;
 
@@ -243,7 +244,7 @@ namespace TOPX.UI.Forms
         {
             if (chkCreateBatchesSubdir.Checked)
             {
-                
+
                 if (!Directory.Exists(txtBatchSourceDirectory.Text))
                 {
                     var msgText = string.IsNullOrEmpty(txtBatchSourceDirectory.Text)
@@ -274,8 +275,8 @@ namespace TOPX.UI.Forms
                 var parser = new Parser(_globals, _dataservice);
 
                 var listofdossiers = _dataservice.GetAllDossiers();
-                
-                var batchSize = (long) ByteSize.FromGigaBytes(Convert.ToDouble(txtBatchSize.Text)).Bytes;
+
+                var batchSize = (long)ByteSize.FromGigaBytes(Convert.ToDouble(txtBatchSize.Text)).Bytes;
 
                 _resultRecordInformationPackage = chkUseBatchSize.Checked
                     ? parser.ParseDataToTopx(listofdossiers, batchSize)
@@ -324,7 +325,7 @@ namespace TOPX.UI.Forms
                     else if (chkCreateBatchesSubdir.Checked)
                     {
                         var message =
-                            $"De batches worden opgeslagen in subdirectories onder {txtBatchTargetDirectory.Text}. Alle reeds aanwezige subdirectories worden GEWIST " + 
+                            $"De batches worden opgeslagen in subdirectories onder {txtBatchTargetDirectory.Text}. Alle reeds aanwezige subdirectories worden GEWIST " +
                             $"om het resultaat zuiver te houden. {Environment.NewLine}Het kopiëren van alle bestanden kan enige tijd kosten, met name wanneer dit over een netwerk gaat. Doorgaan?";
                         if (MessageBox.Show(message, "batches", MessageBoxButtons.YesNo) == DialogResult.Yes)
                         {
@@ -613,18 +614,18 @@ namespace TOPX.UI.Forms
                 MessageBox.Show("Er is geen bewerking geselecteerd");
                 return;
             }
-            if (chkGetFileSignature.Checked && (!File.Exists(txtDroidLocation.Text)  || Path.GetFileName(txtDroidLocation.Text) != "droid.bat"))
+            if (chkGetFileSignature.Checked && (!File.Exists(txtDroidLocation.Text) || Path.GetFileName(txtDroidLocation.Text) != "droid.bat"))
             {
                 MessageBox.Show("Voor vaststellen van de File Signature moet eerst de locatie van droid.bat worden aangegeven (DROID moet eerst door jezelf worden geïnstalleerd). Dat is nodig omdat TopX Creator van deze tool gebruik maakt.");
                 return;
             }
 
             Application.UseWaitCursor = true;
-            
+
             InitBackgroundWorker();
             if (!bgworker.IsBusy)
             {
-                
+
                 bgworker.RunWorkerAsync();
                 btGenerateMetadata.Enabled = false;
             }
@@ -654,7 +655,7 @@ namespace TOPX.UI.Forms
             var path = txtFilesDirToScan.Text;
             var fileAnalysis = new Metadata(chkGetHash.Checked, chkGetFileSize.Checked, checkGetCreationDate.Checked, chkGetFileSignature.Checked, chkTestForPasswProtection.Checked, path, txtDroidLocation.Text, _dataservice.GetAllDossiers(), _dataservice, _logger);
             fileAnalysis.MetadataEventHandler += IncreaseProgress;
-            
+
             fileAnalysis.Collect();
 
             Invoke(new Action(() =>
@@ -667,7 +668,7 @@ namespace TOPX.UI.Forms
         private void Bgworker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             progressBar1.Value = e.ProgressPercentage;
-            var values = (EventCounter) e.UserState;
+            var values = (EventCounter)e.UserState;
             txtProgressMetaData.Text = $"Aantal dossiers: {values.DossiersCount}";
             if (values.DroidStarted)
             {
@@ -690,7 +691,7 @@ namespace TOPX.UI.Forms
             var x = (MetadataEventargs)eventArgs;
             var values = x.GetProgress();
             bgworker.ReportProgress(values.DossiersProgress, values);
-            
+
         }
 
         private void linkCopyMetadataErrors_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -910,7 +911,6 @@ namespace TOPX.UI.Forms
                     SaveGlobals(null, null);
                 }
             }
-            
         }
 
         private void chkCreateBatchesSubdir_CheckedChanged(object sender, EventArgs e)
@@ -956,18 +956,52 @@ namespace TOPX.UI.Forms
             SaveGlobals(null, null);
         }
 
-        private void gridFieldMappingDossiers_CellValueNeeded(object sender, DataGridViewCellValueEventArgs e)
-        {
-
-        }
-
-        private void gridFieldMappingDossiers_CellValueChanged(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
 
         private void gridFieldMappingDossiers_DefaultValuesNeeded(object sender, DataGridViewRowEventArgs e)
         {
+
+        }
+
+        private void picSelectSourceDirOfSidecarFiles_Click(object sender, EventArgs e)
+        {
+            using (var folderBrowserDialog = new FolderBrowserDialog())
+            {
+                var result = folderBrowserDialog.ShowDialog();
+                if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(folderBrowserDialog.SelectedPath))
+                {
+                    txtSourceDirOfSidecarFiles.Text = folderBrowserDialog.SelectedPath;
+                    SaveGlobals(null, null);
+                }
+            }
+        }
+
+        private void picSelectTargetDirOfSidecarFiles_Click(object sender, EventArgs e)
+        {
+            using (var folderBrowserDialog = new FolderBrowserDialog())
+            {
+                var result = folderBrowserDialog.ShowDialog();
+                if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(folderBrowserDialog.SelectedPath))
+                {
+                    txtTargetDirOfSidecarFiles.Text = folderBrowserDialog.SelectedPath;
+                    SaveGlobals(null, null);
+                }
+            }
+        }
+
+        private void btGenerateSidecarExport_Click(object sender, EventArgs e)
+        {
+            if (_resultRecordInformationPackage != null)
+            {
+                var sidecarExport = new Export(_logger, txtSourceDirOfSidecarFiles.Text, txtTargetDirOfSidecarFiles.Text);
+                if (_sideCarExport.Create(_resultRecordInformationPackage))
+                {
+                    MessageBox.Show("Sidecar-export is gereed");
+                }
+                else
+                {
+                    MessageBox.Show("Sidecar-export is niet gelukt");
+                }
+            }
 
         }
     }

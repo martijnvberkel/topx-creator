@@ -33,9 +33,9 @@ namespace TOPX.UI.Forms
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TopXConverter));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.materialContextMenuStrip1 = new MaterialSkin.Controls.MaterialContextMenuStrip();
             this.materialContextMenuStrip2 = new MaterialSkin.Controls.MaterialContextMenuStrip();
             this.testToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -139,22 +139,22 @@ namespace TOPX.UI.Forms
             this.materialLabel13 = new MaterialSkin.Controls.MaterialLabel();
             this.btGenerateTopX = new System.Windows.Forms.Button();
             this.txtLogTopXCreate = new System.Windows.Forms.TextBox();
-            this.lblVersion = new System.Windows.Forms.Label();
             this.SidecarExport = new System.Windows.Forms.TabPage();
-            this.label7 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.materialLabel22 = new MaterialSkin.Controls.MaterialLabel();
-            this.materialLabel23 = new MaterialSkin.Controls.MaterialLabel();
-            this.button1 = new System.Windows.Forms.Button();
-            this.textBox4 = new System.Windows.Forms.TextBox();
             this.materialLabel24 = new MaterialSkin.Controls.MaterialLabel();
+            this.txtLogSidecarExport = new System.Windows.Forms.TextBox();
+            this.btGenerateSidecarExport = new System.Windows.Forms.Button();
+            this.materialLabel23 = new MaterialSkin.Controls.MaterialLabel();
+            this.materialLabel22 = new MaterialSkin.Controls.MaterialLabel();
+            this.label7 = new System.Windows.Forms.Label();
+            this.txtSourceDirOfSidecarFiles = new System.Windows.Forms.TextBox();
+            this.picSelectSourceDirOfSidecarFiles = new System.Windows.Forms.PictureBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.txtTargetDirOfSidecarFiles = new System.Windows.Forms.TextBox();
+            this.picSelectTargetDirOfSidecarFiles = new System.Windows.Forms.PictureBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.txtSidecarNrOfBatches = new System.Windows.Forms.TextBox();
+            this.chkSidecarMakeBatches = new System.Windows.Forms.CheckBox();
+            this.lblVersion = new System.Windows.Forms.Label();
             this.materialContextMenuStrip2.SuspendLayout();
             this.materialContextMenuStrip3.SuspendLayout();
             this.materialTab.SuspendLayout();
@@ -172,8 +172,8 @@ namespace TOPX.UI.Forms
             ((System.ComponentModel.ISupportInitialize)(this.picSelectBatchSourceDir)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picSelectBatchTargetDir)).BeginInit();
             this.SidecarExport.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picSelectSourceDirOfSidecarFiles)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picSelectTargetDirOfSidecarFiles)).BeginInit();
             this.SuspendLayout();
             // 
             // materialContextMenuStrip1
@@ -298,7 +298,7 @@ namespace TOPX.UI.Forms
             this.tabGlobals.Controls.Add(this.materialLabel10);
             this.tabGlobals.Location = new System.Drawing.Point(4, 29);
             this.tabGlobals.Name = "tabGlobals";
-            this.tabGlobals.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabGlobals.Padding = new System.Windows.Forms.Padding(3);
             this.tabGlobals.Size = new System.Drawing.Size(1831, 1022);
             this.tabGlobals.TabIndex = 0;
             this.tabGlobals.Text = "Gegevens";
@@ -548,7 +548,7 @@ namespace TOPX.UI.Forms
             this.tabLoadFiles.Controls.Add(this.gridFieldMappingDossiers);
             this.tabLoadFiles.Location = new System.Drawing.Point(4, 29);
             this.tabLoadFiles.Name = "tabLoadFiles";
-            this.tabLoadFiles.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabLoadFiles.Padding = new System.Windows.Forms.Padding(3);
             this.tabLoadFiles.Size = new System.Drawing.Size(1831, 1022);
             this.tabLoadFiles.TabIndex = 1;
             this.tabLoadFiles.Text = "Bestanden";
@@ -726,14 +726,14 @@ namespace TOPX.UI.Forms
             this.gridFieldMappingRecords.AllowUserToDeleteRows = false;
             this.gridFieldMappingRecords.BackgroundColor = System.Drawing.SystemColors.Window;
             this.gridFieldMappingRecords.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.ControlDark;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gridFieldMappingRecords.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.ControlDark;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gridFieldMappingRecords.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.gridFieldMappingRecords.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gridFieldMappingRecords.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.DatabaseFieldNameRecords,
@@ -788,14 +788,14 @@ namespace TOPX.UI.Forms
             this.gridFieldMappingDossiers.AllowUserToDeleteRows = false;
             this.gridFieldMappingDossiers.BackgroundColor = System.Drawing.SystemColors.Window;
             this.gridFieldMappingDossiers.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.ControlDark;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gridFieldMappingDossiers.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.ControlDark;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gridFieldMappingDossiers.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
             this.gridFieldMappingDossiers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gridFieldMappingDossiers.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.MappedFieldName,
@@ -1426,34 +1426,22 @@ namespace TOPX.UI.Forms
             this.txtLogTopXCreate.TabIndex = 10;
             this.txtLogTopXCreate.WordWrap = false;
             // 
-            // lblVersion
-            // 
-            this.lblVersion.AutoSize = true;
-            this.lblVersion.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(125)))), ((int)(((byte)(139)))));
-            this.lblVersion.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.lblVersion.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lblVersion.Location = new System.Drawing.Point(1792, 52);
-            this.lblVersion.Name = "lblVersion";
-            this.lblVersion.Size = new System.Drawing.Size(79, 22);
-            this.lblVersion.TabIndex = 71;
-            this.lblVersion.Text = "v 1.0.0.0";
-            // 
             // SidecarExport
             // 
             this.SidecarExport.Controls.Add(this.materialLabel24);
-            this.SidecarExport.Controls.Add(this.textBox4);
-            this.SidecarExport.Controls.Add(this.button1);
+            this.SidecarExport.Controls.Add(this.txtLogSidecarExport);
+            this.SidecarExport.Controls.Add(this.btGenerateSidecarExport);
             this.SidecarExport.Controls.Add(this.materialLabel23);
             this.SidecarExport.Controls.Add(this.materialLabel22);
             this.SidecarExport.Controls.Add(this.label7);
-            this.SidecarExport.Controls.Add(this.textBox1);
-            this.SidecarExport.Controls.Add(this.pictureBox1);
+            this.SidecarExport.Controls.Add(this.txtSourceDirOfSidecarFiles);
+            this.SidecarExport.Controls.Add(this.picSelectSourceDirOfSidecarFiles);
             this.SidecarExport.Controls.Add(this.label8);
-            this.SidecarExport.Controls.Add(this.textBox2);
-            this.SidecarExport.Controls.Add(this.pictureBox2);
+            this.SidecarExport.Controls.Add(this.txtTargetDirOfSidecarFiles);
+            this.SidecarExport.Controls.Add(this.picSelectTargetDirOfSidecarFiles);
             this.SidecarExport.Controls.Add(this.label9);
-            this.SidecarExport.Controls.Add(this.textBox3);
-            this.SidecarExport.Controls.Add(this.checkBox1);
+            this.SidecarExport.Controls.Add(this.txtSidecarNrOfBatches);
+            this.SidecarExport.Controls.Add(this.chkSidecarMakeBatches);
             this.SidecarExport.Location = new System.Drawing.Point(4, 29);
             this.SidecarExport.Name = "SidecarExport";
             this.SidecarExport.Padding = new System.Windows.Forms.Padding(3);
@@ -1462,112 +1450,39 @@ namespace TOPX.UI.Forms
             this.SidecarExport.Text = "Sidecar Export";
             this.SidecarExport.UseVisualStyleBackColor = true;
             // 
-            // label7
+            // materialLabel24
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(155, 140);
-            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(188, 20);
-            this.label7.TabIndex = 34;
-            this.label7.Text = "Bron-directory bestanden";
+            this.materialLabel24.AutoSize = true;
+            this.materialLabel24.Depth = 0;
+            this.materialLabel24.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel24.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialLabel24.Location = new System.Drawing.Point(152, 357);
+            this.materialLabel24.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel24.Name = "materialLabel24";
+            this.materialLabel24.Size = new System.Drawing.Size(49, 27);
+            this.materialLabel24.TabIndex = 39;
+            this.materialLabel24.Text = "Log";
             // 
-            // textBox1
+            // txtLogSidecarExport
             // 
-            this.textBox1.Enabled = false;
-            this.textBox1.Location = new System.Drawing.Point(380, 136);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(466, 26);
-            this.textBox1.TabIndex = 33;
+            this.txtLogSidecarExport.Location = new System.Drawing.Point(133, 400);
+            this.txtLogSidecarExport.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtLogSidecarExport.Multiline = true;
+            this.txtLogSidecarExport.Name = "txtLogSidecarExport";
+            this.txtLogSidecarExport.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.txtLogSidecarExport.Size = new System.Drawing.Size(812, 570);
+            this.txtLogSidecarExport.TabIndex = 38;
+            this.txtLogSidecarExport.WordWrap = false;
             // 
-            // pictureBox1
+            // btGenerateSidecarExport
             // 
-            this.pictureBox1.Enabled = false;
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(855, 130);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(34, 45);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 32;
-            this.pictureBox1.TabStop = false;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(153, 180);
-            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(214, 20);
-            this.label8.TabIndex = 31;
-            this.label8.Text = "Doel-directory Sidecar-export";
-            // 
-            // textBox2
-            // 
-            this.textBox2.Enabled = false;
-            this.textBox2.Location = new System.Drawing.Point(380, 176);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(466, 26);
-            this.textBox2.TabIndex = 30;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Enabled = false;
-            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(855, 170);
-            this.pictureBox2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(34, 45);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox2.TabIndex = 29;
-            this.pictureBox2.TabStop = false;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(428, 233);
-            this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(118, 20);
-            this.label9.TabIndex = 28;
-            this.label9.Text = "Aantal dossiers";
-            // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(562, 230);
-            this.textBox3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(49, 26);
-            this.textBox3.TabIndex = 27;
-            this.textBox3.Text = "30";
-            // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.checkBox1.Location = new System.Drawing.Point(262, 229);
-            this.checkBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(135, 24);
-            this.checkBox1.TabIndex = 26;
-            this.checkBox1.Text = "Maak batches";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            // 
-            // materialLabel22
-            // 
-            this.materialLabel22.AutoSize = true;
-            this.materialLabel22.Depth = 0;
-            this.materialLabel22.Font = new System.Drawing.Font("Roboto", 11F);
-            this.materialLabel22.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel22.Location = new System.Drawing.Point(170, 34);
-            this.materialLabel22.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel22.Name = "materialLabel22";
-            this.materialLabel22.Size = new System.Drawing.Size(1104, 27);
-            this.materialLabel22.TabIndex = 35;
-            this.materialLabel22.Text = "Om een Sidecar-export te kunnen maken, moet er een valide TopX-xml gegenereerd zi" +
-    "jn (zie tab \"Genereer TopX\")";
+            this.btGenerateSidecarExport.Location = new System.Drawing.Point(380, 286);
+            this.btGenerateSidecarExport.Name = "btGenerateSidecarExport";
+            this.btGenerateSidecarExport.Size = new System.Drawing.Size(201, 40);
+            this.btGenerateSidecarExport.TabIndex = 37;
+            this.btGenerateSidecarExport.Text = "Genereer Sidecar-export";
+            this.btGenerateSidecarExport.UseVisualStyleBackColor = true;
+            this.btGenerateSidecarExport.Click += new System.EventHandler(this.btGenerateSidecarExport_Click);
             // 
             // materialLabel23
             // 
@@ -1583,38 +1498,126 @@ namespace TOPX.UI.Forms
             this.materialLabel23.Text = "De TopX Creator maakt de Sidecar-structuur aan, en kopiëert alle bestanden naar d" +
     "e juiste plaats in de boom. (Let op voldoende schijfruimte)";
             // 
-            // button1
+            // materialLabel22
             // 
-            this.button1.Location = new System.Drawing.Point(380, 286);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(201, 40);
-            this.button1.TabIndex = 37;
-            this.button1.Text = "Genereer Sidecar-export";
-            this.button1.UseVisualStyleBackColor = true;
+            this.materialLabel22.AutoSize = true;
+            this.materialLabel22.Depth = 0;
+            this.materialLabel22.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel22.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialLabel22.Location = new System.Drawing.Point(170, 34);
+            this.materialLabel22.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel22.Name = "materialLabel22";
+            this.materialLabel22.Size = new System.Drawing.Size(1104, 27);
+            this.materialLabel22.TabIndex = 35;
+            this.materialLabel22.Text = "Om een Sidecar-export te kunnen maken, moet er een valide TopX-xml gegenereerd zi" +
+    "jn (zie tab \"Genereer TopX\")";
             // 
-            // textBox4
+            // label7
             // 
-            this.textBox4.Location = new System.Drawing.Point(133, 400);
-            this.textBox4.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.textBox4.Multiline = true;
-            this.textBox4.Name = "textBox4";
-            this.textBox4.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox4.Size = new System.Drawing.Size(812, 570);
-            this.textBox4.TabIndex = 38;
-            this.textBox4.WordWrap = false;
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(155, 140);
+            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(188, 20);
+            this.label7.TabIndex = 34;
+            this.label7.Text = "Bron-directory bestanden";
             // 
-            // materialLabel24
+            // txtSourceDirOfSidecarFiles
             // 
-            this.materialLabel24.AutoSize = true;
-            this.materialLabel24.Depth = 0;
-            this.materialLabel24.Font = new System.Drawing.Font("Roboto", 11F);
-            this.materialLabel24.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel24.Location = new System.Drawing.Point(152, 357);
-            this.materialLabel24.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel24.Name = "materialLabel24";
-            this.materialLabel24.Size = new System.Drawing.Size(49, 27);
-            this.materialLabel24.TabIndex = 39;
-            this.materialLabel24.Text = "Log";
+            this.txtSourceDirOfSidecarFiles.Enabled = false;
+            this.txtSourceDirOfSidecarFiles.Location = new System.Drawing.Point(380, 136);
+            this.txtSourceDirOfSidecarFiles.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtSourceDirOfSidecarFiles.Name = "txtSourceDirOfSidecarFiles";
+            this.txtSourceDirOfSidecarFiles.Size = new System.Drawing.Size(466, 26);
+            this.txtSourceDirOfSidecarFiles.TabIndex = 33;
+            // 
+            // picSelectSourceDirOfSidecarFiles
+            // 
+            this.picSelectSourceDirOfSidecarFiles.Enabled = false;
+            this.picSelectSourceDirOfSidecarFiles.Image = ((System.Drawing.Image)(resources.GetObject("picSelectSourceDirOfSidecarFiles.Image")));
+            this.picSelectSourceDirOfSidecarFiles.Location = new System.Drawing.Point(855, 130);
+            this.picSelectSourceDirOfSidecarFiles.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.picSelectSourceDirOfSidecarFiles.Name = "picSelectSourceDirOfSidecarFiles";
+            this.picSelectSourceDirOfSidecarFiles.Size = new System.Drawing.Size(34, 45);
+            this.picSelectSourceDirOfSidecarFiles.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picSelectSourceDirOfSidecarFiles.TabIndex = 32;
+            this.picSelectSourceDirOfSidecarFiles.TabStop = false;
+            this.picSelectSourceDirOfSidecarFiles.Click += new System.EventHandler(this.picSelectSourceDirOfSidecarFiles_Click);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(153, 180);
+            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(214, 20);
+            this.label8.TabIndex = 31;
+            this.label8.Text = "Doel-directory Sidecar-export";
+            // 
+            // txtTargetDirOfSidecarFiles
+            // 
+            this.txtTargetDirOfSidecarFiles.Enabled = false;
+            this.txtTargetDirOfSidecarFiles.Location = new System.Drawing.Point(380, 176);
+            this.txtTargetDirOfSidecarFiles.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtTargetDirOfSidecarFiles.Name = "txtTargetDirOfSidecarFiles";
+            this.txtTargetDirOfSidecarFiles.Size = new System.Drawing.Size(466, 26);
+            this.txtTargetDirOfSidecarFiles.TabIndex = 30;
+            // 
+            // picSelectTargetDirOfSidecarFiles
+            // 
+            this.picSelectTargetDirOfSidecarFiles.Enabled = false;
+            this.picSelectTargetDirOfSidecarFiles.Image = ((System.Drawing.Image)(resources.GetObject("picSelectTargetDirOfSidecarFiles.Image")));
+            this.picSelectTargetDirOfSidecarFiles.Location = new System.Drawing.Point(855, 170);
+            this.picSelectTargetDirOfSidecarFiles.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.picSelectTargetDirOfSidecarFiles.Name = "picSelectTargetDirOfSidecarFiles";
+            this.picSelectTargetDirOfSidecarFiles.Size = new System.Drawing.Size(34, 45);
+            this.picSelectTargetDirOfSidecarFiles.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picSelectTargetDirOfSidecarFiles.TabIndex = 29;
+            this.picSelectTargetDirOfSidecarFiles.TabStop = false;
+            this.picSelectTargetDirOfSidecarFiles.Click += new System.EventHandler(this.picSelectTargetDirOfSidecarFiles_Click);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(428, 233);
+            this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(118, 20);
+            this.label9.TabIndex = 28;
+            this.label9.Text = "Aantal dossiers";
+            // 
+            // txtSidecarNrOfBatches
+            // 
+            this.txtSidecarNrOfBatches.Location = new System.Drawing.Point(562, 230);
+            this.txtSidecarNrOfBatches.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtSidecarNrOfBatches.Name = "txtSidecarNrOfBatches";
+            this.txtSidecarNrOfBatches.Size = new System.Drawing.Size(49, 26);
+            this.txtSidecarNrOfBatches.TabIndex = 27;
+            this.txtSidecarNrOfBatches.Text = "30";
+            // 
+            // chkSidecarMakeBatches
+            // 
+            this.chkSidecarMakeBatches.AutoSize = true;
+            this.chkSidecarMakeBatches.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chkSidecarMakeBatches.Location = new System.Drawing.Point(262, 229);
+            this.chkSidecarMakeBatches.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.chkSidecarMakeBatches.Name = "chkSidecarMakeBatches";
+            this.chkSidecarMakeBatches.Size = new System.Drawing.Size(135, 24);
+            this.chkSidecarMakeBatches.TabIndex = 26;
+            this.chkSidecarMakeBatches.Text = "Maak batches";
+            this.chkSidecarMakeBatches.UseVisualStyleBackColor = true;
+            // 
+            // lblVersion
+            // 
+            this.lblVersion.AutoSize = true;
+            this.lblVersion.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(125)))), ((int)(((byte)(139)))));
+            this.lblVersion.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.lblVersion.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.lblVersion.Location = new System.Drawing.Point(1792, 52);
+            this.lblVersion.Name = "lblVersion";
+            this.lblVersion.Size = new System.Drawing.Size(79, 22);
+            this.lblVersion.TabIndex = 71;
+            this.lblVersion.Text = "v 1.0.0.0";
             // 
             // TopXConverter
             // 
@@ -1654,8 +1657,8 @@ namespace TOPX.UI.Forms
             ((System.ComponentModel.ISupportInitialize)(this.picSelectBatchTargetDir)).EndInit();
             this.SidecarExport.ResumeLayout(false);
             this.SidecarExport.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picSelectSourceDirOfSidecarFiles)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picSelectTargetDirOfSidecarFiles)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1769,18 +1772,18 @@ namespace TOPX.UI.Forms
         private CheckBox chkTestForPasswProtection;
         private TabPage SidecarExport;
         private Label label7;
-        private TextBox textBox1;
-        private PictureBox pictureBox1;
+        private TextBox txtSourceDirOfSidecarFiles;
+        private PictureBox picSelectSourceDirOfSidecarFiles;
         private Label label8;
-        private TextBox textBox2;
-        private PictureBox pictureBox2;
+        private TextBox txtTargetDirOfSidecarFiles;
+        private PictureBox picSelectTargetDirOfSidecarFiles;
         private Label label9;
-        private TextBox textBox3;
-        private CheckBox checkBox1;
+        private TextBox txtSidecarNrOfBatches;
+        private CheckBox chkSidecarMakeBatches;
         private MaterialSkin.Controls.MaterialLabel materialLabel22;
         private MaterialSkin.Controls.MaterialLabel materialLabel24;
-        private TextBox textBox4;
-        private Button button1;
+        private TextBox txtLogSidecarExport;
+        private Button btGenerateSidecarExport;
         private MaterialSkin.Controls.MaterialLabel materialLabel23;
     }
 }

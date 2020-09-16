@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
+using NLog;
 using Topx.Data;
 using Topx.Utility;
 
@@ -30,7 +31,7 @@ namespace Topx.FileAnalysis
         private string _errorMessage;
 
 
-        public Identificator(string droidCommandlineLocation, string fileslocationToIdentify, NLog.Logger logger)
+        public Identificator(string droidCommandlineLocation, string fileslocationToIdentify, ILogger logger)
         {
             FileInfo signatureFileInfo;
             try
