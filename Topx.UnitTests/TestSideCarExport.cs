@@ -1,10 +1,9 @@
-﻿using System;
-using System.Diagnostics;
-using System.IO;
+﻿using System.IO;
 using System.Xml.Linq;
 using Moq;
 using NLog;
 using NUnit.Framework;
+using Topx.Sidecar;
 using Topx.Utility;
 
 namespace Topx.UnitTests
@@ -33,12 +32,14 @@ namespace Topx.UnitTests
 
             export.Create(xDoc);
 
-            var count = 0;
-            foreach (var action in ioUtilities.Actions)
-            {
-                Debug.WriteLine($"{count} {action.Type.ToString()} {action.PathSource} {action.PathTarget} {action.Content}");
-                count += 1;
-            }
+            // DEBUG: To view the action-sequence of a validated output to use in the unittests
+
+            // var count = 0;
+            // foreach (var action in ioUtilities.Actions)
+            // {
+            //     Debug.WriteLine($"{count} {action.Type.ToString()} {action.PathSource} {action.PathTarget} {action.Content}");
+            //     count += 1;
+            // }
 
             // Archief CreateDir
             Assert.AreEqual( Type.CreateDirectory, ioUtilities.Actions[0].Type);
@@ -73,6 +74,17 @@ namespace Topx.UnitTests
             Assert.AreEqual(@"tartgetDir\test\NL-0784-10009-BV000000023\B000004136\NL-0784-10009-BV000000023_B000004136.metadata", ioUtilities.Actions[6].PathTarget);
             StringAssert.Contains("<identificatiekenmerk>NL-0784-10009-BV000000023_B000004136</identificatiekenmerk>", ioUtilities.Actions[6].Content);
             StringAssert.Contains("Record", ioUtilities.Actions[6].Content);
+
+            // Bestand metadata
+            Assert.AreEqual(Type.Save, ioUtilities.Actions[7].Type);
+            Assert.AreEqual(@"tartgetDir\test\NL-0784-10009-BV000000023\B000004136\B000004136.metadata", ioUtilities.Actions[7].PathTarget);
+            StringAssert.Contains("<identificatiekenmerk>B000004136</identificatiekenmerk>", ioUtilities.Actions[7].Content);
+            StringAssert.Contains("Bestand", ioUtilities.Actions[7].Content);
+
+            // Bestand copy
+            Assert.AreEqual(Type.FileCopy, ioUtilities.Actions[8].Type);
+            Assert.AreEqual(@"sourceDir\B000004136.pdf", ioUtilities.Actions[8].PathSource);
+            Assert.AreEqual(@"tartgetDir\test\NL-0784-10009-BV000000023\B000004136\B000004136.pdf", ioUtilities.Actions[8].PathTarget);
         }
     }
 }

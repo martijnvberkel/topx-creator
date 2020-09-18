@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Net.Http.Headers;
 using System.Runtime.InteropServices;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Xml.Linq;
 using Microsoft.Win32;
@@ -16,7 +19,7 @@ namespace Topx.Utility
         bool FileExists(string fullpath);
         void FileCopy(string source, string destination);
         bool DirectoryExists(string directory);
-       
+
     }
 
     public class IOUtilities : IIOUtilities
@@ -45,7 +48,7 @@ namespace Topx.Utility
             }
 
             var javaKey = "SOFTWARE\\JavaSoft\\Java Runtime Environmentx\\";
-           
+
             using (var hklm = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64))
             using (var rk = hklm.OpenSubKey(javaKey))
             {
@@ -57,14 +60,26 @@ namespace Topx.Utility
             }
         }
 
+        public static void ShowExplorer(string directory)
+        {
+            Process.Start("explorer.exe", directory);
+        }
+
         public void CreateDirectory(string targetDir)
         {
-            Directory.CreateDirectory(targetDir);
+            if (IsValidDirectoryName(targetDir))
+                Directory.CreateDirectory(targetDir);
+            else
+                throw new Exception($"Directory {targetDir} bevat niet-toegestane karakters");
         }
 
         public void Save(XElement element, string path)
         {
-            element.Save(path);
+            var filename = Path.GetFileName(path);
+            if (IsValidFilename(filename))
+                element.Save(path);
+            else
+                throw new Exception($"De filenaam is niet valide: {filename}");
         }
 
         public bool FileExists(string fullpath)
@@ -111,12 +126,21 @@ namespace Topx.Utility
                     catch (Exception e)
                     {
                         retry += 1;
-                        if (retry >20) 
+                        Thread.Sleep(100);
+                        if (retry > 20)
                             throw new Exception($"Directory {path} kan niet worden verwijderd. Mogelijk is een bestand nog in gebruik");
                     }
                 }
-
             }
+        }
+
+        public bool IsValidFilename(string fileName)
+        {
+            return !fileName.Any(f => Path.GetInvalidFileNameChars().Contains(f));
+        }
+        public bool IsValidDirectoryName(string dirName)
+        {
+            return !dirName.Any(f => Path.GetInvalidPathChars().Contains(f));
         }
     }
 }

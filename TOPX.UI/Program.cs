@@ -8,6 +8,7 @@ using Topx.Data;
 using Topx.DataServices;
 using Container = SimpleInjector.Container;
 using TOPX.UI.Classes;
+using Topx.Utility;
 
 namespace TOPX.UI
 {
@@ -46,6 +47,7 @@ namespace TOPX.UI
             Logging.Init();
             container.Register<ILogger>(LogManager.GetCurrentClassLogger);
             container.Register<IDataService>(() => new DataService(connectionstring), Lifestyle.Singleton);
+            container.Register<IIOUtilities, IOUtilities>();
             container.Register<TopXConverter>();
             return true;
         }

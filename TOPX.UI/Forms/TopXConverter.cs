@@ -2,14 +2,17 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data.Odbc;
+using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using System.Xml.Linq;
 using System.Xml.Serialization;
 using ByteSizeLib;
 using MaterialSkin;
@@ -25,6 +28,7 @@ using Topx.Interface;
 using TOPX.UI.Classes;
 using Topx.Data.DTO;
 using Topx.FileAnalysis;
+using Topx.Sidecar;
 using Topx.Utility;
 using Logger = NLog.Logger;
 
@@ -33,7 +37,6 @@ namespace TOPX.UI.Forms
     public partial class TopXConverter : MaterialForm
     {
         private readonly IDataService _dataservice;
-        private readonly IExport _sideCarExport;
         private List<string> _headersDossiers = new List<string>();
         private List<string> _headersRecords = new List<string>();
 
@@ -41,6 +44,7 @@ namespace TOPX.UI.Forms
         private List<FieldMapping> _fieldmappingsRecords;
 
         private static ILogger _logger;
+        private readonly IIOUtilities _ioUtilities;
         private FormLog _formLog = new FormLog();
 
         private Headers _headers;
@@ -53,11 +57,11 @@ namespace TOPX.UI.Forms
 
         private BackgroundWorker bgworker;
 
-        public TopXConverter(IDataService dataservice, IExport sideCarExport, ILogger logger)
+        public TopXConverter(IDataService dataservice, ILogger logger, IIOUtilities ioUtilities)
         {
             _logger = logger;
+            _ioUtilities = ioUtilities;
             _dataservice = dataservice;
-            _sideCarExport = sideCarExport;
             InitializeComponent();
             var materialSkinManager = MaterialSkinManager.Instance;
             materialSkinManager.AddFormToManage(this);
@@ -147,6 +151,9 @@ namespace TOPX.UI.Forms
             txtOmschrijvingArchief.Text = _globals?.OmschrijvingArchief;
             txtBatchTargetDirectory.Text = _globals?.BatchTargetDirectory;
             txtBatchSourceDirectory.Text = _globals?.BatchSourceDirectory;
+            txtSourceDirOfSidecarFiles.Text = _globals?.SourceDirOfSidecarFiles;
+            txtTargetDirOfSidecarFiles.Text = _globals?.TargetDirOfSidecarFiles;
+
             lblVersion.Text = $"v {Application.ProductVersion}";
 
             if (File.Exists(_globals?.DroidInstallDirectory))
@@ -444,7 +451,9 @@ namespace TOPX.UI.Forms
                 BatchSourceDirectory = txtBatchSourceDirectory.Text,
                 BatchTargetDirectory = txtBatchTargetDirectory.Text,
                 DroidInstallDirectory = txtDroidLocation.Text,
-                DirectoryFilesToScanForMetadata = txtFilesDirToScan.Text
+                DirectoryFilesToScanForMetadata = txtFilesDirToScan.Text,
+                SourceDirOfSidecarFiles = txtSourceDirOfSidecarFiles.Text,
+                TargetDirOfSidecarFiles = txtTargetDirOfSidecarFiles.Text
             };
 
             if (!string.IsNullOrEmpty(txtDatumArchief.Text))
@@ -962,6 +971,8 @@ namespace TOPX.UI.Forms
 
         }
 
+        // ++++++++++++++++++++++++++++++++++++++++ Tab Sidecar-export +++++++++++++++++++++++++++++++++++++++++++++++++
+
         private void picSelectSourceDirOfSidecarFiles_Click(object sender, EventArgs e)
         {
             using (var folderBrowserDialog = new FolderBrowserDialog())
@@ -990,19 +1001,76 @@ namespace TOPX.UI.Forms
 
         private void btGenerateSidecarExport_Click(object sender, EventArgs e)
         {
-            if (_resultRecordInformationPackage != null)
+            if (Directory.Exists(txtTargetDirOfSidecarFiles.Text) && MessageBox.Show($"Alle bestanden in de doeldirectory {txtTargetDirOfSidecarFiles.Text} worden gewist. Doorgaan?", "", MessageBoxButtons.OKCancel) != DialogResult.OK)
+                return;
+
+            if (_resultRecordInformationPackage?[0] == null)
             {
-                var sidecarExport = new Export(_logger, txtSourceDirOfSidecarFiles.Text, txtTargetDirOfSidecarFiles.Text);
-                if (_sideCarExport.Create(_resultRecordInformationPackage))
-                {
-                    MessageBox.Show("Sidecar-export is gereed");
-                }
-                else
-                {
-                    MessageBox.Show("Sidecar-export is niet gelukt");
-                }
+                MessageBox.Show("Er is geen TopX-data aanwezig. Ga naar tab 'Genereer TopX' en zorg ervoor dat er een TopX-bestand wordt gegenereerd. Deze hoeft - voor een sidecar-export - niet te worden opgeslagen.");
+                return;
             }
 
+            if (!Directory.Exists(txtSourceDirOfSidecarFiles.Text))
+            {
+                MessageBox.Show($"De brondirectory {txtSourceDirOfSidecarFiles.Text} is niet bereikbaar of bestaat niet.");
+                return;
+            }
+
+            if (!Directory.Exists(txtTargetDirOfSidecarFiles.Text))
+            {
+                MessageBox.Show($"De doeldirectory voor de Sidecar-export {txtTargetDirOfSidecarFiles.Text} is niet bereikbaar of bestaat niet.");
+                return;
+            }
+            
+            var sidecarExport = new Export(txtSourceDirOfSidecarFiles.Text, txtTargetDirOfSidecarFiles.Text, _ioUtilities, _logger);
+            var doc = new XDocument();
+            using (var writer = doc.CreateWriter())
+            {
+                var serializer = new  XmlSerializer (_resultRecordInformationPackage[0].GetType());
+                serializer.Serialize (writer, _resultRecordInformationPackage[0]);
+            }
+
+            Cursor.Current = Cursors.WaitCursor;
+
+            // Perform Sidecar-export
+            var nrOfBatches = chkSidecarMakeBatches.Checked ? Convert.ToInt32(txtSidecarNrOfBatches.Text) : 0;
+            var success = sidecarExport.Create(doc, nrOfBatches);
+
+            Cursor.Current = Cursors.Default;
+
+            if (sidecarExport.Error)
+            {
+                txtLogSidecarExport.Text = sidecarExport.ErrorMessage.ToString();
+                linkOpenSidecarExportInExplorer.Visible = false;
+            }
+            else
+            {
+                txtLogSidecarExport.Text = $"{sidecarExport.NrOfDossiersExported} dossiers succesvol geëxporteerd.";
+                linkOpenSidecarExportInExplorer.Visible = true; 
+            }
+
+            MessageBox.Show(success
+                ? "Sidecar-export is gereed"
+                : "Errors in Sidecar-export");
+        }
+
+        private void linkOpenSidecarExportInExplorer_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            IOUtilities.ShowExplorer(txtTargetDirOfSidecarFiles.Text);
+        }
+
+        private void txtSidecarNrOfBatches_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Prevent non-numeric chars
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void chkSidecarMakeBatches_CheckedChanged(object sender, EventArgs e)
+        {
+            txtSidecarNrOfBatches.Enabled = chkSidecarMakeBatches.Checked;
         }
     }
 }
