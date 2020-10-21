@@ -134,11 +134,11 @@ namespace Topx.Utility
             }
         }
 
-        public bool IsValidFilename(string fileName)
+        public static bool IsValidFilename(string fileName)
         {
             return !fileName.Any(f => Path.GetInvalidFileNameChars().Contains(f));
         }
-        public bool IsValidDirectoryName(string dirName)
+        public static bool IsValidDirectoryName(string dirName)
         {
             return !dirName.Any(f => Path.GetInvalidPathChars().Contains(f));
         }

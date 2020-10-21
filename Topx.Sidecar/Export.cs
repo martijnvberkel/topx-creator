@@ -48,7 +48,7 @@ namespace Topx.Sidecar
                 System.Threading.Thread.Sleep(100);
                 _ioUtilities.CreateDirectory(_targetDir);
 
-                WriteHeader(xdoc, _targetDir);
+               // WriteHeader(xdoc, _targetDir);
                 var archiefDir = WriteArchief(xdoc, _targetDir);
 
                 WriteDossiers(xdoc, archiefDir, nrOfBatches);
@@ -97,8 +97,16 @@ namespace Topx.Sidecar
         private void WriteRecord(XElement record, XDocument xdoc, string dossierDir)
         {
             var idkenmerkRecord = record.Element(nsArchf + "identificatiekenmerk")?.Value;
-            var directoryName = idkenmerkRecord.Split('_')[1];
-            var recordDir = Path.Combine(dossierDir, directoryName);
+
+            if (!IOUtilities.IsValidDirectoryName(idkenmerkRecord) || !IOUtilities.IsValidDirectoryName(idkenmerkRecord))
+            {
+                var logmessage = $"De samengestelde mapnaam {dossierDir}\\{idkenmerkRecord} bevat niet-toegestane karakters";
+                ErrorMessage.AppendLine(logmessage); 
+                _logger.Error(logmessage);
+                return;
+            }
+
+            var recordDir = Path.Combine(dossierDir, idkenmerkRecord);
 
             _ioUtilities.CreateDirectory(recordDir);
             _ioUtilities.Save(record.Parent, Path.Combine(recordDir, $"{idkenmerkRecord}.metadata"));
@@ -148,7 +156,8 @@ namespace Topx.Sidecar
             var archiefNaam = elementArchief.Element(nsArchf + "naam").Value;
             var identificatiekenmerk = elementArchief.Element(nsArchf + "identificatiekenmerk").Value;
 
-            var archiefDir = Path.Combine(targetDir, archiefNaam);
+           // var archiefDir = Path.Combine(targetDir, archiefNaam);
+            var archiefDir = targetDir;
             Directory.CreateDirectory(archiefDir);
             _ioUtilities.Save(elementArchief.Parent, Path.Combine(archiefDir, $"{identificatiekenmerk}.metadata"));
             _logger.Info($"archief {archiefNaam} saved");
