@@ -11,7 +11,7 @@ namespace Topx.UnitTests
     [TestFixture]
     public class TestSideCarExport
     {
-       
+       [Test]
         public void TestExport()
         {
             // Real export without mocks

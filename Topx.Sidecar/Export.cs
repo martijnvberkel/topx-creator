@@ -48,7 +48,7 @@ namespace Topx.Sidecar
                 System.Threading.Thread.Sleep(100);
                 _ioUtilities.CreateDirectory(_targetDir);
 
-               // WriteHeader(xdoc, _targetDir);
+               //WriteHeader(xdoc, _targetDir);
                 var archiefDir = WriteArchief(xdoc, _targetDir);
 
                 WriteDossiers(xdoc, archiefDir, nrOfBatches);
@@ -156,8 +156,7 @@ namespace Topx.Sidecar
             var archiefNaam = elementArchief.Element(nsArchf + "naam").Value;
             var identificatiekenmerk = elementArchief.Element(nsArchf + "identificatiekenmerk").Value;
 
-           // var archiefDir = Path.Combine(targetDir, archiefNaam);
-            var archiefDir = targetDir;
+            var archiefDir = Path.Combine(targetDir, identificatiekenmerk);
             Directory.CreateDirectory(archiefDir);
             _ioUtilities.Save(elementArchief.Parent, Path.Combine(archiefDir, $"{identificatiekenmerk}.metadata"));
             _logger.Info($"archief {archiefNaam} saved");
