@@ -49,39 +49,39 @@ namespace Topx.UnitTests
 
             // Archief metadata
             Assert.AreEqual(Type.Save, ioUtilities.Actions[1].Type);
-            Assert.AreEqual(@"tartgetDir\1.metadata", ioUtilities.Actions[1].PathTarget);
+            Assert.AreEqual(@"tartgetDir\1\1.metadata", ioUtilities.Actions[1].PathTarget);
             StringAssert.Contains("<identificatiekenmerk>1</identificatiekenmerk>", ioUtilities.Actions[1].Content);
 
             // Dossier CreateDir
             Assert.AreEqual(Type.CreateDirectory, ioUtilities.Actions[2].Type);
-            Assert.AreEqual(@"tartgetDir\NL-0784-10009-BV000000023", ioUtilities.Actions[2].PathTarget);
+            Assert.AreEqual(@"tartgetDir\1\NL-0784-10009-BV000000023", ioUtilities.Actions[2].PathTarget);
 
             // Dossier metadata
             Assert.AreEqual(Type.Save, ioUtilities.Actions[3].Type);
-            Assert.AreEqual(@"tartgetDir\NL-0784-10009-BV000000023\NL-0784-10009-BV000000023.metadata", ioUtilities.Actions[3].PathTarget);
+            Assert.AreEqual(@"tartgetDir\1\NL-0784-10009-BV000000023\NL-0784-10009-BV000000023.metadata", ioUtilities.Actions[3].PathTarget);
             StringAssert.Contains("<identificatiekenmerk>NL-0784-10009-BV000000023</identificatiekenmerk>", ioUtilities.Actions[3].Content);
             StringAssert.Contains("Dossier", ioUtilities.Actions[3].Content);
 
             // Record CreateDir
             Assert.AreEqual(Type.CreateDirectory, ioUtilities.Actions[4].Type);
-            Assert.AreEqual(@"tartgetDir\NL-0784-10009-BV000000023\B000004136", ioUtilities.Actions[4].PathTarget);
+            Assert.AreEqual(@"tartgetDir\1\NL-0784-10009-BV000000023\NL-0784-10009-BV000000023_B000004136", ioUtilities.Actions[4].PathTarget);
 
             // Record metadata
             Assert.AreEqual(Type.Save, ioUtilities.Actions[5].Type);
-            Assert.AreEqual(@"tartgetDir\NL-0784-10009-BV000000023\B000004136\NL-0784-10009-BV000000023_B000004136.metadata", ioUtilities.Actions[5].PathTarget);
+            Assert.AreEqual(@"tartgetDir\1\NL-0784-10009-BV000000023\NL-0784-10009-BV000000023_B000004136\NL-0784-10009-BV000000023_B000004136.metadata", ioUtilities.Actions[5].PathTarget);
             StringAssert.Contains("<identificatiekenmerk>NL-0784-10009-BV000000023_B000004136</identificatiekenmerk>", ioUtilities.Actions[5].Content);
             StringAssert.Contains("Record", ioUtilities.Actions[5].Content);
 
             // Bestand metadata
             Assert.AreEqual(Type.Save, ioUtilities.Actions[6].Type);
-            Assert.AreEqual(@"tartgetDir\NL-0784-10009-BV000000023\B000004136\B000004136.metadata", ioUtilities.Actions[6].PathTarget);
+            Assert.AreEqual(@"tartgetDir\1\NL-0784-10009-BV000000023\NL-0784-10009-BV000000023_B000004136\B000004136.metadata", ioUtilities.Actions[6].PathTarget);
             StringAssert.Contains("<identificatiekenmerk>B000004136</identificatiekenmerk>", ioUtilities.Actions[6].Content);
             StringAssert.Contains("Bestand", ioUtilities.Actions[6].Content);
 
             // Bestand copy
             Assert.AreEqual(Type.FileCopy, ioUtilities.Actions[7].Type);
             Assert.AreEqual(@"sourceDir\B000004136.pdf", ioUtilities.Actions[7].PathSource);
-            Assert.AreEqual(@"tartgetDir\NL-0784-10009-BV000000023\B000004136\B000004136.pdf", ioUtilities.Actions[7].PathTarget);
+            Assert.AreEqual(@"tartgetDir\1\NL-0784-10009-BV000000023\NL-0784-10009-BV000000023_B000004136\B000004136.pdf", ioUtilities.Actions[7].PathTarget);
         }
     }
 }
