@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace Topx.Utility
@@ -19,10 +20,16 @@ namespace Topx.Utility
             return regex.IsMatch(year);
         }
 
-        public static bool TestForValidFileName(string filename)
+        public static bool TestForIllegalCharsInFileName(string filename)
         {
             // Test op illegale chars én op spatie (wat niet mag ivm Archivematica beperking)
             return filename.IndexOfAny(System.IO.Path.GetInvalidFileNameChars()) == -1 && filename.IndexOfAny(new[] {' ', @"\"[0]}) == -1;
+        }
+
+        public static bool TestForFileExtension(string filename)
+        {
+            var delimiters = filename.Count(t => t == '.');
+            return delimiters > 0;
         }
     }
 }

@@ -21,7 +21,7 @@ namespace Topx.FileAnalysis
         private readonly string _droidInstallDirectory;
         private readonly List<Dossier> _dossiers;
         private readonly IDataService _dataService;
-        private readonly Logger _logger;
+        private readonly ILogger _logger;
 
         public event EventHandler MetadataEventHandler;
 
@@ -32,7 +32,7 @@ namespace Topx.FileAnalysis
         private readonly List<string> _allPresentFiles;
 
 
-        public Metadata(bool setHash, bool setSize, bool setCreationDate, bool setFileFormatIdentification, bool testForPwProtection, string path, string droidInstallDirectory, List<Dossier> dossiers, IDataService dataService, NLog.Logger logger)
+        public Metadata(bool setHash, bool setSize, bool setCreationDate, bool setFileFormatIdentification, bool testForPwProtection, string path, string droidInstallDirectory, List<Dossier> dossiers, IDataService dataService, ILogger logger)
         {
             _setHash = setHash;
             _setSize = setSize;

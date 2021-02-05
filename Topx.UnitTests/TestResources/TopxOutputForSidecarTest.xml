@@ -1,0 +1,608 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<recordInformationPackage xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.nationaalarchief.nl/RIP/v0.3">
+  <packageHeader>
+    <identificatie>1</identificatie>
+    <datum>2019-11-03</datum>
+    <omschrijving>test</omschrijving>
+    <bron>test</bron>
+    <doel>test</doel>
+  </packageHeader>
+  <record>
+    <recordHeader>
+      <identificatie>1</identificatie>
+    </recordHeader>
+    <metadata schemaURI="topx">
+      <ToPX xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.nationaalarchief.nl/ToPX/v2.3">
+        <aggregatie>
+          <identificatiekenmerk>1</identificatiekenmerk>
+          <aggregatieniveau>Archief</aggregatieniveau>
+          <naam>test</naam>
+        </aggregatie>
+      </ToPX>
+    </metadata>
+  </record>
+  <record>
+    <recordHeader>
+      <identificatie>NL-0784-10009-BV000000023</identificatie>
+    </recordHeader>
+    <metadata schemaURI="topx">
+      <ToPX xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.nationaalarchief.nl/ToPX/v2.3">
+        <aggregatie>
+          <identificatiekenmerk>NL-0784-10009-BV000000023</identificatiekenmerk>
+          <aggregatieniveau>Dossier</aggregatieniveau>
+          <naam>bouwvergunning - bouwen landbouwerswoning Hoofdstraat 13 5121JA Rijen 17-05-1905</naam>
+          <classificatie>
+            <code>-1.733.21</code>
+            <omschrijving>Bouw van woningen en gebouwen</omschrijving>
+            <bron>basisarchiefcode</bron>
+            <datumOfPeriode>
+              <jaar>2009</jaar>
+            </datumOfPeriode>
+          </classificatie>
+          <omschrijving />
+          <dekking>
+            <inTijd>
+              <begin>
+                <datum>1905-05-17</datum>
+              </begin>
+              <eind>
+                <datum>1905-05-17</datum>
+              </eind>
+            </inTijd>
+            <geografischGebied>Hoofdstraat 13 5121JA Rijen</geografischGebied>
+          </dekking>
+          <eventGeschiedenis>
+            <datumOfPeriode>
+              <datum>1905-05-17</datum>
+            </datumOfPeriode>
+            <type>Afsluiting</type>
+            <verantwoordelijkeFunctionaris>Gemeente Gilze en Rijen</verantwoordelijkeFunctionaris>
+          </eventGeschiedenis>
+          <relatie>
+            <relatieID>1</relatieID>
+            <typeRelatie>Hiërarchisch</typeRelatie>
+            <datumOfPeriode>
+              <datum>2019-05-29</datum>
+            </datumOfPeriode>
+          </relatie>
+          <context>
+            <actor>
+              <identificatiekenmerk>K17272741</identificatiekenmerk>
+              <aggregatieniveau>Organisatie</aggregatieniveau>
+              <geautoriseerdeNaam>Gemeente Gilze en Rijen</geautoriseerdeNaam>
+            </actor>
+            <activiteit>
+              <naam>Verlenen van bouw- en sloopvergunningen</naam>
+            </activiteit>
+          </context>
+          <gebruiksrechten>
+            <omschrijvingVoorwaarden>Vrij te gebruiken</omschrijvingVoorwaarden>
+            <datumOfPeriode>
+              <datum>1905-05-17</datum>
+            </datumOfPeriode>
+          </gebruiksrechten>
+          <vertrouwelijkheid>
+            <classificatieNiveau>Niet vertrouwelijk</classificatieNiveau>
+            <datumOfPeriode>
+              <datum>1905-05-17</datum>
+            </datumOfPeriode>
+          </vertrouwelijkheid>
+          <openbaarheid>
+            <omschrijvingBeperkingen>Openbaar</omschrijvingBeperkingen>
+            <datumOfPeriode>
+              <datum>1905-05-17</datum>
+            </datumOfPeriode>
+          </openbaarheid>
+          <integriteit>Integer</integriteit>
+        </aggregatie>
+      </ToPX>
+    </metadata>
+  </record>
+  <record>
+    <recordHeader>
+      <identificatie>NL-0784-10009-BV000000023_B000004136</identificatie>
+    </recordHeader>
+    <metadata schemaURI="topx">
+      <ToPX xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.nationaalarchief.nl/ToPX/v2.3">
+        <aggregatie>
+          <identificatiekenmerk>NL-0784-10009-BV000000023_B000004136</identificatiekenmerk>
+          <aggregatieniveau>Record</aggregatieniveau>
+          <naam>tekening (technisch) - bouwen landbouwerswoning Hoofdstraat 13 5121JA Rijen 17-05-1905</naam>
+          <taal>dut</taal>
+          <eventGeschiedenis>
+            <datumOfPeriode>
+              <datum>1905-05-17</datum>
+            </datumOfPeriode>
+            <type>Verzending</type>
+            <verantwoordelijkeFunctionaris>Gemeente Gilze en Rijen</verantwoordelijkeFunctionaris>
+          </eventGeschiedenis>
+          <relatie>
+            <relatieID>NL-0784-10009-BV000000023</relatieID>
+            <typeRelatie>Hiërarchisch</typeRelatie>
+            <datumOfPeriode>
+              <datum>2019-05-29</datum>
+            </datumOfPeriode>
+          </relatie>
+          <gebruiksrechten>
+            <omschrijvingVoorwaarden>Vrij te gebruiken</omschrijvingVoorwaarden>
+            <datumOfPeriode>
+              <datum>1905-05-17</datum>
+            </datumOfPeriode>
+          </gebruiksrechten>
+          <vertrouwelijkheid>
+            <classificatieNiveau>Niet vertrouwelijk</classificatieNiveau>
+            <datumOfPeriode>
+              <datum>2018-08-28</datum>
+            </datumOfPeriode>
+          </vertrouwelijkheid>
+          <openbaarheid>
+            <omschrijvingBeperkingen>Openbaar</omschrijvingBeperkingen>
+            <datumOfPeriode>
+              <datum>2018-08-28</datum>
+            </datumOfPeriode>
+          </openbaarheid>
+        </aggregatie>
+      </ToPX>
+    </metadata>
+  </record>
+  <record>
+    <recordHeader>
+      <identificatie>B000004136</identificatie>
+    </recordHeader>
+    <metadata schemaURI="topx">
+      <ToPX xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.nationaalarchief.nl/ToPX/v2.3">
+        <bestand>
+          <identificatiekenmerk>B000004136</identificatiekenmerk>
+          <aggregatieniveau>Bestand</aggregatieniveau>
+          <naam>tekening (technisch) - bouwen landbouwerswoning Hoofdstraat 13 5121JA Rijen 17-05-1905</naam>
+          <relatie>
+            <relatieID>NL-0784-10009-BV000000023_B000004136</relatieID>
+            <typeRelatie>Hiërarchisch</typeRelatie>
+            <datumOfPeriode>
+              <datum>2019-05-29</datum>
+            </datumOfPeriode>
+          </relatie>
+          <vorm>
+            <redactieGenre>Tekening (technisch)</redactieGenre>
+          </vorm>
+          <formaat>
+            <identificatiekenmerk>B000004136</identificatiekenmerk>
+            <bestandsnaam>
+              <naam>B000004136</naam>
+              <extensie>pdf</extensie>
+            </bestandsnaam>
+            <omvang>6172</omvang>
+            <bestandsformaat>fmt/18</bestandsformaat>
+            <fysiekeIntegriteit>
+              <algoritme>sha256</algoritme>
+              <waarde>693ed6b8845dd4e3abfeda0634449f20124eac9fcccb999fd35fd72901f41839</waarde>
+              <datumEnTijd>2020-09-11T16:27:14.3766667</datumEnTijd>
+            </fysiekeIntegriteit>
+            <datumAanmaak>2019-05-29</datumAanmaak>
+          </formaat>
+        </bestand>
+      </ToPX>
+    </metadata>
+  </record>
+  <record>
+    <recordHeader>
+      <identificatie>NL-0784-10009-BV000000023_B000004137</identificatie>
+    </recordHeader>
+    <metadata schemaURI="topx">
+      <ToPX xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.nationaalarchief.nl/ToPX/v2.3">
+        <aggregatie>
+          <identificatiekenmerk>NL-0784-10009-BV000000023_B000004137</identificatiekenmerk>
+          <aggregatieniveau>Record</aggregatieniveau>
+          <naam>bestek- bouwen landbouwerswoning Hoofdstraat 13 5121JA Rijen 17-05-1905</naam>
+          <taal>dut</taal>
+          <eventGeschiedenis>
+            <datumOfPeriode>
+              <datum>1905-05-17</datum>
+            </datumOfPeriode>
+            <type>Verzending</type>
+            <verantwoordelijkeFunctionaris>Gemeente Gilze en Rijen</verantwoordelijkeFunctionaris>
+          </eventGeschiedenis>
+          <relatie>
+            <relatieID>NL-0784-10009-BV000000023</relatieID>
+            <typeRelatie>Hiërarchisch</typeRelatie>
+            <datumOfPeriode>
+              <datum>2019-05-29</datum>
+            </datumOfPeriode>
+          </relatie>
+          <gebruiksrechten>
+            <omschrijvingVoorwaarden>Vrij te gebruiken</omschrijvingVoorwaarden>
+            <datumOfPeriode>
+              <datum>1905-05-17</datum>
+            </datumOfPeriode>
+          </gebruiksrechten>
+          <vertrouwelijkheid>
+            <classificatieNiveau>Niet vertrouwelijk</classificatieNiveau>
+            <datumOfPeriode>
+              <datum>2018-08-28</datum>
+            </datumOfPeriode>
+          </vertrouwelijkheid>
+          <openbaarheid>
+            <omschrijvingBeperkingen>Openbaar</omschrijvingBeperkingen>
+            <datumOfPeriode>
+              <datum>2018-08-28</datum>
+            </datumOfPeriode>
+          </openbaarheid>
+        </aggregatie>
+      </ToPX>
+    </metadata>
+  </record>
+  <record>
+    <recordHeader>
+      <identificatie>B000004137</identificatie>
+    </recordHeader>
+    <metadata schemaURI="topx">
+      <ToPX xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.nationaalarchief.nl/ToPX/v2.3">
+        <bestand>
+          <identificatiekenmerk>B000004137</identificatiekenmerk>
+          <aggregatieniveau>Bestand</aggregatieniveau>
+          <naam>bestek- bouwen landbouwerswoning Hoofdstraat 13 5121JA Rijen 17-05-1905</naam>
+          <relatie>
+            <relatieID>NL-0784-10009-BV000000023_B000004137</relatieID>
+            <typeRelatie>Hiërarchisch</typeRelatie>
+            <datumOfPeriode>
+              <datum>2019-05-29</datum>
+            </datumOfPeriode>
+          </relatie>
+          <vorm>
+            <redactieGenre>Bestek</redactieGenre>
+          </vorm>
+          <formaat>
+            <identificatiekenmerk>B000004137</identificatiekenmerk>
+            <bestandsnaam>
+              <naam>B000004137</naam>
+              <extensie>pdf</extensie>
+            </bestandsnaam>
+            <omvang>3928</omvang>
+            <bestandsformaat>fmt/18</bestandsformaat>
+            <fysiekeIntegriteit>
+              <algoritme>sha256</algoritme>
+              <waarde>2adc1fe25e4d81bd0049a8bc59751f4683ab677da09d6abe93c300fb41a5e6e9</waarde>
+              <datumEnTijd>2020-09-11T16:27:14.3866667</datumEnTijd>
+            </fysiekeIntegriteit>
+            <datumAanmaak>2019-05-29</datumAanmaak>
+          </formaat>
+        </bestand>
+      </ToPX>
+    </metadata>
+  </record>
+  <record>
+    <recordHeader>
+      <identificatie>NL-0784-10009-BV000000046</identificatie>
+    </recordHeader>
+    <metadata schemaURI="topx">
+      <ToPX xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.nationaalarchief.nl/ToPX/v2.3">
+        <aggregatie>
+          <identificatiekenmerk>NL-0784-10009-BV000000046</identificatiekenmerk>
+          <aggregatieniveau>Dossier</aggregatieniveau>
+          <naam>bouwvergunning - bouw school-cathechismuslokalem,sacristie en portiek Raadhuisstraat 3 5126CK Gilze 07-10-1908</naam>
+          <classificatie>
+            <code>-1.733.21</code>
+            <omschrijving>Bouw van woningen en gebouwen</omschrijving>
+            <bron>basisarchiefcode</bron>
+            <datumOfPeriode>
+              <jaar>2009</jaar>
+            </datumOfPeriode>
+          </classificatie>
+          <omschrijving />
+          <dekking>
+            <inTijd>
+              <begin>
+                <datum>1908-10-07</datum>
+              </begin>
+              <eind>
+                <datum>1908-10-07</datum>
+              </eind>
+            </inTijd>
+            <geografischGebied>Raadhuisstraat 3 5126CK Gilze</geografischGebied>
+          </dekking>
+          <eventGeschiedenis>
+            <datumOfPeriode>
+              <datum>1908-10-07</datum>
+            </datumOfPeriode>
+            <type>Afsluiting</type>
+            <verantwoordelijkeFunctionaris>Gemeente Gilze en Rijen</verantwoordelijkeFunctionaris>
+          </eventGeschiedenis>
+          <relatie>
+            <relatieID>1</relatieID>
+            <typeRelatie>Hiërarchisch</typeRelatie>
+            <datumOfPeriode>
+              <datum>2019-05-29</datum>
+            </datumOfPeriode>
+          </relatie>
+          <context>
+            <actor>
+              <identificatiekenmerk>K17272741</identificatiekenmerk>
+              <aggregatieniveau>Organisatie</aggregatieniveau>
+              <geautoriseerdeNaam>Gemeente Gilze en Rijen</geautoriseerdeNaam>
+            </actor>
+            <activiteit>
+              <naam>Verlenen van bouw- en sloopvergunningen</naam>
+            </activiteit>
+          </context>
+          <gebruiksrechten>
+            <omschrijvingVoorwaarden>Vrij te gebruiken</omschrijvingVoorwaarden>
+            <datumOfPeriode>
+              <datum>1908-10-07</datum>
+            </datumOfPeriode>
+          </gebruiksrechten>
+          <vertrouwelijkheid>
+            <classificatieNiveau>Niet vertrouwelijk</classificatieNiveau>
+            <datumOfPeriode>
+              <datum>1908-10-07</datum>
+            </datumOfPeriode>
+          </vertrouwelijkheid>
+          <openbaarheid>
+            <omschrijvingBeperkingen>Openbaar</omschrijvingBeperkingen>
+            <datumOfPeriode>
+              <datum>1908-10-07</datum>
+            </datumOfPeriode>
+          </openbaarheid>
+          <integriteit>Integer</integriteit>
+        </aggregatie>
+      </ToPX>
+    </metadata>
+  </record>
+  <record>
+    <recordHeader>
+      <identificatie>NL-0784-10009-BV000000046_B000004162</identificatie>
+    </recordHeader>
+    <metadata schemaURI="topx">
+      <ToPX xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.nationaalarchief.nl/ToPX/v2.3">
+        <aggregatie>
+          <identificatiekenmerk>NL-0784-10009-BV000000046_B000004162</identificatiekenmerk>
+          <aggregatieniveau>Record</aggregatieniveau>
+          <naam>tekening (technisch) - bouw school-cathechismuslokalem,sacristie en portiek Raadhuisstraat 3 5126CK Gilze 07-10-1908</naam>
+          <taal>dut</taal>
+          <eventGeschiedenis>
+            <datumOfPeriode>
+              <datum>1908-10-07</datum>
+            </datumOfPeriode>
+            <type>Verzending</type>
+            <verantwoordelijkeFunctionaris>Gemeente Gilze en Rijen</verantwoordelijkeFunctionaris>
+          </eventGeschiedenis>
+          <relatie>
+            <relatieID>NL-0784-10009-BV000000046</relatieID>
+            <typeRelatie>Hiërarchisch</typeRelatie>
+            <datumOfPeriode>
+              <datum>2019-05-29</datum>
+            </datumOfPeriode>
+          </relatie>
+          <gebruiksrechten>
+            <omschrijvingVoorwaarden>Vrij te gebruiken</omschrijvingVoorwaarden>
+            <datumOfPeriode>
+              <datum>1908-10-07</datum>
+            </datumOfPeriode>
+          </gebruiksrechten>
+          <vertrouwelijkheid>
+            <classificatieNiveau>Niet vertrouwelijk</classificatieNiveau>
+            <datumOfPeriode>
+              <datum>2018-08-28</datum>
+            </datumOfPeriode>
+          </vertrouwelijkheid>
+          <openbaarheid>
+            <omschrijvingBeperkingen>Openbaar</omschrijvingBeperkingen>
+            <datumOfPeriode>
+              <datum>2018-08-28</datum>
+            </datumOfPeriode>
+          </openbaarheid>
+        </aggregatie>
+      </ToPX>
+    </metadata>
+  </record>
+  <record>
+    <recordHeader>
+      <identificatie>B000004162</identificatie>
+    </recordHeader>
+    <metadata schemaURI="topx">
+      <ToPX xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.nationaalarchief.nl/ToPX/v2.3">
+        <bestand>
+          <identificatiekenmerk>B000004162</identificatiekenmerk>
+          <aggregatieniveau>Bestand</aggregatieniveau>
+          <naam>tekening (technisch) - bouw school-cathechismuslokalem,sacristie en portiek Raadhuisstraat 3 5126CK Gilze 07-10-1908</naam>
+          <relatie>
+            <relatieID>NL-0784-10009-BV000000046_B000004162</relatieID>
+            <typeRelatie>Hiërarchisch</typeRelatie>
+            <datumOfPeriode>
+              <datum>2019-05-29</datum>
+            </datumOfPeriode>
+          </relatie>
+          <vorm>
+            <redactieGenre>Tekening (technisch)</redactieGenre>
+          </vorm>
+          <formaat>
+            <identificatiekenmerk>B000004162</identificatiekenmerk>
+            <bestandsnaam>
+              <naam>B000004162</naam>
+              <extensie>pdf</extensie>
+            </bestandsnaam>
+            <omvang>5033</omvang>
+            <bestandsformaat>fmt/18</bestandsformaat>
+            <fysiekeIntegriteit>
+              <algoritme>sha256</algoritme>
+              <waarde>cd219cd6c05e48c22fe6be052891b731a0cab1e4ec590cde14411eed61dbcca6</waarde>
+              <datumEnTijd>2020-09-11T16:27:14.3933333</datumEnTijd>
+            </fysiekeIntegriteit>
+            <datumAanmaak>2019-05-29</datumAanmaak>
+          </formaat>
+        </bestand>
+      </ToPX>
+    </metadata>
+  </record>
+  <record>
+    <recordHeader>
+      <identificatie>NL-0784-10009-BV000000046_B000004163</identificatie>
+    </recordHeader>
+    <metadata schemaURI="topx">
+      <ToPX xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.nationaalarchief.nl/ToPX/v2.3">
+        <aggregatie>
+          <identificatiekenmerk>NL-0784-10009-BV000000046_B000004163</identificatiekenmerk>
+          <aggregatieniveau>Record</aggregatieniveau>
+          <naam>tekening (technisch) - bouw school-cathechismuslokalem,sacristie en portiek Raadhuisstraat 3 5126CK Gilze 07-10-1908</naam>
+          <taal>dut</taal>
+          <eventGeschiedenis>
+            <datumOfPeriode>
+              <datum>1908-10-07</datum>
+            </datumOfPeriode>
+            <type>Verzending</type>
+            <verantwoordelijkeFunctionaris>Gemeente Gilze en Rijen</verantwoordelijkeFunctionaris>
+          </eventGeschiedenis>
+          <relatie>
+            <relatieID>NL-0784-10009-BV000000046</relatieID>
+            <typeRelatie>Hiërarchisch</typeRelatie>
+            <datumOfPeriode>
+              <datum>2019-05-29</datum>
+            </datumOfPeriode>
+          </relatie>
+          <gebruiksrechten>
+            <omschrijvingVoorwaarden>Vrij te gebruiken</omschrijvingVoorwaarden>
+            <datumOfPeriode>
+              <datum>1908-10-07</datum>
+            </datumOfPeriode>
+          </gebruiksrechten>
+          <vertrouwelijkheid>
+            <classificatieNiveau>Niet vertrouwelijk</classificatieNiveau>
+            <datumOfPeriode>
+              <datum>2018-08-28</datum>
+            </datumOfPeriode>
+          </vertrouwelijkheid>
+          <openbaarheid>
+            <omschrijvingBeperkingen>Openbaar</omschrijvingBeperkingen>
+            <datumOfPeriode>
+              <datum>2018-08-28</datum>
+            </datumOfPeriode>
+          </openbaarheid>
+        </aggregatie>
+      </ToPX>
+    </metadata>
+  </record>
+  <record>
+    <recordHeader>
+      <identificatie>B000004163</identificatie>
+    </recordHeader>
+    <metadata schemaURI="topx">
+      <ToPX xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.nationaalarchief.nl/ToPX/v2.3">
+        <bestand>
+          <identificatiekenmerk>B000004163</identificatiekenmerk>
+          <aggregatieniveau>Bestand</aggregatieniveau>
+          <naam>tekening (technisch) - bouw school-cathechismuslokalem,sacristie en portiek Raadhuisstraat 3 5126CK Gilze 07-10-1908</naam>
+          <relatie>
+            <relatieID>NL-0784-10009-BV000000046_B000004163</relatieID>
+            <typeRelatie>Hiërarchisch</typeRelatie>
+            <datumOfPeriode>
+              <datum>2019-05-29</datum>
+            </datumOfPeriode>
+          </relatie>
+          <vorm>
+            <redactieGenre>Tekening (technisch)</redactieGenre>
+          </vorm>
+          <formaat>
+            <identificatiekenmerk>B000004163</identificatiekenmerk>
+            <bestandsnaam>
+              <naam>B000004163</naam>
+              <extensie>pdf</extensie>
+            </bestandsnaam>
+            <omvang>6142</omvang>
+            <bestandsformaat>fmt/18</bestandsformaat>
+            <fysiekeIntegriteit>
+              <algoritme>sha256</algoritme>
+              <waarde>da4e4ca803155c3c10ead2d43956e48e0c96b5d05995a9277c4d748d044430b4</waarde>
+              <datumEnTijd>2020-09-11T16:27:14.4</datumEnTijd>
+            </fysiekeIntegriteit>
+            <datumAanmaak>2019-05-29</datumAanmaak>
+          </formaat>
+        </bestand>
+      </ToPX>
+    </metadata>
+  </record>
+  <record>
+    <recordHeader>
+      <identificatie>NL-0784-10009-BV000000046_B000004164</identificatie>
+    </recordHeader>
+    <metadata schemaURI="topx">
+      <ToPX xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.nationaalarchief.nl/ToPX/v2.3">
+        <aggregatie>
+          <identificatiekenmerk>NL-0784-10009-BV000000046_B000004164</identificatiekenmerk>
+          <aggregatieniveau>Record</aggregatieniveau>
+          <naam>berekening - bouw school-cathechismuslokalem,sacristie en portiek Raadhuisstraat 3 5126CK Gilze 07-10-1908</naam>
+          <taal>dut</taal>
+          <eventGeschiedenis>
+            <datumOfPeriode>
+              <datum>1908-10-07</datum>
+            </datumOfPeriode>
+            <type>Verzending</type>
+            <verantwoordelijkeFunctionaris>Gemeente Gilze en Rijen</verantwoordelijkeFunctionaris>
+          </eventGeschiedenis>
+          <relatie>
+            <relatieID>NL-0784-10009-BV000000046</relatieID>
+            <typeRelatie>Hiërarchisch</typeRelatie>
+            <datumOfPeriode>
+              <datum>2019-05-29</datum>
+            </datumOfPeriode>
+          </relatie>
+          <gebruiksrechten>
+            <omschrijvingVoorwaarden>Vrij te gebruiken</omschrijvingVoorwaarden>
+            <datumOfPeriode>
+              <datum>1908-10-07</datum>
+            </datumOfPeriode>
+          </gebruiksrechten>
+          <vertrouwelijkheid>
+            <classificatieNiveau>Niet vertrouwelijk</classificatieNiveau>
+            <datumOfPeriode>
+              <datum>2018-08-28</datum>
+            </datumOfPeriode>
+          </vertrouwelijkheid>
+          <openbaarheid>
+            <omschrijvingBeperkingen>Openbaar</omschrijvingBeperkingen>
+            <datumOfPeriode>
+              <datum>2018-08-28</datum>
+            </datumOfPeriode>
+          </openbaarheid>
+        </aggregatie>
+      </ToPX>
+    </metadata>
+  </record>
+  <record>
+    <recordHeader>
+      <identificatie>B000004164</identificatie>
+    </recordHeader>
+    <metadata schemaURI="topx">
+      <ToPX xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.nationaalarchief.nl/ToPX/v2.3">
+        <bestand>
+          <identificatiekenmerk>B000004164</identificatiekenmerk>
+          <aggregatieniveau>Bestand</aggregatieniveau>
+          <naam>berekening - bouw school-cathechismuslokalem,sacristie en portiek Raadhuisstraat 3 5126CK Gilze 07-10-1908</naam>
+          <relatie>
+            <relatieID>NL-0784-10009-BV000000046_B000004164</relatieID>
+            <typeRelatie>Hiërarchisch</typeRelatie>
+            <datumOfPeriode>
+              <datum>2019-05-29</datum>
+            </datumOfPeriode>
+          </relatie>
+          <vorm>
+            <redactieGenre>Berekening</redactieGenre>
+          </vorm>
+          <formaat>
+            <identificatiekenmerk>B000004164</identificatiekenmerk>
+            <bestandsnaam>
+              <naam>B000004164</naam>
+              <extensie>pdf</extensie>
+            </bestandsnaam>
+            <omvang>6154</omvang>
+            <bestandsformaat>fmt/18</bestandsformaat>
+            <fysiekeIntegriteit>
+              <algoritme>sha256</algoritme>
+              <waarde>5aa90cf8a479822b181e5bc8a477801f1d28eabd8e5b6e7425b8c4e804f9d847</waarde>
+              <datumEnTijd>2020-09-11T16:27:14.41</datumEnTijd>
+            </fysiekeIntegriteit>
+            <datumAanmaak>2019-05-29</datumAanmaak>
+          </formaat>
+        </bestand>
+      </ToPX>
+    </metadata>
+  </record>
+</recordInformationPackage>

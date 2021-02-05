@@ -72,6 +72,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MockIOUtilities.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Statics.cs" />
     <Compile Include="TestComplexLinkProcessor.cs" />
@@ -83,6 +84,7 @@
     <Compile Include="TestResources\Dossiers_Test_ComplexLink1.cs" />
     <Compile Include="TestResources\Dossiers_Test1.cs" />
     <Compile Include="TestSanitizer.cs" />
+    <Compile Include="TestSideCarExport.cs" />
     <Compile Include="TestValidations.cs" />
     <Compile Include="TestXmlValidation.cs" />
   </ItemGroup>
@@ -125,6 +127,10 @@
       <Project>{1e9b8660-0142-4818-ac8e-2b3fc0619783}</Project>
       <Name>Topx.Creator</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Topx.Sidecar\Topx.Sidecar.csproj">
+      <Project>{e14311df-ab26-486b-8b78-9fa4a4aac3a9}</Project>
+      <Name>Topx.Sidecar</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Topx.Utility\Topx.Utility.csproj">
       <Project>{5862f3af-2b57-4ee0-8e94-3a3d211737f1}</Project>
       <Name>Topx.Utility</Name>
@@ -141,6 +147,7 @@
     <Content Include="TestResources\ExpectedOutput_Openbaarheid.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="TestResources\TopxOutputForSidecarTest.xml" />
     <Content Include="TestResources\TopXOutput_NotValid.xml" />
     <Content Include="TestResources\ExpectedOutput1.xml" />
     <Content Include="TestResources\ExpectedOutputBatch1.xml">
