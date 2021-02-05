@@ -2,14 +2,17 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data.Odbc;
+using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using System.Xml.Linq;
 using System.Xml.Serialization;
 using ByteSizeLib;
 using MaterialSkin;
@@ -25,6 +28,7 @@ using Topx.Interface;
 using TOPX.UI.Classes;
 using Topx.Data.DTO;
 using Topx.FileAnalysis;
+using Topx.Sidecar;
 using Topx.Utility;
 using Logger = NLog.Logger;
 
@@ -39,7 +43,8 @@ namespace TOPX.UI.Forms
         private List<FieldMapping> _fieldmappingsDossiers;
         private List<FieldMapping> _fieldmappingsRecords;
 
-        private static Logger _logger;
+        private static ILogger _logger;
+        private readonly IIOUtilities _ioUtilities;
         private FormLog _formLog = new FormLog();
 
         private Headers _headers;
@@ -52,8 +57,10 @@ namespace TOPX.UI.Forms
 
         private BackgroundWorker bgworker;
 
-        public TopXConverter(IDataService dataservice)
+        public TopXConverter(IDataService dataservice, ILogger logger, IIOUtilities ioUtilities)
         {
+            _logger = logger;
+            _ioUtilities = ioUtilities;
             _dataservice = dataservice;
             InitializeComponent();
             var materialSkinManager = MaterialSkinManager.Instance;
@@ -72,10 +79,8 @@ namespace TOPX.UI.Forms
                     Application.Exit();
                     return;
                 }
-                Logging.Init();
-                _logger = LogManager.GetCurrentClassLogger();
-               _headers = new Headers();
 
+                _headers = new Headers();
                 gridFieldMappingDossiers.AutoGenerateColumns = false;
                 gridFieldMappingRecords.AutoGenerateColumns = false;
 
@@ -146,6 +151,9 @@ namespace TOPX.UI.Forms
             txtOmschrijvingArchief.Text = _globals?.OmschrijvingArchief;
             txtBatchTargetDirectory.Text = _globals?.BatchTargetDirectory;
             txtBatchSourceDirectory.Text = _globals?.BatchSourceDirectory;
+            txtSourceDirOfSidecarFiles.Text = _globals?.SourceDirOfSidecarFiles;
+            txtTargetDirOfSidecarFiles.Text = _globals?.TargetDirOfSidecarFiles;
+
             lblVersion.Text = $"v {Application.ProductVersion}";
 
             if (File.Exists(_globals?.DroidInstallDirectory))
@@ -243,7 +251,7 @@ namespace TOPX.UI.Forms
         {
             if (chkCreateBatchesSubdir.Checked)
             {
-                
+
                 if (!Directory.Exists(txtBatchSourceDirectory.Text))
                 {
                     var msgText = string.IsNullOrEmpty(txtBatchSourceDirectory.Text)
@@ -274,8 +282,8 @@ namespace TOPX.UI.Forms
                 var parser = new Parser(_globals, _dataservice);
 
                 var listofdossiers = _dataservice.GetAllDossiers();
-                
-                var batchSize = (long) ByteSize.FromGigaBytes(Convert.ToDouble(txtBatchSize.Text)).Bytes;
+
+                var batchSize = (long)ByteSize.FromGigaBytes(Convert.ToDouble(txtBatchSize.Text)).Bytes;
 
                 _resultRecordInformationPackage = chkUseBatchSize.Checked
                     ? parser.ParseDataToTopx(listofdossiers, batchSize)
@@ -324,7 +332,7 @@ namespace TOPX.UI.Forms
                     else if (chkCreateBatchesSubdir.Checked)
                     {
                         var message =
-                            $"De batches worden opgeslagen in subdirectories onder {txtBatchTargetDirectory.Text}. Alle reeds aanwezige subdirectories worden GEWIST " + 
+                            $"De batches worden opgeslagen in subdirectories onder {txtBatchTargetDirectory.Text}. Alle reeds aanwezige subdirectories worden GEWIST " +
                             $"om het resultaat zuiver te houden. {Environment.NewLine}Het kopiëren van alle bestanden kan enige tijd kosten, met name wanneer dit over een netwerk gaat. Doorgaan?";
                         if (MessageBox.Show(message, "batches", MessageBoxButtons.YesNo) == DialogResult.Yes)
                         {
@@ -443,7 +451,9 @@ namespace TOPX.UI.Forms
                 BatchSourceDirectory = txtBatchSourceDirectory.Text,
                 BatchTargetDirectory = txtBatchTargetDirectory.Text,
                 DroidInstallDirectory = txtDroidLocation.Text,
-                DirectoryFilesToScanForMetadata = txtFilesDirToScan.Text
+                DirectoryFilesToScanForMetadata = txtFilesDirToScan.Text,
+                SourceDirOfSidecarFiles = txtSourceDirOfSidecarFiles.Text,
+                TargetDirOfSidecarFiles = txtTargetDirOfSidecarFiles.Text
             };
 
             if (!string.IsNullOrEmpty(txtDatumArchief.Text))
@@ -474,13 +484,42 @@ namespace TOPX.UI.Forms
 
         }
 
+        private void ShowInvalidCsvMessage(string fileName)
+        {
+            MessageBox.Show($"Het aangeboden bestand {fileName} is geen (valide) csv-bestand. Controleer met een simpele editor als Notepad of Notepad++ de bestandsopmaak. Let erop dat de scheidingstekens puntkomma zijn. De bestandsnaam moet de extensie .csv hebben");
+        }
         private void LoadDossierFile(string fileName, bool useCachedMappings = true)
         {
             try
             {
+                if (!_ioUtilities.TestForValidCSV(fileName))
+                {
+                    ShowInvalidCsvMessage(fileName);
+                    return;
+                }
                 using (var sr = new StreamReader(new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite)))
                 {
-                    _headersDossiers = sr.ReadLine().Split(";"[0]).ToList();
+                    var firstLine = sr.ReadLine();
+                    if (firstLine == null)
+                    {
+                        MessageBox.Show($"De header (= de eerste regel) in de file {Path.GetFileName(fileName)} is leeg. Controleer de file op systeemkarakters zoals een tab of newline etc. met (bijvoorbeeld) Notepad++");
+                        return;
+                    }
+
+                    var positionOfSystemCharacters = StringUtilities.CheckForSystemCharacters(firstLine);
+                    if (positionOfSystemCharacters > 0)
+                    {
+                        MessageBox.Show($"De header (= de eerste regel) in de file {Path.GetFileName(fileName)} is niet valide. Er is een Control-karakter gevonden op positie {positionOfSystemCharacters}. Controleer de file op systeemkarakters zoals een tab of newline etc. met (bijvoorbeeld) Notepad++");
+                        return;
+                    }
+
+                    _headersDossiers = firstLine.Split(";"[0]).ToList();
+                    if (_headersDossiers.Count < 20 || _headersDossiers.Count > 40) // dan is het zeker dat er wat mis is
+                    {
+                        ShowInvalidCsvMessage(fileName);
+                        return;
+                    }
+
                 }
                 if (useCachedMappings)
                     _fieldmappingsDossiers = _dataservice.GetMappingsDossiers(_headersDossiers);
@@ -502,9 +541,32 @@ namespace TOPX.UI.Forms
         {
             try
             {
+                if (!_ioUtilities.TestForValidCSV(fileName))
+                {
+                    ShowInvalidCsvMessage(fileName);
+                    return;
+                }
                 using (var sr = new StreamReader(new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite)))
                 {
-                    _headersRecords = sr.ReadLine().Split(";"[0]).ToList();
+                    var firstLine = sr.ReadLine();
+                    if (firstLine == null)
+                    {
+                        MessageBox.Show($"De header (= de eerste regel) in de file {Path.GetFileName(fileName)} is leeg. Controleer de file op systeemkarakters zoals een tab of newline etc. met (bijvoorbeeld) Notepad++");
+                        return;
+                    }
+
+                    var positionOfSystemCharacters = StringUtilities.CheckForSystemCharacters(firstLine);
+                    if (positionOfSystemCharacters > 0)
+                    {
+                        MessageBox.Show($"De header (= de eerste regel) in de file {Path.GetFileName(fileName)} is niet valide. Er is een Control-karakter gevonden op positie {positionOfSystemCharacters}. Controleer de file op systeemkarakters zoals een tab of newline etc. met (bijvoorbeeld) Notepad++");
+                        return;
+                    }
+                    _headersRecords = firstLine.Split(";"[0]).ToList();
+                    if (_headersDossiers.Count < 20 || _headersDossiers.Count > 40) // dan is het zeker dat er wat mis is
+                    {
+                        ShowInvalidCsvMessage(fileName);
+                        return;
+                    }
                 }
 
                 _fieldmappingsRecords = _dataservice.GetMappingsRecords(_headersRecords);
@@ -613,18 +675,18 @@ namespace TOPX.UI.Forms
                 MessageBox.Show("Er is geen bewerking geselecteerd");
                 return;
             }
-            if (chkGetFileSignature.Checked && (!File.Exists(txtDroidLocation.Text)  || Path.GetFileName(txtDroidLocation.Text) != "droid.bat"))
+            if (chkGetFileSignature.Checked && (!File.Exists(txtDroidLocation.Text) || Path.GetFileName(txtDroidLocation.Text) != "droid.bat"))
             {
                 MessageBox.Show("Voor vaststellen van de File Signature moet eerst de locatie van droid.bat worden aangegeven (DROID moet eerst door jezelf worden geïnstalleerd). Dat is nodig omdat TopX Creator van deze tool gebruik maakt.");
                 return;
             }
 
             Application.UseWaitCursor = true;
-            
+
             InitBackgroundWorker();
             if (!bgworker.IsBusy)
             {
-                
+
                 bgworker.RunWorkerAsync();
                 btGenerateMetadata.Enabled = false;
             }
@@ -654,7 +716,7 @@ namespace TOPX.UI.Forms
             var path = txtFilesDirToScan.Text;
             var fileAnalysis = new Metadata(chkGetHash.Checked, chkGetFileSize.Checked, checkGetCreationDate.Checked, chkGetFileSignature.Checked, chkTestForPasswProtection.Checked, path, txtDroidLocation.Text, _dataservice.GetAllDossiers(), _dataservice, _logger);
             fileAnalysis.MetadataEventHandler += IncreaseProgress;
-            
+
             fileAnalysis.Collect();
 
             Invoke(new Action(() =>
@@ -667,7 +729,7 @@ namespace TOPX.UI.Forms
         private void Bgworker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             progressBar1.Value = e.ProgressPercentage;
-            var values = (EventCounter) e.UserState;
+            var values = (EventCounter)e.UserState;
             txtProgressMetaData.Text = $"Aantal dossiers: {values.DossiersCount}";
             if (values.DroidStarted)
             {
@@ -690,7 +752,7 @@ namespace TOPX.UI.Forms
             var x = (MetadataEventargs)eventArgs;
             var values = x.GetProgress();
             bgworker.ReportProgress(values.DossiersProgress, values);
-            
+
         }
 
         private void linkCopyMetadataErrors_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -703,20 +765,27 @@ namespace TOPX.UI.Forms
         {
             if (e.Button == MouseButtons.Right)
             {
-                var currentRow = gridFieldMappingDossiers.HitTest(e.X, e.Y).RowIndex;
+                try
+                {
+                    var currentRow = gridFieldMappingDossiers.HitTest(e.X, e.Y).RowIndex;
 
-                gridFieldMappingDossiers.ClearSelection();
-                gridFieldMappingDossiers.Rows[currentRow].Selected = true;
+                    gridFieldMappingDossiers.ClearSelection();
+                    gridFieldMappingDossiers.Rows[currentRow].Selected = true;
 
-                var screenPoint = ((Control)sender).PointToScreen(e.Location);
-                var formPoint = PointToClient(screenPoint); //this is the Form object
-                var formSelectDossierMapper =
-                    new FormSelectMapper(_fieldmappingsDossiers, gridFieldMappingDossiers.Rows[currentRow].Cells[0].Value.ToString())
-                    {
-                        Location = new Point(Location.X + formPoint.X + 50, Location.Y + formPoint.Y - 30)
-                    };
-                formSelectDossierMapper.ShowDialog();
-                gridFieldMappingDossiers.DataSource = _fieldmappingsDossiers.ToList();
+                    var screenPoint = ((Control)sender).PointToScreen(e.Location);
+                    var formPoint = PointToClient(screenPoint); //this is the Form object
+                    var formSelectDossierMapper =
+                        new FormSelectMapper(_fieldmappingsDossiers, gridFieldMappingDossiers.Rows[currentRow].Cells[0].Value?.ToString())
+                        {
+                            Location = new Point(Location.X + formPoint.X + 50, Location.Y + formPoint.Y - 30)
+                        };
+                    formSelectDossierMapper.ShowDialog();
+                    gridFieldMappingDossiers.DataSource = _fieldmappingsDossiers.ToList();
+
+                }
+                catch  // swallow exception
+                {
+                }
             }
         }
 
@@ -910,7 +979,6 @@ namespace TOPX.UI.Forms
                     SaveGlobals(null, null);
                 }
             }
-            
         }
 
         private void chkCreateBatchesSubdir_CheckedChanged(object sender, EventArgs e)
@@ -956,19 +1024,112 @@ namespace TOPX.UI.Forms
             SaveGlobals(null, null);
         }
 
-        private void gridFieldMappingDossiers_CellValueNeeded(object sender, DataGridViewCellValueEventArgs e)
-        {
-
-        }
-
-        private void gridFieldMappingDossiers_CellValueChanged(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
 
         private void gridFieldMappingDossiers_DefaultValuesNeeded(object sender, DataGridViewRowEventArgs e)
         {
 
+        }
+
+        // ++++++++++++++++++++++++++++++++++++++++ Tab Sidecar-export +++++++++++++++++++++++++++++++++++++++++++++++++
+
+        private void picSelectSourceDirOfSidecarFiles_Click(object sender, EventArgs e)
+        {
+            using (var folderBrowserDialog = new FolderBrowserDialog())
+            {
+                var result = folderBrowserDialog.ShowDialog();
+                if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(folderBrowserDialog.SelectedPath))
+                {
+                    txtSourceDirOfSidecarFiles.Text = folderBrowserDialog.SelectedPath;
+                    SaveGlobals(null, null);
+                }
+            }
+        }
+
+        private void picSelectTargetDirOfSidecarFiles_Click(object sender, EventArgs e)
+        {
+            using (var folderBrowserDialog = new FolderBrowserDialog())
+            {
+                var result = folderBrowserDialog.ShowDialog();
+                if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(folderBrowserDialog.SelectedPath))
+                {
+                    txtTargetDirOfSidecarFiles.Text = folderBrowserDialog.SelectedPath;
+                    SaveGlobals(null, null);
+                }
+            }
+        }
+
+        private void btGenerateSidecarExport_Click(object sender, EventArgs e)
+        {
+            if (Directory.Exists(txtTargetDirOfSidecarFiles.Text) && MessageBox.Show($"Alle bestanden in de doeldirectory {txtTargetDirOfSidecarFiles.Text} worden gewist. Doorgaan?", "", MessageBoxButtons.OKCancel) != DialogResult.OK)
+                return;
+
+            if (_resultRecordInformationPackage?[0] == null)
+            {
+                MessageBox.Show("Er is geen TopX-data aanwezig. Ga naar tab 'Genereer TopX' en zorg ervoor dat er een TopX-bestand wordt gegenereerd. Deze hoeft - voor een sidecar-export - niet te worden opgeslagen.");
+                return;
+            }
+
+            if (!Directory.Exists(txtSourceDirOfSidecarFiles.Text))
+            {
+                MessageBox.Show($"De brondirectory {txtSourceDirOfSidecarFiles.Text} is niet bereikbaar of bestaat niet.");
+                return;
+            }
+
+            if (!Directory.Exists(txtTargetDirOfSidecarFiles.Text))
+            {
+                MessageBox.Show($"De doeldirectory voor de Sidecar-export {txtTargetDirOfSidecarFiles.Text} is niet bereikbaar of bestaat niet.");
+                return;
+            }
+
+            var sidecarExport = new Export(txtSourceDirOfSidecarFiles.Text, txtTargetDirOfSidecarFiles.Text, _ioUtilities, _logger);
+            var doc = new XDocument();
+            using (var writer = doc.CreateWriter())
+            {
+                var serializer = new XmlSerializer(_resultRecordInformationPackage[0].GetType());
+                serializer.Serialize(writer, _resultRecordInformationPackage[0]);
+            }
+
+            Cursor.Current = Cursors.WaitCursor;
+
+            // Perform Sidecar-export
+            var nrOfBatches = chkSidecarMakeBatches.Checked ? Convert.ToInt32(txtSidecarNrOfBatches.Text) : 0;
+            var success = sidecarExport.Create(doc, nrOfBatches);
+
+            Cursor.Current = Cursors.Default;
+
+            if (sidecarExport.Error)
+            {
+                txtLogSidecarExport.Text = sidecarExport.ErrorMessage.ToString();
+                linkOpenSidecarExportInExplorer.Visible = false;
+            }
+            else
+            {
+                txtLogSidecarExport.Text = $"{sidecarExport.NrOfDossiersExported} dossiers succesvol geëxporteerd.";
+                linkOpenSidecarExportInExplorer.Visible = true;
+            }
+
+            MessageBox.Show(success
+                ? "Sidecar-export is gereed"
+                : "Errors in Sidecar-export");
+        }
+
+        private void linkOpenSidecarExportInExplorer_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            IOUtilities.ShowExplorer(txtTargetDirOfSidecarFiles.Text);
+        }
+
+        private void txtSidecarNrOfBatches_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Prevent non-numeric chars
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void chkSidecarMakeBatches_CheckedChanged(object sender, EventArgs e)
+        {
+            txtSidecarNrOfBatches.Enabled = chkSidecarMakeBatches.Checked;
         }
     }
 }

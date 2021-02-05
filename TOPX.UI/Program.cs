@@ -1,14 +1,14 @@
 ﻿using System;
-using System.Runtime.InteropServices;
-using System.Threading;
+using System.ServiceModel.Description;
 using System.Windows.Forms;
-using AutoUpdaterDotNET;
+using NLog;
 using TOPX.UI.Forms;
 using SimpleInjector;
 using Topx.Data;
 using Topx.DataServices;
 using Container = SimpleInjector.Container;
-
+using TOPX.UI.Classes;
+using Topx.Utility;
 
 namespace TOPX.UI
 {
@@ -44,9 +44,10 @@ namespace TOPX.UI
                 MessageBox.Show("De database kon niet worden aangemaakt of gevonden. Mogelijk is deze niet geïnstalleerd. Installeer SqlLocalDB.MSI", "Database niet gevonden", MessageBoxButtons.OK);
                 return false;
             }
-
-          
+            Logging.Init();
+            container.Register<ILogger>(LogManager.GetCurrentClassLogger);
             container.Register<IDataService>(() => new DataService(connectionstring), Lifestyle.Singleton);
+            container.Register<IIOUtilities, IOUtilities>();
             container.Register<TopXConverter>();
             return true;
         }

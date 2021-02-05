@@ -56,7 +56,7 @@ namespace Topx.Creator
             var naamArchief = _globals.NaamArchief;
 
             long totalSize = 0;
-            var rip = new recordInformationPackage()
+            var rip = new recordInformationPackage
             {
                 record = RipArchief(_identificatieArchief, naamArchief)
             };
@@ -95,7 +95,7 @@ namespace Topx.Creator
                 {
                     // Clone rip 
 
-                    resultRecordInformationPackages.Add(new recordInformationPackage()
+                    resultRecordInformationPackages.Add(new recordInformationPackage
                     {
                         packageHeader = RipHeader(_identificatieArchief, (DateTime)datumArchief, omschrijvingArchief, bronArchief, doelArchief),
                         record = rip.record
@@ -108,7 +108,7 @@ namespace Topx.Creator
                 }
             }
 
-            resultRecordInformationPackages.Add(new recordInformationPackage()
+            resultRecordInformationPackages.Add(new recordInformationPackage
             {
                 packageHeader = RipHeader(_identificatieArchief, (DateTime)datumArchief, omschrijvingArchief, bronArchief, doelArchief),
                 record = rip.record
@@ -228,7 +228,7 @@ namespace Topx.Creator
                 {
                     relatieID = new TopX.nonEmptyStringTypeAttribuut() {Value = dossier.IdentificatieKenmerk},
                     typeRelatie = new TopX.nonEmptyStringTypeAttribuut() {Value = dossier.Relatie_Type ?? "Hiërarchisch" },
-                    datumOfPeriode = new datumOfPeriodeType()
+                    datumOfPeriode = new datumOfPeriodeType
                     {
                         datum = relatie_DatumOfPeriode
                     },
@@ -236,9 +236,9 @@ namespace Topx.Creator
             };
             var topx = new topxType
             {
-                Item = new aggregatieType()
+                Item = new aggregatieType
                 {
-                    identificatiekenmerk = new nonEmptyStringTypeAttribuut() { Value = identificatieKenmerk },
+                    identificatiekenmerk = new nonEmptyStringTypeAttribuut { Value = identificatieKenmerk },
 
                     eventGeschiedenis = DirtyTransformTypes(GetEventGeschiedenis(dossier)),
                     //eventGeschiedenis = new eventGeschiedenisType[] { new eventGeschiedenisType() {datumOfPeriode = new datumOfPeriodeType()
@@ -246,23 +246,23 @@ namespace Topx.Creator
                     //    type = new nonEmptyStringTypeAttribuut() {Value = dossier.Eventgeschiedenis_Type} ,
                     //    verantwoordelijkeFunctionaris = new nonEmptyStringTypeAttribuut() {Value = dossier.Eventgeschiedenis_VerantwoordelijkeFunctionaris}  } },
 
-                    aggregatieniveau = new aggregatieTypeAggregatieniveau()
+                    aggregatieniveau = new aggregatieTypeAggregatieniveau
                     {
                         Value = aggregatieAggregatieniveauType.Record
                     },
-                    naam = new[] { new nonEmptyStringTypeAttribuut() { Value = record.Naam } },
-                    taal = new taalTypeAttribuut[] { new taalTypeAttribuut() { Value = (taalType)Enum.Parse(typeof(taalType), dossier.Taal.ToLower()) } },
+                    naam = new[] { new nonEmptyStringTypeAttribuut { Value = record.Naam } },
+                    taal = new taalTypeAttribuut[] { new taalTypeAttribuut { Value = (taalType)Enum.Parse(typeof(taalType), dossier.Taal.ToLower()) } },
                     //  taal = new[] { new taalTypeAttribuut() { Value = taalType.dut } },
                     relatie = relatie,
                     vertrouwelijkheid = new vertrouwelijkheidType[]
                     {
-                        new vertrouwelijkheidType()
+                        new vertrouwelijkheidType
                         {
-                            classificatieNiveau = new vertrouwelijkheidTypeClassificatieNiveau()
+                            classificatieNiveau = new vertrouwelijkheidTypeClassificatieNiveau
                             {
                                 Value = classificatieNiveauType
                             },
-                            datumOfPeriode = new datumOfPeriodeType()
+                            datumOfPeriode = new datumOfPeriodeType
                             {
                                 datum = vertrouwelijkheid_DatumOfPeriode
                             }
@@ -272,13 +272,13 @@ namespace Topx.Creator
                     ,
                     gebruiksrechten = new gebruiksrechtenType[]
                     {
-                        new gebruiksrechtenType()
+                        new gebruiksrechtenType
                         {
-                            omschrijvingVoorwaarden =new nonEmptyStringTypeAttribuut()
+                            omschrijvingVoorwaarden =new nonEmptyStringTypeAttribuut
                             {
                                 Value = record.Gebruiksrechten_OmschrijvingVoorwaarden,
                             },
-                                datumOfPeriode = new datumOfPeriodeType()
+                                datumOfPeriode = new datumOfPeriodeType
                             {
                                 datum = gebruiksrechten_DatumOfPeriode
                             }
@@ -327,35 +327,35 @@ namespace Topx.Creator
 
                     // Wanneer maar 1 entry (dus in de meeste gevallen), OF als de laatste entry van een collectie is gehaald, geef dan geen periode aan
                     if (index == arrDatumsOfPeriodes.Length - 1)
-                        datumOfPeriode = new datumOfPeriodeType()
+                        datumOfPeriode = new datumOfPeriodeType
                         {
                             datum = openbaarheid_DatumOfPeriode.ToString("yyyy-MM-dd")
                         };
                     else // dus wel een periode aangeven
                     {
                         var openbaarheid_DatumOfPeriode_Eind = DateTime.ParseExact(arrDatumsOfPeriodes[index + 1], DateParsing, CultureInfo.InvariantCulture).AddDays(-1);
-                        datumOfPeriode = new datumOfPeriodeType()
+                        datumOfPeriode = new datumOfPeriodeType
                         {
-                            periode = new periodeType()
+                            periode = new periodeType
                             {
-                                begin = new datumOfJaarType()
+                                begin = new datumOfJaarType
                                 {
-                                    Item = new datumOfJaarTypeDatum() { Value = openbaarheid_DatumOfPeriode },
+                                    Item = new datumOfJaarTypeDatum { Value = openbaarheid_DatumOfPeriode },
                                 },
-                                eind = new datumOfJaarType()
+                                eind = new datumOfJaarType
                                 {
-                                    Item = new datumOfJaarTypeDatum() { Value = openbaarheid_DatumOfPeriode_Eind }
+                                    Item = new datumOfJaarTypeDatum { Value = openbaarheid_DatumOfPeriode_Eind }
                                 }
                             }
                         };
                     }
 
                     openbaarheidstypen.Add(
-                        new openbaarheidType()
+                        new openbaarheidType
                         {
                             omschrijvingBeperkingen = new[]
                             {
-                                new nonEmptyStringTypeAttribuut() {Value = arrOmschrijvingBeperkingen[index]}
+                                new nonEmptyStringTypeAttribuut {Value = arrOmschrijvingBeperkingen[index]}
                             },
                             datumOfPeriode = datumOfPeriode
                         });
@@ -392,22 +392,22 @@ namespace Topx.Creator
 
             var topx = new topxType
             {
-                Item = new bestandType()
+                Item = new bestandType
                 {
-                    identificatiekenmerk = new nonEmptyStringTypeAttribuut() { Value = identificatieKenmerkBestand },
-                    aggregatieniveau = new bestandTypeAggregatieniveau()
+                    identificatiekenmerk = new nonEmptyStringTypeAttribuut { Value = identificatieKenmerkBestand },
+                    aggregatieniveau = new bestandTypeAggregatieniveau
                     {
                         Value = bestandAggregatieniveauType.Bestand
                     },
-                    naam = new[] { new nonEmptyStringTypeAttribuut() { Value = record.Naam } },
+                    naam = new[] { new nonEmptyStringTypeAttribuut { Value = record.Naam } },
 
                     relatie = new[]
                     {
-                            new relatieType()
+                            new relatieType
                             {
-                                relatieID = new nonEmptyStringTypeAttribuut() {Value = relatieKenmerkBestand},
-                                typeRelatie = new nonEmptyStringTypeAttribuut() {Value = record.Relatie_TypeRelatie ?? "Hiërarchisch"},
-                                datumOfPeriode = new datumOfPeriodeType()
+                                relatieID = new nonEmptyStringTypeAttribuut {Value = relatieKenmerkBestand},
+                                typeRelatie = new nonEmptyStringTypeAttribuut {Value = record.Relatie_TypeRelatie ?? "Hiërarchisch"},
+                                datumOfPeriode = new datumOfPeriodeType
                                 {
                                     datum = record.Bestand_Formaat_DatumAanmaak?.ToString("yyyy-MM-dd")
                                 },
@@ -416,30 +416,30 @@ namespace Topx.Creator
 
                     // openbaarheid = GetOpenbaarheid(record.Bestand_Formaat_Bestandsnaam, record.Openbaarheid_OmschrijvingBeperkingen, record.Openbaarheid_DatumOfPeriode),
 
-                    vorm = new vormType()
+                    vorm = new vormType
                     {
-                        redactieGenre = new @string() { Value = record.Bestand_Vorm_Redactiegenre },
+                        redactieGenre = new @string { Value = record.Bestand_Vorm_Redactiegenre },
                     },
                     formaat = new[]
                     {
-                            new formaatType()
+                            new formaatType
                             {
-                                identificatiekenmerk = new nonEmptyStringTypeAttribuut() {Value = identificatieKenmerkBestand},
-                                bestandsnaam = new bestandsnaamType()
+                                identificatiekenmerk = new nonEmptyStringTypeAttribuut {Value = identificatieKenmerkBestand},
+                                bestandsnaam = new bestandsnaamType
                                 {
-                                    naam = new nonEmptyStringTypeAttribuut() {Value = identificatieKenmerkBestand},
-                                    extensie = new @string() {Value = Path.GetExtension(record.Bestand_Formaat_Bestandsnaam).Substring(1)} // skip the dot
+                                    naam = new nonEmptyStringTypeAttribuut {Value = identificatieKenmerkBestand},
+                                    extensie = new @string {Value = Path.GetExtension(record.Bestand_Formaat_Bestandsnaam).Substring(1)} // skip the dot
                                 },
-                                omvang = new formaatTypeOmvang() {Value = record.Bestand_Formaat_BestandsOmvang.ToString()},
+                                omvang = new formaatTypeOmvang {Value = record.Bestand_Formaat_BestandsOmvang.ToString()},
                                 //bestandsformaat = new @string() {Value = "fmt/18"},
-                                bestandsformaat = new @string() {Value = record.Bestand_Formaat_BestandsFormaat},
-                                fysiekeIntegriteit = new fysiekeIntegriteitType()
+                                bestandsformaat = new @string {Value = record.Bestand_Formaat_BestandsFormaat},
+                                fysiekeIntegriteit = new fysiekeIntegriteitType
                                 {
-                                    algoritme = new nonEmptyStringTypeAttribuut() {Value = record.Bestand_Formaat_FysiekeIntegriteit_Algoritme},
-                                    waarde = new nonEmptyStringTypeAttribuut() {Value = record.Bestand_Formaat_FysiekeIntegriteit_Waarde},
-                                    datumEnTijd = new fysiekeIntegriteitTypeDatumEnTijd() {Value = record.Bestand_Formaat_FysiekeIntegriteit_DatumEnTijd ?? DateTime.MinValue}
+                                    algoritme = new nonEmptyStringTypeAttribuut {Value = record.Bestand_Formaat_FysiekeIntegriteit_Algoritme},
+                                    waarde = new nonEmptyStringTypeAttribuut {Value = record.Bestand_Formaat_FysiekeIntegriteit_Waarde},
+                                    datumEnTijd = new fysiekeIntegriteitTypeDatumEnTijd {Value = record.Bestand_Formaat_FysiekeIntegriteit_DatumEnTijd ?? DateTime.MinValue}
                                 },
-                                datumAanmaak = new formaatTypeDatumAanmaak()
+                                datumAanmaak = new formaatTypeDatumAanmaak
                                 {
                                     Value = record.Bestand_Formaat_DatumAanmaak?.ToString("yyyy-MM-dd")
                                 }
@@ -516,13 +516,13 @@ namespace Topx.Creator
         }
         private topxType GetTopxArchiefNiveau(string archiefId, string naamArchief)
         {
-            var topx = new topxType()
+            var topx = new topxType
             {
-                Item = new aggregatieType()
+                Item = new aggregatieType
                 {
-                    identificatiekenmerk = new nonEmptyStringTypeAttribuut() { Value = archiefId },
-                    aggregatieniveau = new aggregatieTypeAggregatieniveau() { Value = aggregatieAggregatieniveauType.Archief },
-                    naam = new[] { new nonEmptyStringTypeAttribuut() { Value = naamArchief } }
+                    identificatiekenmerk = new nonEmptyStringTypeAttribuut { Value = archiefId },
+                    aggregatieniveau = new aggregatieTypeAggregatieniveau { Value = aggregatieAggregatieniveauType.Archief },
+                    naam = new[] { new nonEmptyStringTypeAttribuut { Value = naamArchief } }
                 }
             };
 
@@ -557,27 +557,27 @@ namespace Topx.Creator
 
             var vertrouwelijkheid_DatumOfPeriode = DateTime.ParseExact(dossier.Vertrouwelijkheid_DatumOfPeriode, DateParsing, CultureInfo.InvariantCulture).ToString("yyyy-MM-dd");
 
-            var dekking_InTijd_Begin = new datumOfJaarTypeDatum()
+            var dekking_InTijd_Begin = new datumOfJaarTypeDatum
             {
                 Value = Convert.ToDateTime(DateTime.ParseExact(dossier.Dekking_InTijd_Begin,
                     DateParsing, CultureInfo.InvariantCulture).ToString("yyyy-MM-dd"))
             };
 
-            var dekking_InTijd_Eind = new datumOfJaarTypeDatum()
+            var dekking_InTijd_Eind = new datumOfJaarTypeDatum
             {
                 Value = Convert.ToDateTime(DateTime.ParseExact(dossier.Dekking_InTijd_Eind,
                     DateParsing, CultureInfo.InvariantCulture).ToString("yyyy-MM-dd"))
             };
 
-            var dekking_geografischgebied = dossier.Dekking_GeografischGebied.Split('|').Select(dekking => new @string() { Value = dekking.Trim() }).ToArray();
+            var dekking_geografischgebied = dossier.Dekking_GeografischGebied.Split('|').Select(dekking => new @string { Value = dekking.Trim() }).ToArray();
 
 
 
-            topx.Item = new aggregatieType()
+            topx.Item = new aggregatieType
             {
-                identificatiekenmerk = new nonEmptyStringTypeAttribuut() { Value = identificatiekenmerk },
+                identificatiekenmerk = new nonEmptyStringTypeAttribuut { Value = identificatiekenmerk },
                 omschrijving = omschrijving,
-                aggregatieniveau = new aggregatieTypeAggregatieniveau()
+                aggregatieniveau = new aggregatieTypeAggregatieniveau
                 {
                     Value = aggregatieAggregatieniveauType.Dossier
 
@@ -585,23 +585,23 @@ namespace Topx.Creator
                 eventGeschiedenis = GetEventGeschiedenis(dossier),
 
 
-                naam = new[] { new nonEmptyStringTypeAttribuut() { Value = dossier.Naam } },
+                naam = new[] { new nonEmptyStringTypeAttribuut { Value = dossier.Naam } },
                 // taal = new taalTypeAttribuut[] { new taalTypeAttribuut() { Value = (taalType)Enum.Parse(typeof(taalType), dossier.Taal.ToLower()) } },
-                relatie = new[] {new relatieType()
+                relatie = new[] {new relatieType
                 {
-                    relatieID = new nonEmptyStringTypeAttribuut() {Value = _identificatieArchief },
-                    typeRelatie = new nonEmptyStringTypeAttribuut() {Value = dossier.Relatie_Type == null ? "Hiërarchisch" : dossier.Relatie_Type},
-                    datumOfPeriode = new datumOfPeriodeType() {
+                    relatieID = new nonEmptyStringTypeAttribuut {Value = _identificatieArchief },
+                    typeRelatie = new nonEmptyStringTypeAttribuut {Value = dossier.Relatie_Type == null ? "Hiërarchisch" : dossier.Relatie_Type},
+                    datumOfPeriode = new datumOfPeriodeType {
                         datum = relatie_DatumOfPeriode
                     },
 
                 }},
-                classificatie = new[] {new classificatieType()
+                classificatie = new[] {new classificatieType
                     {
-                        code = new nonEmptyStringTypeAttribuut() { Value = dossier.Classificatie_Code},
-                        omschrijving =  new nonEmptyStringTypeAttribuut() {Value = dossier.Classificatie_Omschrijving},
-                        bron = new nonEmptyStringTypeAttribuut() {Value = dossier.Classificatie_Bron},
-                        datumOfPeriode = new datumOfPeriodeType()
+                        code = new nonEmptyStringTypeAttribuut { Value = dossier.Classificatie_Code},
+                        omschrijving =  new nonEmptyStringTypeAttribuut {Value = dossier.Classificatie_Omschrijving},
+                        bron = new nonEmptyStringTypeAttribuut {Value = dossier.Classificatie_Bron},
+                        datumOfPeriode = new datumOfPeriodeType
                         {
                             jaar = GetYearFromDatumOfPeriode(dossier.Classificatie_DatumOfPeriode)
                         }
@@ -611,28 +611,28 @@ namespace Topx.Creator
                 },
                 vertrouwelijkheid = new vertrouwelijkheidType[]
                 {
-                    new vertrouwelijkheidType()
+                    new vertrouwelijkheidType
                     {
-                        classificatieNiveau = new vertrouwelijkheidTypeClassificatieNiveau()
+                        classificatieNiveau = new vertrouwelijkheidTypeClassificatieNiveau
                         {
                             Value = (classificatieNiveauType) Enum.Parse(typeof(classificatieNiveauType), Regex.Replace(dossier.Vertrouwelijkheid_ClassificatieNiveau, @"\s+", "") )
                         },
-                        datumOfPeriode = new datumOfPeriodeType()
+                        datumOfPeriode = new datumOfPeriodeType
                         {
                             datum = vertrouwelijkheid_DatumOfPeriode
                         }
                     }
                 },
                 openbaarheid = openbaarheid,
-                dekking = new dekkingType[] {new dekkingType()
+                dekking = new dekkingType[] {new dekkingType
                     {
-                        inTijd = new periodeType()
+                        inTijd = new periodeType
                         {
-                            begin = new datumOfJaarType()
+                            begin = new datumOfJaarType
                             {
                                 Item = dekking_InTijd_Begin
                             },
-                            eind = new datumOfJaarType()
+                            eind = new datumOfJaarType
                             {
                                 Item = dekking_InTijd_Eind
                             }
@@ -642,47 +642,47 @@ namespace Topx.Creator
 
                     }
                 },
-                context = new contextType()
+                context = new contextType
                 {
                     actor = new[]
                     {
-                        new actorType()
+                        new actorType
                         {
-                            identificatiekenmerk = new nonEmptyStringTypeAttribuut() {Value =dossier.Context_Actor_IdentificatieKenmerk},
-                            aggregatieniveau = new @string() { Value= dossier.Context_Actor_AggregatieNiveau },
-                            geautoriseerdeNaam = new nonEmptyStringTypeAttribuut() {Value = dossier.Context_Actor_GeautoriseerdeNaam }
+                            identificatiekenmerk = new nonEmptyStringTypeAttribuut {Value =dossier.Context_Actor_IdentificatieKenmerk},
+                            aggregatieniveau = new @string { Value= dossier.Context_Actor_AggregatieNiveau },
+                            geautoriseerdeNaam = new nonEmptyStringTypeAttribuut {Value = dossier.Context_Actor_GeautoriseerdeNaam }
                         }
                     },
                     activiteit = new[]
                     {
-                        new activiteitType()
+                        new activiteitType
                         {
-                            naam = new nonEmptyStringTypeAttribuut() { Value = dossier.Context_Activiteit_Naam }
+                            naam = new nonEmptyStringTypeAttribuut { Value = dossier.Context_Activiteit_Naam }
                         }
                     }
 
                 },
                 gebruiksrechten = new gebruiksrechtenType[]
                 {
-                    new gebruiksrechtenType()
+                    new gebruiksrechtenType
                     {
-                        omschrijvingVoorwaarden = new nonEmptyStringTypeAttribuut() {Value = dossier.Gebruiksrechten_OmschrijvingVoorwaarden },
-                        datumOfPeriode = new datumOfPeriodeType()
+                        omschrijvingVoorwaarden = new nonEmptyStringTypeAttribuut {Value = dossier.Gebruiksrechten_OmschrijvingVoorwaarden },
+                        datumOfPeriode = new datumOfPeriodeType
                         {
                             datum = gebruiksrechten_DatumOfPeriode
                         }
                     }
                 },
-                integriteit = new @string() { Value = dossier.Integriteit }
+                integriteit = new @string { Value = dossier.Integriteit }
             };
             return topx;
         }
 
         private eventGeschiedenisType[] GetEventGeschiedenis(Dossier dossier)
         {
-            var arrayOfEventgechiedenisDatumOfPeriode = dossier.Eventgeschiedenis_DatumOfPeriode.Split('|').Select(t => new @string() { Value = t.Trim() }).ToList();
-            var arrayOfEventgeschiedenisType = dossier.Eventgeschiedenis_Type.Split('|').Select(t => new @string() { Value = t.Trim() }).ToList();
-            var arrayOfEventgeschiedenisVerantwFunctionaris = dossier.Eventgeschiedenis_VerantwoordelijkeFunctionaris.Split('|').Select(t => new @string() { Value = t.Trim() }).ToList();
+            var arrayOfEventgechiedenisDatumOfPeriode = dossier.Eventgeschiedenis_DatumOfPeriode.Split('|').Select(t => new @string { Value = t.Trim() }).ToList();
+            var arrayOfEventgeschiedenisType = dossier.Eventgeschiedenis_Type.Split('|').Select(t => new @string { Value = t.Trim() }).ToList();
+            var arrayOfEventgeschiedenisVerantwFunctionaris = dossier.Eventgeschiedenis_VerantwoordelijkeFunctionaris.Split('|').Select(t => new @string { Value = t.Trim() }).ToList();
 
             if (!Utility.Extensions.AllEqual(arrayOfEventgechiedenisDatumOfPeriode.Count,
                 arrayOfEventgeschiedenisType.Count, arrayOfEventgeschiedenisVerantwFunctionaris.Count))
@@ -700,11 +700,11 @@ namespace Topx.Creator
                     throw new Exception($"Dossier: {dossier.IdentificatieKenmerk}: De datum {arrayOfEventgechiedenisDatumOfPeriode[index].Value} is geen geldige datum. Verwacht format is {DateParsing}");
                 }
 
-                eventgeschiedenis.Add(new eventGeschiedenisType()
+                eventgeschiedenis.Add(new eventGeschiedenisType
                 {
-                    datumOfPeriode = new datumOfPeriodeType() { datum = datum.ToString("yyyy-MM-dd") },
-                    type = new nonEmptyStringTypeAttribuut() { Value = arrayOfEventgeschiedenisType[index].Value },
-                    verantwoordelijkeFunctionaris = new nonEmptyStringTypeAttribuut() { Value = arrayOfEventgeschiedenisVerantwFunctionaris[index].Value }
+                    datumOfPeriode = new datumOfPeriodeType { datum = datum.ToString("yyyy-MM-dd") },
+                    type = new nonEmptyStringTypeAttribuut { Value = arrayOfEventgeschiedenisType[index].Value },
+                    verantwoordelijkeFunctionaris = new nonEmptyStringTypeAttribuut { Value = arrayOfEventgeschiedenisVerantwFunctionaris[index].Value }
                 });
             }
 

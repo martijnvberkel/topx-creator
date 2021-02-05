@@ -29,5 +29,7 @@ namespace Topx.Data
         public string BatchTargetDirectory { get; set; }
         public string DroidInstallDirectory { get; set; }
         public string DirectoryFilesToScanForMetadata { get; set; }
+        public string SourceDirOfSidecarFiles { get; set; }
+        public string TargetDirOfSidecarFiles { get; set; }
     }
 }

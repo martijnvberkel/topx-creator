@@ -224,6 +224,10 @@
       <Project>{1e9b8660-0142-4818-ac8e-2b3fc0619783}</Project>
       <Name>Topx.Creator</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Topx.Sidecar\Topx.Sidecar.csproj">
+      <Project>{E14311DF-AB26-486B-8B78-9FA4A4AAC3A9}</Project>
+      <Name>Topx.Sidecar</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Topx.UnitTests.PdfCreator\Topx.UnitTests.PdfCreator.csproj">
       <Project>{1de4daee-6378-412d-9d5f-9197e1bce77b}</Project>
       <Name>Topx.UnitTests.PdfCreator</Name>
