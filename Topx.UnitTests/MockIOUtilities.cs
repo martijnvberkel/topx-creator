@@ -44,5 +44,10 @@ namespace Topx.UnitTests
         {
             return false;
         }
+
+        public bool TestForValidCSV(string fileName)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

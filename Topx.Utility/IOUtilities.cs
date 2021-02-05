@@ -19,7 +19,7 @@ namespace Topx.Utility
         bool FileExists(string fullpath);
         void FileCopy(string source, string destination);
         bool DirectoryExists(string directory);
-
+        bool TestForValidCSV(string fileName);
     }
 
     public class IOUtilities : IIOUtilities
@@ -90,6 +90,11 @@ namespace Topx.Utility
         public bool DirectoryExists(string directory)
         {
             return Directory.Exists(directory);
+        }
+
+        public bool TestForValidCSV(string fileName)
+        {
+            return Path.HasExtension(fileName) && (Path.GetExtension(fileName).ToLower() == ".csv");
         }
 
         public void FileCopy(string source, string destination)

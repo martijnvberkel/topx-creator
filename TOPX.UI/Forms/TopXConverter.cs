@@ -484,13 +484,42 @@ namespace TOPX.UI.Forms
 
         }
 
+        private void ShowInvalidCsvMessage(string fileName)
+        {
+            MessageBox.Show($"Het aangeboden bestand {fileName} is geen (valide) csv-bestand. Controleer met een simpele editor als Notepad of Notepad++ de bestandsopmaak. Let erop dat de scheidingstekens puntkomma zijn. De bestandsnaam moet de extensie .csv hebben");
+        }
         private void LoadDossierFile(string fileName, bool useCachedMappings = true)
         {
             try
             {
+                if (!_ioUtilities.TestForValidCSV(fileName))
+                {
+                    ShowInvalidCsvMessage(fileName);
+                    return;
+                }
                 using (var sr = new StreamReader(new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite)))
                 {
-                    _headersDossiers = sr.ReadLine().Split(";"[0]).ToList();
+                    var firstLine = sr.ReadLine();
+                    if (firstLine == null)
+                    {
+                        MessageBox.Show($"De header (= de eerste regel) in de file {Path.GetFileName(fileName)} is leeg. Controleer de file op systeemkarakters zoals een tab of newline etc. met (bijvoorbeeld) Notepad++");
+                        return;
+                    }
+
+                    var positionOfSystemCharacters = StringUtilities.CheckForSystemCharacters(firstLine);
+                    if (positionOfSystemCharacters > 0)
+                    {
+                        MessageBox.Show($"De header (= de eerste regel) in de file {Path.GetFileName(fileName)} is niet valide. Er is een Control-karakter gevonden op positie {positionOfSystemCharacters}. Controleer de file op systeemkarakters zoals een tab of newline etc. met (bijvoorbeeld) Notepad++");
+                        return;
+                    }
+
+                    _headersDossiers = firstLine.Split(";"[0]).ToList();
+                    if (_headersDossiers.Count < 20 || _headersDossiers.Count > 40) // dan is het zeker dat er wat mis is
+                    {
+                        ShowInvalidCsvMessage(fileName);
+                        return;
+                    }
+
                 }
                 if (useCachedMappings)
                     _fieldmappingsDossiers = _dataservice.GetMappingsDossiers(_headersDossiers);
@@ -512,9 +541,32 @@ namespace TOPX.UI.Forms
         {
             try
             {
+                if (!_ioUtilities.TestForValidCSV(fileName))
+                {
+                    ShowInvalidCsvMessage(fileName);
+                    return;
+                }
                 using (var sr = new StreamReader(new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite)))
                 {
-                    _headersRecords = sr.ReadLine().Split(";"[0]).ToList();
+                    var firstLine = sr.ReadLine();
+                    if (firstLine == null)
+                    {
+                        MessageBox.Show($"De header (= de eerste regel) in de file {Path.GetFileName(fileName)} is leeg. Controleer de file op systeemkarakters zoals een tab of newline etc. met (bijvoorbeeld) Notepad++");
+                        return;
+                    }
+
+                    var positionOfSystemCharacters = StringUtilities.CheckForSystemCharacters(firstLine);
+                    if (positionOfSystemCharacters > 0)
+                    {
+                        MessageBox.Show($"De header (= de eerste regel) in de file {Path.GetFileName(fileName)} is niet valide. Er is een Control-karakter gevonden op positie {positionOfSystemCharacters}. Controleer de file op systeemkarakters zoals een tab of newline etc. met (bijvoorbeeld) Notepad++");
+                        return;
+                    }
+                    _headersRecords = firstLine.Split(";"[0]).ToList();
+                    if (_headersDossiers.Count < 20 || _headersDossiers.Count > 40) // dan is het zeker dat er wat mis is
+                    {
+                        ShowInvalidCsvMessage(fileName);
+                        return;
+                    }
                 }
 
                 _fieldmappingsRecords = _dataservice.GetMappingsRecords(_headersRecords);
@@ -713,20 +765,27 @@ namespace TOPX.UI.Forms
         {
             if (e.Button == MouseButtons.Right)
             {
-                var currentRow = gridFieldMappingDossiers.HitTest(e.X, e.Y).RowIndex;
+                try
+                {
+                    var currentRow = gridFieldMappingDossiers.HitTest(e.X, e.Y).RowIndex;
 
-                gridFieldMappingDossiers.ClearSelection();
-                gridFieldMappingDossiers.Rows[currentRow].Selected = true;
+                    gridFieldMappingDossiers.ClearSelection();
+                    gridFieldMappingDossiers.Rows[currentRow].Selected = true;
 
-                var screenPoint = ((Control)sender).PointToScreen(e.Location);
-                var formPoint = PointToClient(screenPoint); //this is the Form object
-                var formSelectDossierMapper =
-                    new FormSelectMapper(_fieldmappingsDossiers, gridFieldMappingDossiers.Rows[currentRow].Cells[0].Value.ToString())
-                    {
-                        Location = new Point(Location.X + formPoint.X + 50, Location.Y + formPoint.Y - 30)
-                    };
-                formSelectDossierMapper.ShowDialog();
-                gridFieldMappingDossiers.DataSource = _fieldmappingsDossiers.ToList();
+                    var screenPoint = ((Control)sender).PointToScreen(e.Location);
+                    var formPoint = PointToClient(screenPoint); //this is the Form object
+                    var formSelectDossierMapper =
+                        new FormSelectMapper(_fieldmappingsDossiers, gridFieldMappingDossiers.Rows[currentRow].Cells[0].Value?.ToString())
+                        {
+                            Location = new Point(Location.X + formPoint.X + 50, Location.Y + formPoint.Y - 30)
+                        };
+                    formSelectDossierMapper.ShowDialog();
+                    gridFieldMappingDossiers.DataSource = _fieldmappingsDossiers.ToList();
+
+                }
+                catch  // swallow exception
+                {
+                }
             }
         }
 
@@ -1021,13 +1080,13 @@ namespace TOPX.UI.Forms
                 MessageBox.Show($"De doeldirectory voor de Sidecar-export {txtTargetDirOfSidecarFiles.Text} is niet bereikbaar of bestaat niet.");
                 return;
             }
-            
+
             var sidecarExport = new Export(txtSourceDirOfSidecarFiles.Text, txtTargetDirOfSidecarFiles.Text, _ioUtilities, _logger);
             var doc = new XDocument();
             using (var writer = doc.CreateWriter())
             {
-                var serializer = new  XmlSerializer (_resultRecordInformationPackage[0].GetType());
-                serializer.Serialize (writer, _resultRecordInformationPackage[0]);
+                var serializer = new XmlSerializer(_resultRecordInformationPackage[0].GetType());
+                serializer.Serialize(writer, _resultRecordInformationPackage[0]);
             }
 
             Cursor.Current = Cursors.WaitCursor;
@@ -1046,7 +1105,7 @@ namespace TOPX.UI.Forms
             else
             {
                 txtLogSidecarExport.Text = $"{sidecarExport.NrOfDossiersExported} dossiers succesvol geëxporteerd.";
-                linkOpenSidecarExportInExplorer.Visible = true; 
+                linkOpenSidecarExportInExplorer.Visible = true;
             }
 
             MessageBox.Show(success
