@@ -128,6 +128,12 @@
     <Compile Include="Forms\TopXConverter.Designer.cs">
       <DependentUpon>TopXConverter.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Info.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Info.Designer.cs">
+      <DependentUpon>Info.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\WaitForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -144,6 +150,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\TopXConverter.resx">
       <DependentUpon>TopXConverter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Info.resx">
+      <DependentUpon>Info.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\WaitForm.resx">
       <DependentUpon>WaitForm.cs</DependentUpon>
@@ -180,6 +189,7 @@
   <ItemGroup>
     <None Include="Resources\background.png" />
     <None Include="Resources\background1.png" />
+    <None Include="Resources\MVBWorks .Net development op maat.png" />
     <Content Include="TC.ico" />
     <Content Include="TC2.ico" />
   </ItemGroup>
