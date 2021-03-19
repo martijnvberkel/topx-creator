@@ -1131,5 +1131,15 @@ namespace TOPX.UI.Forms
         {
             txtSidecarNrOfBatches.Enabled = chkSidecarMakeBatches.Checked;
         }
+
+        private void LblInfo_Click(object sender, EventArgs e)
+        {
+            var info = new Info()
+            {
+                TopMost = true,
+                StartPosition = FormStartPosition.CenterScreen
+            };
+            info.Show();
+        }
     }
 }
