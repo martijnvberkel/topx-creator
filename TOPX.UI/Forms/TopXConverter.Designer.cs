@@ -905,9 +905,9 @@ namespace TOPX.UI.Forms
             this.btImportFilesInDb.Location = new System.Drawing.Point(63, 29);
             this.btImportFilesInDb.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btImportFilesInDb.Name = "btImportFilesInDb";
-            this.btImportFilesInDb.Size = new System.Drawing.Size(170, 40);
+            this.btImportFilesInDb.Size = new System.Drawing.Size(268, 40);
             this.btImportFilesInDb.TabIndex = 1;
-            this.btImportFilesInDb.Text = "Import bestanden";
+            this.btImportFilesInDb.Text = "Import metadata-bestanden";
             this.btImportFilesInDb.Click += new System.EventHandler(this.btImportFilesInDb_Click);
             // 
             // materialLabel4
