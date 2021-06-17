@@ -1141,5 +1141,18 @@ namespace TOPX.UI.Forms
             };
             info.Show();
         }
+
+        private void linkLabelDROID_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            linkLabelDROID.LinkVisited = true;
+            try
+            {
+                Process.Start("https://www.nationalarchives.gov.uk/information-management/manage-information/preserving-digital-records/droid/");
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show($"Kan de link niet openen. Foutmelding: {exception.Message}");
+            }
+        }
     }
 }
