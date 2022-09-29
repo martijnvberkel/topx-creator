@@ -26,7 +26,7 @@ namespace Topx.FileAnalysis
         }
 
         private readonly string _droidCommandlineLocation;
-        
+
         private readonly string _command;
         private string _errorMessage;
 
@@ -46,15 +46,15 @@ namespace Topx.FileAnalysis
                 ErrorMessage = "Er is geen DROID signaturefile gevonden. Start DROID eerst met de hand, en download de laatste signaturefiles.";
                 return;
             }
-         
+
             _droidCommandlineLocation = droidCommandlineLocation;
             logger.Info($"droidCommandlineLocation: {_droidCommandlineLocation}");
 
             _command = $@"-Nr ""{fileslocationToIdentify}"" -Ns ""{Path.Combine(signatureFileInfo.FullName)}""";
             logger.Info($"command: {_command}");
         }
-      
-       
+
+
         public void IdentifyFiles(List<Record> records)
         {
             if (records == null || !records.Any())
@@ -84,12 +84,13 @@ namespace Topx.FileAnalysis
                 process.StartInfo.UseShellExecute = false;
                 process.StartInfo.RedirectStandardOutput = true;
                 process.StartInfo.RedirectStandardError = true;
-                
+
 
                 using (AutoResetEvent outputWaitHandle = new AutoResetEvent(false))
                 using (AutoResetEvent errorWaitHandle = new AutoResetEvent(false))
                 {
-                    process.OutputDataReceived += (sender, e) => {
+                    process.OutputDataReceived += (sender, e) =>
+                    {
                         if (e.Data == null)
                         {
                             outputWaitHandle.Set();
@@ -122,13 +123,26 @@ namespace Topx.FileAnalysis
 
             if (error.Length > 0)
             {
-                _errorMessage = error.ToString();
-                Error = true;
-                return;
+                var tempError = error.ToString();
+                using (var reader = new StringReader(tempError))
+                {
+                    string line;
+                    while ((line = reader.ReadLine()) != null)
+                    {
+                        if (!line.StartsWith("WARNING"))
+                        {
+                            _errorMessage += line + Environment.NewLine;
+                            Error = true;
+                        }
+                    }
+                }
+
+                if (Error)
+                    return;
             }
-            
+
             string[] delim = { Environment.NewLine, "\n" };
-            foreach (var line in output.ToString().Split(delim, StringSplitOptions.None) .ToArray())
+            foreach (var line in output.ToString().Split(delim, StringSplitOptions.None).ToArray())
             {
                 var entry = line.Split(',');
                 if (entry.Length == 2)  // alleen dan hebben we een entry met een bestandsnaam en een identificatie

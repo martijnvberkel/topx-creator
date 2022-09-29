@@ -25,9 +25,10 @@ namespace Topx.Importer
 
             if (string.IsNullOrEmpty(_record.Bestand_Formaat_Bestandsnaam))
                 ValidationErrors.Add($"{errorPrefix} Bestand_Formaat_Bestandsnaam is leeg, dit veld is verplicht.");
-            
-            if (!Validations.TestForIllegalCharsInFileName(_record.Bestand_Formaat_Bestandsnaam))
-                ValidationErrors.Add($"{errorPrefix} Bestand_Formaat_Bestandsnaam bevat ongeldige karakters: {_record.Bestand_Formaat_Bestandsnaam} ");
+
+            var illegalChars = Validations.GetIllegalCharsInFileName(_record.Bestand_Formaat_Bestandsnaam);
+            if (illegalChars != string.Empty)
+                ValidationErrors.Add($"{errorPrefix} Bestand_Formaat_Bestandsnaam  {_record.Bestand_Formaat_Bestandsnaam} bevat ongeldige karakters: {illegalChars}");
 
             if (!Validations.TestForFileExtension(_record.Bestand_Formaat_Bestandsnaam))
                 ValidationErrors.Add($"{errorPrefix} Bestand_Formaat_Bestandsnaam bevat geen extensie (bijv .pdf of .docx): {_record.Bestand_Formaat_Bestandsnaam}");

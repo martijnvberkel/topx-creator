@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using Topx.Utility;
 
 namespace Topx.UnitTests
@@ -11,32 +6,46 @@ namespace Topx.UnitTests
     [TestFixture]
     public class TestValidations
     {
+        public string[] Fail = { "test test.pdf", "test*.pdf", "a@.b", "a<.b", "<a.b", "a:a.b", "a”.b", "a|b", "a\".b", "a .b", "CON", "COM1" };
+        public string[] Valid = { "test.pdf", "con.pdf", "a.b", "com1.pdf" };
+
         [Test]
         public void TestFileNameValidation_Success()
         {
-            var filename = "test.pdf";
-            var result = Validations.TestForIllegalCharsInFileName(filename);
-            Assert.That(result, Is.True);
+            foreach (var filename in Valid)
+            {
+                var result = Validations.GetIllegalCharsInFileName(filename);
+                Assert.AreEqual(result, string.Empty);
+            }
         }
         [Test]
         public void TestFileNameValidation_Fail()
         {
-            var filename = "test*.pdf";
-            var result = Validations.TestForIllegalCharsInFileName(filename);
-            Assert.That(result, Is.False);
+            foreach (var filename in Fail)
+            {
+                var result = Validations.GetIllegalCharsInFileName(filename);
+                Assert.AreNotEqual(result, string.Empty);
+            }
         }
         [Test]
-        public void TestFileNameValidation_Fail2()
+        public void TestFileNameValidationAndCheckReturnedChar1_Fail()
         {
-            var filename = "test test.pdf";
-            var result = Validations.TestForIllegalCharsInFileName(filename);
-            Assert.That(result, Is.False);
+            var result = Validations.GetIllegalCharsInFileName("test test");
+            Assert.AreEqual(result, " ");
         }
-        public void TestFileNameValidation_Fail3()
+
+        [Test]
+        public void TestFileNameValidationAndCheckReturnedChar2_Fail()
         {
-            var filename = @"test\test.pdf";
-            var result = Validations.TestForIllegalCharsInFileName(filename);
-            Assert.That(result, Is.False);
+            var result = Validations.GetIllegalCharsInFileName("a:a.b");
+            Assert.AreEqual(result, ":");
+        }
+
+        [Test]
+        public void TestFileNameValidationAndCheckReturnedChar3_Fail()
+        {
+            var result = Validations.GetIllegalCharsInFileName("COM1");
+            Assert.AreEqual(result, "COM1");
         }
     }
 }
