@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using Topx.Utility;
 
 namespace Topx.UnitTests
@@ -34,9 +29,9 @@ namespace Topx.UnitTests
         }
         [Test]
         public void TestFileNameValidationAndCheckReturnedChar1_Fail()
-        {           
-                var result = Validations.GetIllegalCharsInFileName("test test");
-                Assert.AreEqual(result, " ");            
+        {
+            var result = Validations.GetIllegalCharsInFileName("test test");
+            Assert.AreEqual(result, " ");
         }
 
         [Test]
@@ -53,6 +48,4 @@ namespace Topx.UnitTests
             Assert.AreEqual(result, "COM1");
         }
     }
-    
-
 }
