@@ -47,5 +47,11 @@ namespace Topx.UnitTests
             var result = Validations.GetIllegalCharsInFileName("COM1");
             Assert.AreEqual(result, "COM1");
         }
+        [Test]
+        public void TestFileNameValidationAndCheckReturnedChar4_Fail()
+        {
+            var result = Validations.GetIllegalCharsInFileName("AC-00004431_V000109427.pdf");
+            Assert.AreEqual(result, string.Empty);
+        }
     }
 }
