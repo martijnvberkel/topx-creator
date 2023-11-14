@@ -38,7 +38,18 @@ namespace TOPX.UI
         {
            
             container = new Container();
-            var connectionstring = LocalDbHelper.GetConnectionString();
+
+            string connectionstring = null;
+            try
+            {
+                 connectionstring = LocalDbHelper.GetConnectionString();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+                Application.Exit();
+            }
+
             if (string.IsNullOrEmpty(connectionstring))
             {
                 MessageBox.Show("De database kon niet worden aangemaakt of gevonden. Mogelijk is deze niet geïnstalleerd. Installeer SqlLocalDB.MSI", "Database niet gevonden", MessageBoxButtons.OK);
