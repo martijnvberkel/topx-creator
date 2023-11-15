@@ -6,7 +6,7 @@ namespace Topx.UnitTests
     [TestFixture]
     public class TestValidations
     {
-        public string[] Fail = { "test test.pdf", "test*.pdf", "a@.b", "a<.b", "<a.b", "a:a.b", "a”.b", "a|b", "a\".b", "a .b", "CON", "COM1" };
+        public string[] Fail = { "test,test.pdf", "test.test.pdf", "test test.pdf", "test*.pdf", "a@.b", "a<.b", "<a.b", "a:a.b", "a”.b", "a|b", "a\".b", "a .b", "CON", "COM1" };
         public string[] Valid = { "test.pdf", "con.pdf", "a.b", "com1.pdf" };
 
         [Test]
@@ -33,7 +33,7 @@ namespace Topx.UnitTests
             var result = Validations.GetIllegalCharsInFileName("test test");
             Assert.AreEqual(result, " ");
         }
-
+      
         [Test]
         public void TestFileNameValidationAndCheckReturnedChar2_Fail()
         {
@@ -48,7 +48,7 @@ namespace Topx.UnitTests
             Assert.AreEqual(result, "COM1");
         }
         [Test]
-        public void TestFileNameValidationAndCheckReturnedChar4_Fail()
+        public void TestFileNameValidationAndCheckReturnedChar4_Ok()
         {
             var result = Validations.GetIllegalCharsInFileName("AC-00004431_V000109427.pdf");
             Assert.AreEqual(result, string.Empty);
