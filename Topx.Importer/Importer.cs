@@ -66,7 +66,7 @@ namespace Topx.Importer
 
                     if (headersSource.Length != fieldsSource.Length)
                     {
-                        ErrorsImportDossiers.AppendLine($"ERROR: Dossier {fieldsSource?[0]} kon niet worden ingelezen, aantal kolommen is onjuist. Dit kan ontstaan door gebruik van puntkomma's in tekstvelden");
+                        ErrorsImportDossiers.AppendLine($"ERROR: Dossier {fieldsSource?[0]} kon niet worden ingelezen, aantal kolommen is onjuist. Dit kan ontstaan door gebruik van puntkomma's of 'new lines' in tekstvelden. Controleer de file in bijv Notepad++ voor diagnose");
                         continue;
                     }
 
@@ -117,7 +117,7 @@ namespace Topx.Importer
                 }
                 catch (Exception e)
                 {
-                    ErrorsImportDossiers.AppendLine($"Dossier {fieldsSource?[0]} kon niet worden geïmporteerd: {e.Message}");
+                    ErrorsImportDossiers.AppendLine($"Dossier {fieldsSource?[0]} kon niet worden geïmporteerd: Message: {e.Message} InnerException: {e.InnerException}");
                 }
             }
         }
