@@ -9,6 +9,8 @@ using Topx.DataServices;
 using Container = SimpleInjector.Container;
 using TOPX.UI.Classes;
 using Topx.Utility;
+using PaletteDesigner;
+using SimpleInjector.Lifestyles;
 
 namespace TOPX.UI
 {
@@ -28,7 +30,11 @@ namespace TOPX.UI
             if (Bootstrap())
             {
                 Cursor.Current = Cursors.Default;
-                Application.Run(container.GetInstance<TopXConverter>());
+                using (ThreadScopedLifestyle.BeginScope(container))
+                {
+                    Application.Run(container.GetInstance<TopXConverter>());
+                }
+               
             }
             Cursor.Current = Cursors.Default;
 
@@ -38,6 +44,7 @@ namespace TOPX.UI
         {
            
             container = new Container();
+            container.Options.DefaultScopedLifestyle = new SimpleInjector.Lifestyles.ThreadScopedLifestyle();
             var connectionstring = LocalDbHelper.GetConnectionString();
             if (string.IsNullOrEmpty(connectionstring))
             {
@@ -48,7 +55,7 @@ namespace TOPX.UI
             container.Register<ILogger>(LogManager.GetCurrentClassLogger);
             container.Register<IDataService>(() => new DataService(connectionstring), Lifestyle.Singleton);
             container.Register<IIOUtilities, IOUtilities>();
-            container.Register<TopXConverter>();
+            container.Register<TopXConverter>(Lifestyle.Scoped);
             return true;
         }
     }

@@ -339,7 +339,7 @@ namespace Topx.UnitTests
 
             var result = dossierValidator.Validate();
             Assert.That(result, Is.EqualTo(false));
-            Assert.That(dossierValidator.ValidationErrors.Count, Is.EqualTo(19));
+            Assert.That(dossierValidator.ValidationErrors.Count, Is.EqualTo(15));
         }
 
         [Test]

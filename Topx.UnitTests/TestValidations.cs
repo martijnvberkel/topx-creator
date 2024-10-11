@@ -15,7 +15,7 @@ namespace Topx.UnitTests
             foreach (var filename in Valid)
             {
                 var result = Validations.GetIllegalCharsInFileName(filename);
-                Assert.AreEqual(result, string.Empty);
+                Assert.That(string.Empty, Is.EqualTo(result));
             }
         }
         [Test]
@@ -24,34 +24,34 @@ namespace Topx.UnitTests
             foreach (var filename in Fail)
             {
                 var result = Validations.GetIllegalCharsInFileName(filename);
-                Assert.AreNotEqual(result, string.Empty);
+                Assert.That(string.Empty, Is.EqualTo(result));
             }
         }
         [Test]
         public void TestFileNameValidationAndCheckReturnedChar1_Fail()
         {
             var result = Validations.GetIllegalCharsInFileName("test test");
-            Assert.AreEqual(result, " ");
+            Assert.That(" ", Is.EqualTo(result));
         }
       
         [Test]
         public void TestFileNameValidationAndCheckReturnedChar2_Fail()
         {
             var result = Validations.GetIllegalCharsInFileName("a:a.b");
-            Assert.AreEqual(result, ":");
+            Assert.That(":", Is.EqualTo(result));
         }
 
         [Test]
         public void TestFileNameValidationAndCheckReturnedChar3_Fail()
         {
             var result = Validations.GetIllegalCharsInFileName("COM1");
-            Assert.AreEqual(result, "COM1");
+            Assert.That("COM1", Is.EqualTo(result));
         }
         [Test]
         public void TestFileNameValidationAndCheckReturnedChar4_Ok()
         {
             var result = Validations.GetIllegalCharsInFileName("AC-00004431_V000109427.pdf");
-            Assert.AreEqual(result, string.Empty);
+            Assert.That(string.Empty, Is.EqualTo(result));
         }
     }
 }

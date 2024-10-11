@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoFixture.NUnit4;
 using Moq;
 using NUnit.Framework;
 using Topx.Creator;
@@ -17,7 +18,7 @@ namespace Topx.UnitTests
     internal class TestOptionalFieldValidations
     {
         [Theory, AutoData]
-        public void Dossiers_Test1()
+        public void Dossiers_Test1(Globals mockGlobals)
         {
             var record = new Record
             {
@@ -72,7 +73,7 @@ namespace Topx.UnitTests
 
             var validator = new DossierValidator(dossiers[0]);
             var result = validator.Validate();
-            Assert.IsTrue(result);
+            Assert.That(result, Is.True);
 
            // var mockGlobals = new Mock<Globals>();
             var mockDataService = new Mock<IDataService>();
@@ -80,12 +81,12 @@ namespace Topx.UnitTests
             var parser = new Parser(mockGlobals, mockDataService.Object);
             parser.ParseDataToTopx(dossiers);
             var resultParser = parser.ErrorMessage.ToString();
-            Assert.IsTrue(parser.ErrorMessage.Length == 0);
+            Assert.That(parser.ErrorMessage.Length, Is.EqualTo(0));
 
             var xmlhelper = new XmlHelper();
             var success = xmlhelper.ValidateXmlString(resultParser);
 
-            Assert.IsTrue(success);
+            Assert.That(success, Is.True);
         }
 
         
