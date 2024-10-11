@@ -80,6 +80,7 @@
     <Compile Include="TestImporter.cs" />
     <Compile Include="TestMetadata.cs" />
     <Compile Include="TestOfficeAnalysis.cs" />
+    <Compile Include="TestOptionalFieldValidations.cs" />
     <Compile Include="TestPdfAnalysis.cs" />
     <Compile Include="TestPronomIdentification.cs" />
     <Compile Include="TestResources\Dossiers_Test_ComplexLink1.cs" />

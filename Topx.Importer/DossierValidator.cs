@@ -28,9 +28,9 @@ namespace Topx.Importer
             if (!Validations.TestForValidDate(_dossier.Dekking_InTijd_Eind))
                 ValidationErrors.Add($"ERROR validatie: Dossier {_dossier.IdentificatieKenmerk}: Dekking_InTijd_Eind is niet herkend als geldige datum (verwacht format: {Validations.DateParsing})");
 
-            if (!Validations.TestForValidDate(_dossier.Classificatie_DatumOfPeriode))
-                if (string.IsNullOrEmpty(_dossier.Classificatie_DatumOfPeriode) || !Validations.TestForValidYear(_dossier.Classificatie_DatumOfPeriode))
-                    ValidationErrors.Add($"ERROR validatie: Dossier {_dossier.IdentificatieKenmerk}: Classificatie_DatumOfPeriode is niet herkend als geldig jaar (verwacht format: yyyy) of als geldige datum (verwacht format: {Validations.DateParsing})");
+            //if (!Validations.TestForValidDate(_dossier.Classificatie_DatumOfPeriode))
+            //    if (string.IsNullOrEmpty(_dossier.Classificatie_DatumOfPeriode) || !Validations.TestForValidYear(_dossier.Classificatie_DatumOfPeriode))
+            //        ValidationErrors.Add($"ERROR validatie: Dossier {_dossier.IdentificatieKenmerk}: Classificatie_DatumOfPeriode is niet herkend als geldig jaar (verwacht format: yyyy) of als geldige datum (verwacht format: {Validations.DateParsing})");
 
             if (!_dossier.Eventgeschiedenis_DatumOfPeriode.Contains("|"))
                 if (!Validations.TestForValidDate(_dossier.Eventgeschiedenis_DatumOfPeriode))
@@ -83,14 +83,14 @@ namespace Topx.Importer
                 ValidationErrors.Add($"ERROR validatie: Dossier {_dossier.IdentificatieKenmerk}: verplicht veld TaalType is leeg of wordt niet herkend");
             }
 
-            if (string.IsNullOrEmpty(_dossier.Classificatie_Code))
-                ValidationErrors.Add($"ERROR validatie: Dossier {_dossier.IdentificatieKenmerk}: verplicht veld Classificatie_Code is leeg of afwezig");
+            //if (string.IsNullOrEmpty(_dossier.Classificatie_Code))
+            //    ValidationErrors.Add($"ERROR validatie: Dossier {_dossier.IdentificatieKenmerk}: verplicht veld Classificatie_Code is leeg of afwezig");
 
-            if (string.IsNullOrEmpty(_dossier.Classificatie_Omschrijving))
-                ValidationErrors.Add($"ERROR validatie: Dossier {_dossier.IdentificatieKenmerk}: verplicht veld Classificatie_Omschrijving is leeg of afwezig");
+            //if (string.IsNullOrEmpty(_dossier.Classificatie_Omschrijving))
+            //    ValidationErrors.Add($"ERROR validatie: Dossier {_dossier.IdentificatieKenmerk}: verplicht veld Classificatie_Omschrijving is leeg of afwezig");
 
-            if (string.IsNullOrEmpty(_dossier.Classificatie_Bron))
-                ValidationErrors.Add($"ERROR validatie: Dossier {_dossier.IdentificatieKenmerk}: verplicht veld Classificatie_Bron is leeg of afwezig");
+            //if (string.IsNullOrEmpty(_dossier.Classificatie_Bron))
+            //    ValidationErrors.Add($"ERROR validatie: Dossier {_dossier.IdentificatieKenmerk}: verplicht veld Classificatie_Bron is leeg of afwezig");
 
             return !ValidationErrors.Any();
         }
