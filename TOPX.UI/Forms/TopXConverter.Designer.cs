@@ -34,8 +34,8 @@ namespace TOPX.UI.Forms
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TopXConverter));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.materialContextMenuStrip1 = new MaterialSkin.Controls.MaterialContextMenuStrip();
             this.materialContextMenuStrip2 = new MaterialSkin.Controls.MaterialContextMenuStrip();
             this.testToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -55,11 +55,16 @@ namespace TOPX.UI.Forms
             this.materialLabel19 = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel18 = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel17 = new MaterialSkin.Controls.MaterialLabel();
+            this.txtIdentificatieArchief = new TOPX.UI.Controls.PlaceHolderTextBox();
             this.materialLabel12 = new MaterialSkin.Controls.MaterialLabel();
             this.btFillDatumArchief = new System.Windows.Forms.Button();
+            this.txtNaamArchief = new TOPX.UI.Controls.PlaceHolderTextBox();
             this.materialLabel9 = new MaterialSkin.Controls.MaterialLabel();
+            this.txtDoelArchief = new TOPX.UI.Controls.PlaceHolderTextBox();
             this.materialLabel11 = new MaterialSkin.Controls.MaterialLabel();
+            this.txtBronArchief = new TOPX.UI.Controls.PlaceHolderTextBox();
             this.materialLabel8 = new MaterialSkin.Controls.MaterialLabel();
+            this.txtOmschrijvingArchief = new TOPX.UI.Controls.PlaceHolderTextBox();
             this.materialLabel7 = new MaterialSkin.Controls.MaterialLabel();
             this.txtDatumArchief = new System.Windows.Forms.MaskedTextBox();
             this.materialLabel10 = new MaterialSkin.Controls.MaterialLabel();
@@ -78,6 +83,15 @@ namespace TOPX.UI.Forms
             this.materialLabel6 = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel5 = new MaterialSkin.Controls.MaterialLabel();
             this.txtDossierLocation = new System.Windows.Forms.TextBox();
+            this.gridFieldMappingRecords = new TOPX.UI.Controls.DragDropGridView();
+            this.DatabaseFieldNameRecords = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MappedFieldNameRecords = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TMLO_Records = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.gridFieldMappingDossiers = new TOPX.UI.Controls.DragDropGridView();
+            this.MappedFieldName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DatabaseFieldName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TMLO = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Optional = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.tabImportFiles = new System.Windows.Forms.TabPage();
             this.linkCopyErrorsRecords = new System.Windows.Forms.LinkLabel();
             this.linkCopyErrorsDossiers = new System.Windows.Forms.LinkLabel();
@@ -87,6 +101,8 @@ namespace TOPX.UI.Forms
             this.txtErrorRecords = new System.Windows.Forms.TextBox();
             this.txtErrorsDossiers = new System.Windows.Forms.TextBox();
             this.tabMetadata = new System.Windows.Forms.TabPage();
+            this.linkLabelDROID = new System.Windows.Forms.LinkLabel();
+            this.label10 = new System.Windows.Forms.Label();
             this.chkTestForPasswProtection = new System.Windows.Forms.CheckBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -144,22 +160,7 @@ namespace TOPX.UI.Forms
             this.chkSidecarMakeBatches = new System.Windows.Forms.CheckBox();
             this.lblVersion = new System.Windows.Forms.Label();
             this.LblInfo = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.linkLabelDROID = new System.Windows.Forms.LinkLabel();
-            this.txtIdentificatieArchief = new TOPX.UI.Controls.PlaceHolderTextBox();
-            this.txtNaamArchief = new TOPX.UI.Controls.PlaceHolderTextBox();
-            this.txtDoelArchief = new TOPX.UI.Controls.PlaceHolderTextBox();
-            this.txtBronArchief = new TOPX.UI.Controls.PlaceHolderTextBox();
-            this.txtOmschrijvingArchief = new TOPX.UI.Controls.PlaceHolderTextBox();
-            this.gridFieldMappingRecords = new TOPX.UI.Controls.DragDropGridView();
-            this.DatabaseFieldNameRecords = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MappedFieldNameRecords = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TMLO_Records = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.gridFieldMappingDossiers = new TOPX.UI.Controls.DragDropGridView();
-            this.MappedFieldName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DatabaseFieldName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TMLO = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Optional = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.chkIgnoreValidationsOfNonMandatoryFields = new System.Windows.Forms.CheckBox();
             this.materialContextMenuStrip2.SuspendLayout();
             this.materialContextMenuStrip3.SuspendLayout();
             this.materialTab.SuspendLayout();
@@ -167,6 +168,8 @@ namespace TOPX.UI.Forms
             this.tabLoadFiles.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picRecordsSelector)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picDossierSelector)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridFieldMappingRecords)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridFieldMappingDossiers)).BeginInit();
             this.tabImportFiles.SuspendLayout();
             this.tabMetadata.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picSelectDroidLocation)).BeginInit();
@@ -177,8 +180,6 @@ namespace TOPX.UI.Forms
             this.SidecarExport.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picSelectSourceDirOfSidecarFiles)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picSelectTargetDirOfSidecarFiles)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridFieldMappingRecords)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridFieldMappingDossiers)).BeginInit();
             this.SuspendLayout();
             // 
             // materialContextMenuStrip1
@@ -313,12 +314,12 @@ namespace TOPX.UI.Forms
             // 
             this.materialLabel21.AutoSize = true;
             this.materialLabel21.Depth = 0;
-            this.materialLabel21.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.materialLabel21.Font = new System.Drawing.Font("Roboto", 11F);
             this.materialLabel21.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialLabel21.Location = new System.Drawing.Point(111, 251);
             this.materialLabel21.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel21.Name = "materialLabel21";
-            this.materialLabel21.Size = new System.Drawing.Size(594, 26);
+            this.materialLabel21.Size = new System.Drawing.Size(601, 27);
             this.materialLabel21.TabIndex = 75;
             this.materialLabel21.Text = "Zie ook de handleiding (in Word) voor functionele toelichting.";
             // 
@@ -326,12 +327,12 @@ namespace TOPX.UI.Forms
             // 
             this.materialLabel20.AutoSize = true;
             this.materialLabel20.Depth = 0;
-            this.materialLabel20.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.materialLabel20.Font = new System.Drawing.Font("Roboto", 11F);
             this.materialLabel20.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialLabel20.Location = new System.Drawing.Point(111, 188);
             this.materialLabel20.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel20.Name = "materialLabel20";
-            this.materialLabel20.Size = new System.Drawing.Size(989, 26);
+            this.materialLabel20.Size = new System.Drawing.Size(984, 27);
             this.materialLabel20.TabIndex = 74;
             this.materialLabel20.Text = "- Optioneel: de koppeling naar de fysieke bestanden voor metadata-analyse (Tab Ge" +
     "nereer Metadata)";
@@ -340,12 +341,12 @@ namespace TOPX.UI.Forms
             // 
             this.materialLabel19.AutoSize = true;
             this.materialLabel19.Depth = 0;
-            this.materialLabel19.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.materialLabel19.Font = new System.Drawing.Font("Roboto", 11F);
             this.materialLabel19.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialLabel19.Location = new System.Drawing.Point(111, 145);
             this.materialLabel19.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel19.Name = "materialLabel19";
-            this.materialLabel19.Size = new System.Drawing.Size(757, 26);
+            this.materialLabel19.Size = new System.Drawing.Size(753, 27);
             this.materialLabel19.TabIndex = 73;
             this.materialLabel19.Text = "- Csv met de records-metadata, = de documenten-metadata (Tab Bestanden)";
             // 
@@ -353,12 +354,12 @@ namespace TOPX.UI.Forms
             // 
             this.materialLabel18.AutoSize = true;
             this.materialLabel18.Depth = 0;
-            this.materialLabel18.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.materialLabel18.Font = new System.Drawing.Font("Roboto", 11F);
             this.materialLabel18.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialLabel18.Location = new System.Drawing.Point(111, 103);
             this.materialLabel18.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel18.Name = "materialLabel18";
-            this.materialLabel18.Size = new System.Drawing.Size(472, 26);
+            this.materialLabel18.Size = new System.Drawing.Size(468, 27);
             this.materialLabel18.TabIndex = 72;
             this.materialLabel18.Text = "- Csv met de dossiergegevens (Tab Bestanden)";
             // 
@@ -366,25 +367,37 @@ namespace TOPX.UI.Forms
             // 
             this.materialLabel17.AutoSize = true;
             this.materialLabel17.Depth = 0;
-            this.materialLabel17.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.materialLabel17.Font = new System.Drawing.Font("Roboto", 11F);
             this.materialLabel17.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialLabel17.Location = new System.Drawing.Point(111, 57);
             this.materialLabel17.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel17.Name = "materialLabel17";
-            this.materialLabel17.Size = new System.Drawing.Size(814, 26);
+            this.materialLabel17.Size = new System.Drawing.Size(813, 27);
             this.materialLabel17.TabIndex = 71;
             this.materialLabel17.Text = "Voor een succesvolle data-import en TopX-conversie zijn de volgende zaken nodig:";
+            // 
+            // txtIdentificatieArchief
+            // 
+            this.txtIdentificatieArchief.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Italic);
+            this.txtIdentificatieArchief.ForeColor = System.Drawing.Color.Gray;
+            this.txtIdentificatieArchief.Location = new System.Drawing.Point(384, 408);
+            this.txtIdentificatieArchief.Name = "txtIdentificatieArchief";
+            this.txtIdentificatieArchief.PlaceHolderText = "Bijv: NL-0784-10009";
+            this.txtIdentificatieArchief.Size = new System.Drawing.Size(289, 26);
+            this.txtIdentificatieArchief.TabIndex = 20;
+            this.txtIdentificatieArchief.Text = "Bijv: NL-0784-10009";
+            this.txtIdentificatieArchief.Leave += new System.EventHandler(this.SaveGlobals);
             // 
             // materialLabel12
             // 
             this.materialLabel12.AutoSize = true;
             this.materialLabel12.Depth = 0;
-            this.materialLabel12.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.materialLabel12.Font = new System.Drawing.Font("Roboto", 11F);
             this.materialLabel12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialLabel12.Location = new System.Drawing.Point(111, 408);
             this.materialLabel12.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel12.Name = "materialLabel12";
-            this.materialLabel12.Size = new System.Drawing.Size(196, 26);
+            this.materialLabel12.Size = new System.Drawing.Size(202, 27);
             this.materialLabel12.TabIndex = 12;
             this.materialLabel12.Text = "Identificatie Archief";
             // 
@@ -398,55 +411,103 @@ namespace TOPX.UI.Forms
             this.btFillDatumArchief.UseVisualStyleBackColor = true;
             this.btFillDatumArchief.Click += new System.EventHandler(this.btFillDatumArchief_Click);
             // 
+            // txtNaamArchief
+            // 
+            this.txtNaamArchief.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Italic);
+            this.txtNaamArchief.ForeColor = System.Drawing.Color.Gray;
+            this.txtNaamArchief.Location = new System.Drawing.Point(384, 363);
+            this.txtNaamArchief.Name = "txtNaamArchief";
+            this.txtNaamArchief.PlaceHolderText = "Bijv: Bouwvergunningen Gemeente Raamsdonk 1993 - 1996";
+            this.txtNaamArchief.Size = new System.Drawing.Size(718, 26);
+            this.txtNaamArchief.TabIndex = 10;
+            this.txtNaamArchief.Text = "Bijv: Bouwvergunningen Gemeente Raamsdonk 1993 - 1996";
+            this.txtNaamArchief.Leave += new System.EventHandler(this.SaveGlobals);
+            // 
             // materialLabel9
             // 
             this.materialLabel9.AutoSize = true;
             this.materialLabel9.Depth = 0;
-            this.materialLabel9.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.materialLabel9.Font = new System.Drawing.Font("Roboto", 11F);
             this.materialLabel9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialLabel9.Location = new System.Drawing.Point(111, 363);
             this.materialLabel9.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel9.Name = "materialLabel9";
-            this.materialLabel9.Size = new System.Drawing.Size(145, 26);
+            this.materialLabel9.Size = new System.Drawing.Size(146, 27);
             this.materialLabel9.TabIndex = 8;
             this.materialLabel9.Text = "Naam Archief";
+            // 
+            // txtDoelArchief
+            // 
+            this.txtDoelArchief.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Italic);
+            this.txtDoelArchief.ForeColor = System.Drawing.Color.Gray;
+            this.txtDoelArchief.Location = new System.Drawing.Point(384, 600);
+            this.txtDoelArchief.Name = "txtDoelArchief";
+            this.txtDoelArchief.PlaceHolderText = "Bijv: Bouwvergunningen om op te nemen in e-Depot";
+            this.txtDoelArchief.Size = new System.Drawing.Size(718, 26);
+            this.txtDoelArchief.TabIndex = 70;
+            this.txtDoelArchief.Text = "Bijv: Bouwvergunningen om op te nemen in e-Depot";
+            this.txtDoelArchief.Leave += new System.EventHandler(this.SaveGlobals);
             // 
             // materialLabel11
             // 
             this.materialLabel11.AutoSize = true;
             this.materialLabel11.Depth = 0;
-            this.materialLabel11.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.materialLabel11.Font = new System.Drawing.Font("Roboto", 11F);
             this.materialLabel11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialLabel11.Location = new System.Drawing.Point(111, 600);
             this.materialLabel11.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel11.Name = "materialLabel11";
-            this.materialLabel11.Size = new System.Drawing.Size(131, 26);
+            this.materialLabel11.Size = new System.Drawing.Size(131, 27);
             this.materialLabel11.TabIndex = 6;
             this.materialLabel11.Text = "Doel Archief";
+            // 
+            // txtBronArchief
+            // 
+            this.txtBronArchief.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Italic);
+            this.txtBronArchief.ForeColor = System.Drawing.Color.Gray;
+            this.txtBronArchief.Location = new System.Drawing.Point(384, 554);
+            this.txtBronArchief.Name = "txtBronArchief";
+            this.txtBronArchief.PlaceHolderText = "Bijv: Digitale bouwvergunningen";
+            this.txtBronArchief.Size = new System.Drawing.Size(718, 26);
+            this.txtBronArchief.TabIndex = 60;
+            this.txtBronArchief.Text = "Bijv: Digitale bouwvergunningen";
+            this.txtBronArchief.Leave += new System.EventHandler(this.SaveGlobals);
             // 
             // materialLabel8
             // 
             this.materialLabel8.AutoSize = true;
             this.materialLabel8.Depth = 0;
-            this.materialLabel8.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.materialLabel8.Font = new System.Drawing.Font("Roboto", 11F);
             this.materialLabel8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialLabel8.Location = new System.Drawing.Point(111, 554);
             this.materialLabel8.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel8.Name = "materialLabel8";
-            this.materialLabel8.Size = new System.Drawing.Size(132, 26);
+            this.materialLabel8.Size = new System.Drawing.Size(133, 27);
             this.materialLabel8.TabIndex = 4;
             this.materialLabel8.Text = "Bron Archief";
+            // 
+            // txtOmschrijvingArchief
+            // 
+            this.txtOmschrijvingArchief.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Italic);
+            this.txtOmschrijvingArchief.ForeColor = System.Drawing.Color.Gray;
+            this.txtOmschrijvingArchief.Location = new System.Drawing.Point(384, 508);
+            this.txtOmschrijvingArchief.Name = "txtOmschrijvingArchief";
+            this.txtOmschrijvingArchief.PlaceHolderText = "Bijv: Bouwvergunningen Gemeente Raamsdonk 1993 - 1996";
+            this.txtOmschrijvingArchief.Size = new System.Drawing.Size(718, 26);
+            this.txtOmschrijvingArchief.TabIndex = 50;
+            this.txtOmschrijvingArchief.Text = "Bijv: Bouwvergunningen Gemeente Raamsdonk 1993 - 1996";
+            this.txtOmschrijvingArchief.Leave += new System.EventHandler(this.SaveGlobals);
             // 
             // materialLabel7
             // 
             this.materialLabel7.AutoSize = true;
             this.materialLabel7.Depth = 0;
-            this.materialLabel7.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.materialLabel7.Font = new System.Drawing.Font("Roboto", 11F);
             this.materialLabel7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialLabel7.Location = new System.Drawing.Point(111, 508);
             this.materialLabel7.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel7.Name = "materialLabel7";
-            this.materialLabel7.Size = new System.Drawing.Size(213, 26);
+            this.materialLabel7.Size = new System.Drawing.Size(213, 27);
             this.materialLabel7.TabIndex = 2;
             this.materialLabel7.Text = "Omschrijving Archief";
             // 
@@ -464,12 +525,12 @@ namespace TOPX.UI.Forms
             // 
             this.materialLabel10.AutoSize = true;
             this.materialLabel10.Depth = 0;
-            this.materialLabel10.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.materialLabel10.Font = new System.Drawing.Font("Roboto", 11F);
             this.materialLabel10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialLabel10.Location = new System.Drawing.Point(111, 463);
             this.materialLabel10.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel10.Name = "materialLabel10";
-            this.materialLabel10.Size = new System.Drawing.Size(151, 26);
+            this.materialLabel10.Size = new System.Drawing.Size(151, 27);
             this.materialLabel10.TabIndex = 0;
             this.materialLabel10.Text = "Datum Archief";
             // 
@@ -593,13 +654,13 @@ namespace TOPX.UI.Forms
             // 
             this.materialLabel2.AutoSize = true;
             this.materialLabel2.Depth = 0;
-            this.materialLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.materialLabel2.Font = new System.Drawing.Font("Roboto", 11F);
             this.materialLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialLabel2.Location = new System.Drawing.Point(954, 123);
             this.materialLabel2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel2.Name = "materialLabel2";
-            this.materialLabel2.Size = new System.Drawing.Size(367, 26);
+            this.materialLabel2.Size = new System.Drawing.Size(363, 27);
             this.materialLabel2.TabIndex = 20;
             this.materialLabel2.Text = "Veldmapping Records en Bestanden";
             // 
@@ -608,13 +669,13 @@ namespace TOPX.UI.Forms
             this.materialLabel1.AutoSize = true;
             this.materialLabel1.BackColor = System.Drawing.Color.White;
             this.materialLabel1.Depth = 0;
-            this.materialLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.materialLabel1.Font = new System.Drawing.Font("Roboto", 11F);
             this.materialLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialLabel1.Location = new System.Drawing.Point(14, 120);
             this.materialLabel1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel1.Name = "materialLabel1";
-            this.materialLabel1.Size = new System.Drawing.Size(231, 26);
+            this.materialLabel1.Size = new System.Drawing.Size(228, 27);
             this.materialLabel1.TabIndex = 19;
             this.materialLabel1.Text = "Veldmapping Dossiers";
             // 
@@ -631,13 +692,13 @@ namespace TOPX.UI.Forms
             // 
             this.materialLabel6.AutoSize = true;
             this.materialLabel6.Depth = 0;
-            this.materialLabel6.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.materialLabel6.Font = new System.Drawing.Font("Roboto", 11F);
             this.materialLabel6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialLabel6.Location = new System.Drawing.Point(957, 23);
             this.materialLabel6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.materialLabel6.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel6.Name = "materialLabel6";
-            this.materialLabel6.Size = new System.Drawing.Size(456, 26);
+            this.materialLabel6.Size = new System.Drawing.Size(457, 27);
             this.materialLabel6.TabIndex = 17;
             this.materialLabel6.Text = "Selecteer Records en Bestanden-Metadatafile";
             // 
@@ -645,13 +706,13 @@ namespace TOPX.UI.Forms
             // 
             this.materialLabel5.AutoSize = true;
             this.materialLabel5.Depth = 0;
-            this.materialLabel5.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.materialLabel5.Font = new System.Drawing.Font("Roboto", 11F);
             this.materialLabel5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialLabel5.Location = new System.Drawing.Point(30, 20);
             this.materialLabel5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.materialLabel5.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel5.Name = "materialLabel5";
-            this.materialLabel5.Size = new System.Drawing.Size(309, 26);
+            this.materialLabel5.Size = new System.Drawing.Size(311, 27);
             this.materialLabel5.TabIndex = 16;
             this.materialLabel5.Text = "Selecteer Dossier-Metadatafile";
             // 
@@ -664,8 +725,147 @@ namespace TOPX.UI.Forms
             this.txtDossierLocation.Size = new System.Drawing.Size(373, 26);
             this.txtDossierLocation.TabIndex = 10;
             // 
+            // gridFieldMappingRecords
+            // 
+            this.gridFieldMappingRecords.AllowDrop = true;
+            this.gridFieldMappingRecords.AllowUserToAddRows = false;
+            this.gridFieldMappingRecords.AllowUserToDeleteRows = false;
+            this.gridFieldMappingRecords.BackgroundColor = System.Drawing.SystemColors.Window;
+            this.gridFieldMappingRecords.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.ControlDark;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gridFieldMappingRecords.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.gridFieldMappingRecords.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gridFieldMappingRecords.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.DatabaseFieldNameRecords,
+            this.MappedFieldNameRecords,
+            this.TMLO_Records});
+            this.gridFieldMappingRecords.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.gridFieldMappingRecords.EnableHeadersVisualStyles = false;
+            this.gridFieldMappingRecords.Location = new System.Drawing.Point(960, 154);
+            this.gridFieldMappingRecords.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.gridFieldMappingRecords.Name = "gridFieldMappingRecords";
+            this.gridFieldMappingRecords.RowHeadersVisible = false;
+            this.gridFieldMappingRecords.RowHeadersWidth = 62;
+            this.gridFieldMappingRecords.ShowCellErrors = false;
+            this.gridFieldMappingRecords.ShowCellToolTips = false;
+            this.gridFieldMappingRecords.ShowEditingIcon = false;
+            this.gridFieldMappingRecords.ShowRowErrors = false;
+            this.gridFieldMappingRecords.Size = new System.Drawing.Size(854, 849);
+            this.gridFieldMappingRecords.TabIndex = 40;
+            this.gridFieldMappingRecords.DataSourceChanged += new System.EventHandler(this.gridFieldMappingRecords_DataSourceChanged);
+            this.gridFieldMappingRecords.Leave += new System.EventHandler(this.gridFieldMappingRecords_Leave);
+            this.gridFieldMappingRecords.MouseClick += new System.Windows.Forms.MouseEventHandler(this.gridFieldMappingRecords_MouseClick);
+            // 
+            // DatabaseFieldNameRecords
+            // 
+            this.DatabaseFieldNameRecords.DataPropertyName = "MappedFieldName";
+            this.DatabaseFieldNameRecords.HeaderText = "Veldnaam Bron";
+            this.DatabaseFieldNameRecords.MinimumWidth = 8;
+            this.DatabaseFieldNameRecords.Name = "DatabaseFieldNameRecords";
+            this.DatabaseFieldNameRecords.Width = 250;
+            // 
+            // MappedFieldNameRecords
+            // 
+            this.MappedFieldNameRecords.DataPropertyName = "DatabaseFieldName";
+            this.MappedFieldNameRecords.HeaderText = "Veldnaam TopX";
+            this.MappedFieldNameRecords.MinimumWidth = 8;
+            this.MappedFieldNameRecords.Name = "MappedFieldNameRecords";
+            this.MappedFieldNameRecords.Width = 265;
+            // 
+            // TMLO_Records
+            // 
+            this.TMLO_Records.DataPropertyName = "TMLO";
+            this.TMLO_Records.HeaderText = "TMLO";
+            this.TMLO_Records.MinimumWidth = 8;
+            this.TMLO_Records.Name = "TMLO_Records";
+            this.TMLO_Records.ReadOnly = true;
+            this.TMLO_Records.Width = 50;
+            // 
+            // gridFieldMappingDossiers
+            // 
+            this.gridFieldMappingDossiers.AllowDrop = true;
+            this.gridFieldMappingDossiers.AllowUserToAddRows = false;
+            this.gridFieldMappingDossiers.AllowUserToDeleteRows = false;
+            this.gridFieldMappingDossiers.BackgroundColor = System.Drawing.SystemColors.Window;
+            this.gridFieldMappingDossiers.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.ControlDark;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gridFieldMappingDossiers.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            this.gridFieldMappingDossiers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gridFieldMappingDossiers.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.MappedFieldName,
+            this.DatabaseFieldName,
+            this.TMLO,
+            this.Optional});
+            this.gridFieldMappingDossiers.EnableHeadersVisualStyles = false;
+            this.gridFieldMappingDossiers.Location = new System.Drawing.Point(8, 154);
+            this.gridFieldMappingDossiers.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.gridFieldMappingDossiers.Name = "gridFieldMappingDossiers";
+            this.gridFieldMappingDossiers.RowHeadersVisible = false;
+            this.gridFieldMappingDossiers.RowHeadersWidth = 62;
+            this.gridFieldMappingDossiers.ShowCellErrors = false;
+            this.gridFieldMappingDossiers.ShowCellToolTips = false;
+            this.gridFieldMappingDossiers.ShowEditingIcon = false;
+            this.gridFieldMappingDossiers.ShowRowErrors = false;
+            this.gridFieldMappingDossiers.Size = new System.Drawing.Size(933, 849);
+            this.gridFieldMappingDossiers.TabIndex = 30;
+            this.gridFieldMappingDossiers.DataSourceChanged += new System.EventHandler(this.gridFieldMappingDossiers_DataSourceChanged);
+            this.gridFieldMappingDossiers.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.gridFieldMappingDossiers_DataBindingComplete);
+            this.gridFieldMappingDossiers.DefaultValuesNeeded += new System.Windows.Forms.DataGridViewRowEventHandler(this.gridFieldMappingDossiers_DefaultValuesNeeded);
+            this.gridFieldMappingDossiers.Leave += new System.EventHandler(this.gridFieldMappingDossiers_Leave);
+            this.gridFieldMappingDossiers.MouseClick += new System.Windows.Forms.MouseEventHandler(this.gridFieldMappingDossiers_MouseClick);
+            // 
+            // MappedFieldName
+            // 
+            this.MappedFieldName.DataPropertyName = "MappedFieldName";
+            this.MappedFieldName.HeaderText = "Veldnaam Bron";
+            this.MappedFieldName.MinimumWidth = 8;
+            this.MappedFieldName.Name = "MappedFieldName";
+            this.MappedFieldName.Width = 250;
+            // 
+            // DatabaseFieldName
+            // 
+            this.DatabaseFieldName.DataPropertyName = "DatabaseFieldName";
+            this.DatabaseFieldName.HeaderText = "Veldnaam TopX";
+            this.DatabaseFieldName.MinimumWidth = 8;
+            this.DatabaseFieldName.Name = "DatabaseFieldName";
+            this.DatabaseFieldName.Width = 250;
+            // 
+            // TMLO
+            // 
+            this.TMLO.DataPropertyName = "TMLO";
+            this.TMLO.HeaderText = "TMLO";
+            this.TMLO.MinimumWidth = 8;
+            this.TMLO.Name = "TMLO";
+            this.TMLO.ReadOnly = true;
+            this.TMLO.Width = 60;
+            // 
+            // Optional
+            // 
+            this.Optional.DataPropertyName = "Optional";
+            this.Optional.HeaderText = "Opt.";
+            this.Optional.MinimumWidth = 8;
+            this.Optional.Name = "Optional";
+            this.Optional.ReadOnly = true;
+            this.Optional.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Optional.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.Optional.ToolTipText = "Optioneel";
+            this.Optional.Width = 35;
+            // 
             // tabImportFiles
             // 
+            this.tabImportFiles.Controls.Add(this.chkIgnoreValidationsOfNonMandatoryFields);
             this.tabImportFiles.Controls.Add(this.linkCopyErrorsRecords);
             this.tabImportFiles.Controls.Add(this.linkCopyErrorsDossiers);
             this.tabImportFiles.Controls.Add(this.btImportFilesInDb);
@@ -718,13 +918,13 @@ namespace TOPX.UI.Forms
             // 
             this.materialLabel4.AutoSize = true;
             this.materialLabel4.Depth = 0;
-            this.materialLabel4.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.materialLabel4.Font = new System.Drawing.Font("Roboto", 11F);
             this.materialLabel4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialLabel4.Location = new System.Drawing.Point(982, 95);
             this.materialLabel4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.materialLabel4.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel4.Name = "materialLabel4";
-            this.materialLabel4.Size = new System.Drawing.Size(158, 26);
+            this.materialLabel4.Size = new System.Drawing.Size(156, 27);
             this.materialLabel4.TabIndex = 9;
             this.materialLabel4.Text = "Errors Records";
             // 
@@ -732,13 +932,13 @@ namespace TOPX.UI.Forms
             // 
             this.materialLabel3.AutoSize = true;
             this.materialLabel3.Depth = 0;
-            this.materialLabel3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.materialLabel3.Font = new System.Drawing.Font("Roboto", 11F);
             this.materialLabel3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialLabel3.Location = new System.Drawing.Point(58, 92);
             this.materialLabel3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.materialLabel3.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel3.Name = "materialLabel3";
-            this.materialLabel3.Size = new System.Drawing.Size(162, 26);
+            this.materialLabel3.Size = new System.Drawing.Size(159, 27);
             this.materialLabel3.TabIndex = 8;
             this.materialLabel3.Text = "Errors Dossiers";
             // 
@@ -796,6 +996,27 @@ namespace TOPX.UI.Forms
             this.tabMetadata.TabIndex = 5;
             this.tabMetadata.Text = "Genereer Metadata";
             this.tabMetadata.UseVisualStyleBackColor = true;
+            // 
+            // linkLabelDROID
+            // 
+            this.linkLabelDROID.AutoSize = true;
+            this.linkLabelDROID.Location = new System.Drawing.Point(397, 442);
+            this.linkLabelDROID.Name = "linkLabelDROID";
+            this.linkLabelDROID.Size = new System.Drawing.Size(162, 20);
+            this.linkLabelDROID.TabIndex = 43;
+            this.linkLabelDROID.TabStop = true;
+            this.linkLabelDROID.Text = "The National Archives";
+            this.linkLabelDROID.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelDROID_LinkClicked);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(138, 442);
+            this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(258, 20);
+            this.label10.TabIndex = 42;
+            this.label10.Text = "Klik hier om DROID te downloaden:";
             // 
             // chkTestForPasswProtection
             // 
@@ -915,13 +1136,13 @@ namespace TOPX.UI.Forms
             // 
             this.materialLabel16.AutoSize = true;
             this.materialLabel16.Depth = 0;
-            this.materialLabel16.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.materialLabel16.Font = new System.Drawing.Font("Roboto", 11F);
             this.materialLabel16.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialLabel16.Location = new System.Drawing.Point(854, 43);
             this.materialLabel16.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.materialLabel16.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel16.Name = "materialLabel16";
-            this.materialLabel16.Size = new System.Drawing.Size(71, 26);
+            this.materialLabel16.Size = new System.Drawing.Size(70, 27);
             this.materialLabel16.TabIndex = 30;
             this.materialLabel16.Text = "Errors";
             // 
@@ -984,13 +1205,13 @@ namespace TOPX.UI.Forms
             // 
             this.materialLabel15.AutoSize = true;
             this.materialLabel15.Depth = 0;
-            this.materialLabel15.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.materialLabel15.Font = new System.Drawing.Font("Roboto", 11F);
             this.materialLabel15.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialLabel15.Location = new System.Drawing.Point(105, 37);
             this.materialLabel15.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.materialLabel15.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel15.Name = "materialLabel15";
-            this.materialLabel15.Size = new System.Drawing.Size(350, 26);
+            this.materialLabel15.Size = new System.Drawing.Size(352, 27);
             this.materialLabel15.TabIndex = 24;
             this.materialLabel15.Text = "Selecteer directory te scannen files";
             // 
@@ -1181,13 +1402,13 @@ namespace TOPX.UI.Forms
             // 
             this.materialLabel14.AutoSize = true;
             this.materialLabel14.Depth = 0;
-            this.materialLabel14.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.materialLabel14.Font = new System.Drawing.Font("Roboto", 11F);
             this.materialLabel14.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialLabel14.Location = new System.Drawing.Point(984, 306);
             this.materialLabel14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.materialLabel14.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel14.Name = "materialLabel14";
-            this.materialLabel14.Size = new System.Drawing.Size(361, 26);
+            this.materialLabel14.Size = new System.Drawing.Size(362, 27);
             this.materialLabel14.TabIndex = 14;
             this.materialLabel14.Text = "TopX XML (eerste 10.000 karakters)";
             // 
@@ -1218,13 +1439,13 @@ namespace TOPX.UI.Forms
             // 
             this.materialLabel13.AutoSize = true;
             this.materialLabel13.Depth = 0;
-            this.materialLabel13.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.materialLabel13.Font = new System.Drawing.Font("Roboto", 11F);
             this.materialLabel13.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialLabel13.Location = new System.Drawing.Point(69, 308);
             this.materialLabel13.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.materialLabel13.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel13.Name = "materialLabel13";
-            this.materialLabel13.Size = new System.Drawing.Size(48, 26);
+            this.materialLabel13.Size = new System.Drawing.Size(49, 27);
             this.materialLabel13.TabIndex = 9;
             this.materialLabel13.Text = "Log";
             // 
@@ -1291,12 +1512,12 @@ namespace TOPX.UI.Forms
             // 
             this.materialLabel24.AutoSize = true;
             this.materialLabel24.Depth = 0;
-            this.materialLabel24.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.materialLabel24.Font = new System.Drawing.Font("Roboto", 11F);
             this.materialLabel24.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialLabel24.Location = new System.Drawing.Point(152, 357);
             this.materialLabel24.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel24.Name = "materialLabel24";
-            this.materialLabel24.Size = new System.Drawing.Size(48, 26);
+            this.materialLabel24.Size = new System.Drawing.Size(49, 27);
             this.materialLabel24.TabIndex = 39;
             this.materialLabel24.Text = "Log";
             // 
@@ -1325,12 +1546,12 @@ namespace TOPX.UI.Forms
             // 
             this.materialLabel23.AutoSize = true;
             this.materialLabel23.Depth = 0;
-            this.materialLabel23.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.materialLabel23.Font = new System.Drawing.Font("Roboto", 11F);
             this.materialLabel23.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialLabel23.Location = new System.Drawing.Point(126, 72);
             this.materialLabel23.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel23.Name = "materialLabel23";
-            this.materialLabel23.Size = new System.Drawing.Size(1538, 26);
+            this.materialLabel23.Size = new System.Drawing.Size(1534, 27);
             this.materialLabel23.TabIndex = 36;
             this.materialLabel23.Text = "De TopX Creator maakt de Sidecar-structuur aan, en kopiëert alle bestanden naar d" +
     "e juiste plaats in de Sidecar-boomstructuur. (Let op voldoende schijfruimte)";
@@ -1339,12 +1560,12 @@ namespace TOPX.UI.Forms
             // 
             this.materialLabel22.AutoSize = true;
             this.materialLabel22.Depth = 0;
-            this.materialLabel22.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.materialLabel22.Font = new System.Drawing.Font("Roboto", 11F);
             this.materialLabel22.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialLabel22.Location = new System.Drawing.Point(126, 34);
             this.materialLabel22.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel22.Name = "materialLabel22";
-            this.materialLabel22.Size = new System.Drawing.Size(1121, 26);
+            this.materialLabel22.Size = new System.Drawing.Size(1104, 27);
             this.materialLabel22.TabIndex = 35;
             this.materialLabel22.Text = "Om een Sidecar-export te kunnen maken, moet er een valide TopX-xml gegenereerd zi" +
     "jn (zie tab \"Genereer TopX\")";
@@ -1469,224 +1690,16 @@ namespace TOPX.UI.Forms
             this.LblInfo.Text = "?";
             this.LblInfo.Click += new System.EventHandler(this.LblInfo_Click);
             // 
-            // label10
+            // chkIgnoreValidationsOfNonMandatoryFields
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(138, 442);
-            this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(258, 20);
-            this.label10.TabIndex = 42;
-            this.label10.Text = "Klik hier om DROID te downloaden:";
-            // 
-            // linkLabelDROID
-            // 
-            this.linkLabelDROID.AutoSize = true;
-            this.linkLabelDROID.Location = new System.Drawing.Point(397, 442);
-            this.linkLabelDROID.Name = "linkLabelDROID";
-            this.linkLabelDROID.Size = new System.Drawing.Size(162, 20);
-            this.linkLabelDROID.TabIndex = 43;
-            this.linkLabelDROID.TabStop = true;
-            this.linkLabelDROID.Text = "The National Archives";
-            this.linkLabelDROID.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelDROID_LinkClicked);
-            // 
-            // txtIdentificatieArchief
-            // 
-            this.txtIdentificatieArchief.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Italic);
-            this.txtIdentificatieArchief.ForeColor = System.Drawing.Color.Gray;
-            this.txtIdentificatieArchief.Location = new System.Drawing.Point(384, 408);
-            this.txtIdentificatieArchief.Name = "txtIdentificatieArchief";
-            this.txtIdentificatieArchief.PlaceHolderText = "Bijv: NL-0784-10009";
-            this.txtIdentificatieArchief.Size = new System.Drawing.Size(289, 26);
-            this.txtIdentificatieArchief.TabIndex = 20;
-            this.txtIdentificatieArchief.Text = "Bijv: NL-0784-10009";
-            this.txtIdentificatieArchief.Leave += new System.EventHandler(this.SaveGlobals);
-            // 
-            // txtNaamArchief
-            // 
-            this.txtNaamArchief.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Italic);
-            this.txtNaamArchief.ForeColor = System.Drawing.Color.Gray;
-            this.txtNaamArchief.Location = new System.Drawing.Point(384, 363);
-            this.txtNaamArchief.Name = "txtNaamArchief";
-            this.txtNaamArchief.PlaceHolderText = "Bijv: Bouwvergunningen Gemeente Raamsdonk 1993 - 1996";
-            this.txtNaamArchief.Size = new System.Drawing.Size(718, 26);
-            this.txtNaamArchief.TabIndex = 10;
-            this.txtNaamArchief.Text = "Bijv: Bouwvergunningen Gemeente Raamsdonk 1993 - 1996";
-            this.txtNaamArchief.Leave += new System.EventHandler(this.SaveGlobals);
-            // 
-            // txtDoelArchief
-            // 
-            this.txtDoelArchief.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Italic);
-            this.txtDoelArchief.ForeColor = System.Drawing.Color.Gray;
-            this.txtDoelArchief.Location = new System.Drawing.Point(384, 600);
-            this.txtDoelArchief.Name = "txtDoelArchief";
-            this.txtDoelArchief.PlaceHolderText = "Bijv: Bouwvergunningen om op te nemen in e-Depot";
-            this.txtDoelArchief.Size = new System.Drawing.Size(718, 26);
-            this.txtDoelArchief.TabIndex = 70;
-            this.txtDoelArchief.Text = "Bijv: Bouwvergunningen om op te nemen in e-Depot";
-            this.txtDoelArchief.Leave += new System.EventHandler(this.SaveGlobals);
-            // 
-            // txtBronArchief
-            // 
-            this.txtBronArchief.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Italic);
-            this.txtBronArchief.ForeColor = System.Drawing.Color.Gray;
-            this.txtBronArchief.Location = new System.Drawing.Point(384, 554);
-            this.txtBronArchief.Name = "txtBronArchief";
-            this.txtBronArchief.PlaceHolderText = "Bijv: Digitale bouwvergunningen";
-            this.txtBronArchief.Size = new System.Drawing.Size(718, 26);
-            this.txtBronArchief.TabIndex = 60;
-            this.txtBronArchief.Text = "Bijv: Digitale bouwvergunningen";
-            this.txtBronArchief.Leave += new System.EventHandler(this.SaveGlobals);
-            // 
-            // txtOmschrijvingArchief
-            // 
-            this.txtOmschrijvingArchief.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Italic);
-            this.txtOmschrijvingArchief.ForeColor = System.Drawing.Color.Gray;
-            this.txtOmschrijvingArchief.Location = new System.Drawing.Point(384, 508);
-            this.txtOmschrijvingArchief.Name = "txtOmschrijvingArchief";
-            this.txtOmschrijvingArchief.PlaceHolderText = "Bijv: Bouwvergunningen Gemeente Raamsdonk 1993 - 1996";
-            this.txtOmschrijvingArchief.Size = new System.Drawing.Size(718, 26);
-            this.txtOmschrijvingArchief.TabIndex = 50;
-            this.txtOmschrijvingArchief.Text = "Bijv: Bouwvergunningen Gemeente Raamsdonk 1993 - 1996";
-            this.txtOmschrijvingArchief.Leave += new System.EventHandler(this.SaveGlobals);
-            // 
-            // gridFieldMappingRecords
-            // 
-            this.gridFieldMappingRecords.AllowDrop = true;
-            this.gridFieldMappingRecords.AllowUserToAddRows = false;
-            this.gridFieldMappingRecords.AllowUserToDeleteRows = false;
-            this.gridFieldMappingRecords.BackgroundColor = System.Drawing.SystemColors.Window;
-            this.gridFieldMappingRecords.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.ControlDark;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gridFieldMappingRecords.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            this.gridFieldMappingRecords.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gridFieldMappingRecords.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.DatabaseFieldNameRecords,
-            this.MappedFieldNameRecords,
-            this.TMLO_Records});
-            this.gridFieldMappingRecords.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.gridFieldMappingRecords.EnableHeadersVisualStyles = false;
-            this.gridFieldMappingRecords.Location = new System.Drawing.Point(960, 154);
-            this.gridFieldMappingRecords.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.gridFieldMappingRecords.Name = "gridFieldMappingRecords";
-            this.gridFieldMappingRecords.RowHeadersVisible = false;
-            this.gridFieldMappingRecords.RowHeadersWidth = 62;
-            this.gridFieldMappingRecords.ShowCellErrors = false;
-            this.gridFieldMappingRecords.ShowCellToolTips = false;
-            this.gridFieldMappingRecords.ShowEditingIcon = false;
-            this.gridFieldMappingRecords.ShowRowErrors = false;
-            this.gridFieldMappingRecords.Size = new System.Drawing.Size(854, 849);
-            this.gridFieldMappingRecords.TabIndex = 40;
-            this.gridFieldMappingRecords.DataSourceChanged += new System.EventHandler(this.gridFieldMappingRecords_DataSourceChanged);
-            this.gridFieldMappingRecords.Leave += new System.EventHandler(this.gridFieldMappingRecords_Leave);
-            this.gridFieldMappingRecords.MouseClick += new System.Windows.Forms.MouseEventHandler(this.gridFieldMappingRecords_MouseClick);
-            // 
-            // DatabaseFieldNameRecords
-            // 
-            this.DatabaseFieldNameRecords.DataPropertyName = "MappedFieldName";
-            this.DatabaseFieldNameRecords.HeaderText = "Veldnaam Bron";
-            this.DatabaseFieldNameRecords.MinimumWidth = 8;
-            this.DatabaseFieldNameRecords.Name = "DatabaseFieldNameRecords";
-            this.DatabaseFieldNameRecords.Width = 250;
-            // 
-            // MappedFieldNameRecords
-            // 
-            this.MappedFieldNameRecords.DataPropertyName = "DatabaseFieldName";
-            this.MappedFieldNameRecords.HeaderText = "Veldnaam TopX";
-            this.MappedFieldNameRecords.MinimumWidth = 8;
-            this.MappedFieldNameRecords.Name = "MappedFieldNameRecords";
-            this.MappedFieldNameRecords.Width = 265;
-            // 
-            // TMLO_Records
-            // 
-            this.TMLO_Records.DataPropertyName = "TMLO";
-            this.TMLO_Records.HeaderText = "TMLO";
-            this.TMLO_Records.MinimumWidth = 8;
-            this.TMLO_Records.Name = "TMLO_Records";
-            this.TMLO_Records.ReadOnly = true;
-            this.TMLO_Records.Width = 50;
-            // 
-            // gridFieldMappingDossiers
-            // 
-            this.gridFieldMappingDossiers.AllowDrop = true;
-            this.gridFieldMappingDossiers.AllowUserToAddRows = false;
-            this.gridFieldMappingDossiers.AllowUserToDeleteRows = false;
-            this.gridFieldMappingDossiers.BackgroundColor = System.Drawing.SystemColors.Window;
-            this.gridFieldMappingDossiers.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.ControlDark;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gridFieldMappingDossiers.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
-            this.gridFieldMappingDossiers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gridFieldMappingDossiers.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.MappedFieldName,
-            this.DatabaseFieldName,
-            this.TMLO,
-            this.Optional});
-            this.gridFieldMappingDossiers.EnableHeadersVisualStyles = false;
-            this.gridFieldMappingDossiers.Location = new System.Drawing.Point(8, 154);
-            this.gridFieldMappingDossiers.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.gridFieldMappingDossiers.Name = "gridFieldMappingDossiers";
-            this.gridFieldMappingDossiers.RowHeadersVisible = false;
-            this.gridFieldMappingDossiers.RowHeadersWidth = 62;
-            this.gridFieldMappingDossiers.ShowCellErrors = false;
-            this.gridFieldMappingDossiers.ShowCellToolTips = false;
-            this.gridFieldMappingDossiers.ShowEditingIcon = false;
-            this.gridFieldMappingDossiers.ShowRowErrors = false;
-            this.gridFieldMappingDossiers.Size = new System.Drawing.Size(933, 849);
-            this.gridFieldMappingDossiers.TabIndex = 30;
-            this.gridFieldMappingDossiers.DataSourceChanged += new System.EventHandler(this.gridFieldMappingDossiers_DataSourceChanged);
-            this.gridFieldMappingDossiers.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.gridFieldMappingDossiers_DataBindingComplete);
-            this.gridFieldMappingDossiers.DefaultValuesNeeded += new System.Windows.Forms.DataGridViewRowEventHandler(this.gridFieldMappingDossiers_DefaultValuesNeeded);
-            this.gridFieldMappingDossiers.Leave += new System.EventHandler(this.gridFieldMappingDossiers_Leave);
-            this.gridFieldMappingDossiers.MouseClick += new System.Windows.Forms.MouseEventHandler(this.gridFieldMappingDossiers_MouseClick);
-            // 
-            // MappedFieldName
-            // 
-            this.MappedFieldName.DataPropertyName = "MappedFieldName";
-            this.MappedFieldName.HeaderText = "Veldnaam Bron";
-            this.MappedFieldName.MinimumWidth = 8;
-            this.MappedFieldName.Name = "MappedFieldName";
-            this.MappedFieldName.Width = 250;
-            // 
-            // DatabaseFieldName
-            // 
-            this.DatabaseFieldName.DataPropertyName = "DatabaseFieldName";
-            this.DatabaseFieldName.HeaderText = "Veldnaam TopX";
-            this.DatabaseFieldName.MinimumWidth = 8;
-            this.DatabaseFieldName.Name = "DatabaseFieldName";
-            this.DatabaseFieldName.Width = 250;
-            // 
-            // TMLO
-            // 
-            this.TMLO.DataPropertyName = "TMLO";
-            this.TMLO.HeaderText = "TMLO";
-            this.TMLO.MinimumWidth = 8;
-            this.TMLO.Name = "TMLO";
-            this.TMLO.ReadOnly = true;
-            this.TMLO.Width = 60;
-            // 
-            // Optional
-            // 
-            this.Optional.DataPropertyName = "Optional";
-            this.Optional.HeaderText = "Opt.";
-            this.Optional.MinimumWidth = 8;
-            this.Optional.Name = "Optional";
-            this.Optional.ReadOnly = true;
-            this.Optional.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Optional.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.Optional.ToolTipText = "Optioneel";
-            this.Optional.Width = 35;
+            this.chkIgnoreValidationsOfNonMandatoryFields.AutoSize = true;
+            this.chkIgnoreValidationsOfNonMandatoryFields.Location = new System.Drawing.Point(452, 38);
+            this.chkIgnoreValidationsOfNonMandatoryFields.Name = "chkIgnoreValidationsOfNonMandatoryFields";
+            this.chkIgnoreValidationsOfNonMandatoryFields.Size = new System.Drawing.Size(387, 24);
+            this.chkIgnoreValidationsOfNonMandatoryFields.TabIndex = 13;
+            this.chkIgnoreValidationsOfNonMandatoryFields.Text = "Negeer validaties niet-verplichte velden in dossiers";
+            this.chkIgnoreValidationsOfNonMandatoryFields.UseVisualStyleBackColor = true;
+            this.chkIgnoreValidationsOfNonMandatoryFields.CheckedChanged += new System.EventHandler(this.chkIgnoreValidationsOfNonMandatoryFields_CheckedChanged);
             // 
             // TopXConverter
             // 
@@ -1713,6 +1726,8 @@ namespace TOPX.UI.Forms
             this.tabLoadFiles.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picRecordsSelector)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picDossierSelector)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridFieldMappingRecords)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridFieldMappingDossiers)).EndInit();
             this.tabImportFiles.ResumeLayout(false);
             this.tabImportFiles.PerformLayout();
             this.tabMetadata.ResumeLayout(false);
@@ -1727,8 +1742,6 @@ namespace TOPX.UI.Forms
             this.SidecarExport.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picSelectSourceDirOfSidecarFiles)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picSelectTargetDirOfSidecarFiles)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridFieldMappingRecords)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridFieldMappingDossiers)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1860,6 +1873,7 @@ namespace TOPX.UI.Forms
         private Label LblInfo;
         private LinkLabel linkLabelDROID;
         private Label label10;
+        private CheckBox chkIgnoreValidationsOfNonMandatoryFields;
     }
 }
 

@@ -86,7 +86,8 @@ namespace Topx.UnitTests
             };
             var streamreader = CreateReader($"A;B;C{Environment.NewLine}TestA;TestB;TestC");
 
-            mockDataservice.Setup(t => t.SaveDossier(It.Is<Dossier>(y => y.Naam == "TestA" && y.Relatie_Id == "TestB" && y.IdentificatieKenmerk == null)));
+            mockDataservice.Setup(t => t.SaveDossier(It.Is<Dossier>(y => y.Naam == "TestA" && y.Relatie_Id == "TestB" && y.IdentificatieKenmerk == null)))
+                .Returns(true);
 
             // Act
             importer.SaveDossiers(mappings, streamreader);
@@ -339,7 +340,7 @@ namespace Topx.UnitTests
 
             var result = dossierValidator.Validate();
             Assert.That(result, Is.EqualTo(false));
-            Assert.That(dossierValidator.ValidationErrors.Count, Is.EqualTo(15));
+            Assert.That(dossierValidator.ValidationErrors.Count, Is.EqualTo(16));
         }
 
         [Test]

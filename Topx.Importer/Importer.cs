@@ -17,7 +17,7 @@ namespace Topx.Importer
         public StringBuilder ErrorsImportDossiers = new StringBuilder();
         public StringBuilder ErrorsImportRecords = new StringBuilder();
         public bool ComplexLinksFound;
-      
+
         public int NrOfDossiers = 0;
         public int NrOfRecords = 0;
         private readonly string[] _fieldsThatMaybeEmpty =
@@ -44,7 +44,7 @@ namespace Topx.Importer
             var readLineAsHeader = dossierStream.ReadLine();
             if (readLineAsHeader == null)
             {
-               ErrorMessage = "File is leeg";
+                ErrorMessage = "File is leeg";
                 return;
             };
             var headersSource = readLineAsHeader.Split(';');
@@ -78,7 +78,7 @@ namespace Topx.Importer
                             continue;
 
                         if (mappedfield.StartsWith("ComplexlinkNummer"))
-                            complexLink = new ComplexLink() {ComplexLinkNummer = fieldsSource[index]};
+                            complexLink = new ComplexLink() { ComplexLinkNummer = fieldsSource[index] };
 
                         var propertyInfo = dossier.GetType().GetProperty(mappedfield);
 
@@ -86,32 +86,27 @@ namespace Topx.Importer
                             propertyInfo.SetValue(dossier, fieldsSource[index], null);
                     }
 
-                   
-
-                    if (_enableValidation)
+                    var dossierValidator = new DossierValidator(dossier);
+                    var isValidated = _enableValidation ? dossierValidator.Validate() : dossierValidator.ValidateIgnoringOptionalFields();
+                    if (isValidated)
                     {
-                        var dossiervalidator = new DossierValidator(dossier);
-                        var isValidated = dossiervalidator.Validate();
-                        if (isValidated)
+                        if (complexLink != null)
                         {
-                            if (complexLink != null)
-                            {
-                                ComplexLinksFound = true;
-                                dossier.ComplexLinks.Add(complexLink);
-                            }
-
-                            if (!_dataservice.SaveDossier(dossier))
-                            {
-                                ErrorsImportDossiers.AppendLine(_dataservice.ErrorMessage);
-                            }
-                            NrOfDossiers++;
+                            ComplexLinksFound = true;
+                            dossier.ComplexLinks.Add(complexLink);
                         }
-                        else
+
+                        if (!_dataservice.SaveDossier(dossier))
                         {
-                            foreach (var validatorValidationError in dossiervalidator.ValidationErrors)
-                            {
-                                ErrorsImportDossiers.AppendLine(validatorValidationError);
-                            }
+                            ErrorsImportDossiers.AppendLine(_dataservice.ErrorMessage);
+                        }
+                        NrOfDossiers++;
+                    }
+                    else
+                    {
+                        foreach (var validatorValidationError in dossierValidator.ValidationErrors)
+                        {
+                            ErrorsImportDossiers.AppendLine(validatorValidationError);
                         }
                     }
                 }
@@ -126,7 +121,7 @@ namespace Topx.Importer
             var readLineAsHeader = recordsStream.ReadLine();
             if (readLineAsHeader == null)
             {
-               ErrorMessage = "File is leeg";
+                ErrorMessage = "File is leeg";
                 return;
             };
             var headersSource = readLineAsHeader.Split(';');
@@ -172,7 +167,7 @@ namespace Topx.Importer
                     }
                     var recordvalidator = new RecordValidator(record);
 
-                    if (_enableValidation)
+                    //if (_enableValidation)
                     {
                         var isValidated = recordvalidator.Validate();
                         if (isValidated)
@@ -198,10 +193,10 @@ namespace Topx.Importer
                 }
             }
         }
-        
+
         public bool CheckHealthyFieldmappings(List<FieldMapping> fieldmappings)
         {
-           foreach (var fieldmapping in fieldmappings.Where(t => t.DatabaseFieldName != null && !t.DatabaseFieldName.StartsWith("ComplexLink", true, CultureInfo.InvariantCulture) && t.DatabaseFieldName != "Omschrijving"))
+            foreach (var fieldmapping in fieldmappings.Where(t => t.DatabaseFieldName != null && !t.DatabaseFieldName.StartsWith("ComplexLink", true, CultureInfo.InvariantCulture) && t.DatabaseFieldName != "Omschrijving"))
             {
                 if (!string.IsNullOrEmpty(fieldmapping.DatabaseFieldName) && string.IsNullOrEmpty(fieldmapping.MappedFieldName) && !_fieldsThatMaybeEmpty.Contains(fieldmapping.DatabaseFieldName) && !fieldmapping.Optional)
                     return false;

@@ -185,7 +185,7 @@ namespace TOPX.UI.Forms
             _dataservice.ClearDossiersAndRecords();
 
 
-            var importer = new Importer(_dataservice);
+            var importer = new Importer(_dataservice, !chkIgnoreValidationsOfNonMandatoryFields.Checked);
             if (!importer.CheckHealthyFieldmappings(_fieldmappingsDossiers) || !importer.CheckHealthyFieldmappings(_fieldmappingsRecords))
             {
                 MessageBox.Show("Niet alle velden zijn gemapped. Corrigeer dit eerst, in de tab 'Bestanden'. ");
@@ -1153,6 +1153,11 @@ namespace TOPX.UI.Forms
             {
                 MessageBox.Show($"Kan de link niet openen. Foutmelding: {exception.Message}");
             }
+        }
+
+        private void chkIgnoreValidationsOfNonMandatoryFields_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

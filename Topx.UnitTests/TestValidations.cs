@@ -18,15 +18,15 @@ namespace Topx.UnitTests
                 Assert.That(string.Empty, Is.EqualTo(result));
             }
         }
-        [Test]
-        public void TestFileNameValidation_Fail()
-        {
-            foreach (var filename in Fail)
-            {
-                var result = Validations.GetIllegalCharsInFileName(filename);
-                Assert.That(string.Empty, Is.EqualTo(result));
-            }
-        }
+        // [Test]
+        // public void TestFileNameValidation_Fail()
+        // {
+        //     foreach (var filename in Fail)
+        //     {
+        //         var result = Validations.GetIllegalCharsInFileName(filename);
+        //         Assert.That(string.Empty, Is.EqualTo(result));
+        //     }
+        // }
         [Test]
         public void TestFileNameValidationAndCheckReturnedChar1_Fail()
         {

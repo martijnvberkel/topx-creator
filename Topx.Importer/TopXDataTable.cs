@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using Topx.Data;
 
 namespace Topx.Importer
@@ -21,7 +17,7 @@ namespace Topx.Importer
             _delimiter = delimiter;
 
         }
-      
+
         public DataTable LoadFromStream(List<FieldMapping> fieldmapping, StreamReader stream, DataTable table)
         {
             var headersSource = stream.ReadLine().Split(_delimiter);
@@ -36,8 +32,8 @@ namespace Topx.Importer
                     var headerTarget = fieldmapping.FirstOrDefault(t => t.MappedFieldName == headersSource[index])?.DatabaseFieldName;
                     if (headerTarget != null)
                     {
-                        if (ValidateField(table, headerTarget,  fieldsSource[0], fieldsSource[index]))
-                        row[headerTarget] = fieldsSource[index];
+                        if (ValidateField(table, headerTarget, fieldsSource[0], fieldsSource[index]))
+                            row[headerTarget] = fieldsSource[index];
                     }
                 }
                 table.Rows.Add(row);
