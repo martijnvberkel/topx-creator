@@ -199,10 +199,8 @@ namespace TOPX.UI.Forms
                 if (importer.Error)
                 {
                     txtErrorsDossiers.Text = importer.ErrorMessage + Environment.NewLine + importer.ErrorsImportDossiers;
-                    return;
+                    //return;
                 }
-
-
             }
 
             using (var records = new StreamReader(new FileStream(txtRecordBestandLocation.Text, FileMode.Open, FileAccess.Read, FileShare.ReadWrite), Encoding.UTF7))
@@ -218,6 +216,8 @@ namespace TOPX.UI.Forms
             txtErrorsDossiers.Text = importer.ErrorsImportDossiers.ToString();
             Cursor.Current = Cursors.Default;
 
+            if (importer.Error)
+                return;
             var msg = string.Empty;
             if (importer.Error)
             {

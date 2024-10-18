@@ -93,6 +93,7 @@ namespace TOPX.UI.Forms
             this.TMLO = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Optional = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.tabImportFiles = new System.Windows.Forms.TabPage();
+            this.chkIgnoreValidationsOfNonMandatoryFields = new System.Windows.Forms.CheckBox();
             this.linkCopyErrorsRecords = new System.Windows.Forms.LinkLabel();
             this.linkCopyErrorsDossiers = new System.Windows.Forms.LinkLabel();
             this.btImportFilesInDb = new System.Windows.Forms.Button();
@@ -160,7 +161,6 @@ namespace TOPX.UI.Forms
             this.chkSidecarMakeBatches = new System.Windows.Forms.CheckBox();
             this.lblVersion = new System.Windows.Forms.Label();
             this.LblInfo = new System.Windows.Forms.Label();
-            this.chkIgnoreValidationsOfNonMandatoryFields = new System.Windows.Forms.CheckBox();
             this.materialContextMenuStrip2.SuspendLayout();
             this.materialContextMenuStrip3.SuspendLayout();
             this.materialTab.SuspendLayout();
@@ -879,6 +879,18 @@ namespace TOPX.UI.Forms
             this.tabImportFiles.TabIndex = 2;
             this.tabImportFiles.Text = "Import";
             this.tabImportFiles.UseVisualStyleBackColor = true;
+            // 
+            // chkIgnoreValidationsOfNonMandatoryFields
+            // 
+            this.chkIgnoreValidationsOfNonMandatoryFields.AutoSize = true;
+            this.chkIgnoreValidationsOfNonMandatoryFields.Location = new System.Drawing.Point(452, 38);
+            this.chkIgnoreValidationsOfNonMandatoryFields.Name = "chkIgnoreValidationsOfNonMandatoryFields";
+            this.chkIgnoreValidationsOfNonMandatoryFields.Size = new System.Drawing.Size(613, 24);
+            this.chkIgnoreValidationsOfNonMandatoryFields.TabIndex = 13;
+            this.chkIgnoreValidationsOfNonMandatoryFields.Text = "Negeer validaties van (volgens de xsd) niet-verplichte velden in dossiers en reco" +
+    "rds";
+            this.chkIgnoreValidationsOfNonMandatoryFields.UseVisualStyleBackColor = true;
+            this.chkIgnoreValidationsOfNonMandatoryFields.CheckedChanged += new System.EventHandler(this.chkIgnoreValidationsOfNonMandatoryFields_CheckedChanged);
             // 
             // linkCopyErrorsRecords
             // 
@@ -1689,17 +1701,6 @@ namespace TOPX.UI.Forms
             this.LblInfo.TabIndex = 72;
             this.LblInfo.Text = "?";
             this.LblInfo.Click += new System.EventHandler(this.LblInfo_Click);
-            // 
-            // chkIgnoreValidationsOfNonMandatoryFields
-            // 
-            this.chkIgnoreValidationsOfNonMandatoryFields.AutoSize = true;
-            this.chkIgnoreValidationsOfNonMandatoryFields.Location = new System.Drawing.Point(452, 38);
-            this.chkIgnoreValidationsOfNonMandatoryFields.Name = "chkIgnoreValidationsOfNonMandatoryFields";
-            this.chkIgnoreValidationsOfNonMandatoryFields.Size = new System.Drawing.Size(387, 24);
-            this.chkIgnoreValidationsOfNonMandatoryFields.TabIndex = 13;
-            this.chkIgnoreValidationsOfNonMandatoryFields.Text = "Negeer validaties niet-verplichte velden in dossiers";
-            this.chkIgnoreValidationsOfNonMandatoryFields.UseVisualStyleBackColor = true;
-            this.chkIgnoreValidationsOfNonMandatoryFields.CheckedChanged += new System.EventHandler(this.chkIgnoreValidationsOfNonMandatoryFields_CheckedChanged);
             // 
             // TopXConverter
             // 

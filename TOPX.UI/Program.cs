@@ -34,7 +34,6 @@ namespace TOPX.UI
                 {
                     Application.Run(container.GetInstance<TopXConverter>());
                 }
-               
             }
             Cursor.Current = Cursors.Default;
 

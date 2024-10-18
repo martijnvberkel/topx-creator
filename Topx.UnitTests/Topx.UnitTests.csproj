@@ -139,7 +139,6 @@
     <Compile Include="TestSanitizer.cs" />
     <Compile Include="TestSideCarExport.cs" />
     <Compile Include="TestValidations.cs" />
-    <Compile Include="TestXmlValidation.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

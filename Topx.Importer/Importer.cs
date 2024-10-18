@@ -167,23 +167,19 @@ namespace Topx.Importer
                     }
                     var recordvalidator = new RecordValidator(record);
 
-                    //if (_enableValidation)
+                    var isValidated = _enableValidation ? recordvalidator.Validate() : recordvalidator.ValidateIgnoringOptionalFields();
+                    if (isValidated)
                     {
-                        var isValidated = recordvalidator.Validate();
-                        if (isValidated)
-                        {
-
-                            if (!_dataservice.SaveAddedRecord(record))
-                                ErrorsImportRecords.AppendLine(_dataservice.ErrorMessage);
-                            else
-                                NrOfRecords++;
-                        }
+                        if (!_dataservice.SaveAddedRecord(record))
+                            ErrorsImportRecords.AppendLine(_dataservice.ErrorMessage);
                         else
+                            NrOfRecords++;
+                    }
+                    else
+                    {
+                        foreach (var validatorValidationError in recordvalidator.ValidationErrors)
                         {
-                            foreach (var validatorValidationError in recordvalidator.ValidationErrors)
-                            {
-                                ErrorsImportRecords.AppendLine(validatorValidationError);
-                            }
+                            ErrorsImportRecords.AppendLine(validatorValidationError);
                         }
                     }
                 }
