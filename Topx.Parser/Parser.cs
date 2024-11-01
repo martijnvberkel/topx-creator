@@ -222,7 +222,8 @@ namespace Topx.Creator
                     naam = new[] { new nonEmptyStringTypeAttribuut { Value = record.Naam } },
                     taal = string.IsNullOrEmpty(dossier.Taal) ? null : new taalTypeAttribuut[] { new taalTypeAttribuut { Value = (taalType)Enum.Parse(typeof(taalType), dossier.Taal.ToLower()) } },
                    
-                    relatie = record.IsElementEmpty("Relatie") ? null : GetRelatie(dossier, record),
+                    //relatie = record.IsElementEmpty("Relatie") ? null : GetRelatie(dossier, record),
+                    relatie = GetRelatie(dossier, record),
                     vertrouwelijkheid = record.IsElementEmpty("Vertrouwelijkheid") ? null : new[]
                     {
                         new vertrouwelijkheidType

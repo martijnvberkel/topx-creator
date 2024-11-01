@@ -1,4 +1,5 @@
-﻿using System.Security.Policy;
+﻿using System.Drawing;
+using AutoUpdaterDotNET;
 using System.Windows.Forms;
 
 namespace TOPX.UI.Forms
@@ -18,6 +19,12 @@ namespace TOPX.UI.Forms
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             System.Diagnostics.Process.Start("https://mvbworks.com/downloads/");
+        }
+
+        private void btPrelease_Click(object sender, System.EventArgs e)
+        {
+            AutoUpdater.Start("https://mvbworks.com/downloads/updates/prerelease/version.xml");
+            Close();
         }
     }
 }
