@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Topx.Creator.Extensions;
 using Topx.Data;
 using Topx.Utility;
 using static Topx.Data.DTO.TopX;
@@ -37,11 +38,45 @@ namespace Topx.Importer
                     ValidationErrors.Add(
                         $"ERROR validatie: Dossier {_dossier.IdentificatieKenmerk}: De combinatie van Openbaarheid_OmschrijvingBeperkingen en Openbaarheid_DatumOfPeriode is niet valide. (verwacht format: {Validations.DateParsing}) De waardes zijn: {_dossier.Openbaarheid_OmschrijvingBeperkingen}, {_dossier.Openbaarheid_DatumOfPeriode}");
             }
-          
-            if (!string.IsNullOrEmpty(_dossier.Eventplan_DatumOfPeriode) && !Validations.TestForValidDate(_dossier.Eventplan_DatumOfPeriode))
-                ValidationErrors.Add($"ERROR validatie: Dossier {_dossier.IdentificatieKenmerk}: Eventplan_DatumOfPeriode is niet herkend als geldige datum (verwacht format: {Validations.DateParsing})");
+
+            if (!_dossier.IsElementEmptyOrComplete("Vertrouwelijkheid"))
+                ValidationErrors.Add($"Dossier: {_dossier.IdentificatieKenmerk}: ERROR: Vertrouwelijkheid is onvolledig ingevuld. Maak alle velden hiervan leeg, of vul ze allemaal met de juiste gegevens.");
+
+            if (!_dossier.IsElementEmptyOrComplete ("Openbaarheid"))
+                ValidationErrors.Add($"Dossier: {_dossier.IdentificatieKenmerk}: ERROR: Openbaarheid is onvolledig ingevuld. Maak alle velden hiervan leeg, of vul ze allemaal met de juiste gegevens.");
+
+            if (!_dossier.IsElementEmptyOrComplete("Eventgeschiedenis"))
+                ValidationErrors.Add($"Dossier: {_dossier.IdentificatieKenmerk}: ERROR: Eventgeschiedenis is onvolledig ingevuld. Maak alle velden hiervan leeg, of vul ze allemaal met de juiste gegevens.");
+
+            if (!_dossier.IsElementEmptyOrComplete("Context"))
+                ValidationErrors.Add($"Dossier: {_dossier.IdentificatieKenmerk}: ERROR: Context is onvolledig ingevuld. Maak alle velden hiervan leeg, of vul ze allemaal met de juiste gegevens.");
+            
+            if (!_dossier.IsElementEmptyOrComplete("Dekking"))
+                ValidationErrors.Add($"Dossier: {_dossier.IdentificatieKenmerk}: ERROR: Dekking is onvolledig ingevuld. Maak alle velden hiervan leeg, of vul ze allemaal met de juiste gegevens.");
+
+            if (!_dossier.IsElementEmptyOrComplete("Gebruiksrechten"))
+            {
+                ValidationErrors.Add($"Dossier: {_dossier.IdentificatieKenmerk}: ERROR: Gebruiksrechten is onvolledig ingevuld. Maak alle velden hiervan leeg, of vul ze allemaal met de juiste gegevens.");
+            }
+            
+            ValidateClassificationFields();
 
             return !ValidationErrors.Any();
+        }
+       
+
+        private void ValidateClassificationFields()
+        {
+            if (!_dossier.IsElementEmptyOrComplete("Classificatie"))
+                ValidationErrors.Add($"Dossier: {_dossier.IdentificatieKenmerk}: ERROR: Classificatie is onvolledig ingevuld. Maak alle velden hiervan leeg, of vul ze allemaal met de juiste gegevens.");
+            
+            if (!_dossier.IsElementEmpty("Classificatie"))
+            {
+                if (!Validations.TestForValidDate(_dossier.Classificatie_DatumOfPeriode))
+                    if (string.IsNullOrEmpty(_dossier.Classificatie_DatumOfPeriode) || !Validations.TestForValidYear(_dossier.Classificatie_DatumOfPeriode))
+                        ValidationErrors.Add($"ERROR validatie: Dossier {_dossier.IdentificatieKenmerk}: Classificatie_DatumOfPeriode is niet herkend als geldig jaar (verwacht format: yyyy) of als geldige datum (verwacht format: {Validations.DateParsing})");
+                
+            }
         }
 
 

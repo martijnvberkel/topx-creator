@@ -122,6 +122,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\DossierExtensionsTest.cs" />
     <Compile Include="Helpers\AutoMockAttribute.cs" />
     <Compile Include="Helpers\Cloner.cs" />
     <Compile Include="MockIOUtilities.cs" />

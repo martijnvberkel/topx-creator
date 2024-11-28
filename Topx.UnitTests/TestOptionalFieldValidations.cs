@@ -332,7 +332,7 @@ namespace Topx.UnitTests
 
             // Assert
             Assert.That(resultValidatorFields, Is.True);
-            Assert.That(parser.ErrorMessage.Length, Is.EqualTo(0));  // Parsing will succeed anyway because the xml will not be validated there
+            Assert.That(parser.ErrorMessage.ToString(), Is.EqualTo("Dossier: NL-0000-10000-1: ERROR: Classificatie is onvolledig ingevuld.\r\n")); 
             Assert.That(xmlhelper.ValidationErrors.Length, Is.GreaterThan(0)); // Here the validation fails (against the xsd schema)
             Assert.That(xmlString, Is.Not.Empty);  // Xml will be processed anyway
         }
@@ -487,14 +487,14 @@ namespace Topx.UnitTests
                 Gebruiksrechten_DatumOfPeriode = "17-05-1905",
                 Vertrouwelijkheid_ClassificatieNiveau = "Niet vertrouwelijk",
                 Vertrouwelijkheid_DatumOfPeriode = "17-05-1905",
-                Bestand_Vorm_Redactiegenre = "Tekening (technisch)",
-                Bestand_Formaat_Bestandsnaam = "B000000058.pdf",
-                Bestand_Formaat_BestandsOmvang = 1200000,
-                Bestand_Formaat_BestandsFormaat = "fmt/354",
-                Bestand_Formaat_FysiekeIntegriteit_Algoritme = "sha256",
-                Bestand_Formaat_FysiekeIntegriteit_Waarde = "6024baa32d6a7f8ef10239d43c9dfd8b25a64b1fc8c9d34da7523ec5dbed9ac6",
-                Bestand_Formaat_FysiekeIntegriteit_DatumEnTijd = Convert.ToDateTime("30-7-2015 12:50"),
-                Bestand_Formaat_DatumAanmaak = Convert.ToDateTime("20-8-2012"),
+                //Bestand_Vorm_Redactiegenre = "Tekening (technisch)",
+                //Bestand_Formaat_Bestandsnaam = "B000000058.pdf",
+                //Bestand_Formaat_BestandsOmvang = 1200000,
+                //Bestand_Formaat_BestandsFormaat = "fmt/354",
+                //Bestand_Formaat_FysiekeIntegriteit_Algoritme = "sha256",
+                //Bestand_Formaat_FysiekeIntegriteit_Waarde = "6024baa32d6a7f8ef10239d43c9dfd8b25a64b1fc8c9d34da7523ec5dbed9ac6",
+                //Bestand_Formaat_FysiekeIntegriteit_DatumEnTijd = Convert.ToDateTime("30-7-2015 12:50"),
+                //Bestand_Formaat_DatumAanmaak = Convert.ToDateTime("20-8-2012"),
                 Openbaarheid_DatumOfPeriode = "17-05-1905",
                 Openbaarheid_OmschrijvingBeperkingen = "Openbaar",
                 DossierId = "NL-0000-10000-1"
@@ -548,6 +548,80 @@ namespace Topx.UnitTests
             Assert.That(resultValidatorFields, Is.True);
             Assert.That(parser.ErrorMessage.Length, Is.EqualTo(0));
             Assert.That(xmlhelper.ValidationErrors.Length, Is.EqualTo(0));
+            Assert.That(xmlString, Is.Not.Empty);
+        }
+
+        [Theory, AutoData]
+        public void LeaveSomeValidations(Globals mockGlobals)
+        {
+            var record = new Record
+            {
+                Naam = "tekening (technisch) - bouwen landbouwerswoning Hoofdstraat 13 5121JA Rijen 17-05-1905",
+                Gebruiksrechten_OmschrijvingVoorwaarden = "Vrij te gebruiken",
+                Gebruiksrechten_DatumOfPeriode = "17-05-1905",
+                Vertrouwelijkheid_ClassificatieNiveau = "Niet vertrouwelijk",
+                Vertrouwelijkheid_DatumOfPeriode = "17-05-1905",
+                Bestand_Vorm_Redactiegenre = "Tekening (technisch)",
+                Bestand_Formaat_Bestandsnaam = "B000000058.pdf",
+                Bestand_Formaat_BestandsOmvang = 1200000,
+                Bestand_Formaat_BestandsFormaat = "fmt/354",
+                Bestand_Formaat_FysiekeIntegriteit_Algoritme = "sha256",
+                Bestand_Formaat_FysiekeIntegriteit_Waarde = "6024baa32d6a7f8ef10239d43c9dfd8b25a64b1fc8c9d34da7523ec5dbed9ac6",
+                Bestand_Formaat_FysiekeIntegriteit_DatumEnTijd = Convert.ToDateTime("30-7-2015 12:50"),
+                Bestand_Formaat_DatumAanmaak = Convert.ToDateTime("20-8-2012"),
+                Openbaarheid_DatumOfPeriode = "17-05-1905",
+                Openbaarheid_OmschrijvingBeperkingen = "Openbaar",
+                DossierId = "NL-0000-10000-1"
+            };
+            var dossiers = new List<Dossier> { new Dossier
+            {
+                Classificatie_Bron = string.Empty,
+                Classificatie_Code = "1",
+                Classificatie_DatumOfPeriode = string.Empty,
+                Classificatie_Omschrijving = string.Empty,
+                Context_Activiteit_Naam = string.Empty,
+                Context_Actor_AggregatieNiveau = string.Empty,
+                Context_Actor_GeautoriseerdeNaam = string.Empty,
+                Context_Actor_IdentificatieKenmerk = string.Empty,
+                Dekking_GeografischGebied = string.Empty,
+                Dekking_InTijd_Begin = string.Empty,
+                Dekking_InTijd_Eind = string.Empty,
+                Eventgeschiedenis_DatumOfPeriode = string.Empty,
+                Eventgeschiedenis_Type = string.Empty,
+                Eventgeschiedenis_VerantwoordelijkeFunctionaris = string.Empty,
+                Gebruiksrechten_DatumOfPeriode = string.Empty,
+                Gebruiksrechten_OmschrijvingVoorwaarden = string.Empty,
+                IdentificatieKenmerk = "NL-0000-10000-1",
+                Integriteit = string.Empty,
+                Naam = "bouwvergunning - bouwen landbouwerswoning Hoofdstraat 13 5121JA Rijen 17-05-1905",
+                Openbaarheid_DatumOfPeriode = string.Empty,
+                Openbaarheid_OmschrijvingBeperkingen = string.Empty,
+                Relatie_Id = null,
+                Relatie_DatumOfPeriode = null,
+                Relatie_Type = null,
+                Taal = string.Empty,
+                Vertrouwelijkheid_DatumOfPeriode =string.Empty,
+                Vertrouwelijkheid_ClassificatieNiveau = string.Empty,
+                Records = new List<Record>() { record }
+            }};
+            var mockDataService = new Mock<IDataService>();
+            var parser = new Parser(mockGlobals, mockDataService.Object);
+
+            var validator = new RecordValidator(dossiers[0].Records.FirstOrDefault());
+
+            // Act
+            var resultValidatorFields = validator.ValidateIgnoringOptionalFields();
+            var recordInformationPackages = parser.ParseDataToTopx(new List<Dossier> { dossiers[0] });
+
+            var xmlhelper = new XmlHelper();
+            var xmlString = xmlhelper.GetXmlStringFromObject(recordInformationPackages[0]);
+
+            var xdoc = XDocument.Parse(xmlString);
+
+            // Assert
+            Assert.That(resultValidatorFields, Is.True);
+            Assert.That(parser.ErrorMessage.ToString(), Is.EqualTo ("Dossier: NL-0000-10000-1: ERROR: Classificatie is onvolledig ingevuld.\r\n"));
+            Assert.That(xmlhelper.ValidationErrors.Length, Is.GreaterThan(0));
             Assert.That(xmlString, Is.Not.Empty);
         }
     }

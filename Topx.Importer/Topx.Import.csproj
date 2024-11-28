@@ -86,6 +86,10 @@
       <Project>{91592173-F613-4370-A362-0EF1AB0F3A65}</Project>
       <Name>Topx.Interface</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Topx.Parser\Topx.Creator.csproj">
+      <Project>{1E9B8660-0142-4818-AC8E-2B3FC0619783}</Project>
+      <Name>Topx.Creator</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Topx.Utility\Topx.Utility.csproj">
       <Project>{5862F3AF-2B57-4EE0-8E94-3A3D211737F1}</Project>
       <Name>Topx.Utility</Name>
