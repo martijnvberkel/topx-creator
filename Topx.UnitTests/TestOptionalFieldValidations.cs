@@ -331,7 +331,7 @@ namespace Topx.UnitTests
             var xmlString = xmlhelper.GetXmlStringFromObject(recordInformationPackages[0]);
 
             // Assert
-            Assert.That(resultValidatorFields, Is.True);
+            Assert.That(resultValidatorFields, Is.False);
             Assert.That(parser.ErrorMessage.ToString(), Is.EqualTo("Dossier: NL-0000-10000-1: ERROR: Classificatie is onvolledig ingevuld.\r\n")); 
             Assert.That(xmlhelper.ValidationErrors.Length, Is.GreaterThan(0)); // Here the validation fails (against the xsd schema)
             Assert.That(xmlString, Is.Not.Empty);  // Xml will be processed anyway
@@ -545,8 +545,8 @@ namespace Topx.UnitTests
             var xdoc = XDocument.Parse(xmlString);
 
             // Assert
-            Assert.That(resultValidatorFields, Is.True);
-            Assert.That(parser.ErrorMessage.Length, Is.EqualTo(0));
+            Assert.That(resultValidatorFields, Is.False);
+            Assert.That(parser.ErrorMessage.Length, Is.GreaterThan(0));
             Assert.That(xmlhelper.ValidationErrors.Length, Is.EqualTo(0));
             Assert.That(xmlString, Is.Not.Empty);
         }

@@ -27,6 +27,9 @@ namespace Topx.Utility
 
         public static string GetIllegalCharsInFileName(string filename)
         {
+            if (string.IsNullOrEmpty(filename))
+                return string.Empty;
+
             var countPoints = filename.Count(t => t == '.');
             if (countPoints > 1)
                 return ".";
@@ -44,6 +47,8 @@ namespace Topx.Utility
 
         public static bool TestForFileExtension(string filename)
         {
+            if (string.IsNullOrEmpty(filename))
+                return false;
             var delimiters = filename.Count(t => t == '.');
             return delimiters > 0;
         }
