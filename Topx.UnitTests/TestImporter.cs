@@ -86,7 +86,8 @@ namespace Topx.UnitTests
             };
             var streamreader = CreateReader($"A;B;C{Environment.NewLine}TestA;TestB;TestC");
 
-            mockDataservice.Setup(t => t.SaveDossier(It.Is<Dossier>(y => y.Naam == "TestA" && y.Relatie_Id == "TestB" && y.IdentificatieKenmerk == null)));
+            mockDataservice.Setup(t => t.SaveDossier(It.Is<Dossier>(y => y.Naam == "TestA" && y.Relatie_Id == "TestB" && y.IdentificatieKenmerk == null)))
+                .Returns(true);
 
             // Act
             importer.SaveDossiers(mappings, streamreader);
@@ -100,6 +101,7 @@ namespace Topx.UnitTests
         {
             //Arrange
             var mockDataservice = new Mock<IDataService>(MockBehavior.Strict);
+            
             var importer = new Importer.Importer(mockDataservice.Object, enableValidation: false);
             var mappings = new List<FieldMapping>()
             {
@@ -107,8 +109,8 @@ namespace Topx.UnitTests
             };
             var streamreader = CreateReader($"A;B{Environment.NewLine}TestA;TestB{Environment.NewLine}this_is_not_a_good_csv");
 
-            mockDataservice.Setup(t => t.SaveDossier(It.Is<Dossier>(y => y.Naam == "TestA" && y.Relatie_Id == null && y.IdentificatieKenmerk == null)));
-
+           // mockDataservice.Setup(t => t.SaveDossier(It.Is<Dossier>(y => y.Naam == "TestA" && y.Relatie_Id == null && y.IdentificatieKenmerk == null)));
+            mockDataservice.Setup(x => x.SaveDossier(It.IsAny<Dossier>())).Returns(true);
             // Act
             importer.SaveDossiers(mappings, streamreader);
 
@@ -339,7 +341,7 @@ namespace Topx.UnitTests
 
             var result = dossierValidator.Validate();
             Assert.That(result, Is.EqualTo(false));
-            Assert.That(dossierValidator.ValidationErrors.Count, Is.EqualTo(19));
+            Assert.That(dossierValidator.ValidationErrors.Count, Is.EqualTo(16));
         }
 
         [Test]

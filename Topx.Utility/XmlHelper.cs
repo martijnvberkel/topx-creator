@@ -29,7 +29,7 @@ namespace Topx.Utility
             return xmlstreamActual;
         }
 
-        public bool ValidateXmlString(string xmlstring)
+        public void ValidateXmlString(string xmlstring)
         {
             Assembly assembly = GetType().Assembly;
 
@@ -39,11 +39,9 @@ namespace Topx.Utility
             schema.Add("http://www.nationaalarchief.nl/RIP/v0.3", new XmlTextReader(resourceStreamRIP));
             schema.Add("http://www.nationaalarchief.nl/ToPX/v2.3", new XmlTextReader(resourceStreamTopX));
 
-            XDocument xdoc = XDocument.Parse(xmlstring.ToString());
-            
+            XDocument xdoc = XDocument.Parse(xmlstring);
 
             xdoc.Validate(schema, ValidationEventHandler);
-            return false;
         }
 
         private void ValidationEventHandler(dynamic sender, ValidationEventArgs e)

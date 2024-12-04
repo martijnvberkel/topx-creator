@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure.Design;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml;
+using Topx.Creator.Extensions;
 using Topx.Data;
 using Topx.Data.DTO;
 using Topx.DataServices;
@@ -85,7 +87,7 @@ namespace Topx.Creator
                 catch (Exception ex)
                 {
                     _dataservice.Log(dossier.IdentificatieKenmerk, $"ERROR: {ex.Message}");
-                    ErrorMessage.AppendLine($"Dossier {dossier.IdentificatieKenmerk}: ERROR: { ex.Message}");
+                    ErrorMessage.AppendLine($"Dossier {dossier.IdentificatieKenmerk}: ERROR: {ex.Message}");
                 }
 
                 var sizeOfDossier = dossier.Records.Sum(record => record.Bestand_Formaat_BestandsOmvang ?? 0);
@@ -206,71 +208,42 @@ namespace Topx.Creator
         /// <returns>Record-fragment voor xml-serialization</returns>
         private TopX.topxType GetRecordAsTopx(Dossier dossier, Record record, string identificatieKenmerk)
         {
-
-            //var eventgeschiedenis_DatumOfPeriode = DateTime.ParseExact(dossier.Eventgeschiedenis_DatumOfPeriode, DateParsing, CultureInfo.InvariantCulture).ToString("yyyy-MM-dd");
-
-            var relatie_DatumOfPeriode = dossier.Relatie_DatumOfPeriode ?? record.Bestand_Formaat_DatumAanmaak?.ToString("yyyy-MM-dd"); ;
-
-            var vertrouwelijkheid_DatumOfPeriode = DateTime.ParseExact(record.Vertrouwelijkheid_DatumOfPeriode, DateParsing, CultureInfo.InvariantCulture).ToString("yyyy-MM-dd");
-
-            if (!Enum.TryParse(record.Vertrouwelijkheid_ClassificatieNiveau.RemoveSpaces(), out classificatieNiveauType classificatieNiveauType))
-            {
-                ErrorMessage.AppendLine(
-                    $"ERROR: record naam: {record.Naam}: Het classificatieniveau {record.Vertrouwelijkheid_ClassificatieNiveau} is niet herkend als geldige waarde.");
-            }
-
-            var gebruiksrechten_DatumOfPeriode = DateTime.ParseExact(record.Gebruiksrechten_DatumOfPeriode, DateParsing, CultureInfo.InvariantCulture).ToString("yyyy-MM-dd");
-
-
-            var relatie = new[]
-             {
-                new TopX.relatieType()
-                {
-                    relatieID = new TopX.nonEmptyStringTypeAttribuut() {Value = dossier.IdentificatieKenmerk},
-                    typeRelatie = new TopX.nonEmptyStringTypeAttribuut() {Value = dossier.Relatie_Type ?? "Hiërarchisch" },
-                    datumOfPeriode = new datumOfPeriodeType
-                    {
-                        datum = relatie_DatumOfPeriode
-                    },
-                }
-            };
             var topx = new topxType
             {
                 Item = new aggregatieType
                 {
                     identificatiekenmerk = new nonEmptyStringTypeAttribuut { Value = identificatieKenmerk },
 
-                    eventGeschiedenis = DirtyTransformTypes(GetEventGeschiedenis(dossier)),
-                    //eventGeschiedenis = new eventGeschiedenisType[] { new eventGeschiedenisType() {datumOfPeriode = new datumOfPeriodeType()
-                    //    { datum = eventgeschiedenis_DatumOfPeriode },
-                    //    type = new nonEmptyStringTypeAttribuut() {Value = dossier.Eventgeschiedenis_Type} ,
-                    //    verantwoordelijkeFunctionaris = new nonEmptyStringTypeAttribuut() {Value = dossier.Eventgeschiedenis_VerantwoordelijkeFunctionaris}  } },
+                    eventGeschiedenis = dossier.IsElementEmpty("Eventgeschiedenis") ? null : DirtyTransformTypes(GetEventGeschiedenis(dossier)),
 
                     aggregatieniveau = new aggregatieTypeAggregatieniveau
                     {
                         Value = aggregatieAggregatieniveauType.Record
                     },
                     naam = new[] { new nonEmptyStringTypeAttribuut { Value = record.Naam } },
-                    taal = new taalTypeAttribuut[] { new taalTypeAttribuut { Value = (taalType)Enum.Parse(typeof(taalType), dossier.Taal.ToLower()) } },
-                    //  taal = new[] { new taalTypeAttribuut() { Value = taalType.dut } },
-                    relatie = relatie,
-                    vertrouwelijkheid = new vertrouwelijkheidType[]
+                    taal = string.IsNullOrEmpty(dossier.Taal) ? null : new taalTypeAttribuut[] { new taalTypeAttribuut { Value = (taalType)Enum.Parse(typeof(taalType), dossier.Taal.ToLower()) } },
+
+                    //relatie = record.IsElementEmpty("Relatie") ? null : GetRelatie(dossier, record),
+                    relatie = GetRelatie(dossier, record),
+                    vertrouwelijkheid = record.IsElementEmpty("Vertrouwelijkheid") ? null : new[]
                     {
                         new vertrouwelijkheidType
                         {
                             classificatieNiveau = new vertrouwelijkheidTypeClassificatieNiveau
                             {
-                                Value = classificatieNiveauType
+                                Value = GetVetrouweijkheidClassificatieNiveau(record)
                             },
                             datumOfPeriode = new datumOfPeriodeType
                             {
-                                datum = vertrouwelijkheid_DatumOfPeriode
+                                datum = DateTime.ParseExact(record.Vertrouwelijkheid_DatumOfPeriode, DateParsing, CultureInfo.InvariantCulture).ToString("yyyy-MM-dd")
                             }
                         }
                     },
-                    openbaarheid = GetOpenbaarheid(record.Bestand_Formaat_Bestandsnaam, record.Openbaarheid_OmschrijvingBeperkingen, record.Openbaarheid_DatumOfPeriode)
+                    openbaarheid = record.IsElementEmpty("Openbaarheid")
+                        ? null
+                        : GetOpenbaarheid(record.Bestand_Formaat_Bestandsnaam, record.Openbaarheid_OmschrijvingBeperkingen, record.Openbaarheid_DatumOfPeriode)
                     ,
-                    gebruiksrechten = new gebruiksrechtenType[]
+                    gebruiksrechten = record.IsElementEmpty("Gebruiksrechten") ? null : new gebruiksrechtenType[]
                     {
                         new gebruiksrechtenType
                         {
@@ -280,13 +253,42 @@ namespace Topx.Creator
                             },
                                 datumOfPeriode = new datumOfPeriodeType
                             {
-                                datum = gebruiksrechten_DatumOfPeriode
+                                datum = DateTime.ParseExact(record.Gebruiksrechten_DatumOfPeriode, DateParsing, CultureInfo.InvariantCulture).ToString("yyyy-MM-dd")
                             }
                         }
                     }
                 }
             };
             return topx;
+        }
+
+        private relatieType[] GetRelatie(Dossier dossier, Record record)
+        {
+            var relatie_DatumOfPeriode = dossier.Relatie_DatumOfPeriode ?? record.Bestand_Formaat_DatumAanmaak?.ToString("yyyy-MM-dd");
+            return new[]
+             {
+                new TopX.relatieType()
+                {
+                    relatieID = new TopX.nonEmptyStringTypeAttribuut() {Value = dossier.IdentificatieKenmerk},
+                    typeRelatie = new TopX.nonEmptyStringTypeAttribuut() {Value = dossier.Relatie_Type ?? "Hiërarchisch" },
+                    datumOfPeriode = new datumOfPeriodeType
+                    {
+                        datum = relatie_DatumOfPeriode
+                    }
+                }
+            };
+        }
+
+        private classificatieNiveauType GetVetrouweijkheidClassificatieNiveau(Record record)
+        {
+
+            if (!Enum.TryParse(record.Vertrouwelijkheid_ClassificatieNiveau.RemoveSpaces(), out classificatieNiveauType classificatieNiveauType))
+            {
+                ErrorMessage.AppendLine(
+                    $"ERROR: record naam: {record.Naam}: Het classificatieniveau {record.Vertrouwelijkheid_ClassificatieNiveau} is niet herkend als geldige waarde.");
+            }
+
+            return classificatieNiveauType;
         }
 
         private eventGeschiedenisType[] DirtyTransformTypes(eventGeschiedenisType[] eventGeschiedenisTypes)
@@ -540,38 +542,16 @@ namespace Topx.Creator
                      DateParsing, CultureInfo.InvariantCulture).ToString("yyyy-MM-dd")
                  : dossier.Records.FirstOrDefault()?.Bestand_Formaat_DatumAanmaak?.ToString("yyyy-MM-dd");
 
-            var openbaarheid = GetOpenbaarheid(dossier.IdentificatieKenmerk,
-                dossier.Openbaarheid_OmschrijvingBeperkingen, dossier.Openbaarheid_DatumOfPeriode);
-
             var omschrijving = new @string[] { new @string() };
             omschrijving[0].Value = dossier.Omschrijving;
 
-            string gebruiksrechten_DatumOfPeriode = string.Empty;
-            if (string.IsNullOrEmpty(dossier.Gebruiksrechten_DatumOfPeriode))
-            {
-                ErrorMessage.Append($"{dossier.IdentificatieKenmerk}: Gebruiksrechten_DatumOfPeriode mag niet leeg zijn");
-            }
-            else
+            var gebruiksrechten_DatumOfPeriode = string.Empty;
+            if (!string.IsNullOrEmpty(dossier.Gebruiksrechten_DatumOfPeriode))
                 gebruiksrechten_DatumOfPeriode = DateTime.ParseExact(dossier.Gebruiksrechten_DatumOfPeriode, DateParsing, CultureInfo.InvariantCulture).ToString("yyyy-MM-dd");
-
-
-            var vertrouwelijkheid_DatumOfPeriode = DateTime.ParseExact(dossier.Vertrouwelijkheid_DatumOfPeriode, DateParsing, CultureInfo.InvariantCulture).ToString("yyyy-MM-dd");
-
-            var dekking_InTijd_Begin = new datumOfJaarTypeDatum
-            {
-                Value = Convert.ToDateTime(DateTime.ParseExact(dossier.Dekking_InTijd_Begin,
-                    DateParsing, CultureInfo.InvariantCulture).ToString("yyyy-MM-dd"))
-            };
-
-            var dekking_InTijd_Eind = new datumOfJaarTypeDatum
-            {
-                Value = Convert.ToDateTime(DateTime.ParseExact(dossier.Dekking_InTijd_Eind,
-                    DateParsing, CultureInfo.InvariantCulture).ToString("yyyy-MM-dd"))
-            };
-
-            var dekking_geografischgebied = dossier.Dekking_GeografischGebied.Split('|').Select(dekking => new @string { Value = dekking.Trim() }).ToArray();
-
-
+            //else
+            //{
+            //    ErrorMessage.Append($"{dossier.IdentificatieKenmerk}: Gebruiksrechten_DatumOfPeriode mag niet leeg zijn");
+            //}
 
             topx.Item = new aggregatieType
             {
@@ -582,7 +562,7 @@ namespace Topx.Creator
                     Value = aggregatieAggregatieniveauType.Dossier
 
                 },
-                eventGeschiedenis = GetEventGeschiedenis(dossier),
+                eventGeschiedenis = dossier.IsElementEmpty("Eventgeschiedenis") ? null : GetEventGeschiedenis(dossier),
 
 
                 naam = new[] { new nonEmptyStringTypeAttribuut { Value = dossier.Naam } },
@@ -596,73 +576,16 @@ namespace Topx.Creator
                     },
 
                 }},
-                classificatie = new[] {new classificatieType
-                    {
-                        code = new nonEmptyStringTypeAttribuut { Value = dossier.Classificatie_Code},
-                        omschrijving =  new nonEmptyStringTypeAttribuut {Value = dossier.Classificatie_Omschrijving},
-                        bron = new nonEmptyStringTypeAttribuut {Value = dossier.Classificatie_Bron},
-                        datumOfPeriode = new datumOfPeriodeType
-                        {
-                            jaar = GetYearFromDatumOfPeriode(dossier.Classificatie_DatumOfPeriode)
-                        }
+                classificatie = dossier.IsElementEmpty("Classificatie") ? null : GetNewClassification(dossier),
 
-                    },
+                vertrouwelijkheid = dossier.IsElementEmpty("Vertrouwelijkheid") ? null : GetVertrouwelijkheidType(dossier),
+                openbaarheid = dossier.IsElementEmpty("Openbaarheid") ? null : GetOpenbaarheid(dossier.IdentificatieKenmerk, dossier.Openbaarheid_OmschrijvingBeperkingen, dossier.Openbaarheid_DatumOfPeriode),
 
-                },
-                vertrouwelijkheid = new vertrouwelijkheidType[]
-                {
-                    new vertrouwelijkheidType
-                    {
-                        classificatieNiveau = new vertrouwelijkheidTypeClassificatieNiveau
-                        {
-                            Value = (classificatieNiveauType) Enum.Parse(typeof(classificatieNiveauType), Regex.Replace(dossier.Vertrouwelijkheid_ClassificatieNiveau, @"\s+", "") )
-                        },
-                        datumOfPeriode = new datumOfPeriodeType
-                        {
-                            datum = vertrouwelijkheid_DatumOfPeriode
-                        }
-                    }
-                },
-                openbaarheid = openbaarheid,
-                dekking = new dekkingType[] {new dekkingType
-                    {
-                        inTijd = new periodeType
-                        {
-                            begin = new datumOfJaarType
-                            {
-                                Item = dekking_InTijd_Begin
-                            },
-                            eind = new datumOfJaarType
-                            {
-                                Item = dekking_InTijd_Eind
-                            }
+                dekking = dossier.IsElementEmpty("Dekking") ? null : GetNewDekkingType(dossier),
+                
+                context = dossier.IsElementEmpty("Context") ? null : GetContextType(dossier),
 
-                        },
-                        geografischGebied = dekking_geografischgebied,
-
-                    }
-                },
-                context = new contextType
-                {
-                    actor = new[]
-                    {
-                        new actorType
-                        {
-                            identificatiekenmerk = new nonEmptyStringTypeAttribuut {Value =dossier.Context_Actor_IdentificatieKenmerk},
-                            aggregatieniveau = new @string { Value= dossier.Context_Actor_AggregatieNiveau },
-                            geautoriseerdeNaam = new nonEmptyStringTypeAttribuut {Value = dossier.Context_Actor_GeautoriseerdeNaam }
-                        }
-                    },
-                    activiteit = new[]
-                    {
-                        new activiteitType
-                        {
-                            naam = new nonEmptyStringTypeAttribuut { Value = dossier.Context_Activiteit_Naam }
-                        }
-                    }
-
-                },
-                gebruiksrechten = new gebruiksrechtenType[]
+                gebruiksrechten = dossier.IsElementEmpty("Gebruiksrechten") ? null : new[]
                 {
                     new gebruiksrechtenType
                     {
@@ -676,6 +599,124 @@ namespace Topx.Creator
                 integriteit = new @string { Value = dossier.Integriteit }
             };
             return topx;
+        }
+
+        private contextType GetContextType(Dossier dossier)
+        {
+            if (string.IsNullOrEmpty(dossier.Context_Actor_IdentificatieKenmerk) || string.IsNullOrEmpty(dossier.Context_Actor_AggregatieNiveau) || string.IsNullOrEmpty(dossier.Context_Actor_GeautoriseerdeNaam) || string.IsNullOrEmpty(dossier.Context_Activiteit_Naam))
+                ErrorMessage.AppendLine($"Dossier: {dossier.IdentificatieKenmerk}: ERROR: Context is onvolledig ingevuld.");
+            return new contextType
+            {
+                actor = new[]
+                {
+                    new actorType
+                    {
+                        identificatiekenmerk = new nonEmptyStringTypeAttribuut { Value = dossier.Context_Actor_IdentificatieKenmerk },
+                        aggregatieniveau = new @string { Value = dossier.Context_Actor_AggregatieNiveau },
+                        geautoriseerdeNaam = new nonEmptyStringTypeAttribuut { Value = dossier.Context_Actor_GeautoriseerdeNaam }
+                    }
+                },
+                activiteit = new[]
+                {
+                    new activiteitType
+                    {
+                        naam = new nonEmptyStringTypeAttribuut { Value = dossier.Context_Activiteit_Naam }
+                    }
+                }
+            };
+        }
+
+        private dekkingType[] GetNewDekkingType(Dossier dossier)
+        {
+            if (!Validations.TestForValidDate(dossier.Dekking_InTijd_Begin))
+                ErrorMessage.AppendLine($"ERROR validatie: Dossier {dossier.IdentificatieKenmerk}: Dekking_InTijd_Begin is niet herkend als geldige datum (verwacht format: {Validations.DateParsing})");
+
+            if (!Validations.TestForValidDate(dossier.Dekking_InTijd_Eind))
+                ErrorMessage.AppendLine($"ERROR validatie: Dossier {dossier.IdentificatieKenmerk}: Dekking_InTijd_Eind is niet herkend als geldige datum (verwacht format: {Validations.DateParsing})");
+
+            return new[]
+            {
+                new dekkingType
+                {
+                    inTijd = new periodeType
+                    {
+                        begin = new datumOfJaarType
+                        {
+                            Item = DekkingInTijdBegin(dossier)
+                        },
+                        eind = new datumOfJaarType
+                        {
+                            Item = DekkingInTijdEind(dossier)
+                        }
+
+                    },
+                    geografischGebied = DekkingGeografischGebied(dossier)
+                }
+            };
+        }
+
+        private vertrouwelijkheidType[] GetVertrouwelijkheidType(Dossier dossier)
+        {
+            if (string.IsNullOrEmpty(dossier.Vertrouwelijkheid_ClassificatieNiveau) || string.IsNullOrEmpty(dossier.Vertrouwelijkheid_DatumOfPeriode))
+                ErrorMessage.AppendLine($"Dossier: {dossier.IdentificatieKenmerk}: ERROR: Vertrouwelijkheid is onvolledig ingevuld.");
+            
+            return new vertrouwelijkheidType[]
+            {
+                new vertrouwelijkheidType
+                {
+                    classificatieNiveau = new vertrouwelijkheidTypeClassificatieNiveau
+                    {
+                        Value = (classificatieNiveauType)Enum.Parse(typeof(classificatieNiveauType), Regex.Replace(dossier.Vertrouwelijkheid_ClassificatieNiveau, @"\s+", ""))
+                    },
+                    datumOfPeriode = new datumOfPeriodeType
+                    {
+                        datum = DateTime.ParseExact(dossier.Vertrouwelijkheid_DatumOfPeriode, DateParsing, CultureInfo.InvariantCulture).ToString("yyyy-MM-dd")
+                    }
+                }
+            };
+        }
+
+        private classificatieType[] GetNewClassification(Dossier dossier)
+        {
+            if (string.IsNullOrEmpty(dossier.Classificatie_Code) || string.IsNullOrEmpty(dossier.Classificatie_Omschrijving) || string.IsNullOrEmpty(dossier.Classificatie_Bron) || string.IsNullOrEmpty(dossier.Classificatie_DatumOfPeriode))
+               ErrorMessage.AppendLine($"Dossier: {dossier.IdentificatieKenmerk}: ERROR: Classificatie is onvolledig ingevuld.");
+            return new[]
+            {
+                new classificatieType
+                {
+
+                    code = new nonEmptyStringTypeAttribuut { Value = dossier.Classificatie_Code },
+                    omschrijving = new nonEmptyStringTypeAttribuut { Value = dossier.Classificatie_Omschrijving },
+                    bron = new nonEmptyStringTypeAttribuut { Value = dossier.Classificatie_Bron },
+                    datumOfPeriode = new datumOfPeriodeType
+                    {
+                        jaar = string.IsNullOrEmpty(dossier.Classificatie_DatumOfPeriode) ? string.Empty : GetYearFromDatumOfPeriode(dossier.Classificatie_DatumOfPeriode)
+                    }
+                }
+            };
+        }
+
+        private static @string[] DekkingGeografischGebied(Dossier dossier)
+        {
+            return dossier.Dekking_GeografischGebied.Split('|').Select(dekking => new @string { Value = dekking.Trim() }).ToArray();
+        }
+
+        private static datumOfJaarTypeDatum DekkingInTijdEind(Dossier dossier)
+        {
+            return new datumOfJaarTypeDatum
+            {
+                Value = Convert.ToDateTime(DateTime.ParseExact(dossier.Dekking_InTijd_Eind,
+                    DateParsing, CultureInfo.InvariantCulture).ToString("yyyy-MM-dd"))
+            };
+        }
+
+        private static datumOfJaarTypeDatum DekkingInTijdBegin(Dossier dossier)
+        {
+            return new datumOfJaarTypeDatum
+            {
+                Value = Convert.ToDateTime(DateTime.ParseExact(dossier.Dekking_InTijd_Begin,
+                    DateParsing, CultureInfo.InvariantCulture).ToString("yyyy-MM-dd"))
+            };
         }
 
         private eventGeschiedenisType[] GetEventGeschiedenis(Dossier dossier)
@@ -692,7 +733,7 @@ namespace Topx.Creator
 
             var eventgeschiedenis = new List<eventGeschiedenisType>();
 
-            for (var index = 0; index <= arrayOfEventgechiedenisDatumOfPeriode.Count -1; index++)
+            for (var index = 0; index <= arrayOfEventgechiedenisDatumOfPeriode.Count - 1; index++)
             {
                 var parseSuccess = DateTime.TryParseExact(arrayOfEventgechiedenisDatumOfPeriode[index].Value, DateParsing, CultureInfo.InvariantCulture, DateTimeStyles.None, out var datum);
                 if (!parseSuccess)

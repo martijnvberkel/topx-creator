@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using Moq;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 using Topx.Data;
 using Topx.DataServices;
 using Topx.FileAnalysis;
@@ -39,13 +40,11 @@ namespace Topx.UnitTests
             metadata.Collect();
 
             // Then
-            Assert.NotNull(records[0].Bestand_Formaat_FysiekeIntegriteit_DatumEnTijd);
-            Assert.NotNull(records[0].Bestand_Formaat_FysiekeIntegriteit_Waarde);
+            ClassicAssert.NotNull(records[0].Bestand_Formaat_FysiekeIntegriteit_DatumEnTijd);
+            ClassicAssert.NotNull(records[0].Bestand_Formaat_FysiekeIntegriteit_Waarde);
             Assert.That(records[0].Bestand_Formaat_FysiekeIntegriteit_Algoritme, Is.EqualTo("sha256"));
             Assert.That(records[0].Bestand_Formaat_BestandsOmvang, Is.EqualTo(13264));
         }
-
-       
     }
 }
 

@@ -185,7 +185,7 @@ namespace TOPX.UI.Forms
             _dataservice.ClearDossiersAndRecords();
 
 
-            var importer = new Importer(_dataservice);
+            var importer = new Importer(_dataservice, !chkIgnoreValidationsOfNonMandatoryFields.Checked);
             if (!importer.CheckHealthyFieldmappings(_fieldmappingsDossiers) || !importer.CheckHealthyFieldmappings(_fieldmappingsRecords))
             {
                 MessageBox.Show("Niet alle velden zijn gemapped. Corrigeer dit eerst, in de tab 'Bestanden'. ");
@@ -199,10 +199,8 @@ namespace TOPX.UI.Forms
                 if (importer.Error)
                 {
                     txtErrorsDossiers.Text = importer.ErrorMessage + Environment.NewLine + importer.ErrorsImportDossiers;
-                    return;
+                    //return;
                 }
-
-
             }
 
             using (var records = new StreamReader(new FileStream(txtRecordBestandLocation.Text, FileMode.Open, FileAccess.Read, FileShare.ReadWrite), Encoding.UTF7))
@@ -218,6 +216,8 @@ namespace TOPX.UI.Forms
             txtErrorsDossiers.Text = importer.ErrorsImportDossiers.ToString();
             Cursor.Current = Cursors.Default;
 
+            if (importer.Error)
+                return;
             var msg = string.Empty;
             if (importer.Error)
             {
@@ -1153,6 +1153,11 @@ namespace TOPX.UI.Forms
             {
                 MessageBox.Show($"Kan de link niet openen. Foutmelding: {exception.Message}");
             }
+        }
+
+        private void chkIgnoreValidationsOfNonMandatoryFields_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

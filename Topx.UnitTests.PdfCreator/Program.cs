@@ -37,14 +37,12 @@ namespace Topx.UnitTests.PdfCreator
             pdf.Info.Title = "Test PDF";
             var pdfPage = pdf.AddPage();
             var graph = XGraphics.FromPdfPage(pdfPage);
-            var font = new XFont("Verdana", 12, XFontStyle.Regular);
+            var font = new XFont("Verdana", 12);
 
             var formatter = new XTextFormatter(graph);
             var layoutRectangle = new XRect(10, 10, pdfPage.Width.Point, pdfPage.Height.Point);
             formatter.DrawString(RandomString(), font, XBrushes.Black, layoutRectangle);
-            
             pdf.Save(fileName);
-              
         }
 
         private static string RandomString()

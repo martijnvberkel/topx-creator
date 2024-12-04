@@ -5,7 +5,7 @@ using Topx.Utility;
 
 namespace Topx.Importer
 {
-    internal class RecordValidator
+    public class RecordValidator
     {
         private readonly Record _record;
         public List<string> ValidationErrors = new List<string>();
@@ -15,6 +15,31 @@ namespace Topx.Importer
             _record = record;
         }
 
+        public bool ValidateIgnoringOptionalFields()
+        {
+            var errorPrefix = $"ERROR Validatie: Record met DossierId {_record.DossierId}:";
+
+            if (string.IsNullOrEmpty(_record.Bestand_Formaat_Bestandsnaam))
+                ValidationErrors.Add($"{errorPrefix} Bestand_Formaat_Bestandsnaam is leeg, dit veld is verplicht.");
+
+            var illegalChars = Validations.GetIllegalCharsInFileName(_record.Bestand_Formaat_Bestandsnaam);
+            if (illegalChars != string.Empty)
+                ValidationErrors.Add($"{errorPrefix} Bestand_Formaat_Bestandsnaam  {_record.Bestand_Formaat_Bestandsnaam} bevat ongeldige karakters: {illegalChars}");
+
+            if (!Validations.TestForFileExtension(_record.Bestand_Formaat_Bestandsnaam))
+                ValidationErrors.Add($"{errorPrefix} Bestand_Formaat_Bestandsnaam bevat geen extensie (bijv .pdf of .docx): {_record.Bestand_Formaat_Bestandsnaam}");
+
+            if (string.IsNullOrEmpty(_record.DossierId))
+                ValidationErrors.Add($"{errorPrefix} DossierId is leeg, dit veld is verplicht.");
+
+            if (string.IsNullOrEmpty(_record.Naam))
+                ValidationErrors.Add($"{errorPrefix} Naam is leeg, dit veld is verplicht.");
+
+            if (string.IsNullOrEmpty(_record.Bestand_Vorm_Redactiegenre))
+                ValidationErrors.Add($"{errorPrefix} Bestand_Vorm_Redactiegenre is leeg, dit veld is verplicht.");
+            return !ValidationErrors.Any();
+        }
+        
         public bool Validate()
         {
             var errorPrefix = $"ERROR Validatie: Record met DossierId {_record.DossierId}:";
